@@ -11,14 +11,10 @@ public class PreservativoDecorator extends RischioDecorator {
 	public LivelloRischio calcola() {
 		LivelloRischio rischioAttuale = super.calcola();
 		
-		if (rischioAttuale == LivelloRischio.ALTO) {
-			return LivelloRischio.NULLO;
+		if (rischioAttuale == LivelloRischio.NULLO) {
+			return rischioAttuale;
 		}
 		
-		else if (rischioAttuale == LivelloRischio.BASSO) {
-			return LivelloRischio.NULLO;
-		}
-		
-		return rischioAttuale;
+		return LivelloRischio.NULLO;
 	}
 }

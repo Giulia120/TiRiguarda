@@ -1,4 +1,4 @@
-package it.TiRiguarda.domain;
+package it.tiriguarda.domain;
 
 public class ProtocolloPrEP {
 	private Utente utente;

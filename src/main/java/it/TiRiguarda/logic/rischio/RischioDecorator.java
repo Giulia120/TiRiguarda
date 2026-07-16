@@ -5,7 +5,7 @@ import it.TiRiguarda.domain.LivelloRischio;
 public abstract class RischioDecorator implements CalcoloRischio {
 	protected CalcoloRischio component;
 	
-	public RischioDecorator (CalcoloRischio component) {
+	protected RischioDecorator (CalcoloRischio component) {
 		this.component = component;
 	}
 	
