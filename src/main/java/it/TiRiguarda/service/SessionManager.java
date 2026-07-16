@@ -15,11 +15,11 @@ public class SessionManager {
 		return instance;
 	}
 	
-	public String getIdUtenteLoggato() {
-		return utenteLoggato.getIdUtente();
+	public Utente getUtenteLoggato() {
+		return utenteLoggato;
 	}
 	
-	public void setIdUtenteLoggato(Utente utenteLoggato) {
+	public void setUtenteLoggato(Utente utenteLoggato) {
 		this.utenteLoggato = utenteLoggato;
 	}
 	
