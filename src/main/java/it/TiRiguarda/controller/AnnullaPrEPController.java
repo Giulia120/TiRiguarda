@@ -1,4 +1,4 @@
-package it.TiRiguarda.controller;
+package it.tiriguarda.controller;
 
 public class AnnullaPrEPController {
 	

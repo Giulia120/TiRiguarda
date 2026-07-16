@@ -1,6 +1,6 @@
-package it.TiRiguarda.service;
+package it.tiriguarda.service;
 
-import it.TiRiguarda.domain.Utente;
+import it.tiriguarda.domain.Utente;
 
 public class SessionManager {
 	private Utente utenteLoggato;

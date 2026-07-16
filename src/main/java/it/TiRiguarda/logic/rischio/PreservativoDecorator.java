@@ -1,6 +1,6 @@
-package it.TiRiguarda.logic.rischio;
+package it.tiriguarda.logic.rischio;
 
-import it.TiRiguarda.domain.LivelloRischio;
+import it.tiriguarda.domain.LivelloRischio;
 
 public class PreservativoDecorator extends RischioDecorator {
 	public PreservativoDecorator(CalcoloRischio component) {

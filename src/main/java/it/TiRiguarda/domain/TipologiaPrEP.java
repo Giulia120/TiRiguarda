@@ -1,4 +1,4 @@
-package it.TiRiguarda.domain;
+package it.tiriguarda.domain;
 
 public enum TipologiaPrEP {
 	DAILY,

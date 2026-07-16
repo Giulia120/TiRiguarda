@@ -1,10 +1,10 @@
-package it.TiRiguarda.dto;
+package it.tiriguarda.dto;
 
 import java.util.Date;
 import java.util.List;
 
-import it.TiRiguarda.domain.Precauzioni;
-import it.TiRiguarda.domain.TipoRapporto;
+import it.tiriguarda.domain.Precauzioni;
+import it.tiriguarda.domain.TipoRapporto;
 
 public class RapportoBean {
 	private Date data;

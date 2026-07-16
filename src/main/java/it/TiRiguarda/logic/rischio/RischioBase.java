@@ -1,9 +1,9 @@
-package it.TiRiguarda.logic.rischio;
+package it.tiriguarda.logic.rischio;
 
 import java.util.List;
 
-import it.TiRiguarda.domain.LivelloRischio;
-import it.TiRiguarda.domain.TipoRapporto;
+import it.tiriguarda.domain.LivelloRischio;
+import it.tiriguarda.domain.TipoRapporto;
 
 public class RischioBase implements CalcoloRischio {
 	private List<TipoRapporto> tipoRapporto;

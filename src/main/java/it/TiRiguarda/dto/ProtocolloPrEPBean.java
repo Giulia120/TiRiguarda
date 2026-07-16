@@ -1,6 +1,6 @@
-package it.TiRiguarda.dto;
+package it.tiriguarda.dto;
 
-import it.TiRiguarda.domain.TipologiaPrEP;
+import it.tiriguarda.domain.TipologiaPrEP;
 
 public class ProtocolloPrEPBean {
 	private TipologiaPrEP tipoPrEP;
