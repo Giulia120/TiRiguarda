@@ -1,4 +1,4 @@
-package it.TiRiguardaController;
+package it.TiRiguarda.controller;
 
 import java.util.Calendar;
 import java.util.Date;
