@@ -14,6 +14,7 @@ import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
+import it.tiriguarda.service.SessionManager;
 
 public class RegistraRapportoAppController {
 	private static RegistraRapportoAppController instance;
@@ -32,7 +33,7 @@ public class RegistraRapportoAppController {
 		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {
 			throw new Exception("Dati mancanti per registrare il rapporto"); //aggiungere Exception
 		}
-		Utente utenteCorrente = new Utente("User01", "Giulia", "3331234567"); //fittizzio poi SessionManager
+		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		
 		String idRapporto = UUID.randomUUID().toString();
 				
