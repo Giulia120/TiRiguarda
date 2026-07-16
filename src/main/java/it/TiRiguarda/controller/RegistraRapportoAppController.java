@@ -1,19 +1,19 @@
-package it.TiRiguarda.controller;
+package it.tiriguarda.controller;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-import it.TiRiguarda.domain.LivelloRischio;
-import it.TiRiguarda.domain.Precauzioni;
-import it.TiRiguarda.domain.ProtocolloPrEP;
-import it.TiRiguarda.domain.Rapporto;
-import it.TiRiguarda.domain.Utente;
-import it.TiRiguarda.dto.RapportoBean;
-import it.TiRiguarda.logic.rischio.CalcoloRischio;
-import it.TiRiguarda.logic.rischio.PrEPDecorator;
-import it.TiRiguarda.logic.rischio.PreservativoDecorator;
-import it.TiRiguarda.logic.rischio.RischioBase;
+import it.tiriguarda.domain.LivelloRischio;
+import it.tiriguarda.domain.Precauzioni;
+import it.tiriguarda.domain.ProtocolloPrEP;
+import it.tiriguarda.domain.Rapporto;
+import it.tiriguarda.domain.Utente;
+import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.logic.rischio.CalcoloRischio;
+import it.tiriguarda.logic.rischio.PrEPDecorator;
+import it.tiriguarda.logic.rischio.PreservativoDecorator;
+import it.tiriguarda.logic.rischio.RischioBase;
 
 public class RegistraRapportoAppController {
 	private static RegistraRapportoAppController instance;
