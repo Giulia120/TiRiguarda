@@ -8,12 +8,15 @@ public class SessionManager {
 	
 	private SessionManager() {}
 	
-	public static SessionManager getIstance() {
+	public static SessionManager getInstance() {
 		if (instance == null) {
 			instance = new SessionManager();
 		}
 		return instance;
 	}
 	
+	public String getIdUtenteLoggato() {
+		return utenteLoggato.getIdUtente();
+	}
 	
 }
