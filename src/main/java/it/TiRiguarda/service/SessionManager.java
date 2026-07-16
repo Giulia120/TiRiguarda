@@ -19,4 +19,11 @@ public class SessionManager {
 		return utenteLoggato.getIdUtente();
 	}
 	
+	public void setIdUtenteLoggato(Utente utenteLoggato) {
+		this.utenteLoggato = utenteLoggato;
+	}
+	
+	public void clearSessione() {
+		this.utenteLoggato = null;
+	}
 }
