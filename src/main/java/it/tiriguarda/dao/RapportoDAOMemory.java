@@ -14,5 +14,4 @@ public class RapportoDAOMemory implements RapportoDAO {
 		dbInMemoria.add(rapporto);
 		System.out.println("DEMO: Rapporto salvato correttamente");
 	}
-
 }

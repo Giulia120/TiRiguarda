@@ -8,5 +8,4 @@ public class RapportoDAOFS implements RapportoDAO {
 	public void salvaRapporto (Rapporto rapporto) {
 		System.out.println("FAKE: Rapporto salvato FS");
 	}
-
 }

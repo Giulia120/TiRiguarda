@@ -1,9 +1,9 @@
 package it.tiriguarda.controller;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
+import it.tiriguarda.dao.RapportoDAO;
+import it.tiriguarda.dao.RapportoDAOFactory;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.ProtocolloPrEP;
@@ -39,11 +39,12 @@ public class RegistraRapportoAppController {
 				
 		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
 		
-		Date dataFinePeriodoFinestra = calcolaPeriodoFinestra(bean.getData(), rischioCalcolato);
+		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), rischioCalcolato);
 		
-		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), rischioCalcolato, dataFinePeriodoFinestra);
+		RapportoDAOFactory factory = new RapportoDAOFactory();
+		RapportoDAO dao = factory.createRapportoDAO();
+		dao.salvaRapporto(nuovoRapporto);
 		
-		//Parte del DAO
 	}
 	
 	private LivelloRischio analizzaRischio(RapportoBean bean, Utente utente) {
@@ -59,16 +60,6 @@ public class RegistraRapportoAppController {
 		}
 		
 		return calcolatore.calcola();
-	}
-	
-	private Date calcolaPeriodoFinestra(Date dataRapporto, LivelloRischio rischio) {
-		if (rischio == LivelloRischio.NULLO) {
-			return null;
-		}
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(dataRapporto);
-		cal.add(Calendar.DAY_OF_MONTH, 28);
-		return cal.getTime();
 	}
 	
 }
