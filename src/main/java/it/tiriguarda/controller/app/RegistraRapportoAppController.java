@@ -1,4 +1,4 @@
-package it.tiriguarda.controller;
+package it.tiriguarda.controller.app;
 
 import java.util.UUID;
 
