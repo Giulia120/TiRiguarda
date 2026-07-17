@@ -1,15 +1,15 @@
 package it.tiriguarda.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ProtocolloPrEP {
 	private Utente utente;
 	private final TipologiaPrEP tipoPrEP;
-	private final Date dataInizio;
+	private LocalDate dataInizio;
 	private boolean statoPrEP;
-	private final Date dataAnnullamento;
+	private LocalDate dataAnnullamento;
 	
-	public ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, Date dataInizio, boolean statoPrEP, Date dataAnnullamento) {
+	public ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, boolean statoPrEP, LocalDate dataAnnullamento) {
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
@@ -25,9 +25,29 @@ public class ProtocolloPrEP {
 		return tipoPrEP;
 	}
 	
+	public LocalDate getDataInizio() {
+		return dataInizio;
+	}
+	
 	public boolean getStatoPrEP() {
 		return statoPrEP;
 	}
 	
+	public LocalDate getDataAnnullamento() {
+		return dataAnnullamento;
+	}
 	
+	public void setStatoPrEP(boolean statoPrEP) {
+		this.statoPrEP = statoPrEP;
+	}
+	
+	public void setDataInizio(LocalDate dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+	
+	public void setDataAnnullamento() {
+		this.dataAnnullamento = LocalDate.now();
+	}
+	
+
 }
