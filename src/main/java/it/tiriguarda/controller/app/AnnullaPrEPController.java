@@ -1,5 +1,7 @@
 package it.tiriguarda.controller.app;
 
+import it.tiriguarda.dao.ProtocolloPrEPDAO;
+import it.tiriguarda.dao.ProtocolloPrEPDAOFactory;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.service.SessionManager;
@@ -25,7 +27,10 @@ public class AnnullaPrEPController {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		
-		//chiama aggiornaStato della DAO
+		ProtocolloPrEPDAOFactory factory = new ProtocolloPrEPDAOFactory();
+		ProtocolloPrEPDAO dao = factory.creaProtocolloPrEPDAO();
+		
+		dao.annullaStatoProtocollo(protocollo);
 		
 	}
 	
