@@ -4,7 +4,7 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.service.SessionManager;
 
-public class AnnullaPrEPController {
+public class AnnullaPrEPController  {
 	
 	public void verificaStatoPrEP() throws Exception{
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
