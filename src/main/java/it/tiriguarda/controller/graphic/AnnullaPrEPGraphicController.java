@@ -28,6 +28,14 @@ public class AnnullaPrEPGraphicController {
 		}catch(Exception e) {
 			//errore
 		}
+	}
+	@FXML
+	public void onNoConfermaAnnullamento(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	public void onMenuPrincipale(ActionEvent event) {
 		
 	}
 }

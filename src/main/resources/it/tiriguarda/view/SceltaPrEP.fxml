@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.RegistraRapportoGraphicController">
+   <children>
+      <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/username/SceltaPrEP.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="OnDemandButton" layoutX="265.0" layoutY="339.0" mnemonicParsing="false" onAction="#onOnDemand" prefHeight="68.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="DailyButton" layoutX="265.0" layoutY="241.0" mnemonicParsing="false" onAction="#onDaily" prefHeight="68.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="menuPrincipale" layoutX="29.0" layoutY="561.0" mnemonicParsing="false" onAction="#onMenuPrincipale" prefHeight="33.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="AnnullaButton" layoutX="265.0" layoutY="437.0" mnemonicParsing="false" onAction="#onAnnullaPrEP" prefHeight="70.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
