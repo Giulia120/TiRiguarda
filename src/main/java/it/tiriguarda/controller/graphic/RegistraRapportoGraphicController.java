@@ -38,12 +38,6 @@ public class RegistraRapportoGraphicController {
 	 private Button confermaButton;
 	 @FXML
 	 private Button backButton;
-	 @FXML
-	 private Button homeButton;
-	 @FXML
-	 private Button SiButton;
-	 @FXML
-	 private Button NoButton;
 	 
 	 @FXML
 	 public void onConfermaRegistrazione(ActionEvent event) {
@@ -108,7 +102,7 @@ public class RegistraRapportoGraphicController {
 	 
 	 private void mostraSchermataSuccesso(ActionEvent eventoClick) throws Exception {
 		 System.out.println("Nessun rischio: carico la schermata di successo...");
-		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/SuccessoRapporto.fxml"));
+		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/Successo.fxml"));
          Parent nuovaVista = loader.load();
          
          Stage finestraAttuale = (Stage) ((Node) eventoClick.getSource()).getScene().getWindow();
@@ -128,24 +122,10 @@ public class RegistraRapportoGraphicController {
 	 
 	  
 	 @FXML
-	 private void onTornaMenuPrincipale(){
+	 private void onTornaMenuPrincipale(ActionEvent event){
 		 System.out.println("Daje");
 	 }
 	 
-	 @FXML
-	 private void onHomeButton(){
-		 System.out.println("Daje");
-	 }
-	 
-	 @FXML
-	 private void onSiButton(){
-		 System.out.println("Daje");
-	 }
-	 
-	 @FXML
-	 private void onNoButton(){
-		 System.out.println("Daje");
-	 }
 	 
 	        
 }

@@ -1,0 +1,16 @@
+.bottone-dinamico {
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.bottone-dinamico:hover {
+    -fx-translate-y: -4; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.35), 10, 0, 0, 5);
+}
+
+.bottone-dinamico:pressed {
+    -fx-translate-y: 1;
+    -fx-effect: none;
+}
