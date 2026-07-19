@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.RegistraRapportoGraphicController">
    <children>
       <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Downloads/username%20(2).png" />
+            <Image url="@images/registra_rapporto.png" />
          </image>
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -31,7 +30,7 @@
             <RadioButton fx:id="radioCoInt" layoutX="451.0" layoutY="378.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" toggleGroup="$gruppoPrecuazioni" />
             <RadioButton fx:id="radioPreservativo" layoutX="451.0" layoutY="416.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" toggleGroup="$gruppoPrecuazioni" />
             <Button fx:id="confermaButton" layoutX="324.0" layoutY="459.0" mnemonicParsing="false" onAction="#onConfermaRegistrazione" prefHeight="53.0" prefWidth="152.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="homeButton" layoutX="29.0" layoutY="560.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="32.0" prefWidth="41.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="backButton" layoutX="29.0" layoutY="560.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="32.0" prefWidth="41.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>
