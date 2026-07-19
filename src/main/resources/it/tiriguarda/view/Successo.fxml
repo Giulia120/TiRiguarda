@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.SuccessoGraphicController">
+   <children>
+      <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/successo.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="HomeButton" layoutX="318.0" layoutY="535.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="54.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
