@@ -1,5 +1,9 @@
 package it.tiriguarda.controller.graphic;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.tiriguarda.controller.app.AnnullaPrEPController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class SceltaPrEPGraphicController {
+	private static final Logger logger = Logger.getLogger(SceltaPrEPGraphicController.class.getName());
 	
 	@FXML
 	private Button dailyButton;
@@ -48,7 +53,7 @@ public class SceltaPrEPGraphicController {
 		}
 	}
 	
-	private void apriConfermaAnnullamento(ActionEvent event) throws Exception{
+	private void apriConfermaAnnullamento(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/ConfermaAnnullamneto.fxml"));
 		Parent vistaConferma = loader.load();
 		Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -70,12 +75,11 @@ public class SceltaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			e.printStackTrace();
-			System.out.println("Errore nel caricamento della schermata.");
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata Menu Principale.", e);
 		}
 	}
 	
-	private void apriMenuPrincipale(ActionEvent event) throws Exception{
+	private void apriMenuPrincipale(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
 		Parent vistaMenuPrincipale = loader.load();
 		Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,5 +1,8 @@
 package it.tiriguarda.controller.graphic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class SuccessoGraphicController {
+	private static final Logger logger = Logger.getLogger(SuccessoGraphicController.class.getName());
+	
 	 @FXML
 	 private Button homeButton;
 
@@ -23,11 +28,9 @@ public class SuccessoGraphicController {
 	            finestraAttuale.setScene(new Scene(nuovaVista));
 	            finestraAttuale.show();
 	            
-	            System.out.println("Cliccato: Tornata alla Home con successo!");
-	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            System.out.println("Errore nel caricamento della schermata Home.");
+	            logger.log(Level.SEVERE, "Errore nel caricamento della schermata Home.", e);
 	        }
 	    }
 }

@@ -1,25 +1,25 @@
 package it.tiriguarda.controller.app;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.dao.RapportoDAOFactory;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
-import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiRapportoIncompletiException;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
-import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
 import it.tiriguarda.service.SessionManager;
 
 public class RegistraRapportoAppController {
 	private static RegistraRapportoAppController instance;
+	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
 	
 	private RegistraRapportoAppController() {
 	}
@@ -51,7 +51,7 @@ public class RegistraRapportoAppController {
 		RapportoDAOFactory factory = new RapportoDAOFactory();
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
-		
+		logger.info("Rapporto registrato con successo. ID: " + idRapporto + " - Rischio: " + rischioCalcolato);
 		bean.setRischio(rischioCalcolato);
         bean.setDataFinePeriodoFinestra(nuovoRapporto.getDataFinePeriodoFinestra());
         

@@ -1,5 +1,8 @@
 package it.tiriguarda.controller.graphic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class MenuPrincipaleGraphicController {
+	private static final Logger logger = Logger.getLogger(MenuPrincipaleGraphicController.class.getName());
 	
 	@FXML private Button testButton;
 	@FXML private Button profiloButton;
@@ -29,8 +33,7 @@ public class MenuPrincipaleGraphicController {
 			finestra.setScene(new Scene(nuovaVista));
 			finestra.show();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Errore nel caricamento della schermata: " + fxmlPath);
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata: " + fxmlPath, e);
 		}
 	}
 	

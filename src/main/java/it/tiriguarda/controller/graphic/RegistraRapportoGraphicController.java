@@ -1,7 +1,10 @@
 package it.tiriguarda.controller.graphic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
 import it.tiriguarda.domain.LivelloRischio;
@@ -25,6 +28,7 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
 public class RegistraRapportoGraphicController {
+	private static final Logger logger = Logger.getLogger(RegistraRapportoGraphicController.class.getName());
 
 	 @FXML
 	 private DatePicker dataRapportoPicker;
@@ -97,8 +101,8 @@ public class RegistraRapportoGraphicController {
 	            mostraErrore(e.getMessage());
 	            dataRapportoPicker.setValue(null);          
 	        } catch (Exception e) {
-	            mostraErrore("Errore di sistema." + e.getMessage());
-	            System.out.println(e.getMessage());
+	        	mostraErrore("Errore di sistema." + e.getMessage());
+	            logger.log(Level.SEVERE, "Errore di sistema durante la registrazione", e);
 	        }
 	 }
 	 private void mostraErrore(String messaggio) {
@@ -109,8 +113,8 @@ public class RegistraRapportoGraphicController {
 	   	 alert.showAndWait();
 	 }
 	 
-	 private void mostraSchermataSuccesso(ActionEvent event) throws Exception {
-		 System.out.println("Nessun rischio: carico la schermata di successo...");
+	 private void mostraSchermataSuccesso(ActionEvent event) throws IOException {
+		 logger.info("Nessun rischio: carico la schermata di successo...");
 		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/Successo.fxml"));
          Parent vistaSuccesso = loader.load();
          
@@ -119,8 +123,8 @@ public class RegistraRapportoGraphicController {
          finestra.show();
 	 }
 	 
-	 private void mostraSchermataSMS(ActionEvent event, RapportoBean beanAggiornato) throws Exception {
-		 System.out.println("Rischio rilevato: apro la richiesta SMS...");
+	 private void mostraSchermataSMS(ActionEvent event, RapportoBean beanAggiornato) throws IOException {
+		 logger.info("Rischio rilevato: apro la richiesta SMS...");
          FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/RichiestaSMSRapporto.fxml"));
          Parent vistaRichiestaSMSRapporto = loader.load();
          RichiestaSMSRapportoGraphicController controllerSMS = loader.getController();
@@ -136,12 +140,11 @@ public class RegistraRapportoGraphicController {
 			try {
 				apriMenuPrincipale(event);
 			}catch (Exception e){
-				e.printStackTrace();
-				System.out.println("Errore nel caricamento della schermata." + e.getMessage());
+				logger.log(Level.SEVERE, "Errore nel caricamento della schermata Menu Principale.", e);
 			}
-		}
+	 }
 		
-		private void apriMenuPrincipale(ActionEvent event) throws Exception {
+		private void apriMenuPrincipale(ActionEvent event) throws IOException {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
 			Parent vistaMenuPrincipale = loader.load();
 			Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
