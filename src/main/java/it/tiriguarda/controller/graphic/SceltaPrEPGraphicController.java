@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -43,17 +44,25 @@ public class SceltaPrEPGraphicController {
 			apriConfermaAnnullamento(event);
 			
 		}catch(Exception e) {
-			//errore
+			errore("Impossibile annullare PrEP: Protocollo non eisstente o gia annullato.");
 		}
 	}
 	
-	private void apriConfermaAnnullamento(ActionEvent event) {
+	private void apriConfermaAnnullamento(ActionEvent event) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/ConfermaAnnullamneto.fxml"));
 		Parent vistaConferma = loader.load();
 		Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		
 		finestra.setScene(new Scene(vistaConferma));
 		finestra.show();
+	}
+	
+	private void errore(String messaggio) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
 	}
 	
 	@FXML
