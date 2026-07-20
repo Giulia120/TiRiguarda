@@ -10,17 +10,17 @@ import javafx.scene.control.Label;
 public class RichiestaSMSRapportoGraphicController {
 
 	 @FXML
-	 private Button SiButton;
+	 private Button siButton;
 	 @FXML
-	 private Button NoButton;
+	 private Button noButton;
 	 @FXML 
-	 private Label DataFinestraLabel;
+	 private Label dataFinestraLabel;
 	 
 	 public void initData(Date dataFineFinestra) {
 			if (dataFineFinestra != null) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				String dataFormattata = sdf.format(dataFineFinestra);
-				DataFinestraLabel.setText(dataFormattata);
+				dataFinestraLabel.setText(dataFormattata);
 			}
 		}
 	 

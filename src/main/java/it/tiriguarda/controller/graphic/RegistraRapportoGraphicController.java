@@ -98,6 +98,7 @@ public class RegistraRapportoGraphicController {
 	            dataRapportoPicker.setValue(null);          
 	        } catch (Exception e) {
 	            mostraErrore("Errore di sistema." + e.getMessage());
+	            System.out.println(e.getMessage());
 	        }
 	 }
 	 private void mostraErrore(String messaggio) {

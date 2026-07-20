@@ -31,7 +31,7 @@ public class RegistraRapportoAppController {
 		return instance;
 	}
 	
-	public RapportoBean registraRapporto(RapportoBean bean) throws DatiRapportoIncompletiException, DataFuturaException, Exception{
+	public RapportoBean registraRapporto(RapportoBean bean) throws DatiRapportoIncompletiException, DataFuturaException{
 		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {
 			throw new DatiRapportoIncompletiException("Dati mancanti per registrare il rapporto");
 		}

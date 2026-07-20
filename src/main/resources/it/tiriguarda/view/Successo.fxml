@@ -15,7 +15,7 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="HomeButton" layoutX="318.0" layoutY="535.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="54.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="homeButton" layoutX="318.0" layoutY="535.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="54.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>

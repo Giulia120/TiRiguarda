@@ -30,7 +30,7 @@
             <RadioButton fx:id="radioCoInt" layoutX="451.0" layoutY="378.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" toggleGroup="$gruppoPrecuazioni" />
             <RadioButton fx:id="radioPreservativo" layoutX="451.0" layoutY="416.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" toggleGroup="$gruppoPrecuazioni" />
             <Button fx:id="confermaButton" layoutX="324.0" layoutY="459.0" mnemonicParsing="false" onAction="#onConfermaRegistrazione" prefHeight="53.0" prefWidth="152.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="backButton" layoutX="29.0" layoutY="560.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="32.0" prefWidth="41.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="backButton" layoutX="29.0" layoutY="560.0" mnemonicParsing="false" onAction="#onMenuPrincipale" prefHeight="32.0" prefWidth="41.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>

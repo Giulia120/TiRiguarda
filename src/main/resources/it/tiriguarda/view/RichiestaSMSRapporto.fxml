@@ -17,9 +17,9 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="SiButton" layoutX="264.0" layoutY="477.0" mnemonicParsing="false" onAction="#onSiButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="NoButton" layoutX="448.0" layoutY="477.0" mnemonicParsing="false" onAction="#onNoButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Label fx:id="dataFnestraLabel" layoutX="292.0" layoutY="378.0" prefHeight="18.0" prefWidth="216.0">
+            <Button fx:id="siButton" layoutX="264.0" layoutY="477.0" mnemonicParsing="false" onAction="#onSiButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="noButton" layoutX="448.0" layoutY="477.0" mnemonicParsing="false" onAction="#onNoButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Label fx:id="dataFinestraLabel" layoutX="292.0" layoutY="378.0" prefHeight="18.0" prefWidth="216.0">
                <font>
                   <Font name="Bodoni MT Black" size="28.0" />
                </font>

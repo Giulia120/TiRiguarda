@@ -14,13 +14,13 @@ import javafx.stage.Stage;
 public class SceltaPrEPGraphicController {
 	
 	@FXML
-	private Button DailyButton;
+	private Button dailyButton;
 	
 	@FXML
-	private Button OnDemandButton;
+	private Button onDemandButton;
 	
 	@FXML
-	private Button AnnullaButton;
+	private Button annullaButton;
 	
 	@FXML
 	private Button menuPrincipale;
