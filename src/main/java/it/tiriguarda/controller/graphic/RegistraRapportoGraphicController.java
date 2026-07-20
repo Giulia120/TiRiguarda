@@ -3,9 +3,13 @@ package it.tiriguarda.controller.graphic;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.controller.app.RegistraRapportoAppController;
+import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatiRapportoIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,17 +83,21 @@ public class RegistraRapportoGraphicController {
 	        }
 	        
 	        try {
-	            //RegistraRapportoAppController.getInstance().registraRapporto(bean);
-	            
-	            boolean rischioRilevato = true;
-	            if (rischioRilevato) {
-	                mostraSchermataSMS(event);
+	        	RegistraRapportoAppController appController = RegistraRapportoAppController.getInstance();
+	        	RapportoBean beanAggiornato = appController.registraRapporto(bean);
+	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
+	                mostraSchermataSMS(event, beanAggiornato);
 	            } else {
 	            	mostraSchermataSuccesso(event);
 	            }
 	            
+	        } catch (DatiRapportoIncompletiException e) {
+	            mostraErrore(e.getMessage());
+	        } catch (DataFuturaException e) {
+	            mostraErrore(e.getMessage());
+	            dataRapportoPicker.setValue(null);          
 	        } catch (Exception e) {
-	            mostraErrore("Si è verificato un errore: " + e.getMessage());
+	            mostraErrore("Errore di sistema." + e.getMessage());
 	        }
 	 }
 	 private void mostraErrore(String messaggio) {
@@ -100,32 +108,44 @@ public class RegistraRapportoGraphicController {
 	   	 alert.showAndWait();
 	 }
 	 
-	 private void mostraSchermataSuccesso(ActionEvent eventoClick) throws Exception {
+	 private void mostraSchermataSuccesso(ActionEvent event) throws Exception {
 		 System.out.println("Nessun rischio: carico la schermata di successo...");
 		 FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/Successo.fxml"));
-         Parent nuovaVista = loader.load();
+         Parent vistaSuccesso = loader.load();
          
-         Stage finestraAttuale = (Stage) ((Node) eventoClick.getSource()).getScene().getWindow();
-         finestraAttuale.setScene(new Scene(nuovaVista));
-         finestraAttuale.show();
+         Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         finestra.setScene(new Scene(vistaSuccesso));
+         finestra.show();
 	 }
 	 
-	 private void mostraSchermataSMS(ActionEvent eventoClick) throws Exception {
+	 private void mostraSchermataSMS(ActionEvent event, RapportoBean beanAggiornato) throws Exception {
 		 System.out.println("Rischio rilevato: apro la richiesta SMS...");
          FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/RichiestaSMSRapporto.fxml"));
-         Parent nuovaVista = loader.load();
-         
-         Stage finestraAttuale = (Stage) ((Node) eventoClick.getSource()).getScene().getWindow();
-         finestraAttuale.setScene(new Scene(nuovaVista));
-         finestraAttuale.show();
+         Parent vistaRichiestaSMSRapporto = loader.load();
+         RichiestaSMSRapportoGraphicController controllerSMS = loader.getController();
+         controllerSMS.initData(beanAggiornato.getDataFinePeriodoFinestra());
+         Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         finestra.setScene(new Scene(vistaRichiestaSMSRapporto));
+         finestra.show();
 	 }
 	 
 	  
 	 @FXML
-	 private void onTornaMenuPrincipale(ActionEvent event){
-		 System.out.println("Daje");
-	 }
-	 
-	 
-	        
+		public void onMenuPrincipale(ActionEvent event) {
+			try {
+				apriMenuPrincipale(event);
+			}catch (Exception e){
+				e.printStackTrace();
+				System.out.println("Errore nel caricamento della schermata." + e.getMessage());
+			}
+		}
+		
+		private void apriMenuPrincipale(ActionEvent event) throws Exception {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
+			Parent vistaMenuPrincipale = loader.load();
+			Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+			finestra.setScene(new Scene(vistaMenuPrincipale));
+			finestra.show();
+		}     
 }

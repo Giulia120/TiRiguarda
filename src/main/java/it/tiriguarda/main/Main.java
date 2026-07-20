@@ -12,11 +12,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/it/tiriguarda/view/RegistraRapportoGUI.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
             
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Ti Riguarda - Registra Rapporto (Test)");
+            primaryStage.setTitle("Ti Riguarda (Test)");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.show();

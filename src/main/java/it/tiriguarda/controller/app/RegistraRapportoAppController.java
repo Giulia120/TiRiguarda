@@ -10,6 +10,8 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatiRapportoIncompletiException;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
@@ -29,10 +31,15 @@ public class RegistraRapportoAppController {
 		return instance;
 	}
 	
-	public void registraRapporto(RapportoBean bean) throws Exception{
+	public RapportoBean registraRapporto(RapportoBean bean) throws DatiRapportoIncompletiException, DataFuturaException, Exception{
 		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {
-			throw new Exception("Dati mancanti per registrare il rapporto"); //aggiungere Exception
+			throw new DatiRapportoIncompletiException("Dati mancanti per registrare il rapporto");
 		}
+		
+        if (bean.getData().after(new java.util.Date())) {
+            throw new DataFuturaException("Hai inserito una data futura");
+        }
+        
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		
 		String idRapporto = UUID.randomUUID().toString();
@@ -45,6 +52,10 @@ public class RegistraRapportoAppController {
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
 		
+		bean.setRischio(rischioCalcolato);
+        bean.setDataFinePeriodoFinestra(nuovoRapporto.getDataFinePeriodoFinestra());
+        
+		return bean;
 	}
 	
 	private LivelloRischio analizzaRischio(RapportoBean bean, Utente utente) {
