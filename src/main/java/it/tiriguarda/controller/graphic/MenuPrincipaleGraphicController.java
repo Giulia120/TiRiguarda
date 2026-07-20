@@ -11,14 +11,14 @@ import javafx.stage.Stage;
 
 public class MenuPrincipaleGraphicController {
 	
-	@FXML private Button TestButton;
-	@FXML private Button ProfiloButton;
-	@FXML private Button RiepilogoButton;
-	@FXML private Button RegistraRapportoButton;
-	@FXML private Button PrEPButton;
-	@FXML private Button QuestionarioButton;
-	@FXML private Button InfoButton;
-	@FXML private Button LougoutButton;
+	@FXML private Button testButton;
+	@FXML private Button profiloButton;
+	@FXML private Button riepilogoButton;
+	@FXML private Button registraRapportoButton;
+	@FXML private Button prEPButton;
+	@FXML private Button questionarioButton;
+	@FXML private Button infoButton;
+	@FXML private Button logoutButton;
 
 	private void cambiaSchermata(ActionEvent event, String fxmlPath) {
 		try {

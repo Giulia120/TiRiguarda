@@ -15,7 +15,7 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
          <children>
-            <Button fx:id="TestButton" contentDisplay="GRAPHIC_ONLY" layoutX="94.0" layoutY="374.0" mnemonicParsing="false" onAction="#onRegistraRapportoButton" prefHeight="161.0" prefWidth="164.0" styleClass="bottone-dinamico">
+            <Button fx:id="testButton" contentDisplay="GRAPHIC_ONLY" layoutX="94.0" layoutY="374.0" mnemonicParsing="false" onAction="#onRegistraRapportoButton" prefHeight="161.0" prefWidth="164.0" styleClass="bottone-dinamico">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -23,7 +23,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="ProfiloButton" layoutX="330.0" layoutY="374.0" mnemonicParsing="false" onAction="#onProfiloButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <Button fx:id="profiloButton" layoutX="330.0" layoutY="374.0" mnemonicParsing="false" onAction="#onProfiloButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -31,7 +31,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="RiepilogoButton" layoutX="568.0" layoutY="374.0" mnemonicParsing="false" onAction="#onProfiloButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <Button fx:id="riepilogoButton" layoutX="568.0" layoutY="374.0" mnemonicParsing="false" onAction="#onProfiloButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -39,7 +39,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="RegistraRapportoButton" layoutX="568.0" layoutY="152.0" mnemonicParsing="false" onAction="#onRegistraRapportoButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <Button fx:id="registraRapportoButton" layoutX="568.0" layoutY="152.0" mnemonicParsing="false" onAction="#onRegistraRapportoButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -47,7 +47,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="PrEPButton" layoutX="330.0" layoutY="152.0" mnemonicParsing="false" onAction="#onPrEPButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <Button fx:id="prEPButton" layoutX="330.0" layoutY="152.0" mnemonicParsing="false" onAction="#onPrEPButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -55,7 +55,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="QuestionarioButton" layoutX="94.0" layoutY="152.0" mnemonicParsing="false" onAction="#onQuestionarioButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+            <Button fx:id="questionarioButton" layoutX="94.0" layoutY="152.0" mnemonicParsing="false" onAction="#onQuestionarioButton" prefHeight="161.0" prefWidth="164.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>
@@ -63,8 +63,8 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="InfoButton" layoutX="344.0" layoutY="552.0" mnemonicParsing="false" onAction="#onInfoButton" prefHeight="74.0" prefWidth="138.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="LogoutButton" layoutX="32.0" layoutY="561.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="29.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="infoButton" layoutX="344.0" layoutY="552.0" mnemonicParsing="false" onAction="#onInfoButton" prefHeight="74.0" prefWidth="138.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="logoutButton" layoutX="32.0" layoutY="561.0" mnemonicParsing="false" onAction="#onLogoutButton" prefHeight="29.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>

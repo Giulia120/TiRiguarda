@@ -65,10 +65,10 @@ public class RegistraRapportoAppController {
 			calcolatore = new PreservativoDecorator(calcolatore);
 		}
 		
-		ProtocolloPrEP prep = utente.getProtocolloAttivo();
+		/*ProtocolloPrEP prep = utente.getProtocolloAttivo();
 		if (prep != null && prep.getStatoPrEP() == true) {
 			calcolatore = new PrEPDecorator(calcolatore);
-		}
+		}*/
 		
 		return calcolatore.calcola();
 	}
