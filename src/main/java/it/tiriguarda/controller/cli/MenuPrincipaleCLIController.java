@@ -42,7 +42,8 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "5":
-					System.out.println("\n[INFO] Sezione Scelta PrEP aperta.");
+					SceltaPrEPCLIController PrEPController = new SceltaPrEPCLIController();
+					PrEPController.avviaPrEP(scanner);
 					break;
 					
 				case "6":
