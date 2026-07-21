@@ -5,6 +5,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.tiriguarda.controller.app.AnnullaPrEPController;
+import it.tiriguarda.exception.PrEPAnnullataException;
+import it.tiriguarda.exception.PrEPNonEsistenteException;
+import it.tiriguarda.exception.TiRiguardaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,15 +44,18 @@ public class SceltaPrEPGraphicController {
 	
 	@FXML
 	public void onAnnullaPrEP(ActionEvent event) {
-		
 		AnnullaPrEPController controller = new AnnullaPrEPController();
-		
 		try {
 			controller.verificaStatoPrEP();
 			apriConfermaAnnullamento(event);
-			
+		}catch(PrEPNonEsistenteException e) {
+			errore(e.getMessage());
+		}catch(PrEPAnnullataException e) {
+			errore(e.getMessage());
+		} catch(TiRiguardaException e) {
+	        errore(e.getMessage());
 		}catch(Exception e) {
-			errore("Impossibile annullare PrEP: Protocollo non eisstente o gia annullato.");
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di conferma.", e);
 		}
 	}
 	
@@ -87,6 +93,5 @@ public class SceltaPrEPGraphicController {
 		finestra.setScene(new Scene(vistaMenuPrincipale));
 		finestra.show();
 	}
-	
 }
 	

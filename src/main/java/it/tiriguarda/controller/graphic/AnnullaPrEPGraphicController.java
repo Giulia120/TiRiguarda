@@ -1,16 +1,23 @@
 package it.tiriguarda.controller.graphic;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.tiriguarda.controller.app.AnnullaPrEPController;
+import it.tiriguarda.exception.TiRiguardaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class AnnullaPrEPGraphicController {
+	private static final Logger logger = Logger.getLogger(AnnullaPrEPGraphicController.class.getName());
 	
 	@FXML
 	private Button siConfermaAnnullamento;
@@ -23,16 +30,13 @@ public class AnnullaPrEPGraphicController {
 	
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
-		
 		AnnullaPrEPController controller = new AnnullaPrEPController();
-		
 		try {
 			controller.annullaPrEP();
 			apriSuccesso(event);
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Errore nell'annullamento del protocollo.");
+		}catch(TiRiguardaException e) {
+			errore(e.getMessage());
 		}
 	}
 	@FXML
@@ -40,8 +44,8 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			e.printStackTrace();
-			System.out.println("Errore nel caricamento della schermata.");
+			errore("Errore di sistema: "+e.getMessage());
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
 	
@@ -50,11 +54,10 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			e.printStackTrace();
-			System.out.println("Errore nel caricamento della schermata.");
+			errore("Errore di sistema: "+e.getMessage());
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
-	
 	private void apriMenuPrincipale(ActionEvent event) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
 		Parent vistaMenuPrincipale = loader.load();
@@ -63,13 +66,23 @@ public class AnnullaPrEPGraphicController {
 		finestra.setScene(new Scene(vistaMenuPrincipale));
 		finestra.show();
 	}
-	
-	private void apriSuccesso(ActionEvent event) throws Exception{
+	private void apriSuccesso(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/Successo.fxml"));
-		Parent vistaMenuPrincipale = loader.load();
-		Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		finestra.setScene(new Scene(vistaMenuPrincipale));
-		finestra.show();
+		try {
+			Parent vistaSuccesso = loader.load();
+			Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			finestra.setScene(new Scene(vistaSuccesso));
+			finestra.show();
+		}catch(Exception e) {
+			errore("Errore di sistema: " + e.getMessage());
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di successo.", e);
+		}	
+	}
+	private void errore(String messaggio) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
 	}
 }
