@@ -35,11 +35,11 @@ public class SceltaPrEPGraphicController {
 	
 	@FXML
 	public void onDaily(ActionEvent event) {
-		
+		//da fare
 	}
 	@FXML
 	public void onOnDemand(ActionEvent event) {
-		
+		//da fare
 	}
 	
 	@FXML

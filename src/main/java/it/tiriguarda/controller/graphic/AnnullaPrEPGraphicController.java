@@ -44,7 +44,7 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			errore("Errore di sistema: "+e.getMessage());
+			errore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
@@ -54,7 +54,7 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			errore("Errore di sistema: "+e.getMessage());
+			errore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
@@ -74,7 +74,7 @@ public class AnnullaPrEPGraphicController {
 			finestra.setScene(new Scene(vistaSuccesso));
 			finestra.show();
 		}catch(Exception e) {
-			errore("Errore di sistema: " + e.getMessage());
+			errore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di successo.", e);
 		}	
 	}

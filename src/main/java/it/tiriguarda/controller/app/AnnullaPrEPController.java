@@ -27,7 +27,7 @@ public class AnnullaPrEPController  {
 		
 		boolean stato = protocollo.getStatoPrEP();
 		
-		if(stato == false) {
+		if(!stato) {
 			throw new PrEPAnnullataException("Protocollo già annullato");
 		}
 	}
