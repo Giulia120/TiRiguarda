@@ -11,6 +11,10 @@ public class AnnullaPrEPController  {
 	
 	public void verificaStatoPrEP() throws TiRiguardaException{
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
+		if(utente == null) {
+			throw new TiRiguardaException("Utente non loggato");
+		}
+		
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		
 		if(protocollo == null) {
@@ -24,8 +28,12 @@ public class AnnullaPrEPController  {
 		}
 	}
 	
-	public void annullaPrEP() {
+	public void annullaPrEP() throws TiRiguardaException{
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
+		if(utente == null) {
+			throw new TiRiguardaException("Utente non loggato");
+		}
+		
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		
 		ProtocolloPrEPDAOFactory factory = new ProtocolloPrEPDAOFactory();
