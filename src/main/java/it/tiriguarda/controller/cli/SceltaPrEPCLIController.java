@@ -24,7 +24,7 @@ public class SceltaPrEPCLIController {
 					System.out.println("scelta PrEP on demand");
 				case "3":
 					AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
-					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento(scanner);
+					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento();
 					if(!tornaMenu) {
 						return;
 					}

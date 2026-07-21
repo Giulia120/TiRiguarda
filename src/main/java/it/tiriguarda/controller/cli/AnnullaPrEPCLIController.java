@@ -1,6 +1,8 @@
 package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.controller.app.AnnullaPrEPController;
 import it.tiriguarda.exception.PrEPAnnullataException;
@@ -9,7 +11,8 @@ import it.tiriguarda.exception.TiRiguardaException;
 
 
 public class AnnullaPrEPCLIController {
-	public boolean avvioAnnullamento(Scanner scanner) {
+	private static final Logger logger = Logger.getLogger(AnnullaPrEPCLIController.class.getName());
+	public boolean avvioAnnullamento() {
 		AnnullaPrEPController controller = new AnnullaPrEPController();
 		try {
 			System.out.println("...Verifico lo stato del tuo protocollo...");
@@ -17,16 +20,16 @@ public class AnnullaPrEPCLIController {
 			System.out.println("Stato del tuo protocollo attivo");
 			return confermaAnnullamento(controller);
 		}catch(PrEPNonEsistenteException e) {
-			System.out.println("ERRORE: " + e.getMessage());
+			logger.log(Level.WARNING, "Protocollo PrEP non esistente", e.getMessage());
 			return false;
 		}catch(PrEPAnnullataException e) {
-			System.out.println("ERRORE: " + e.getMessage());
+			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e.getMessage());
 			return false;
 		} catch(TiRiguardaException e) {
-			System.out.println("ERRORE: " + e.getMessage());
+			logger.log(Level.WARNING, e.getMessage());
 			return false;
 		}catch(Exception e) {
-			System.out.println("ERRORE: " + e.getMessage());
+			logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e.getMessage());
 			return false;
 		}
 	}
@@ -47,7 +50,7 @@ public class AnnullaPrEPCLIController {
 					System.out.println("****************************************");
 					return true;
 				}catch(Exception e) {
-					System.out.println("ERRORE: " + e.getMessage());
+					logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e.getMessage());
 					return false;
 				}	
 			}
