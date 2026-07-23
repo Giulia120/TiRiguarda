@@ -8,6 +8,7 @@ import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.UtenteBean;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UsernameEsistenteException;
 
 public class RegistraUtenteAppController {
 	private static final Logger logger = Logger.getLogger(RegistraUtenteAppController.class.getName());
@@ -19,9 +20,12 @@ public class RegistraUtenteAppController {
 			throw new DatiIncompletiException();			
 		}
 		
-		Utente nuovoUtente = new Utente(bean.getUsername(), bean.getPassword(), bean.getNumeroTelefono());
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		UtenteDAO dao = factory.createUtenteDAO();
+		if (dao.trovaPerUsername(bean.getUsername()) != null) {
+			throw new UsernameEsistenteException();
+		}
+		Utente nuovoUtente = new Utente(bean.getUsername(), bean.getPassword(), bean.getNumeroTelefono());
 		dao.registraUtente(nuovoUtente);
 		logger.info("Rapporto registrato con successo.");
 		return;

@@ -20,6 +20,19 @@ public class UtenteBean {
 	public String getNumeroTelefono() {
 		return numeroTelefono;
 	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
+	
 	
 	
 }
