@@ -12,7 +12,7 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
-import it.tiriguarda.exception.DatiRapportoIncompletiException;
+import it.tiriguarda.exception.DatiIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,7 +95,7 @@ public class RegistraRapportoGraphicController {
 	            	mostraSchermataSuccesso(event);
 	            }
 	            
-	        } catch (DatiRapportoIncompletiException e) {
+	        } catch (DatiIncompletiException e) {
 	            mostraErrore(e.getMessage());
 	        } catch (DataFuturaException e) {
 	            mostraErrore(e.getMessage());
