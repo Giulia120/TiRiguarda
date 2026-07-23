@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.tiriguarda.controller.app.AnnullaPrEPController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.PrEPAnnullataException;
 import it.tiriguarda.exception.PrEPNonEsistenteException;
 import it.tiriguarda.exception.TiRiguardaException;
@@ -44,7 +44,7 @@ public class SceltaPrEPGraphicController {
 	
 	@FXML
 	public void onAnnullaPrEP(ActionEvent event) {
-		AnnullaPrEPController controller = new AnnullaPrEPController();
+		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			controller.verificaStatoPrEP();
 			apriConfermaAnnullamento(event);

@@ -5,7 +5,7 @@ import java.util.List;
 
 import it.tiriguarda.domain.Rapporto;
 
-public class RapportoDAOMemory implements RapportoDAO {
+public class RapportoDAOMem implements RapportoDAO {
 	
 	private static List<Rapporto> dbInMemoria = new ArrayList<>();
 	

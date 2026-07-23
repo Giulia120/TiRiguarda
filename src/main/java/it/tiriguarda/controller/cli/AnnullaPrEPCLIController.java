@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.tiriguarda.controller.app.AnnullaPrEPController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.PrEPAnnullataException;
 import it.tiriguarda.exception.PrEPNonEsistenteException;
 import it.tiriguarda.exception.TiRiguardaException;
@@ -13,7 +13,7 @@ import it.tiriguarda.exception.TiRiguardaException;
 public class AnnullaPrEPCLIController {
 	private static final Logger logger = Logger.getLogger(AnnullaPrEPCLIController.class.getName());
 	public boolean avvioAnnullamento() {
-		AnnullaPrEPController controller = new AnnullaPrEPController();
+		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			System.out.println("...Verifico lo stato del tuo protocollo...");
 			controller.verificaStatoPrEP();
@@ -34,7 +34,7 @@ public class AnnullaPrEPCLIController {
 		}
 	}
 		
-		private boolean confermaAnnullamento(AnnullaPrEPController controller) {
+		private boolean confermaAnnullamento(AnnullaPrEPAppController controller) {
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
 			System.out.print("Rispondi si/no: ");

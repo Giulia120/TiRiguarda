@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-// Quando lo creerai, toglierai il commento a questo import!
+
 // import it.tiriguarda.controller.cli.MenuPrincipaleCLIController;
 
 public class Main extends Application {
@@ -53,7 +53,6 @@ public class Main extends Application {
             
         } else if (scelta.equals("2")) {
             System.out.println("\n--- Avvio in modalità Grafica ---");
-            System.out.println("Guarda la finestra che si sta aprendo!");
             
             launch(args);
             

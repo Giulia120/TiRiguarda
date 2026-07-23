@@ -11,8 +11,8 @@ import it.tiriguarda.exception.PrEPNonEsistenteException;
 import it.tiriguarda.exception.TiRiguardaException;
 import it.tiriguarda.service.SessionManager;
 
-public class AnnullaPrEPController  {
-	private static final Logger logger = Logger.getLogger(AnnullaPrEPController.class.getName());
+public class AnnullaPrEPAppController  {
+	private static final Logger logger = Logger.getLogger(AnnullaPrEPAppController.class.getName());
 	
 	public void verificaStatoPrEP() throws TiRiguardaException{
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();

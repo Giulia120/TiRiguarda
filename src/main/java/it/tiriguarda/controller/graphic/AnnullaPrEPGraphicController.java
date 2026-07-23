@@ -1,10 +1,9 @@
 package it.tiriguarda.controller.graphic;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.tiriguarda.controller.app.AnnullaPrEPController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.TiRiguardaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +29,7 @@ public class AnnullaPrEPGraphicController {
 	
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
-		AnnullaPrEPController controller = new AnnullaPrEPController();
+		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			controller.annullaPrEP();
 			apriSuccesso(event);
