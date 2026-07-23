@@ -9,5 +9,4 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 		protocolloPrEP.setStatoPrEP(false);
 		protocolloPrEP.setDataAnnullamento();
 	}
-
 }
