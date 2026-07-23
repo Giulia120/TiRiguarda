@@ -1,7 +1,7 @@
 package it.tiriguarda.exception;
 
 public class DataFuturaException extends TiRiguardaException {
-    public DataFuturaException(String message) {
-        super(message);
+    public DataFuturaException() {
+        super("Hai inserito una data futura");
     }
 }

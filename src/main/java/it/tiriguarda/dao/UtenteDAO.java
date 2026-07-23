@@ -1,5 +1,9 @@
 package it.tiriguarda.dao;
 
-public interface UtenteDAO {
+import it.tiriguarda.domain.Utente;
 
+public interface UtenteDAO {
+	void registraUtente(Utente utente);
+	
+	Utente trovaPerUsername(String username);
 }

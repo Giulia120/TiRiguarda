@@ -3,15 +3,16 @@ package it.tiriguarda.controller.app;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.DAOFactory;
+import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.RapportoDAO;
-import it.tiriguarda.dao.RapportoDAOFactory;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
-import it.tiriguarda.exception.DatiRapportoIncompletiException;
+import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
@@ -31,13 +32,13 @@ public class RegistraRapportoAppController {
 		return instance;
 	}
 	
-	public RapportoBean registraRapporto(RapportoBean bean) throws DatiRapportoIncompletiException, DataFuturaException{
+	public RapportoBean registraRapporto(RapportoBean bean) throws DatiIncompletiException, DataFuturaException{
 		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {
-			throw new DatiRapportoIncompletiException("Dati mancanti per registrare il rapporto");
+			throw new DatiIncompletiException();
 		}
 		
         if (bean.getData().after(new java.util.Date())) {
-            throw new DataFuturaException("Hai inserito una data futura");
+            throw new DataFuturaException();
         }
         
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
@@ -48,10 +49,10 @@ public class RegistraRapportoAppController {
 		
 		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), rischioCalcolato);
 		
-		RapportoDAOFactory factory = new RapportoDAOFactory();
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
-		logger.info("Rapporto registrato con successo. ID: " + idRapporto + " - Rischio: " + rischioCalcolato);
+		logger.info("Rapporto registrato con successo.");
 		bean.setRischio(rischioCalcolato);
         bean.setDataFinePeriodoFinestra(nuovoRapporto.getDataFinePeriodoFinestra());
         

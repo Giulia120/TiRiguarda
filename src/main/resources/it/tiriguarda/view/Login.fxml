@@ -19,8 +19,8 @@
          <children>
             <Button fx:id="loginButton" layoutX="321.0" layoutY="369.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="70.0" prefWidth="165.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="registratiButton" layoutX="433.0" layoutY="454.0" mnemonicParsing="false" onAction="#onRegistratiButton" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <PasswordField fx:id="passwordField" layoutX="278.0" layoutY="307.0" onAction="#onPasswordField" prefHeight="26.0" prefWidth="250.0" />
-            <TextField fx:id="usernameField" layoutX="278.0" layoutY="241.0" onAction="#onUsernameField" prefHeight="26.0" prefWidth="250.0" />
+            <PasswordField fx:id="passwordField" layoutX="278.0" layoutY="307.0" prefHeight="26.0" prefWidth="250.0" />
+            <TextField fx:id="usernameField" layoutX="278.0" layoutY="241.0" prefHeight="26.0" prefWidth="250.0" />
          </children>
       </AnchorPane>
    </children>

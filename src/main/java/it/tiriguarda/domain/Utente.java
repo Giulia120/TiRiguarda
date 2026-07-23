@@ -2,19 +2,25 @@ package it.tiriguarda.domain;
 
 import java.util.List;
 
+import it.tiriguarda.util.SecurityUtil;
+
 public class Utente {
-	private final String idUtente;
 	private final String username;
+	private final String password;
 	private final String numeroTelefono;
 	private List<Rapporto> rapporti;
 	private ProtocolloPrEP protocolloAttivo;
 	
-	public Utente (String idUtente, String username, String numeroTelefono) {
-		this.idUtente = idUtente;
+	public Utente (String username, String passwordHash, String numeroTelefono) {
 		this.username = username;
+		this.password = passwordHash;
 		this.numeroTelefono = numeroTelefono;
 	}
 	
+	public boolean verificaPassword(String passwordInseritaInChiaro) {
+        String hashCalcolato = SecurityUtil.hashPassword(passwordInseritaInChiaro);
+        return this.password.equals(hashCalcolato);
+    } 
 	
 	public List<Rapporto> getRapporti() {
 		return rapporti;
@@ -23,11 +29,6 @@ public class Utente {
 
 	public void setRapporti(List<Rapporto> rapporti) {
 		this.rapporti = rapporti;
-	}
-
-
-	public String getIdUtente() {
-		return idUtente;
 	}
 
 

@@ -2,8 +2,9 @@ package it.tiriguarda.controller.app;
 
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.DAOFactory;
+import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
-import it.tiriguarda.dao.ProtocolloPrEPDAOFactory;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.PrEPAnnullataException;
@@ -38,8 +39,8 @@ public class AnnullaPrEPAppController  {
 			throw new TiRiguardaException("Utente non loggato");
 		}
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
-		ProtocolloPrEPDAOFactory factory = new ProtocolloPrEPDAOFactory();
-		ProtocolloPrEPDAO dao = factory.creaProtocolloPrEPDAO();
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		dao.annullaStatoProtocollo(protocollo);	
 		logger.info("Protocollo PrEP annullato correttamente");
 	}

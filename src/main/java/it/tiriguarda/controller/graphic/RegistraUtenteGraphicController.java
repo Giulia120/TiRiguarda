@@ -1,0 +1,5 @@
+package it.tiriguarda.controller.graphic;
+
+public class RegistraUtenteGraphicController {
+
+}

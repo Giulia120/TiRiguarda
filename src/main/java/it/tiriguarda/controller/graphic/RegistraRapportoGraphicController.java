@@ -148,7 +148,6 @@ public class RegistraRapportoGraphicController {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
 			Parent vistaMenuPrincipale = loader.load();
 			Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
 			finestra.setScene(new Scene(vistaMenuPrincipale));
 			finestra.show();
 		}     

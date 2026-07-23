@@ -1,5 +1,15 @@
 package it.tiriguarda.dao;
 
-public class UtenteDAODB implements UtenteDAO{
+import it.tiriguarda.domain.Utente;
 
+public class UtenteDAODB implements UtenteDAO{
+	@Override
+	public void registraUtente(Utente utente) {
+		//da implementare
+	}
+	
+	@Override
+	public Utente trovaPerUsername(String username) {
+		
+	}
 }
