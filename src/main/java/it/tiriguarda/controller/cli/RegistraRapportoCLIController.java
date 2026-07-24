@@ -13,7 +13,7 @@ import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
-@SuppressWarnings("java:S106")
+
 public class RegistraRapportoCLIController {
 
 	public void avviaRegistrazioneRapporto(Scanner scanner) {

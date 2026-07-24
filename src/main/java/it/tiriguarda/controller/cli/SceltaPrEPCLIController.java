@@ -1,7 +1,7 @@
 package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
-@SuppressWarnings("java:S106")
+
 public class SceltaPrEPCLIController {
 	public void avviaPrEP(Scanner scanner) {
 		boolean fine = false;
