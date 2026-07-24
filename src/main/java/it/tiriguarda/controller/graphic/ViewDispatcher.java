@@ -32,7 +32,7 @@ public class ViewDispatcher {
 			finestraPrincipale.setScene(new Scene(nuovaVista));
 			finestraPrincipale.show();
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Errore nel caricamento della schermata: " + fxmlPath, e);
+			logger.log(Level.SEVERE, e, () -> "Errore nel caricamento della schermata: " + fxmlPath);
 		}
 	}
 	

@@ -19,16 +19,16 @@ public class AnnullaPrEPCLIController {
 			System.out.println("Stato del tuo protocollo attivo");
 			return confermaAnnullamento(controller, scanner);
 		}catch(PrEPNonEsistenteException e) {
-			logger.log(Level.WARNING, "Protocollo PrEP non esistente", e.getMessage());
+			logger.log(Level.WARNING, "Protocollo PrEP non esistente", e);
 			return false;
 		}catch(PrEPAnnullataException e) {
-			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e.getMessage());
+			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e);
 			return false;
 		} catch(IllegalStateException e) {
 			logger.log(Level.WARNING, e.getMessage());
 			return false;
 		}catch(Exception e) {
-			logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e.getMessage());
+			logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e);
 			return false;
 		}
 	}

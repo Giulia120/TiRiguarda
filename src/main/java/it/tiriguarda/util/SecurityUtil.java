@@ -5,6 +5,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class SecurityUtil {
+	private SecurityUtil() {
+		// Costruttore privato per nascondere quello pubblico di default
+	}
     public static String hashPassword(String passwordInChiaro) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -1,6 +1,7 @@
 package it.tiriguarda.domain;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class ProtocolloPrEP {
 	private Utente utente;
@@ -46,7 +47,7 @@ public class ProtocolloPrEP {
 	}
 	
 	public void setDataAnnullamento() {
-		this.dataAnnullamento = LocalDate.now();
+		this.dataAnnullamento = LocalDate.now(ZoneId.systemDefault());
 	}
 	
 

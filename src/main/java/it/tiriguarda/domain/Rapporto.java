@@ -15,7 +15,7 @@ public class Rapporto {
 		this.idRapporto = idRapporto;
 		this.data = data;
 		this.rischio = rischio;
-		this.dataFinePeriodoFinestra = calcolaPeriodoFinestra(data, rischio);;
+		this.dataFinePeriodoFinestra = calcolaPeriodoFinestra(data, rischio);
 	}
 	
 	private Date calcolaPeriodoFinestra(Date data, LivelloRischio rischio) {
