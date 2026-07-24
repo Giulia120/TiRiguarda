@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@username/ConfermaAnnullamentoPrEP.png" />
+            <Image url="@images/ConfermaAnnullamentoPrEP.png" />
          </image>
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
