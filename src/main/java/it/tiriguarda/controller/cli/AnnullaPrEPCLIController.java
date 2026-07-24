@@ -7,25 +7,24 @@ import java.util.logging.Logger;
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.PrEPAnnullataException;
 import it.tiriguarda.exception.PrEPNonEsistenteException;
-import it.tiriguarda.exception.TiRiguardaException;
 
 
 public class AnnullaPrEPCLIController {
 	private static final Logger logger = Logger.getLogger(AnnullaPrEPCLIController.class.getName());
-	public boolean avvioAnnullamento() {
+	public boolean avvioAnnullamento(Scanner scanner) {
 		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			System.out.println("...Verifico lo stato del tuo protocollo...");
 			controller.verificaStatoPrEP();
 			System.out.println("Stato del tuo protocollo attivo");
-			return confermaAnnullamento(controller);
+			return confermaAnnullamento(controller, scanner);
 		}catch(PrEPNonEsistenteException e) {
 			logger.log(Level.WARNING, "Protocollo PrEP non esistente", e.getMessage());
 			return false;
 		}catch(PrEPAnnullataException e) {
 			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e.getMessage());
 			return false;
-		} catch(TiRiguardaException e) {
+		} catch(IllegalStateException e) {
 			logger.log(Level.WARNING, e.getMessage());
 			return false;
 		}catch(Exception e) {
@@ -34,8 +33,7 @@ public class AnnullaPrEPCLIController {
 		}
 	}
 		
-		private boolean confermaAnnullamento(AnnullaPrEPAppController controller) {
-			Scanner scanner = new Scanner(System.in);
+		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
 			System.out.print("Rispondi si/no: ");
 			String risposta = scanner.nextLine();

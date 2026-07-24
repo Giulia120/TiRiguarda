@@ -2,7 +2,7 @@ package it.tiriguarda.main;
 
 import java.util.Scanner;
 
-import it.tiriguarda.controller.cli.MenuPrincipaleCLIController;
+import it.tiriguarda.controller.cli.LoginCLIController;
 import it.tiriguarda.controller.graphic.ViewDispatcher;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -32,8 +32,8 @@ public class Main extends Application {
         if (scelta.equals("1")) {
             System.out.println("\n--- Avvio in modalità CLI ---\n");
             
-            MenuPrincipaleCLIController menuCLI = new MenuPrincipaleCLIController();
-            menuCLI.avvia(scanner); 
+            LoginCLIController loginCLI = new LoginCLIController();
+            loginCLI.avviaLogin(scanner); 
             
         } else if (scelta.equals("2")) {
             System.out.println("\n--- Avvio in modalità Grafica ---");

@@ -27,7 +27,6 @@ public class RegistraUtenteAppController {
 		Utente nuovoUtente = new Utente(bean.getUsername(), bean.getPassword(), bean.getNumeroTelefono());
 		dao.registraUtente(nuovoUtente);
 		logger.info("Utente registrato con successo.");
-		return;
 	}
 	
 }

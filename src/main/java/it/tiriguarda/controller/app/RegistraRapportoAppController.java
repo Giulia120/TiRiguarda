@@ -8,12 +8,14 @@ import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
+import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
+import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
 import it.tiriguarda.service.SessionManager;
@@ -55,10 +57,10 @@ public class RegistraRapportoAppController {
 			calcolatore = new PreservativoDecorator(calcolatore);
 		}
 		
-		/*ProtocolloPrEP prep = utente.getProtocolloAttivo();
+		ProtocolloPrEP prep = utente.getProtocolloAttivo();
 		if (prep != null && prep.getStatoPrEP() == true) {
 			calcolatore = new PrEPDecorator(calcolatore);
-		}*/
+		}
 		
 		return calcolatore.calcola();
 	}

@@ -26,7 +26,7 @@ public class SceltaPrEPCLIController {
 					break;
 				case "3":
 					AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
-					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento();
+					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento(scanner);
 					if(!tornaMenu) {
 						return;
 					}

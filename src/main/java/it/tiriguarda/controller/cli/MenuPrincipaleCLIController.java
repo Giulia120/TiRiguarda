@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuPrincipaleCLIController {
 
-	public void avvia(Scanner scanner) {
+	public void avviaMenu(Scanner scanner) {
 		boolean esci = false;
 
 		while (!esci) {
