@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,7 +32,7 @@ public class RichiestaSMSRapportoGraphicController {
 	 }
 	 
 	 @FXML
-	 private void onNoButton(){
-		 System.out.println("Daje");
+	 private void onNoButton(ActionEvent event){
+		 ViewDispatcher.mostraSuccesso();
 	 }
 }

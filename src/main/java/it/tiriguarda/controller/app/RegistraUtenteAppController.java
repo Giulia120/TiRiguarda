@@ -16,8 +16,8 @@ public class RegistraUtenteAppController {
 	public RegistraUtenteAppController() {}
 	
 	public void registraUtente (UtenteBean bean) throws DatiIncompletiException, UsernameEsistenteException{
-		if(bean.getUsername() == null || bean.getPassword() == null || bean.getNumeroTelefono() == null) {
-			throw new DatiIncompletiException();			
+		if(bean.getUsername() == null || bean.getUsername().isBlank() || bean.getPassword() == null || bean.getPassword().isBlank() || bean.getNumeroTelefono() == null || bean.getNumeroTelefono().isBlank()){
+			throw new DatiIncompletiException();
 		}
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
@@ -27,7 +27,7 @@ public class RegistraUtenteAppController {
 		}
 		Utente nuovoUtente = new Utente(bean.getUsername(), bean.getPassword(), bean.getNumeroTelefono());
 		dao.registraUtente(nuovoUtente);
-		logger.info("Rapporto registrato con successo.");
+		logger.info("Utente registrato con successo.");
 		return;
 	}
 	

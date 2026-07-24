@@ -9,17 +9,14 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.PrEPAnnullataException;
 import it.tiriguarda.exception.PrEPNonEsistenteException;
-import it.tiriguarda.exception.TiRiguardaException;
 import it.tiriguarda.service.SessionManager;
 
 public class AnnullaPrEPAppController  {
 	private static final Logger logger = Logger.getLogger(AnnullaPrEPAppController.class.getName());
 	
-	public void verificaStatoPrEP() throws TiRiguardaException{
+	public void verificaStatoPrEP() throws PrEPNonEsistenteException, PrEPAnnullataException {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
-		if(utente == null) {
-			throw new TiRiguardaException("Utente non loggato");
-		}
+
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 	
 		if(protocollo == null) {
@@ -33,11 +30,8 @@ public class AnnullaPrEPAppController  {
 		}
 	}
 	
-	public void annullaPrEP() throws TiRiguardaException{
+	public void annullaPrEP() {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
-		if(utente == null) {
-			throw new TiRiguardaException("Utente non loggato");
-		}
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();

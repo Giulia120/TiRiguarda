@@ -3,33 +3,17 @@ package it.tiriguarda.main;
 import java.util.Scanner;
 
 import it.tiriguarda.controller.cli.MenuPrincipaleCLIController;
+import it.tiriguarda.controller.graphic.ViewDispatcher;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-// import it.tiriguarda.controller.cli.MenuPrincipaleCLIController;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/SceltaConfig.fxml"));
-            Parent root = loader.load();
-            
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Ti Riguarda");
-            primaryStage.setResizable(false);
-            primaryStage.show();
-            
-        } catch(Exception e) {
-            System.out.println("Errore fatale durante l'avvio dell'interfaccia grafica!");
-            e.printStackTrace();
-        }
+    	ViewDispatcher.setFinestraPrincipale(primaryStage);
+        ViewDispatcher.mostraSceltaConfig();
     }
 
     public static void main(String[] args) {
