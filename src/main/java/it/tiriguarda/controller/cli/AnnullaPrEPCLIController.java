@@ -8,7 +8,7 @@ import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.PrEPAnnullataException;
 import it.tiriguarda.exception.PrEPNonEsistenteException;
 
-
+@SuppressWarnings("java:S106")
 public class AnnullaPrEPCLIController {
 	private static final Logger logger = Logger.getLogger(AnnullaPrEPCLIController.class.getName());
 	public boolean avvioAnnullamento(Scanner scanner) {

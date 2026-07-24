@@ -1,7 +1,7 @@
 package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
-
+@SuppressWarnings("java:S106")
 public class MenuPrincipaleCLIController {
 
 	public void avviaMenu(Scanner scanner) {

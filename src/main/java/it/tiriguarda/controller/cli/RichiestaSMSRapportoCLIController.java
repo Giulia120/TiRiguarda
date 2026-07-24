@@ -3,7 +3,7 @@ package it.tiriguarda.controller.cli;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import it.tiriguarda.dto.RapportoBean;
-
+@SuppressWarnings("java:S106")
 public class RichiestaSMSRapportoCLIController {
 
 	public void avvia(RapportoBean beanAggiornato, Scanner scanner) {

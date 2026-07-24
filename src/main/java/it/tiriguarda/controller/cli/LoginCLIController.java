@@ -5,7 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.controller.app.LoginAppController;
 import it.tiriguarda.dto.CredenzialiBean;
 import it.tiriguarda.exception.CredenzialiErrateException;
-
+@SuppressWarnings("java:S106")
 public class LoginCLIController {
 
 	public void avviaLogin(Scanner scanner) {

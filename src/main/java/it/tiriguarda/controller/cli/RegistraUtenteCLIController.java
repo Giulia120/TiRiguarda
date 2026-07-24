@@ -7,7 +7,7 @@ import it.tiriguarda.dto.UtenteBean;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
 import it.tiriguarda.util.SecurityUtil;
-
+@SuppressWarnings("java:S106")
 public class RegistraUtenteCLIController {
 
 	public void avviaRegistrazione(Scanner scanner) {
