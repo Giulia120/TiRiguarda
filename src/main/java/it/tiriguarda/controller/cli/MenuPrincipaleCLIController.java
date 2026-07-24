@@ -12,10 +12,10 @@ public class MenuPrincipaleCLIController {
 			System.out.println("            MENU PRINCIPALE           ");
 			System.out.println("========================================");
 			System.out.println("1 - Registra Rapporto");
-			System.out.println("2 - Gestione Test");
+			System.out.println("2 - Registra Test");
 			System.out.println("3 - Visualizza Profilo");
 			System.out.println("4 - Riepilogo");
-			System.out.println("5 - Scelta PrEP");
+			System.out.println("5 - PrEP");
 			System.out.println("6 - Questionario");
 			System.out.println("7 - Informazioni");
 			System.out.println("8 - Logout");
@@ -25,12 +25,13 @@ public class MenuPrincipaleCLIController {
 
 			switch (scelta) {
 				case "1":
-					RegistraRapportoCLIController registraController = new RegistraRapportoCLIController();
-					registraController.avviaRegistrazioneRapporto(scanner);
+					RegistraRapportoCLIController registraRapportoController = new RegistraRapportoCLIController();
+					registraRapportoController.avviaRegistrazioneRapporto(scanner);
 					break;
 					
 				case "2":
-					System.out.println("\n[INFO] Sezione Test aperta.");
+					RegistraTestCLIController registraTestController = new RegistraTestCLIController();
+					registraTestController.avviaRegistrazioneTest(scanner);
 					break;
 					
 				case "3":

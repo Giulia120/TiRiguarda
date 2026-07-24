@@ -13,4 +13,10 @@ public class FullDAOFactory implements DAOFactory{
 	public ProtocolloPrEPDAO createProtocolloPrEPDAO() {
 		return new ProtocolloPrEPDAODB();
 	}
+	
+	@Override 
+	public TestDAO createTestDAO() {
+		return new TestDAOMem();
+	}
+
 }

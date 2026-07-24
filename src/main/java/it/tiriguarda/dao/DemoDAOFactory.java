@@ -13,5 +13,10 @@ public class DemoDAOFactory implements DAOFactory{
 	public ProtocolloPrEPDAO createProtocolloPrEPDAO() {
 		return new ProtocolloPrEPDAOMem();
 	}
+	
+	@Override 
+	public TestDAO createTestDAO() {
+		return new TestDAOMem();
+	}
 
 }
