@@ -15,7 +15,7 @@ public class RegistraUtenteAppController {
 	
 	public RegistraUtenteAppController() {}
 	
-	public void registraUtente (UtenteBean bean) throws DatiIncompletiException{
+	public void registraUtente (UtenteBean bean) throws DatiIncompletiException, UsernameEsistenteException{
 		if(bean.getUsername() == null || bean.getPassword() == null || bean.getNumeroTelefono() == null) {
 			throw new DatiIncompletiException();			
 		}

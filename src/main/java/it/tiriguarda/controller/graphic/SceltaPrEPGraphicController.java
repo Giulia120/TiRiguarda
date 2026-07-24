@@ -49,11 +49,11 @@ public class SceltaPrEPGraphicController {
 			controller.verificaStatoPrEP();
 			apriConfermaAnnullamento(event);
 		}catch(PrEPNonEsistenteException e) {
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 		}catch(PrEPAnnullataException e) {
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 		} catch(TiRiguardaException e) {
-	        errore(e.getMessage());
+	        mostraErrore(e.getMessage());
 		}catch(Exception e) {
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di conferma.", e);
 		}
@@ -68,7 +68,7 @@ public class SceltaPrEPGraphicController {
 		finestra.show();
 	}
 	
-	private void errore(String messaggio) {
+	private void mostraErrore(String messaggio) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");
         alert.setHeaderText(null);

@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -68,5 +69,13 @@ public class RegistraUtenteGraphicController {
 			Stage finestra = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			finestra.setScene(new Scene(vistaMenuPrincipale));
 			finestra.show();
-		}     
+		} 
+		
+		private void mostraErrore(String messaggio) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Errore");
+	        alert.setHeaderText(null);
+	        alert.setContentText(messaggio);
+	        alert.showAndWait();
+		}
 }

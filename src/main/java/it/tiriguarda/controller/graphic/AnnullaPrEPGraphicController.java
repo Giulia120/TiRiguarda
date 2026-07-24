@@ -35,7 +35,7 @@ public class AnnullaPrEPGraphicController {
 			apriSuccesso(event);
 			
 		}catch(TiRiguardaException e) {
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 		}
 	}
 	@FXML
@@ -43,7 +43,7 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
@@ -53,7 +53,7 @@ public class AnnullaPrEPGraphicController {
 		try {
 			apriMenuPrincipale(event);
 		}catch (Exception e){
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata principale.", e);
 		}
 	}
@@ -73,11 +73,11 @@ public class AnnullaPrEPGraphicController {
 			finestra.setScene(new Scene(vistaSuccesso));
 			finestra.show();
 		}catch(Exception e) {
-			errore(e.getMessage());
+			mostraErrore(e.getMessage());
 			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di successo.", e);
 		}	
 	}
-	private void errore(String messaggio) {
+	private void mostraErrore(String messaggio) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");
         alert.setHeaderText(null);
