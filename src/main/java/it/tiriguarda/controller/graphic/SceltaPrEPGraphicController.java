@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
+import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,11 +23,11 @@ public class SceltaPrEPGraphicController {
 	
 	@FXML
 	public void onDaily(ActionEvent event) {
-		//da fare
+		ViewDispatcher.mostraConfiguraPrEP(TipologiaPrEP.DAILY);
 	}
 	@FXML
 	public void onOnDemand(ActionEvent event) {
-		//da fare
+		ViewDispatcher.mostraConfiguraPrEP(TipologiaPrEP.ON_DEMAND);
 	}
 	
 	@FXML

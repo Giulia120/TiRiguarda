@@ -1,22 +1,27 @@
 package it.tiriguarda.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.List;
 
-public class ProtocolloPrEP {
+public abstract class ProtocolloPrEP {
 	private Utente utente;
 	private final TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private boolean statoPrEP;
 	private LocalDate dataAnnullamento;
 	
-	public ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, boolean statoPrEP, LocalDate dataAnnullamento) {
+	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
-		this.statoPrEP = statoPrEP;
-		this.dataAnnullamento = dataAnnullamento;
+		this.statoPrEP = true;
+		this.dataAnnullamento = null;
 	}
+	
+	public abstract List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora);
 	
 	public Utente getUtente() {
 		return utente;
@@ -49,6 +54,4 @@ public class ProtocolloPrEP {
 	public void setDataAnnullamento() {
 		this.dataAnnullamento = LocalDate.now(ZoneId.systemDefault());
 	}
-	
-
 }

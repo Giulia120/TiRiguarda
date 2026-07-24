@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.RapportoBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -100,6 +101,10 @@ public class ViewDispatcher {
     
     public static void mostraConfermaAnnullamento() {
     	cambiaSchermata("/it/tiriguarda/view/ConfermaAnnullamentoPrEP.fxml");
+    }
+    
+    public static void mostraConfiguraPrEP(TipologiaPrEP tipoPrEP) {
+    	cambiaSchermata("/it/tiriguarda/view/ConfiguraPrEP.fxml");
     }
 	
 	public static void mostraErrore(String messaggio) {
