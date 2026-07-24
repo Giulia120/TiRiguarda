@@ -15,8 +15,6 @@ public class RegistraTestCLIController {
 
 	public void avviaRegistrazioneTest(Scanner scanner) {
 		boolean fine = false;
-        
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		while (!fine) {
 			System.out.println("\n========================================");
@@ -24,60 +22,72 @@ public class RegistraTestCLIController {
 			System.out.println("========================================");
 			System.out.println("(Digita 'q' in qualsiasi momento per tornare indietro)");
 
-			System.out.print("Data del test (gg/mm/aaaa): ");
-			String dataInput = scanner.nextLine();
-			
-			if (dataInput.equalsIgnoreCase("q")) {
-				return;
-			}
+			java.sql.Date dataConvertita = leggiDataTest(scanner);
+			if (dataConvertita == null) return;
 
-			java.sql.Date dataConvertita = null;
-			boolean dataValida = false;
-            
+			TipoTest tipoScelto = leggiTipoTest(scanner);
+			if (tipoScelto == null) return;
+
+			TestBean bean = new TestBean();
+			bean.setData(dataConvertita);
+			bean.setTipo(tipoScelto);
+
 			try {
-				LocalDate localDate = LocalDate.parse(dataInput, formatter);
-				dataConvertita = java.sql.Date.valueOf(localDate);
-				dataValida = true;
-			} catch (DateTimeParseException e) {
-				System.out.println("\n[ERRORE] Formato data non valido! Usa il formato gg/mm/aaaa.");
+				RegistraTestAppController appController = new RegistraTestAppController();
+				appController.registraTest(bean);
+				
+				System.out.println("\nTest registrato con successo! Torno al menu principale...");
+				fine = true;
+				
+			} catch (DatiIncompletiException | DataFuturaException e) {
+				System.out.println("\n[ERRORE DI VALIDAZIONE]: " + e.getMessage());
+				System.out.println("Premi INVIO per riprovare...");
+				scanner.nextLine();
+			} catch (Exception e) {
+				System.out.println("\n[ERRORE DI SISTEMA]: Impossibile salvare il test. " + e.getMessage());
+				fine = true; 
+			}
+		}
+	}
+
+	private java.sql.Date leggiDataTest(Scanner scanner) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		while (true) {
+			System.out.print("Data del test (gg/mm/aaaa): ");
+			String input = scanner.nextLine();
+			
+			if (input.equalsIgnoreCase("q")) {
+				return null;
 			}
 
-			if (dataValida) {
-				System.out.println("Che tipo di test hai effettuato?");
-				System.out.println("1) Rapido");
-				System.out.println("2) Prelievo");
-				System.out.print("Scelta (1 o 2): ");
-				String tipoInput = scanner.nextLine();
-				
-				if (tipoInput.equalsIgnoreCase("q")) {
-					return;
-				}
+			try {
+				LocalDate localDate = LocalDate.parse(input, formatter);
+				return java.sql.Date.valueOf(localDate);
+			} catch (DateTimeParseException e) {
+				System.out.println("[ERRORE] Formato data non valido! Usa il formato gg/mm/aaaa.");
+			}
+		}
+	}
 
-				TipoTest tipoScelto = null;
-				if (tipoInput.equals("1")) {
-					tipoScelto = TipoTest.RAPIDO;
-				} else if (tipoInput.equals("2")) {
-					tipoScelto = TipoTest.PRELIEVO;
-				} else {
-					System.out.println("\n[ERRORE] Scelta non valida! Inserisci 1 o 2.");
-				}
+	private TipoTest leggiTipoTest(Scanner scanner) {
+		while (true) {
+			System.out.println("\nChe tipo di test hai effettuato?");
+			System.out.println("1) Rapido");
+			System.out.println("2) Prelievo");
+			System.out.print("Scelta (1 o 2): ");
+			String input = scanner.nextLine();
+			
+			if (input.equalsIgnoreCase("q")) {
+				return null;
+			}
 
-				if (tipoScelto != null) {
-					TestBean bean = new TestBean();
-					bean.setData(dataConvertita);
-					bean.setTipo(tipoScelto);
-
-					try {
-						RegistraTestAppController appController = new RegistraTestAppController();
-						appController.registraTest(bean);
-						
-						System.out.println("\nTest registrato con successo! Torno al menu principale...");
-						fine = true;
-						
-					} catch (DatiIncompletiException | DataFuturaException e) {
-						System.out.println("\n[ERRORE] " + e.getMessage());
-					}
-				}
+			if (input.equals("1")) {
+				return TipoTest.RAPIDO;
+			} else if (input.equals("2")) {
+				return TipoTest.PRELIEVO;
+			} else {
+				System.out.println("[ERRORE] Scelta non valida! Inserisci 1 o 2.");
 			}
 		}
 	}
