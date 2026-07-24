@@ -9,6 +9,7 @@ public class InfoGraphicController {
 	@FXML
 	private Button backButton;
 	
+	@FXML
 	public void onBackButton(ActionEvent event) {
 		ViewDispatcher.mostraMenuPrincipale();
 	}

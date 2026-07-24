@@ -38,7 +38,7 @@ public class RegistraTestGraphicController {
 	     bean.setData(dataConvertita);
 	     
 	     if (radioRapido.isSelected()) {
-	            bean.setTipo(TipoTest.RAPIDO);;
+	            bean.setTipo(TipoTest.RAPIDO);
 	        } else if (radioPrelievo.isSelected()) {
 	            bean.setTipo(TipoTest.PRELIEVO);
 	        }
