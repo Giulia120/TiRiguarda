@@ -12,7 +12,7 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
-import it.tiriguarda.exception.DatiRapportoIncompletiException;
+import it.tiriguarda.exception.DatiIncompletiException;
 
 public class RegistraRapportoCLIController {
 
@@ -54,7 +54,7 @@ public class RegistraRapportoCLIController {
 	            
 	            completato = true;
 
-	        } catch (DatiRapportoIncompletiException | DataFuturaException e) {
+	        } catch (DatiIncompletiException | DataFuturaException e) {
 	            System.out.println("\n[ERRORE DI VALIDAZIONE]: " + e.getMessage());
 	            System.out.println("Premi INVIO per correggere i dati...");
 	            scanner.nextLine();

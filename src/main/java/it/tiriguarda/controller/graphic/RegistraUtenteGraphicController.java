@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.controller.app.RegistraUtenteAppController;
 import it.tiriguarda.dto.UtenteBean;
-import it.tiriguarda.exception.CredenzialiErrateException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
 import it.tiriguarda.util.SecurityUtil;
@@ -52,6 +51,11 @@ public class RegistraUtenteGraphicController {
 		} catch (UsernameEsistenteException e) {
 			mostraErrore(e.getMessage());
 			usernameField.setText(null);
+		}
+		try {
+			apriLoginPage(event);
+		}catch (Exception e){
+			logger.log(Level.SEVERE, "Errore nel caricamento della schermata di Login.", e);
 		}
 	}	
 	

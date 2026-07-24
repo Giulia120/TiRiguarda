@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/MenuPrincipale.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/tiriguarda/view/SceltaConfig.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
