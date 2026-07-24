@@ -1,8 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
-import it.tiriguarda.exception.PrEPAnnullataException;
-import it.tiriguarda.exception.PrEPNonEsistenteException;
+import it.tiriguarda.exception.AnnullamentoPrEPException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,7 +35,7 @@ public class SceltaPrEPGraphicController {
 		try {
 			controller.verificaStatoPrEP();
 			ViewDispatcher.mostraConfermaAnnullamento();
-		}catch(PrEPNonEsistenteException | PrEPAnnullataException e) {
+		}catch(AnnullamentoPrEPException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraMenuPrincipale();
 			}
