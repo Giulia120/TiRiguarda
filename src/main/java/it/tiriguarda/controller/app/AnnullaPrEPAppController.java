@@ -16,7 +16,10 @@ public class AnnullaPrEPAppController  {
 	
 	public void verificaStatoPrEP() throws PrEPNonEsistenteException, PrEPAnnullataException {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
-
+		if (utente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
+		
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 	
 		if(protocollo == null) {
@@ -32,6 +35,10 @@ public class AnnullaPrEPAppController  {
 	
 	public void annullaPrEP() {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
+		if (utente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
+		
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();

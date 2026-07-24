@@ -19,18 +19,7 @@ import it.tiriguarda.logic.rischio.RischioBase;
 import it.tiriguarda.service.SessionManager;
 
 public class RegistraRapportoAppController {
-	private static RegistraRapportoAppController instance;
 	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
-	
-	private RegistraRapportoAppController() {
-	}
-	
-	public static RegistraRapportoAppController getInstance() {
-		if (instance == null) {
-			instance = new RegistraRapportoAppController();
-		}
-		return instance;
-	}
 	
 	public RapportoBean registraRapporto(RapportoBean bean) throws DatiIncompletiException, DataFuturaException{
 		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {

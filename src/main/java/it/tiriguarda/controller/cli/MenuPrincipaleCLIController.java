@@ -9,7 +9,7 @@ public class MenuPrincipaleCLIController {
 
 		while (!esci) {
 			System.out.println("\n========================================");
-			System.out.println("          MENU PRINCIPALE (CLI)         ");
+			System.out.println("            MENU PRINCIPALE           ");
 			System.out.println("========================================");
 			System.out.println("1 - Registra Rapporto");
 			System.out.println("2 - Gestione Test");
@@ -42,8 +42,8 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "5":
-					SceltaPrEPCLIController PrEPController = new SceltaPrEPCLIController();
-					PrEPController.avviaPrEP(scanner);
+					SceltaPrEPCLIController prEPController = new SceltaPrEPCLIController();
+					prEPController.avviaPrEP(scanner);
 					break;
 					
 				case "6":

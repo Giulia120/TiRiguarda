@@ -75,7 +75,7 @@ public class RegistraRapportoGraphicController {
 	        }
 	        
 	        try {
-	        	RegistraRapportoAppController appController = RegistraRapportoAppController.getInstance();
+	        	RegistraRapportoAppController appController = new RegistraRapportoAppController();
 	        	RapportoBean beanAggiornato = appController.registraRapporto(bean);
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
 	            	ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);

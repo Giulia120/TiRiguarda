@@ -13,10 +13,6 @@ public class RapportoBean {
     private Precauzioni precauzioniUsate;
     private LivelloRischio rischio;
 	private Date dataFinePeriodoFinestra;
-    
-    public RapportoBean(){
-    	// Costruttore vuoto necessario per la specifica JavaBean
-    }
 
 	public Date getData() {
 		return data;

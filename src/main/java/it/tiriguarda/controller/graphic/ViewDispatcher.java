@@ -15,6 +15,9 @@ public class ViewDispatcher {
 	private static final Logger logger = Logger.getLogger(ViewDispatcher.class.getName());
 	private static Stage finestraPrincipale;
 	
+	private ViewDispatcher() {
+        // Costruttore privato per nascondere quello pubblico di default
+    }
 	public static void setFinestraPrincipale(Stage stage) {
         finestraPrincipale = stage;
         finestraPrincipale = stage;
@@ -82,7 +85,17 @@ public class ViewDispatcher {
     }
     
     public static void mostraSchermataSMSRapporto(RapportoBean bean) {
-    	cambiaSchermata("/it/tiriguarda/view/RichiestaSMSRapporto.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/RichiestaSMSRapporto.fxml"));
+            Parent nuovaVista = loader.load();            
+            RichiestaSMSRapportoGraphicController controller = loader.getController();
+            controller.initData(bean.getDataFinePeriodoFinestra());
+            finestraPrincipale.setScene(new Scene(nuovaVista));
+            finestraPrincipale.show();
+            
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Errore nel caricamento della schermata SMS Rapporto", e);
+        }
     }
     
     public static void mostraConfermaAnnullamento() {

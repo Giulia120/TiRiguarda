@@ -7,7 +7,7 @@ public class SceltaPrEPCLIController {
 		boolean fine = false;
 		while(!fine) {
 			System.out.println("\n========================================");
-			System.out.println("                PrEP (CLI)              ");
+			System.out.println("                  PrEP                 ");
 			System.out.println("========================================");
 			System.out.println("Cosa vuoi fare?");
 			System.out.println("1 - Daily");
@@ -20,8 +20,10 @@ public class SceltaPrEPCLIController {
 			switch(scelta) {
 				case "1":
 					System.out.println("scelta PrEP daily");
+					break;
 				case "2":
 					System.out.println("scelta PrEP on demand");
+					break;
 				case "3":
 					AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
 					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento();
@@ -31,6 +33,8 @@ public class SceltaPrEPCLIController {
 					break;
 				case "q":
 					return;
+				default:
+					System.out.println("\n[ERRORE] Scelta non valida! Inserisci un numero da 1 a 3.");
 			}
 		}
 	}

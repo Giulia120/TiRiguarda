@@ -13,7 +13,6 @@ import it.tiriguarda.exception.UsernameEsistenteException;
 public class RegistraUtenteAppController {
 	private static final Logger logger = Logger.getLogger(RegistraUtenteAppController.class.getName());
 	
-	public RegistraUtenteAppController() {}
 	
 	public void registraUtente (UtenteBean bean) throws DatiIncompletiException, UsernameEsistenteException{
 		if(bean.getUsername() == null || bean.getUsername().isBlank() || bean.getPassword() == null || bean.getPassword().isBlank() || bean.getNumeroTelefono() == null || bean.getNumeroTelefono().isBlank()){

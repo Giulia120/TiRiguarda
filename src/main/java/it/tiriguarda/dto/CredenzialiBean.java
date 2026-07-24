@@ -4,9 +4,6 @@ public class CredenzialiBean {
 	private String username;
 	private String password;
 	
-	public CredenzialiBean(){
-		// Costruttore vuoto necessario per la specifica JavaBean
-	}
 	public String getUsername() {
 		return username;
 	}

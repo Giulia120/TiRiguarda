@@ -42,7 +42,7 @@ public class RegistraRapportoCLIController {
 	        System.out.println("\nSto calcolando il rischio...");
 
 	        try {
-	            RegistraRapportoAppController appController = RegistraRapportoAppController.getInstance();
+	            RegistraRapportoAppController appController = new RegistraRapportoAppController();
 	            RapportoBean beanAggiornato = appController.registraRapporto(bean);
 
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
@@ -100,12 +100,12 @@ public class RegistraRapportoCLIController {
 	    while (tipi.isEmpty()) {
 	        System.out.print("È stato un rapporto penetrativo? (si/no): ");
 	        String risp1 = scanner.nextLine();
-	        if (risp1.equalsIgnoreCase("q")) return null;
+	        if (risp1.equalsIgnoreCase("q")) return java.util.Collections.emptyList();
 	        if (risp1.equalsIgnoreCase("si")) tipi.add(TipoRapporto.PENETRATIVO);
 	        
 	        System.out.print("È stato un rapporto orale? (si/no): ");
 	        String risp2 = scanner.nextLine();
-	        if (risp2.equalsIgnoreCase("q")) return null;
+	        if (risp2.equalsIgnoreCase("q")) return java.util.Collections.emptyList();
 	        if (risp2.equalsIgnoreCase("si")) tipi.add(TipoRapporto.ORALE);
 	        
 	        if (tipi.isEmpty()) {
