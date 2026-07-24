@@ -32,47 +32,52 @@ public class RegistraTestCLIController {
 			}
 
 			java.sql.Date dataConvertita = null;
+			boolean dataValida = false;
+            
 			try {
 				LocalDate localDate = LocalDate.parse(dataInput, formatter);
 				dataConvertita = java.sql.Date.valueOf(localDate);
+				dataValida = true;
 			} catch (DateTimeParseException e) {
 				System.out.println("\n[ERRORE] Formato data non valido! Usa il formato gg/mm/aaaa.");
-				continue;
 			}
 
-			System.out.println("Che tipo di test hai effettuato?");
-			System.out.println("1) Rapido");
-			System.out.println("2) Prelievo");
-			System.out.print("Scelta (1 o 2): ");
-			String tipoInput = scanner.nextLine();
-			
-			if (tipoInput.equalsIgnoreCase("q")) {
-				return;
-			}
-
-			TipoTest tipoScelto = null;
-			if (tipoInput.equals("1")) {
-				tipoScelto = TipoTest.RAPIDO;
-			} else if (tipoInput.equals("2")) {
-				tipoScelto = TipoTest.PRELIEVO;
-			} else {
-				System.out.println("\n[ERRORE] Scelta non valida! Inserisci 1 o 2.");
-				continue;
-			}
-
-			TestBean bean = new TestBean();
-			bean.setData(dataConvertita);
-			bean.setTipo(tipoScelto);
-
-			try {
-				RegistraTestAppController appController = new RegistraTestAppController();
-				appController.registraTest(bean);
+			if (dataValida) {
+				System.out.println("Che tipo di test hai effettuato?");
+				System.out.println("1) Rapido");
+				System.out.println("2) Prelievo");
+				System.out.print("Scelta (1 o 2): ");
+				String tipoInput = scanner.nextLine();
 				
-				System.out.println("\nTest registrato con successo! Torno al menu principale...");
-				fine = true;
-				
-			} catch (DatiIncompletiException | DataFuturaException e) {
-				System.out.println("\n[ERRORE] " + e.getMessage());
+				if (tipoInput.equalsIgnoreCase("q")) {
+					return;
+				}
+
+				TipoTest tipoScelto = null;
+				if (tipoInput.equals("1")) {
+					tipoScelto = TipoTest.RAPIDO;
+				} else if (tipoInput.equals("2")) {
+					tipoScelto = TipoTest.PRELIEVO;
+				} else {
+					System.out.println("\n[ERRORE] Scelta non valida! Inserisci 1 o 2.");
+				}
+
+				if (tipoScelto != null) {
+					TestBean bean = new TestBean();
+					bean.setData(dataConvertita);
+					bean.setTipo(tipoScelto);
+
+					try {
+						RegistraTestAppController appController = new RegistraTestAppController();
+						appController.registraTest(bean);
+						
+						System.out.println("\nTest registrato con successo! Torno al menu principale...");
+						fine = true;
+						
+					} catch (DatiIncompletiException | DataFuturaException e) {
+						System.out.println("\n[ERRORE] " + e.getMessage());
+					}
+				}
 			}
 		}
 	}
