@@ -55,6 +55,6 @@ public class ConfiguraPrEPAppController {
 		logger.info("Protocollo registrato con successo.");
 	}
 	public void attivaSMS(List<LocalDateTime> promemoria) {
-		
+		//da fare
 	}
 }
