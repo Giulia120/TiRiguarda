@@ -26,7 +26,7 @@ public class RegistraRapportoAppController {
 	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
 	
 	public RapportoBean registraRapporto(RapportoBean bean) throws DatiIncompletiException, DataFuturaException{
-		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty()) {
+		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty() || bean.getPrecauzioniUsate() == null) {
 			throw new DatiIncompletiException();
 		}
 		

@@ -14,7 +14,7 @@ public class RichiestaSMSRapportoCLIController {
 		System.out.println("========================================");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String dataFormattata = formatter	.format(beanAggiornato.getDataFinePeriodoFinestra());
+		String dataFormattata = formatter.format(beanAggiornato.getDataFinePeriodoFinestra());
 		
 		System.out.println("Data fine periodo finestra: " + dataFormattata);
 		System.out.println("Vuoi attivare le notifiche SMS per ricordarti di fare il test?");
@@ -28,12 +28,6 @@ public class RichiestaSMSRapportoCLIController {
 			System.out.println("[INFO] Hai detto NO agli SMS.");
 		}
 		
-		mostraSchermataSuccesso();
-	}
-	
-	private void mostraSchermataSuccesso() {
-		System.out.println("\n****************************************");
-		System.out.println("*  Rapporto registrato con successo!   *");
-		System.out.println("****************************************");
+		System.out.println("\nRapporto registrato con successo! Torno al menu principale...");
 	}
 }

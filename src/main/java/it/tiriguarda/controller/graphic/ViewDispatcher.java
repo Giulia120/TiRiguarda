@@ -52,6 +52,18 @@ public class ViewDispatcher {
     public static void mostraProfilo() {
         cambiaSchermata("/it/tiriguarda/view/Profilo.fxml");
     }
+    
+    public static void mostraModificaPwd() {
+        cambiaSchermata("/it/tiriguarda/view/ModificaPwd.fxml");
+    }
+    
+    public static void mostraModificaTel() {
+        cambiaSchermata("/it/tiriguarda/view/ModificaTel.fxml");
+    }
+    
+    public static void mostraModificaUser() {
+        cambiaSchermata("/it/tiriguarda/view/ModificaUser.fxml");
+    }
 
     public static void mostraRiepilogo() {
         cambiaSchermata("/it/tiriguarda/view/Riepilogo.fxml");

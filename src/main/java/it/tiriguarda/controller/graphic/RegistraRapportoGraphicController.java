@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 public class RegistraRapportoGraphicController {
 	 @FXML
@@ -24,6 +25,8 @@ public class RegistraRapportoGraphicController {
 	 private CheckBox checkPenetrativo;
 	 @FXML
 	 private CheckBox checkOrale;
+	 @FXML
+	 private ToggleGroup precauzioni;
 	 @FXML
 	 private RadioButton radioNulla;
 	 @FXML
@@ -47,7 +50,7 @@ public class RegistraRapportoGraphicController {
 	            return;
 	        }
 	        
-	        if (!radioNulla.isSelected() && !radioCoInt.isSelected() && !radioPreservativo.isSelected()) {
+	        if (precauzioni.getSelectedToggle() == null) {
 	        	ViewDispatcher.mostraErrore("Devi selezionare le precauzioni usate!");
 	            return;
 	        }

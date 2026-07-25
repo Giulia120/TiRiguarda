@@ -23,8 +23,7 @@ public class RichiestaSMSRapportoGraphicController {
 		        String dataFormattata = dataFineFinestra.format(formatter);
 		        dataFinestraLabel.setText(dataFormattata);
 			}
-		}
-	 
+		} 
 	 
 	 @FXML
 	 private void onSiButton(){

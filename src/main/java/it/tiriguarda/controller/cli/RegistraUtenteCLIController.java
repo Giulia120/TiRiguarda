@@ -3,10 +3,10 @@ package it.tiriguarda.controller.cli;
 import java.util.Scanner;
 
 import it.tiriguarda.controller.app.RegistraUtenteAppController;
+import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.UtenteBean;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
-import it.tiriguarda.util.SecurityUtil;
 
 public class RegistraUtenteCLIController {
 
@@ -28,19 +28,17 @@ public class RegistraUtenteCLIController {
 
 			System.out.print("Password: ");
 			String password = scanner.nextLine();
+			
+			SessoBiologico sesso = leggiSessoBiologico(scanner);
+            if (sesso == null) return;
 
 			System.out.print("Numero di telefono: ");
 			String telefono = scanner.nextLine();
 
 			UtenteBean bean = new UtenteBean();
 			bean.setUsername(username);
-			
-			if (password.isBlank()) {
-				bean.setPassword("");
-			} else {
-				bean.setPassword(SecurityUtil.hashPassword(password));
-			}
-			
+			bean.setPassword(password);
+			bean.setSessoBiologico(sesso);
 			bean.setNumeroTelefono(telefono);
 
 			try {
@@ -55,4 +53,22 @@ public class RegistraUtenteCLIController {
 			}
 		}
 	}
+	
+	private SessoBiologico leggiSessoBiologico(Scanner scanner) {
+        while (true) {
+            System.out.println("Sesso Biologico:");
+            System.out.println("1 - Femminile");
+            System.out.println("2 - Maschile");
+            System.out.print("Scegli un'opzione: ");
+            
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("q")) return null;
+            
+            switch (input) {
+                case "1": return SessoBiologico.FEMMINILE;
+                case "2": return SessoBiologico.MASCHILE;
+                default: System.out.println("[ERRORE] Opzione non valida, riprova!\n");
+            }
+        }
+    }
 }

@@ -75,7 +75,7 @@ public class RegistraTestCLIController {
 			System.out.println("\nChe tipo di test hai effettuato?");
 			System.out.println("1) Rapido");
 			System.out.println("2) Prelievo");
-			System.out.print("Scelta (1 o 2): ");
+			System.out.print("Scegli un'opzione: ");
 			String input = scanner.nextLine();
 			
 			if (input.equalsIgnoreCase("q")) {
