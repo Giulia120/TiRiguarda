@@ -23,7 +23,7 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     }
     
     public void verificaScadenza() {
-    	LocalDate oggi =  LocalDate.now(ZoneId.systemDefault());
+    	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
     	
     	if(oggi.isAfter(getDataInizio().plusDays(2))) {
     		setStatoPrEP(false);
