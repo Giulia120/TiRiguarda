@@ -11,17 +11,17 @@ public abstract class ProtocolloPrEP {
 	private final TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private boolean statoPrEP;
-	private LocalDate dataAnnullamento;
+	private LocalDate dataFine;
 	
-	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
+	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, LocalDate dataFine) {
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
 		this.statoPrEP = true;
-		this.dataAnnullamento = null;
+		this.dataFine = dataFine;
 	}
 	
-	public abstract List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora);
+	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio);
 	
 	public Utente getUtente() {
 		return utente;
@@ -39,8 +39,8 @@ public abstract class ProtocolloPrEP {
 		return statoPrEP;
 	}
 	
-	public LocalDate getDataAnnullamento() {
-		return dataAnnullamento;
+	public LocalDate getDataFine() {
+		return dataFine;
 	}
 	
 	public void setStatoPrEP(boolean statoPrEP) {
@@ -51,7 +51,7 @@ public abstract class ProtocolloPrEP {
 		this.dataInizio = dataInizio;
 	}
 	
-	public void setDataAnnullamento() {
-		this.dataAnnullamento = LocalDate.now(ZoneId.systemDefault());
+	public void setDataFine(LocalDate dataFine) {
+		this.dataFine = dataFine;
 	}
 }

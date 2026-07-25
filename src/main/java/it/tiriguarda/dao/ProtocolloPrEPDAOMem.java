@@ -17,6 +17,12 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
+	public void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP) {
+		
+	}
+	
+	
+	@Override
 	public void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP) {
 		protocolloPrEP.setStatoPrEP(false);
 		protocolloPrEP.setDataAnnullamento();

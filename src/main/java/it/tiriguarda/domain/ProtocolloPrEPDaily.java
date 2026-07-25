@@ -8,17 +8,17 @@ import java.util.List;
 
 public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	
-	public ProtocolloPrEPDaily(Utente utente, LocalDate dataInizio) {
-        super(utente, TipologiaPrEP.DAILY, dataInizio);
+	public ProtocolloPrEPDaily(Utente utente, LocalDate dataInizio, LocalDate dataFine) {
+        super(utente, TipologiaPrEP.DAILY, dataInizio, null);
     }
 
     @Override
-    public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora) {
-    	List<LocalDateTime> promemoria = new ArrayList<>();
+    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio) {
+    	List<LocalDate> promemoria = new ArrayList<>();
 
         for(int i = 0; i < 30; i++) {
             LocalDate giorno = getDataInizio().plusDays(i);
-            promemoria.add(LocalDateTime.of(giorno, ora));
+            promemoria.add(giorno);
         }
         return promemoria;
     }

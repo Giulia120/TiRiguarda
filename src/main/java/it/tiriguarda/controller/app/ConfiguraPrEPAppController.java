@@ -1,5 +1,6 @@
 package it.tiriguarda.controller.app;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
@@ -37,16 +38,20 @@ public class ConfiguraPrEPAppController {
 		}
 		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    protocollo = new ProtocolloPrEPDaily(utente, bean.getDataInizio());
+		    protocollo = new ProtocolloPrEPDaily(utente, bean.getDataInizio(), null);
 		}else {
-			protocollo = new ProtocolloPrEPOnDemand(utente, bean.getDataInizio());
+			protocollo = new ProtocolloPrEPOnDemand(utente, bean.getDataInizio(), null);
+			
 		}
 		
-		List<LocalDateTime> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio(), bean.getOrario());
+		List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio());
 		
 		if(bean.getRicevereSMS()) {
 			attivaSMS(promemoria);
 		}
+		
+		/* protocollo.aggiornaDataFine(bean.getDataInizio());*/
+		
 		utente.setProtocolloAttivo(protocollo);
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
@@ -54,7 +59,7 @@ public class ConfiguraPrEPAppController {
 		dao.configuraProtocollo(protocollo);
 		logger.info("Protocollo registrato con successo.");
 	}
-	public void attivaSMS(List<LocalDateTime> promemoria) {
+	public void attivaSMS(List<LocalDate> promemoria) {
 		//da fare
 	}
 }

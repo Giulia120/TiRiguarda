@@ -10,6 +10,11 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
+	public void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP) {
+		System.out.println("Aggiornato nel DB");
+	}
+	
+	@Override
 	public void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP) {
 		System.out.println("Aggiornato nel DB");
 	}

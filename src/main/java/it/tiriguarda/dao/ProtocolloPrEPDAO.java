@@ -4,5 +4,6 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 
 public interface ProtocolloPrEPDAO {
 	void configuraProtocollo(ProtocolloPrEP protocolloPrEP);
+	void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP);
 	void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP);
 }
