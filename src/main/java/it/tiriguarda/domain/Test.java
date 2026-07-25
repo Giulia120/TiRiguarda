@@ -1,14 +1,14 @@
 package it.tiriguarda.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Test {
 	private final Utente utente;
 	private final TipoTest tipo;
-	private final Date data;
+	private final LocalDate data;
 	
 	
-	public Test(Utente utente, TipoTest tipo, Date data) {
+	public Test(Utente utente, TipoTest tipo, LocalDate data) {
 		this.utente = utente;
 		this.tipo = tipo;
 		this.data = data;
@@ -19,7 +19,7 @@ public class Test {
 	public TipoTest getTipo() {
 		return tipo;
 	}
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 	

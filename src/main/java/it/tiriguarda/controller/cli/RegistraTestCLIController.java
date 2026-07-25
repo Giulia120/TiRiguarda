@@ -22,14 +22,14 @@ public class RegistraTestCLIController {
 			System.out.println("========================================");
 			System.out.println("(Digita 'q' in qualsiasi momento per tornare indietro)");
 
-			java.sql.Date dataConvertita = leggiDataTest(scanner);
-			if (dataConvertita == null) return;
+			LocalDate dataTest = leggiData(scanner);
+			if (dataTest == null) return;
 
 			TipoTest tipoScelto = leggiTipoTest(scanner);
 			if (tipoScelto == null) return;
 
 			TestBean bean = new TestBean();
-			bean.setData(dataConvertita);
+			bean.setData(dataTest);
 			bean.setTipo(tipoScelto);
 
 			try {
@@ -50,25 +50,25 @@ public class RegistraTestCLIController {
 		}
 	}
 
-	private java.sql.Date leggiDataTest(Scanner scanner) {
+	private LocalDate leggiData(Scanner scanner) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-		while (true) {
-			System.out.print("Data del test (gg/mm/aaaa): ");
-			String input = scanner.nextLine();
-			
-			if (input.equalsIgnoreCase("q")) {
-				return null;
-			}
-
-			try {
-				LocalDate localDate = LocalDate.parse(input, formatter);
-				return java.sql.Date.valueOf(localDate);
-			} catch (DateTimeParseException e) {
-				System.out.println("[ERRORE] Formato data non valido! Usa il formato gg/mm/aaaa.");
-			}
-		}
+	    
+	    while (true) {
+	        System.out.print("Inserisci la data (gg/mm/aaaa): ");
+	        String input = scanner.nextLine();
+	        
+	        if (input.equalsIgnoreCase("q")) {
+	            return null;
+	        }
+	        
+	        try {
+	        	return LocalDate.parse(input, formatter);
+	        } catch (DateTimeParseException e) {
+	            System.out.println("Formato o data non valido! Usa gg/mm/aaaa.");
+	        }
+	    }
 	}
+
 
 	private TipoTest leggiTipoTest(Scanner scanner) {
 		while (true) {

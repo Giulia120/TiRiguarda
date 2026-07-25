@@ -54,8 +54,7 @@ public class RegistraRapportoGraphicController {
 	        
 	        RapportoBean bean = new RapportoBean();
 	        
-	        java.sql.Date dataConvertita = java.sql.Date.valueOf(dataRapportoPicker.getValue());
-	        bean.setData(dataConvertita);
+	        bean.setData(dataRapportoPicker.getValue());
 	        
 	        List<TipoRapporto> tipiSelezionati = new ArrayList<>();
 	        if (checkPenetrativo.isSelected()) {

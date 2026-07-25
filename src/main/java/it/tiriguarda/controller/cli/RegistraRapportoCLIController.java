@@ -1,7 +1,8 @@
 package it.tiriguarda.controller.cli;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +26,7 @@ public class RegistraRapportoCLIController {
 	        System.out.println("========================================");
 	        System.out.println("(Digita 'q' in qualsiasi momento per annullare e tornare al menu)\n");
 
-	        java.sql.Date dataRapporto = leggiData(scanner);
+	        LocalDate dataRapporto = leggiData(scanner);
 	        if (dataRapporto == null) return; 
 
 	        List<TipoRapporto> tipi = leggiTipiRapporto(scanner);
@@ -73,9 +74,8 @@ public class RegistraRapportoCLIController {
 	}
 
 
-	private java.sql.Date leggiData(Scanner scanner) {
-	    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-	    format.setLenient(false);
+	private LocalDate leggiData(Scanner scanner) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    
 	    while (true) {
 	        System.out.print("Inserisci la data (gg/mm/aaaa): ");
@@ -86,10 +86,9 @@ public class RegistraRapportoCLIController {
 	        }
 	        
 	        try {
-	            java.util.Date dataUtil = format.parse(input);
-	            return new java.sql.Date(dataUtil.getTime());
-	        } catch (ParseException e) {
-	            System.out.println("Formato non valido! Usa gg/mm/aaaa.");
+	        	return LocalDate.parse(input, formatter);
+	        } catch (DateTimeParseException e) {
+	            System.out.println("Formato o data non valido! Usa gg/mm/aaaa.");
 	        }
 	    }
 	}

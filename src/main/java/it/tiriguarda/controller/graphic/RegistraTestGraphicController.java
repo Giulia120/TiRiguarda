@@ -34,8 +34,7 @@ public class RegistraTestGraphicController {
 		 
 		 TestBean bean = new TestBean();
 		 
-		 java.sql.Date dataConvertita = java.sql.Date.valueOf(dataRapportoPicker.getValue());
-	     bean.setData(dataConvertita);
+	     bean.setData(dataRapportoPicker.getValue());
 	     
 	     if (radioRapido.isSelected()) {
 	            bean.setTipo(TipoTest.RAPIDO);

@@ -1,6 +1,6 @@
 package it.tiriguarda.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import it.tiriguarda.domain.LivelloRischio;
@@ -8,17 +8,17 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 
 public class RapportoBean {
-	private Date data;
+	private LocalDate data;
     private List<TipoRapporto> tipo;
     private Precauzioni precauzioniUsate;
     private LivelloRischio rischio;
-	private Date dataFinePeriodoFinestra;
+	private LocalDate dataFinePeriodoFinestra;
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -46,11 +46,11 @@ public class RapportoBean {
 		this.rischio = rischio;
 	}
 
-	public Date getDataFinePeriodoFinestra() {
+	public LocalDate getDataFinePeriodoFinestra() {
 		return dataFinePeriodoFinestra;
 	}
 
-	public void setDataFinePeriodoFinestra(Date dataFinePeriodoFinestra) {
+	public void setDataFinePeriodoFinestra(LocalDate dataFinePeriodoFinestra) {
 		this.dataFinePeriodoFinestra = dataFinePeriodoFinestra;
 	}
     

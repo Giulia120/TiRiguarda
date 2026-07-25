@@ -1,7 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,11 +17,11 @@ public class RichiestaSMSRapportoGraphicController {
 	 @FXML 
 	 private Label dataFinestraLabel;
 	 
-	 public void initData(Date dataFineFinestra) {
+	 public void initData(LocalDate dataFineFinestra) {
 			if (dataFineFinestra != null) {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				String dataFormattata = sdf.format(dataFineFinestra);
-				dataFinestraLabel.setText(dataFormattata);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		        String dataFormattata = dataFineFinestra.format(formatter);
+		        dataFinestraLabel.setText(dataFormattata);
 			}
 		}
 	 

@@ -1,5 +1,7 @@
 package it.tiriguarda.controller.app;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -28,7 +30,7 @@ public class RegistraRapportoAppController {
 			throw new DatiIncompletiException();
 		}
 		
-        if (bean.getData().after(new java.util.Date())) {
+        if (bean.getData().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
             throw new DataFuturaException();
         }
         
@@ -58,7 +60,7 @@ public class RegistraRapportoAppController {
 		}
 		
 		ProtocolloPrEP prep = utente.getProtocolloAttivo();
-		if (prep != null && prep.getStatoPrEP() == true) {
+		if (prep != null && bean.getData().isAfter(prep.getDataInizio())) {
 			calcolatore = new PrEPDecorator(calcolatore);
 		}
 		

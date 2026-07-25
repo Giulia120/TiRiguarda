@@ -1,16 +1,15 @@
 package it.tiriguarda.domain;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Rapporto {
 	private Utente utente;
 	private final String idRapporto;
-	private final Date data;
+	private final LocalDate data;
 	private final LivelloRischio rischio;
-	private final Date dataFinePeriodoFinestra;
+	private final LocalDate dataFinePeriodoFinestra;
 	
-	public Rapporto (Utente utente, String idRapporto, Date data, LivelloRischio rischio) {
+	public Rapporto (Utente utente, String idRapporto, LocalDate data, LivelloRischio rischio) {
 		this.utente = utente;
 		this.idRapporto = idRapporto;
 		this.data = data;
@@ -18,14 +17,11 @@ public class Rapporto {
 		this.dataFinePeriodoFinestra = calcolaPeriodoFinestra(data, rischio);
 	}
 	
-	private Date calcolaPeriodoFinestra(Date data, LivelloRischio rischio) {
+	private LocalDate calcolaPeriodoFinestra(LocalDate data, LivelloRischio rischio) {
 		if (rischio == LivelloRischio.NULLO) {
 			return null;
 		}
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(data);
-		cal.add(Calendar.DAY_OF_MONTH, 28);
-		return cal.getTime();
+		return data.plusDays(28);
 	}
 
 	public Utente getUtente() {
@@ -40,7 +36,7 @@ public class Rapporto {
 		return idRapporto;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
@@ -48,7 +44,7 @@ public class Rapporto {
 		return rischio;
 	}
 
-	public Date getDataFinePeriodoFinestra() {
+	public LocalDate getDataFinePeriodoFinestra() {
 		return dataFinePeriodoFinestra;
 	}
 

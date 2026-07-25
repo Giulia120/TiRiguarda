@@ -1,5 +1,7 @@
 package it.tiriguarda.controller.app;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -17,7 +19,7 @@ public class RegistraTestAppController {
 		if(bean.getData() == null || bean.getTipo() == null) {
 			throw new DatiIncompletiException();
 		}
-		if (bean.getData().after(new java.util.Date())) {
+		if (bean.getData().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
             throw new DataFuturaException();
         }
 	Test nuovoTest = new Test(SessionManager.getInstance().getUtenteLoggato(), bean.getTipo(), bean.getData());

@@ -1,6 +1,6 @@
 package it.tiriguarda.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.domain.Utente;
@@ -8,7 +8,7 @@ import it.tiriguarda.domain.Utente;
 public class TestBean {
 	private Utente utente;
 	private TipoTest tipo;
-	private Date data;
+	private LocalDate data;
 	public Utente getUtente() {
 		return utente;
 	}
@@ -21,10 +21,10 @@ public class TestBean {
 	public void setTipo(TipoTest tipo) {
 		this.tipo = tipo;
 	}
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 	

@@ -1,7 +1,8 @@
 package it.tiriguarda.controller.cli;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 import it.tiriguarda.dto.RapportoBean;
 
 public class RichiestaSMSRapportoCLIController {
@@ -12,8 +13,8 @@ public class RichiestaSMSRapportoCLIController {
 		System.out.println("          ATTENZIONE: RISCHIO RILEVATO  ");
 		System.out.println("========================================");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String dataFormattata = sdf.format(beanAggiornato.getDataFinePeriodoFinestra());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataFormattata = formatter	.format(beanAggiornato.getDataFinePeriodoFinestra());
 		
 		System.out.println("Data fine periodo finestra: " + dataFormattata);
 		System.out.println("Vuoi attivare le notifiche SMS per ricordarti di fare il test?");
