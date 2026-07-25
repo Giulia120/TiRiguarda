@@ -19,7 +19,7 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="registraUtenteButton" layoutX="323.0" layoutY="446.0" mnemonicParsing="false" onAction="#onRegistraUtenteButton" prefHeight="53.0" prefWidth="153.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="registraUtenteButton" layoutX="324.0" layoutY="503.0" mnemonicParsing="false" onAction="#onRegistraUtenteButton" prefHeight="54.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="backButton" layoutX="29.0" layoutY="562.0" mnemonicParsing="false" onAction="#onLoginPage" prefHeight="29.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <PasswordField fx:id="passwordField" layoutX="278.0" layoutY="307.0" prefHeight="26.0" prefWidth="250.0" />
             <TextField fx:id="usernameField" layoutX="278.0" layoutY="241.0" prefHeight="26.0" prefWidth="250.0" />

@@ -24,7 +24,7 @@
             <CheckBox fx:id="checkOrale" layoutX="229.0" layoutY="378.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="6.0" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" />
             <RadioButton fx:id="radioNulla" layoutX="451.0" layoutY="340.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;">
                <toggleGroup>
-                  <ToggleGroup fx:id="gruppoPrecuazioni" />
+                  <ToggleGroup fx:id="precuazioni" />
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="radioCoInt" layoutX="451.0" layoutY="378.0" mnemonicParsing="false" style="-fx-accent: #4A5D3E; -fx-background-border-color: #4A5D3E;" toggleGroup="$gruppoPrecuazioni" />

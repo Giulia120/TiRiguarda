@@ -50,7 +50,7 @@ public class RegistraRapportoCLIController {
 	                RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
 	                smsController.avvia(beanAggiornato, scanner); 
 	            } else {
-	                mostraSchermataSuccesso();
+	            	System.out.println("\nRapporto registrato con successo! Torno al menu principale...");
 	            }
 	            
 	            completato = true;
@@ -66,13 +66,6 @@ public class RegistraRapportoCLIController {
 	        }
 	    }
 	}
-
-	private void mostraSchermataSuccesso() {
-		System.out.println("\n****************************************");
-		System.out.println("*  Rapporto registrato con successo!   *");
-		System.out.println("****************************************");
-	}
-
 
 	private LocalDate leggiData(Scanner scanner) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -120,7 +113,7 @@ public class RegistraRapportoCLIController {
 	        System.out.println("1 - Preservativo");
 	        System.out.println("2 - Coito Interrotto");
 	        System.out.println("3 - Nessuna (Nulla)");
-	        System.out.print("Scegli un'opzione (1/2/3) oppure 'q' per annullare: ");
+	        System.out.print("Scegli un'opzione: ");
 	        
 	        String input = scanner.nextLine();
 	        if (input.equalsIgnoreCase("q")) return null;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.ProfiloGraphicController">
+   <children>
+      <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/profilo.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="modificaPwd" layoutX="326.0" layoutY="456.0" mnemonicParsing="false" onAction="#onModificaPwd" prefHeight="52.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="modificaTelButton" layoutX="489.0" layoutY="345.0" mnemonicParsing="false" onAction="#onModificaTel" prefHeight="52.0" prefWidth="111.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Label layoutX="394.0" layoutY="9.0" prefHeight="120.0" prefWidth="73.0" text=" ">
+               <tooltip>
+                  <Tooltip text="Simbolo di supporto e solidarietà per la lotta contro l'AIDS" />
+               </tooltip>
+            </Label>
+            <Button fx:id="modificaUserButton" layoutX="199.0" layoutY="345.0" mnemonicParsing="false" onAction="#onModificaUser" prefHeight="52.0" prefWidth="111.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Label fx:id="usernameLabel" layoutX="379.0" layoutY="228.0" prefHeight="18.0" prefWidth="263.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="sessoLabel" layoutX="422.0" layoutY="255.0" prefHeight="18.0" prefWidth="74.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="telLabel" layoutX="363.0" layoutY="283.0" prefHeight="18.0" prefWidth="84.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" layoutX="27.0" layoutY="559.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="36.0" prefWidth="46.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
