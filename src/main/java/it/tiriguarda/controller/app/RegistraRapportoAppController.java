@@ -45,6 +45,14 @@ public class RegistraRapportoAppController {
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
+		
+		/*ProtocolloPrEP prep = utenteCorrente.getProtocolloAttivo();
+	    if (prep != null) {
+	        prep.aggiornaFinestraOnDemand(bean.getData());
+	        ProtocolloPrEPDAO prepDao = factory.createProtocolloPrEPDAO();
+	        prepDao.aggiornaProtocollo(prep);
+	    }*/
+		
 		logger.info("Rapporto registrato con successo.");
 		bean.setRischio(rischioCalcolato);
         bean.setDataFinePeriodoFinestra(nuovoRapporto.getDataFinePeriodoFinestra());

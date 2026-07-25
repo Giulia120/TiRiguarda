@@ -8,6 +8,7 @@ import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
+import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.TestBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
@@ -22,7 +23,10 @@ public class RegistraTestAppController {
 		if (bean.getData().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
             throw new DataFuturaException();
         }
-	Test nuovoTest = new Test(SessionManager.getInstance().getUtenteLoggato(), bean.getTipo(), bean.getData());
+	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+	
+	Test nuovoTest = new Test(utenteCorrente, bean.getTipo(), bean.getData());
+
 	
 	DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 	TestDAO dao = factory.createTestDAO();

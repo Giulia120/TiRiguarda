@@ -1,19 +1,19 @@
 package it.tiriguarda.domain;
 
-import java.util.List;
-
 import it.tiriguarda.util.SecurityUtil;
 
 public class Utente {
 	private final String username;
 	private final String password;
+	private final SessoBiologico sessoBiologico;
 	private final String numeroTelefono;
-	private List<Rapporto> rapporti;
 	private ProtocolloPrEP protocolloAttivo;
 	
-	public Utente (String username, String passwordHash, String numeroTelefono) {
+	
+	public Utente (String username, String passwordHash, SessoBiologico sessoBiologico, String numeroTelefono) {
 		this.username = username;
 		this.password = passwordHash;
+		this.sessoBiologico = sessoBiologico;
 		this.numeroTelefono = numeroTelefono;
 	}
 	
@@ -21,21 +21,16 @@ public class Utente {
         String hashCalcolato = SecurityUtil.hashPassword(passwordInseritaInChiaro);
         return this.password.equals(hashCalcolato);
     } 
-	
-	public List<Rapporto> getRapporti() {
-		return rapporti;
-	}
-
-
-	public void setRapporti(List<Rapporto> rapporti) {
-		this.rapporti = rapporti;
-	}
 
 
 	public String getUsername() {
 		return username;
 	}
 
+
+	public SessoBiologico getSessoBiologico() {
+		return sessoBiologico;
+	}
 
 	public String getNumeroTelefono() {
 		return numeroTelefono;
