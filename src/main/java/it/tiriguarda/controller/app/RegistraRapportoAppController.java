@@ -1,7 +1,5 @@
 package it.tiriguarda.controller.app;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -14,8 +12,6 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
-import it.tiriguarda.exception.DataFuturaException;
-import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
@@ -25,38 +21,16 @@ import it.tiriguarda.service.SessionManager;
 public class RegistraRapportoAppController {
 	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
 	
-	public RapportoBean registraRapporto(RapportoBean bean) throws DatiIncompletiException, DataFuturaException{
-		if(bean.getData() == null || bean.getTipo() == null || bean.getTipo().isEmpty() || bean.getPrecauzioniUsate() == null) {
-			throw new DatiIncompletiException();
-		}
-		
-        if (bean.getData().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
-            throw new DataFuturaException();
-        }
-        
+	public RapportoBean valutaRischio(RapportoBean bean) {
+
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-		
-		String idRapporto = UUID.randomUUID().toString();
-				
 		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
 		
-		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), rischioCalcolato);
+		Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente, "temp-id", bean.getData(), rischioCalcolato);
 		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-		RapportoDAO dao = factory.createRapportoDAO();
-		dao.salvaRapporto(nuovoRapporto);
-		
-		/*ProtocolloPrEP prep = utenteCorrente.getProtocolloAttivo();
-	    if (prep != null) {
-	        prep.aggiornaFinestraOnDemand(bean.getData());
-	        ProtocolloPrEPDAO prepDao = factory.createProtocolloPrEPDAO();
-	        prepDao.aggiornaProtocollo(prep);
-	    }*/
-		
-		logger.info("Rapporto registrato con successo.");
 		bean.setRischio(rischioCalcolato);
-        bean.setDataFinePeriodoFinestra(nuovoRapporto.getDataFinePeriodoFinestra());
-        
+		bean.setDataFinePeriodoFinestra(rapportoTemporaneo.getDataFinePeriodoFinestra());
+		
 		return bean;
 	}
 	
@@ -73,6 +47,26 @@ public class RegistraRapportoAppController {
 		}
 		
 		return calcolatore.calcola();
+	}
+	
+	public void salvaRapportoDefinitivo(RapportoBean bean) {
+		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+		String idRapporto = UUID.randomUUID().toString();
+		
+		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), bean.getRischio());
+		
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		RapportoDAO dao = factory.createRapportoDAO();
+		dao.salvaRapporto(nuovoRapporto);
+		
+		/*ProtocolloPrEP prep = utenteCorrente.getProtocolloAttivo();
+	    if (prep != null) {
+	        prep.aggiornaFinestraOnDemand(bean.getData());
+	        ProtocolloPrEPDAO prepDao = factory.createProtocolloPrEPDAO();
+	        prepDao.aggiornaProtocollo(prep);
+	    }*/
+		
+		logger.info("Rapporto registrato definitivamente con successo.");
 	}
 	
 }

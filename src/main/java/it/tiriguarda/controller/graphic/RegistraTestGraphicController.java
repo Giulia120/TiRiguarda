@@ -23,26 +23,19 @@ public class RegistraTestGraphicController {
 	
 	@FXML
 	 public void onConfermaRegistrazione(ActionEvent event) {
-		 if (dataRapportoPicker.getValue() == null) {
-			 ViewDispatcher.mostraErrore("Devi selezionare la data del test!");
-	            return;
-	        }
-		 if (!radioRapido.isSelected() && !radioPrelievo.isSelected()) {
-	        	ViewDispatcher.mostraErrore("Devi selezionare il tipo!");
-	            return;
-	        }
-		 
-		 TestBean bean = new TestBean();
-		 
-	     bean.setData(dataRapportoPicker.getValue());
-	     
-	     if (radioRapido.isSelected()) {
-	            bean.setTipo(TipoTest.RAPIDO);
-	        } else if (radioPrelievo.isSelected()) {
-	            bean.setTipo(TipoTest.PRELIEVO);
-	        }
-	     
 	     try {
+	    	 TestBean bean = new TestBean();
+			 
+		     bean.setData(dataRapportoPicker.getValue());
+		     
+		     TipoTest tipoTest = null;
+		     if (radioRapido.isSelected()) {
+		    	 tipoTest = TipoTest.RAPIDO;
+		        } else if (radioPrelievo.isSelected()) {
+		        	tipoTest = TipoTest.PRELIEVO;
+		        }
+		     bean.setTipo(tipoTest);
+		     
 	    	 RegistraTestAppController controller = new RegistraTestAppController();
 	    	 controller.registraTest(bean);
 	     } catch (DatiIncompletiException e) {
