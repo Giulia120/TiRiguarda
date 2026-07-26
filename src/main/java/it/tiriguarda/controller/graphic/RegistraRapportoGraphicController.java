@@ -40,51 +40,38 @@ public class RegistraRapportoGraphicController {
 	 
 	 @FXML
 	 public void onConfermaRegistrazione(ActionEvent event) {
-		 if (dataRapportoPicker.getValue() == null) {
-			 ViewDispatcher.mostraErrore("Devi selezionare la data del rapporto!");
-	            return;
-	        }
-	        
-	        if (!checkPenetrativo.isSelected() && !checkOrale.isSelected()) {
-	        	ViewDispatcher.mostraErrore("Devi selezionare almeno un tipo di rapporto!");
-	            return;
-	        }
-	        
-	        if (precauzioni.getSelectedToggle() == null) {
-	        	ViewDispatcher.mostraErrore("Devi selezionare le precauzioni usate!");
-	            return;
-	        }
-	        
-	        RapportoBean bean = new RapportoBean();
-	        
-	        bean.setData(dataRapportoPicker.getValue());
-	        
-	        List<TipoRapporto> tipiSelezionati = new ArrayList<>();
-	        if (checkPenetrativo.isSelected()) {
-	            tipiSelezionati.add(TipoRapporto.PENETRATIVO);
-	        }
-	        if (checkOrale.isSelected()) {
-	            tipiSelezionati.add(TipoRapporto.ORALE);
-	        }
-	        bean.setTipo(tipiSelezionati);
-	        
-	        if (radioPreservativo.isSelected()) {
-	            bean.setPrecauzioniUsate(Precauzioni.PRESERVATIVO);
-	        } else if (radioCoInt.isSelected()) {
-	            bean.setPrecauzioniUsate(Precauzioni.COITO_INTERROTTO);
-	        } else if (radioNulla.isSelected()) {
-	            bean.setPrecauzioniUsate(Precauzioni.NULLA);
-	        }
-	        
 	        try {
-	        	RegistraRapportoAppController appController = new RegistraRapportoAppController();
-	        	RapportoBean beanAggiornato = appController.registraRapporto(bean);
+	        	RapportoBean bean = new RapportoBean();
+		        
+		        bean.setData(dataRapportoPicker.getValue());
+		        
+		        List<TipoRapporto> tipiSelezionati = new ArrayList<>();
+		        if (checkPenetrativo.isSelected()) {
+		            tipiSelezionati.add(TipoRapporto.PENETRATIVO);
+		        }
+		        if (checkOrale.isSelected()) {
+		            tipiSelezionati.add(TipoRapporto.ORALE);
+		        }
+		        bean.setTipo(tipiSelezionati);
+		        
+		        Precauzioni precauzioneSelezionata = null;
+		        if (radioPreservativo.isSelected()) {
+		        	precauzioneSelezionata = Precauzioni.PRESERVATIVO;
+		        } else if (radioCoInt.isSelected()) {
+		        	precauzioneSelezionata = Precauzioni.COITO_INTERROTTO;
+		        } else if (radioNulla.isSelected()) {
+		        	precauzioneSelezionata = Precauzioni.NULLA;
+		        }
+		        bean.setPrecauzioniUsate(precauzioneSelezionata);
+		        
+		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
+	        	RapportoBean beanAggiornato = appController.valutaRischio(bean);
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
+	            	appController.salvaRapportoDefinitivo(beanAggiornato);
 	            	ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
 	            } else {
 	            	ViewDispatcher.mostraSuccesso();
 	            }
-	            
 	        } catch (DatiIncompletiException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        } catch (DataFuturaException e) {

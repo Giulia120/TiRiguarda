@@ -1,6 +1,7 @@
 package it.tiriguarda.dto;
 
 import it.tiriguarda.domain.SessoBiologico;
+import it.tiriguarda.exception.DatiIncompletiException;
 
 public class UtenteBean {
 	private String username;
@@ -23,20 +24,57 @@ public class UtenteBean {
 	public String getNumeroTelefono() {
 		return numeroTelefono;
 	}
-
-	public void setUsername(String username) {
+	
+	public void setUsername(String username) throws DatiIncompletiException {
+		controllaStringa(username, "Devi inserire un username!");
+		//controllaLunghezzaUsername(username);
 		this.username = username;
 	}
-
-	public void setPassword(String password) {
+	
+	public void setPassword(String password) throws DatiIncompletiException {
+		controllaStringa(password, "Devi inserire una password!");
+		//controllaPassword(password);
 		this.password = password;
 	}
 	
-	public void setSessoBiologico(SessoBiologico sessoBiologico) {
+	public void setNumeroTelefono(String numeroTelefono) throws DatiIncompletiException {
+		controllaStringa(numeroTelefono, "Devi inserire un numero di telefono!");
+		//controllaFormatoTelefono(numeroTelefono);
+		this.numeroTelefono = numeroTelefono;
+	}	
+
+	public void setSessoBiologico(SessoBiologico sessoBiologico) throws DatiIncompletiException {
+		controllaSessoBiologico(sessoBiologico);
 		this.sessoBiologico = sessoBiologico;
 	}
 
-	public void setNumeroTelefono(String numeroTelefono) {
-		this.numeroTelefono = numeroTelefono;
-	}	
+	private void controllaSessoBiologico(SessoBiologico sessoBiologico) throws DatiIncompletiException {
+		if (sessoBiologico == null) {
+			throw new DatiIncompletiException("Devi selezionare il sesso biologico!");
+		}
+	}
+	
+	private void controllaStringa(String valore, String messaggioErrore) throws DatiIncompletiException {
+		if (valore == null || valore.isBlank()) {
+			throw new DatiIncompletiException(messaggioErrore);
+		}
+	}
+	
+	/*private void controllaLunghezzaUsername(String username) throws DatiIncompletiException {
+		if (username.length() < 3 || username.length() > 30) {
+			throw new DatiIncompletiException("L'username deve essere compreso tra 3 e 30 caratteri!");
+		}
+	}
+	
+	private void controllaPassword(String password) throws DatiIncompletiException {
+		if (password.length() < 6) {
+			throw new DatiIncompletiException("La password deve avere almeno 6 caratteri!");
+		}
+	}
+
+	private void controllaFormatoTelefono(String numeroTelefono) throws DatiIncompletiException {
+		if (!numeroTelefono.matches("^\\d{9,11}$")) {
+			throw new DatiIncompletiException("Il numero di telefono non è valido (deve contenere solo numeri, tra 9 e 11 cifre)!");
+		}
+	}*/
 }

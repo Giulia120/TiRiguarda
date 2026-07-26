@@ -36,20 +36,22 @@ public class RegistraUtenteGraphicController {
 	
 	@FXML
 	public void onRegistraUtenteButton(ActionEvent event) throws IOException, DatiIncompletiException {
-		UtenteBean bean = new UtenteBean();
-		if(usernameField.getText().isBlank() || passwordField.getText().isBlank() || sessoBiologico.getSelectedToggle() == null) {
-			ViewDispatcher.mostraErrore("Tutti i campi sono obbligatori!");
-            return;
-		}
-		bean.setUsername(usernameField.getText());
-		bean.setPassword(passwordField.getText());
-		if (radioFemm.isSelected()) {
-			bean.setSessoBiologico(SessoBiologico.FEMMINILE);
-		} else if (radioMasc.isSelected()) {
-			bean.setSessoBiologico(SessoBiologico.MASCHILE);
-		}
-		bean.setNumeroTelefono(telefonoField.getText());
+		
 		try {
+			UtenteBean bean = new UtenteBean();
+			
+			bean.setUsername(usernameField.getText());
+			bean.setPassword(passwordField.getText());
+			
+			SessoBiologico sessoSelezionato = null;
+	        if (radioFemm.isSelected()) {
+	            sessoSelezionato = SessoBiologico.FEMMINILE;
+	        } else if (radioMasc.isSelected()) {
+	            sessoSelezionato = SessoBiologico.MASCHILE;
+	        }
+	        bean.setSessoBiologico(sessoSelezionato);
+			bean.setNumeroTelefono(telefonoField.getText());
+			
 			RegistraUtenteAppController appController = new RegistraUtenteAppController();
 			appController.registraUtente(bean);
 			ViewDispatcher.mostraLogin();
