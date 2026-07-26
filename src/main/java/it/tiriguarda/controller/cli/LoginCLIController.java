@@ -5,6 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.controller.app.LoginAppController;
 import it.tiriguarda.dto.CredenzialiBean;
 import it.tiriguarda.exception.CredenzialiErrateException;
+import it.tiriguarda.exception.DatiIncompletiException;
 
 public class LoginCLIController {
 
@@ -49,16 +50,12 @@ public class LoginCLIController {
 		System.out.print("Password: ");
 		String password = scanner.nextLine();
 		
-		if (username.trim().isEmpty() || password.trim().isEmpty()) {
-			System.out.println("\n[ERRORE] Dati mancanti.");
-			return false;
-		}
-		
-		CredenzialiBean bean = new CredenzialiBean();
-		bean.setUsername(username);
-		bean.setPassword(password);
 		
 		try {
+			CredenzialiBean bean = new CredenzialiBean();
+			bean.setUsername(username);
+			bean.setPassword(password);
+			
 			LoginAppController appController = new LoginAppController();
 			appController.effettuaLogin(bean);
 			
@@ -66,7 +63,7 @@ public class LoginCLIController {
 			menuController.avviaMenu(scanner);
 			
 			return true;
-		} catch (CredenzialiErrateException e) {
+		} catch (CredenzialiErrateException | DatiIncompletiException e) {
 			System.out.println("\n[ERRORE] " + e.getMessage());
 			return false;
 		}

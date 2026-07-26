@@ -67,9 +67,9 @@ public class RegistraRapportoGraphicController {
 		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
 	        	RapportoBean beanAggiornato = appController.valutaRischio(bean);
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
-	            	appController.salvaRapportoDefinitivo(beanAggiornato);
 	            	ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
 	            } else {
+	            	appController.salvaRapportoDefinitivo(beanAggiornato);
 	            	ViewDispatcher.mostraSuccesso();
 	            }
 	        } catch (DatiIncompletiException e) {
