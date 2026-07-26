@@ -54,17 +54,13 @@ public class ViewDispatcher {
     }
     
     public static void mostraModificaPwd() {
-        cambiaSchermata("/it/tiriguarda/view/ModificaPwd.fxml");
+        mostraPopup("/it/tiriguarda/view/ModificaPwd.fxml", "Modifica Password");
     }
     
     public static void mostraModificaTel() {
-        cambiaSchermata("/it/tiriguarda/view/ModificaTel.fxml");
+        mostraPopup("/it/tiriguarda/view/ModificaTel.fxml", "Modifica Telefono");
     }
     
-    public static void mostraModificaUser() {
-        cambiaSchermata("/it/tiriguarda/view/ModificaUser.fxml");
-    }
-
     public static void mostraRiepilogo() {
         cambiaSchermata("/it/tiriguarda/view/Riepilogo.fxml");
     }
@@ -102,7 +98,7 @@ public class ViewDispatcher {
             FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/RichiestaSMSRapporto.fxml"));
             Parent nuovaVista = loader.load();            
             RichiestaSMSRapportoGraphicController controller = loader.getController();
-            controller.initData(bean.getDataFinePeriodoFinestra());
+            controller.inizializza(bean);
             finestraPrincipale.setScene(new Scene(nuovaVista));
             finestraPrincipale.show();
             
@@ -119,9 +115,28 @@ public class ViewDispatcher {
     	cambiaSchermata("/it/tiriguarda/view/ConfiguraPrEP.fxml");
     }
 	
+    private static void mostraPopup(String fxmlPath, String titolo) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource(fxmlPath));
+            Parent root = loader.load();
+            
+            Stage popupStage = new Stage();
+            popupStage.setTitle(titolo);
+            popupStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            popupStage.initOwner(finestraPrincipale);
+            popupStage.setResizable(false);
+            
+            popupStage.setScene(new Scene(root));
+            popupStage.showAndWait();
+            
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Errore nel caricamento del popup: " + titolo, e);
+        }
+    }
+    
 	public static void mostraErrore(String messaggio) {
 		 Alert alert = new Alert(AlertType.ERROR);
-	   	 alert.setTitle("Errore di Validazione");
+	   	 alert.setTitle("Ops!");
 	   	 alert.setHeaderText(null);
 	   	 alert.setContentText(messaggio);
 	   	 alert.showAndWait();

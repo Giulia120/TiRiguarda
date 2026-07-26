@@ -15,6 +15,7 @@ public class UtenteDAOMem implements UtenteDAO{
 		utentiInMemoria.add(utente);
 		logger.info("Utente salvato correttamente");
 	}
+	
 	@Override
 	public Utente trovaPerUsername(String username) {
 		for (Utente u : utentiInMemoria) {
@@ -23,5 +24,17 @@ public class UtenteDAOMem implements UtenteDAO{
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public void aggiornaUtente(Utente utenteAggiornato) {
+		for (int i = 0; i < utentiInMemoria.size(); i++) {
+			if (utentiInMemoria.get(i).getUsername().equals(utenteAggiornato.getUsername())) {
+				utentiInMemoria.set(i, utenteAggiornato);
+				logger.info("Utente aggiornato correttamente in memoria");
+				return;
+			}
+		}
+		logger.warning("Impossibile aggiornare: utente non trovato in memoria.");
 	}
 }

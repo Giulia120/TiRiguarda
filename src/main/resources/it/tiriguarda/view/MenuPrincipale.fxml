@@ -33,7 +33,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="riepilogoButton" layoutX="568.0" layoutY="374.0" mnemonicParsing="false" onAction="#onProfiloButton" prefHeight="161.0" prefWidth="164.0" styleClass="bottone-dinamico">
+            <Button fx:id="riepilogoButton" layoutX="568.0" layoutY="374.0" mnemonicParsing="false" onAction="#onRiepilogoButton" prefHeight="161.0" prefWidth="164.0" styleClass="bottone-dinamico">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="bottone-dinamico">
                      <image>

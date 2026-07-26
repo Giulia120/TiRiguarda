@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.LoginGraphicController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="194.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.ModificaPwdGraphicController">
    <children>
-      <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="259.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/modifca_password.png" />
+            <Image url="@images/modifica_psw.png" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="438.0" prefWidth="554.0">
          <children>
-            <Button fx:id="loginButton" layoutX="325.0" layoutY="456.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="52.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="backButton" layoutX="29.0" layoutY="564.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="26.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <TextField fx:id="newPwdField" layoutX="321.0" layoutY="264.0" prefHeight="26.0" prefWidth="259.0" />
-            <Label layoutX="394.0" layoutY="9.0" prefHeight="120.0" prefWidth="73.0" text=" ">
-               <tooltip>
-                  <Tooltip text="Simbolo di supporto e solidarietà per la lotta contro l'AIDS" />
-               </tooltip>
-            </Label>
-            <PasswordField fx:id="oldPwdField" layoutX="320.0" layoutY="344.0" prefHeight="26.0" prefWidth="259.0" />
+            <Button fx:id="confermaButton" layoutX="119.0" layoutY="144.0" mnemonicParsing="false" onAction="#onConfermaButton" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <PasswordField fx:id="oldPwdField" layoutX="88.0" layoutY="104.0" />
+            <TextField fx:id="newPwdField" layoutX="89.0" layoutY="52.0" />
          </children>
       </AnchorPane>
    </children>
