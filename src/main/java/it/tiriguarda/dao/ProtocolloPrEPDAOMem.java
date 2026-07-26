@@ -1,5 +1,7 @@
 package it.tiriguarda.dao;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,14 +20,24 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	
 	@Override
 	public void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP) {
-		
+		int index = -1;
+	  
+	    for (int i = 0; i < protocolliInMemoria.size(); i++) {
+	        ProtocolloPrEP p = protocolliInMemoria.get(i);
+	        if (p.getStatoPrEP()) {
+	            index = i;
+	            break; 
+	        }
+	    }
+	    protocolliInMemoria.set(index, protocolloPrEP);
+	    logger.info("Protocollo attivo aggiornato con successo.");
 	}
 	
 	
 	@Override
 	public void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP) {
 		protocolloPrEP.setStatoPrEP(false);
-		protocolloPrEP.setDataAnnullamento();
+		protocolloPrEP.setDataFine(LocalDate.now(ZoneId.systemDefault()));
 		logger.info("Protocollo annullato.");
 	}
 }

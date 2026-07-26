@@ -13,12 +13,12 @@ public abstract class ProtocolloPrEP {
 	private boolean statoPrEP;
 	private LocalDate dataFine;
 	
-	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, LocalDate dataFine) {
+	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
 		this.statoPrEP = true;
-		this.dataFine = dataFine;
+		this.dataFine = null;
 	}
 	
 	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio);

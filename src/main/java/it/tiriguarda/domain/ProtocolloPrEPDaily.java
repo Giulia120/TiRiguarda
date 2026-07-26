@@ -1,15 +1,14 @@
 package it.tiriguarda.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	
-	public ProtocolloPrEPDaily(Utente utente, LocalDate dataInizio, LocalDate dataFine) {
-        super(utente, TipologiaPrEP.DAILY, dataInizio, null);
+	public ProtocolloPrEPDaily(Utente utente, LocalDate dataInizio) {
+        super(utente, TipologiaPrEP.DAILY, dataInizio);
     }
 
     @Override
@@ -22,4 +21,12 @@ public class ProtocolloPrEPDaily extends ProtocolloPrEP{
         }
         return promemoria;
     }
+    
+    public void ricalcolo() {
+    	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
+    	LocalDate fineMese = getDataInizio().plusDays(30);
+    	if(oggi.isAfter(fineMese)) {
+    		calcolaGiorniPromemoria(fineMese);
+    	}
+    } 
 }

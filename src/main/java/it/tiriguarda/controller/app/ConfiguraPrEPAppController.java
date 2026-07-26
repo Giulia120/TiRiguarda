@@ -1,7 +1,6 @@
 package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -38,10 +37,11 @@ public class ConfiguraPrEPAppController {
 		}
 		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    protocollo = new ProtocolloPrEPDaily(utente, bean.getDataInizio(), null);
+		    protocollo = new ProtocolloPrEPDaily(utente, bean.getDataInizio());
 		}else {
-			protocollo = new ProtocolloPrEPOnDemand(utente, bean.getDataInizio(), null);
-			
+			ProtocolloPrEPOnDemand protocolloOnDemand = new ProtocolloPrEPOnDemand(utente, bean.getDataInizio());
+			protocolloOnDemand.aggiornaDataFine(bean.getDataInizio());
+			protocollo = protocolloOnDemand;
 		}
 		
 		List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio());
@@ -49,8 +49,6 @@ public class ConfiguraPrEPAppController {
 		if(bean.getRicevereSMS()) {
 			attivaSMS(promemoria);
 		}
-		
-		/* protocollo.aggiornaDataFine(bean.getDataInizio());*/
 		
 		utente.setProtocolloAttivo(protocollo);
 		

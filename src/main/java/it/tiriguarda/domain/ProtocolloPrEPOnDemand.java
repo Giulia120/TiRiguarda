@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
-	public ProtocolloPrEPOnDemand(Utente utente, LocalDate dataInizio, LocalDate dataFine) {
-        super(utente, TipologiaPrEP.ON_DEMAND, dataInizio, dataFine);
+	public ProtocolloPrEPOnDemand(Utente utente, LocalDate dataInizio) {
+        super(utente, TipologiaPrEP.ON_DEMAND, dataInizio);
     }
 	
     @Override
@@ -26,7 +26,6 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     		}
     		return promemoria;
     	}
-    	
     }
     
     public void verificaScadenza() {
@@ -34,7 +33,6 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     	
     	if(oggi.isAfter(getDataFine())) {
     		setStatoPrEP(false);
-    		//setDataAnnullamento();
     	}
     }
     
