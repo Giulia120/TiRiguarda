@@ -46,11 +46,6 @@ public class ProfiloGraphicController {
 	}
 	
 	@FXML
-	void onModificaUser(ActionEvent event) {
-		ViewDispatcher.mostraModificaUser();
-	}
-	
-	@FXML
 	void onModificaPwd(ActionEvent event) {
 		ViewDispatcher.mostraModificaPwd();
 	}

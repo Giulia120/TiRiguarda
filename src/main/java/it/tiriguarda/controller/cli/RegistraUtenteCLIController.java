@@ -17,7 +17,7 @@ public class RegistraUtenteCLIController {
 			System.out.println("\n========================================");
 			System.out.println("              REGISTRAZIONE             ");
 			System.out.println("========================================");
-			System.out.println("(Digita 'q' sul campo Username per tornare indietro)");
+			System.out.println("(Digita 'q' per tornare indietro)");
 
 			System.out.print("Username: ");
 			String username = scanner.nextLine();
@@ -29,19 +29,25 @@ public class RegistraUtenteCLIController {
 			System.out.print("Password: ");
 			String password = scanner.nextLine();
 			
-			SessoBiologico sesso = leggiSessoBiologico(scanner);
-            if (sesso == null) return;
-
+			if (password.equalsIgnoreCase("q")) {
+				return;
+			}
 			System.out.print("Numero di telefono: ");
 			String telefono = scanner.nextLine();
+			if (telefono.equalsIgnoreCase("q")) {
+				return;
+			}
+			
+			SessoBiologico sesso = leggiSessoBiologico(scanner);
 
-			UtenteBean bean = new UtenteBean();
-			bean.setUsername(username);
-			bean.setPassword(password);
-			bean.setSessoBiologico(sesso);
-			bean.setNumeroTelefono(telefono);
 
 			try {
+				UtenteBean bean = new UtenteBean();
+				bean.setUsername(username);
+				bean.setPassword(password);
+				bean.setSessoBiologico(sesso);
+				bean.setNumeroTelefono(telefono);
+				
 				RegistraUtenteAppController appController = new RegistraUtenteAppController();
 				appController.registraUtente(bean);
 				

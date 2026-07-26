@@ -23,16 +23,15 @@ public class RegistraTestCLIController {
 			System.out.println("(Digita 'q' in qualsiasi momento per tornare indietro)");
 
 			LocalDate dataTest = leggiData(scanner);
-			if (dataTest == null) return;
 
 			TipoTest tipoScelto = leggiTipoTest(scanner);
-			if (tipoScelto == null) return;
-
-			TestBean bean = new TestBean();
-			bean.setData(dataTest);
-			bean.setTipo(tipoScelto);
 
 			try {
+				
+				TestBean bean = new TestBean();
+				bean.setData(dataTest);
+				bean.setTipo(tipoScelto);
+				
 				RegistraTestAppController appController = new RegistraTestAppController();
 				appController.registraTest(bean);
 				
