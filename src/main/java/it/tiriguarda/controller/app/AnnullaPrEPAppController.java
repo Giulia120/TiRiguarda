@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
+import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
@@ -32,11 +33,18 @@ public class AnnullaPrEPAppController  {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
 		
+		
 		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		dao.annullaStatoProtocollo(protocollo);	
 		logger.info("Protocollo PrEP annullato correttamente");
+		
+	
+		UtenteDAO daoUtente = factory.createUtenteDAO();
+		daoUtente.eliminaProtocolloAttivo(utente);	
+		logger.info("Eliminato riferimento a protocollo attivo.");
+		
 	}
 	
 }

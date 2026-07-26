@@ -25,6 +25,7 @@ public class ConfiguraPrEPAppController {
 			throw new DatiIncompletiException();
 		}
 		
+		boolean vecchio = false;
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
@@ -44,18 +45,27 @@ public class ConfiguraPrEPAppController {
 			protocollo = protocolloOnDemand;
 		}
 		
-		List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio());
-		
-		if(bean.getRicevereSMS()) {
-			attivaSMS(promemoria);
-		}
-		
-		utente.setProtocolloAttivo(protocollo);
-		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-		dao.configuraProtocollo(protocollo);
-		logger.info("Protocollo registrato con successo.");
+		
+		if(protocollo.getDataFine().isBefore(LocalDate.now()) && protocollo.getDataFine() != null) {
+			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
+	        
+	        protocollo.setStatoPrEP(false);
+	        dao.configuraProtocollo(protocollo);
+	       
+	        utente.setProtocolloAttivo(null);
+		}
+		else {
+			List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio());
+			
+			if(bean.getRicevereSMS()) {
+				attivaSMS(promemoria);
+			}
+			utente.setProtocolloAttivo(protocollo);
+			dao.configuraProtocollo(protocollo);
+			logger.info("Protocollo attivo registrato con successo.");
+		}
 	}
 	public void attivaSMS(List<LocalDate> promemoria) {
 		//da fare

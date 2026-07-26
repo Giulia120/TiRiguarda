@@ -6,4 +6,6 @@ public interface UtenteDAO {
 	void registraUtente(Utente utente);
 	
 	Utente trovaPerUsername(String username);
+	
+	void eliminaProtocolloAttivo(Utente utente);
 }

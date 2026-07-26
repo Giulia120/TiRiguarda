@@ -28,12 +28,13 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     	}
     }
     
-    public void verificaScadenza() {
+    public boolean verificaScadenza() {
     	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
     	
     	if(oggi.isAfter(getDataFine())) {
-    		setStatoPrEP(false);
+    		return true;
     	}
+    	return false;
     }
     
     public void aggiornaDataFine(LocalDate dataInizio) {

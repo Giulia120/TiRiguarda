@@ -24,4 +24,9 @@ public class UtenteDAOMem implements UtenteDAO{
 		}
 		return null;
 	}
+	
+	@Override
+	public void eliminaProtocolloAttivo(Utente utente) {
+		utente.setProtocolloAttivo(null);
+	}
 }
