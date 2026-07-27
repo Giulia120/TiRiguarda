@@ -7,13 +7,15 @@ import java.time.ZoneId;
 import java.util.List;
 
 public abstract class ProtocolloPrEP {
+	private final String idProtocollo;
 	private Utente utente;
 	private final TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private boolean statoPrEP;
 	private LocalDate dataFine;
 	
-	protected ProtocolloPrEP(Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
+	protected ProtocolloPrEP(String idProtocollo, Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
+		this.idProtocollo = idProtocollo;
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;

@@ -3,9 +3,9 @@ package it.tiriguarda.domain;
 import it.tiriguarda.util.SecurityUtil;
 
 public class Utente {
-	private String username;
+	private final String username;
 	private String password;
-	private SessoBiologico sessoBiologico;
+	private final SessoBiologico sessoBiologico;
 	private String numeroTelefono;
 	private ProtocolloPrEP protocolloAttivo;
 	
@@ -52,14 +52,6 @@ public class Utente {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setSessoBiologico(SessoBiologico sessoBiologico) {
-		this.sessoBiologico = sessoBiologico;
 	}
 
 	public void setNumeroTelefono(String numeroTelefono) {
