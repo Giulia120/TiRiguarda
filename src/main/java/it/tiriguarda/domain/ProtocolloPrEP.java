@@ -25,6 +25,10 @@ public abstract class ProtocolloPrEP {
 	
 	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio);
 	
+	public String getIdProtocollo() {
+		return idProtocollo;
+	}
+	
 	public Utente getUtente() {
 		return utente;
 	}
