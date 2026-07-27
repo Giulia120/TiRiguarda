@@ -19,7 +19,7 @@ public class ModificaTelefonoAppController {
 
         DAOFactory factory = DAOFactoryProvider.getDAOFactory();
         UtenteDAO dao = factory.createUtenteDAO();        
-        dao.aggiornaUtente(utenteCorrente); 
+        dao.aggiornaTelUtente(utenteCorrente); 
         
         logger.info("Numero di telefono aggiornato con successo.");
     }

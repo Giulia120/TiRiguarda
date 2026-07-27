@@ -9,5 +9,7 @@ public interface UtenteDAO {
 	
 	void eliminaProtocolloAttivo(Utente utente);
 	
-	void aggiornaUtente(Utente utente);
+	void aggiornaPwdUtente(Utente utente);
+	
+	void aggiornaTelUtente(Utente utente);
 }
