@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
@@ -22,6 +21,7 @@ public class UtenteDAODB implements UtenteDAO{
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				e.printStackTrace();
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}

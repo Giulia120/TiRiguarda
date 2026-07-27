@@ -67,8 +67,8 @@ public class UtenteBean {
 	}
 	
 	private void controllaPassword(String password) throws DatiIncompletiException {
-		if (password.length() < 6) {
-			throw new DatiIncompletiException("La password deve avere almeno 6 caratteri!");
+		if (nuovaPassword.length() < 6 || nuovaPassword.length() > 128) {
+			throw new DatiIncompletiException("La nuova password deve avere almeno 6 caratteri e massimo 128!");
 		}
 	}
 

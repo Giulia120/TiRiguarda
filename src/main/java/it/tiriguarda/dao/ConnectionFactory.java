@@ -1,6 +1,5 @@
 package it.tiriguarda.dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -19,9 +18,9 @@ public class ConnectionFactory {
     private ConnectionFactory() {
     	// Costruttore privato per nascondere quello pubblico di default
     }
-
+    
     static {
-        try (InputStream input = new FileInputStream("resources/db.properties")) {
+        try (InputStream input = ConnectionFactory.class.getResourceAsStream("/db.properties")) {
             Properties properties = new Properties();
             properties.load(input);
 
