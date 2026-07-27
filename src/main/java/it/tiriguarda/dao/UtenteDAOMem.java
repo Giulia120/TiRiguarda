@@ -29,4 +29,9 @@ public class UtenteDAOMem implements UtenteDAO{
 	public void eliminaProtocolloAttivo(Utente utente) {
 		utente.setProtocolloAttivo(null);
 	}
+	
+	@Override
+	public void aggiornaUtente(Utente utente) {
+		System.out.println("Ciao");
+	}
 }
