@@ -43,6 +43,10 @@ CREATE TABLE `tiriguardadatabase`.`Test`(
 ENGINE = InnoDB;
 
 
+DROP USER IF EXISTS tiriguarda;
+CREATE USER 'tiriguarda' IDENTIFIED BY 'password123';
+GRANT ALL PRIVILEGES ON tiriguardadatabase.* TO 'tiriguarda';
+FLUSH PRIVILEGES;
 
 
 
