@@ -25,7 +25,7 @@ public class ModificaPwdAppController {
         
         DAOFactory factory = DAOFactoryProvider.getDAOFactory();
         UtenteDAO dao = factory.createUtenteDAO();
-        dao.aggiornaUtente(utenteCorrente); 
+        dao.aggiornaPwdUtente(utenteCorrente); 
         
         logger.info("Password aggiornata con successo.");
     }

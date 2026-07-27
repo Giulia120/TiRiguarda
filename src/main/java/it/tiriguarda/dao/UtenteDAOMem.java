@@ -31,7 +31,12 @@ public class UtenteDAOMem implements UtenteDAO{
 	}
 	
 	@Override
-	public void aggiornaUtente(Utente utente) {
+	public void aggiornaPwdUtente(Utente utente) {
+		System.out.println("Ciao");
+	}
+	
+	@Override
+	public void aggiornaTelUtente(Utente utente) {
 		System.out.println("Ciao");
 	}
 }
