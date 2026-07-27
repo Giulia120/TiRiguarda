@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 import javafx.event.ActionEvent;
@@ -77,7 +78,10 @@ public class ConfiguraPrEPGraphicController {
 			ViewDispatcher.mostraPrEP();
 		}catch(DatiIncompletiException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
-		}
+		}catch (DatabaseNonRaggiungibileException e) {
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraSceltaConfig();
+        }
 	}
 	
 	@FXML

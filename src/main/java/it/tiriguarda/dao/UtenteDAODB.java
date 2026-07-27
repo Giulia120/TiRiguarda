@@ -68,11 +68,12 @@ public class UtenteDAODB implements UtenteDAO{
 	
 	@Override
 	public void aggiornaPwdUtente(Utente utente) {
-		String sql = "upadate `Utente` set `password` = ? where `username` = ?";
+		String sql = "update `Utente` set `password` = ? where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);) {
 			ps.setString(1, utente.getPassword());
 			ps.setString(2, utente.getUsername());
+			ps.executeUpdate();
 			}catch(SQLException e) {
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
@@ -80,11 +81,12 @@ public class UtenteDAODB implements UtenteDAO{
 	
 	@Override
 	public void aggiornaTelUtente(Utente utente) {
-		String sql = "upadate `Utente` set `telefono` = ? where `username` = ?";
+		String sql = "update `Utente` set `numeroTelefono` = ? where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);) {
 			ps.setString(1, utente.getNumeroTelefono());
 			ps.setString(2, utente.getUsername());
+			ps.executeUpdate();
 			}catch(SQLException e) {
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}

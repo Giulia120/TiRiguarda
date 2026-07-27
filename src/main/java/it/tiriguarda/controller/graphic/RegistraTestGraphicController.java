@@ -4,6 +4,7 @@ import it.tiriguarda.controller.app.RegistraTestAppController;
 import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.dto.TestBean;
 import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,13 +39,16 @@ public class RegistraTestGraphicController {
 		     
 	    	 RegistraTestAppController controller = new RegistraTestAppController();
 	    	 controller.registraTest(bean);
+	    	 ViewDispatcher.mostraSuccesso();
 	     } catch (DatiIncompletiException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        } catch (DataFuturaException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	            dataRapportoPicker.setValue(null);          
+	        }catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraSceltaConfig();
 	        }
-	     ViewDispatcher.mostraSuccesso();
 	}
 	
 	@FXML

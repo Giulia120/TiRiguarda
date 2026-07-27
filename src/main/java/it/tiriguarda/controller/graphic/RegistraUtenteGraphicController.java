@@ -5,6 +5,7 @@ import java.io.IOException;
 import it.tiriguarda.controller.app.RegistraUtenteAppController;
 import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.UtenteBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
 import javafx.event.ActionEvent;
@@ -60,7 +61,10 @@ public class RegistraUtenteGraphicController {
 		}catch (UsernameEsistenteException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			usernameField.setText(null);
-		}
+		}catch (DatabaseNonRaggiungibileException e) {
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraSceltaConfig();
+        }
 	}	
 	
 	 @FXML

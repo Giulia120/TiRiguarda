@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import it.tiriguarda.controller.app.ModificaPwdAppController;
 import it.tiriguarda.dto.CambioPwdBean;
 import it.tiriguarda.exception.CredenzialiErrateException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +39,10 @@ public class ModificaPwdGraphicController {
 
             oldPwdField.setText("");
             newPwdField.setText("");
+        }catch (DatabaseNonRaggiungibileException e) {
+        	chiudiFinestra();
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraSceltaConfig();
         }
     }
     

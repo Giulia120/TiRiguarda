@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,7 +40,10 @@ public class SceltaPrEPGraphicController {
 		}catch(AnnullamentoPrEPException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraMenuPrincipale();
-			}
+			}catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraSceltaConfig();
+	        }
 	}
 	
 	@FXML

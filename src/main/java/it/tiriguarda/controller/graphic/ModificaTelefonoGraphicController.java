@@ -2,6 +2,7 @@ package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.controller.app.ModificaTelefonoAppController;
 import it.tiriguarda.dto.CambioTelefonoBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,8 +30,12 @@ public class ModificaTelefonoGraphicController {
             
             chiudiFinestra();
             
-        } catch (DatiIncompletiException e) {
+        }catch (DatiIncompletiException e) {
             ViewDispatcher.mostraErrore(e.getMessage());
+        }catch (DatabaseNonRaggiungibileException e) {
+        	chiudiFinestra();
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraSceltaConfig();
         }
     }
     

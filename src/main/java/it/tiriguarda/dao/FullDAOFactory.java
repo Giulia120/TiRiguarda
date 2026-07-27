@@ -16,7 +16,7 @@ public class FullDAOFactory implements DAOFactory{
 	
 	@Override 
 	public TestDAO createTestDAO() {
-		return new TestDAOMem();
+		return new TestDAODB();
 	}
 
 }

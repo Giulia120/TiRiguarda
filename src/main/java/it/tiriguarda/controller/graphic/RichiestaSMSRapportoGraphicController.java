@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -59,7 +60,11 @@ public class RichiestaSMSRapportoGraphicController {
 	 }
 	 
 	 private void salvaEConcludi() {
-			RegistraRapportoAppController appController = new RegistraRapportoAppController();
-			appController.salvaRapportoDefinitivo(beanInSospeso);
+			try{ RegistraRapportoAppController appController = new RegistraRapportoAppController();
+				appController.salvaRapportoDefinitivo(beanInSospeso);
+				}catch (DatabaseNonRaggiungibileException e) {
+		        	ViewDispatcher.mostraErrore(e.getMessage());
+		        	ViewDispatcher.mostraSceltaConfig();
+		        }
 		}
 }

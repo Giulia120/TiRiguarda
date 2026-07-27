@@ -9,6 +9,7 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,6 +78,9 @@ public class RegistraRapportoGraphicController {
 	        } catch (DataFuturaException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	            dataRapportoPicker.setValue(null);          
+	        }catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraSceltaConfig();
 	        }
 	 } 
 	 @FXML
