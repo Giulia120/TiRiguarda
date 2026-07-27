@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
-	public ProtocolloPrEPOnDemand(Utente utente, LocalDate dataInizio) {
-        super(utente, TipologiaPrEP.ON_DEMAND, dataInizio);
+	public ProtocolloPrEPOnDemand(String idProtocollo, Utente utente, LocalDate dataInizio) {
+        super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio);
     }
 	
     @Override

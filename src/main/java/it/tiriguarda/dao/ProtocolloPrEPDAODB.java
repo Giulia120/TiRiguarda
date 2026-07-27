@@ -6,6 +6,8 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	
 	@Override
 	public void configuraProtocollo(ProtocolloPrEP protocolloPrEP) {
+		String sql = "insert into `ProtocolloPrEP`(`idProt`  ";
+		
 		System.out.println("Salvato nel DB");
 	}
 	
