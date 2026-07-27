@@ -21,8 +21,8 @@ public class CambioPwdBean {
 
 	public void setNuovaPassword(String nuovaPassword) throws DatiIncompletiException {
 		controllaStringa(nuovaPassword, "Inserisci la nuova password!");
-		if (nuovaPassword.length() < 6) {
-			throw new DatiIncompletiException("La nuova password deve avere almeno 6 caratteri!");
+		if (nuovaPassword.length() < 6 || nuovaPassword.length() > 128) {
+			throw new DatiIncompletiException("La nuova password deve avere almeno 6 caratteri e massimo 128!");
 		}
 		this.nuovaPassword = nuovaPassword;
 	}
