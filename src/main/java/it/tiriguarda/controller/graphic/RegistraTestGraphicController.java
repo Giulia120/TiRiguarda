@@ -6,6 +6,7 @@ import it.tiriguarda.dto.TestBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,7 +46,7 @@ public class RegistraTestGraphicController {
 	        } catch (DataFuturaException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	            dataRapportoPicker.setValue(null);          
-	        }catch (DatabaseNonRaggiungibileException e) {
+	        }catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraSceltaConfig();
 	        }

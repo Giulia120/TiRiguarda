@@ -5,4 +5,5 @@ public interface DAOFactory {
 	public ProtocolloPrEPDAO createProtocolloPrEPDAO();
 	public UtenteDAO createUtenteDAO();
 	public TestDAO createTestDAO();
+	public SmsDAO createSmsDAO();
 }

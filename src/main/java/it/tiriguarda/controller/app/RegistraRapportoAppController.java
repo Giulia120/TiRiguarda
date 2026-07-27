@@ -1,5 +1,7 @@
 package it.tiriguarda.controller.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -12,14 +14,41 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.logic.observer.NuoviRapportiSubject;
+import it.tiriguarda.logic.observer.NuovoRapportoObserver;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
 import it.tiriguarda.service.SessionManager;
 
-public class RegistraRapportoAppController {
+public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
+	
+	private List<NuovoRapportoObserver> observers = new ArrayList<>();
+	
+	private Rapporto ultimoRapportoSalvato; 
+
+    @Override
+    public void attach(NuovoRapportoObserver observer) { 
+    	observers.add(observer); 
+    	}
+
+    @Override
+    public void detach(NuovoRapportoObserver observer) { 
+    	observers.remove(observer); 
+    	}
+
+    @Override
+    public void notifyObservers() {
+        for (NuovoRapportoObserver obs : observers) {
+            obs.update();
+        }
+    }
+    
+    public Rapporto getUltimoRapportoSalvato() {
+        return this.ultimoRapportoSalvato;
+    }
 	
 	public RapportoBean valutaRischio(RapportoBean bean) {
 
@@ -59,12 +88,8 @@ public class RegistraRapportoAppController {
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
 		
-		/*ProtocolloPrEP prep = utenteCorrente.getProtocolloAttivo();
-	    if (prep != null) {
-	        prep.aggiornaFinestraOnDemand(bean.getData());
-	        ProtocolloPrEPDAO prepDao = factory.createProtocolloPrEPDAO();
-	        prepDao.aggiornaProtocollo(prep);
-	    }*/
+		this.ultimoRapportoSalvato = nuovoRapporto;
+		notifyObservers();
 		
 		logger.info("Rapporto registrato definitivamente con successo.");
 	}

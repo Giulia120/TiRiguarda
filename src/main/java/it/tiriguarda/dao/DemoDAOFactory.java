@@ -18,5 +18,10 @@ public class DemoDAOFactory implements DAOFactory{
 	public TestDAO createTestDAO() {
 		return new TestDAOMem();
 	}
+	
+	@Override 
+	public SmsDAO createSmsDAO() {
+		return new SmsDAOMem();
+	}
 
 }

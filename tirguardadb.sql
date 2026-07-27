@@ -60,6 +60,22 @@ CREATE TABLE `tiriguardadatabase`.`Test`(
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `tiriguardadatabase`.`Sms`;
+CREATE TABLE `tiriguardadatabase`.`Sms`(
+	`utente` VARCHAR(45) NOT NULL,
+    `idSms` VARCHAR(45) NOT NULL,
+    `testo` VARCHAR(45) NOT NULL,
+    `dataSpedizione` TIMESTAMP NOT NULL,
+    `stato` ENUM('DA_INVIARE', 'INVIATO','ERRORE') NOT NULL,
+    `tipo` ENUM('PREP_ON', 'PREP_DAILY', 'TEST') NOT NULL,
+    PRIMARY KEY (`idSms`),
+    
+    CONSTRAINT `sms_utente`
+    FOREIGN KEY (`utente`)
+    REFERENCES `Utente` (`username`)
+)
+ENGINE = InnoDB;
+
 
 DROP USER IF EXISTS tiriguarda;
 CREATE USER 'tiriguarda' IDENTIFIED BY 'password123';

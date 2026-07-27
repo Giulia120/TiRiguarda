@@ -1,10 +1,16 @@
 package it.tiriguarda.controller.graphic;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
 import it.tiriguarda.domain.LivelloRischio;
+import it.tiriguarda.domain.StatoSms;
+import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.dto.SmsBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +50,19 @@ public class RichiestaSMSRapportoGraphicController {
 	 @FXML
 	 private void onSiButton(){
 		 salvaEConcludi();
-		 System.out.println("Daje");
+		 SmsBean bean = new SmsBean();
+		 bean.setTesto("[PROMEMORIA]: È ora di fare il test!");
+		 LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
+		 bean.setDataSpedizione(dataEOra);
+		 bean.setTipo(TipoSms.TEST);
+		 bean.setStato(StatoSms.DA_INVIARE);
+		 try {
+			 GestioneSmsAppController controller = new GestioneSmsAppController();
+			 controller.programmaSms(bean);
+		 }catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraSceltaConfig();
+	        }
 		 ViewDispatcher.mostraSuccesso();
 	 }
 	 
