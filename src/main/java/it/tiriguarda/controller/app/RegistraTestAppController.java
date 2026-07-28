@@ -15,6 +15,9 @@ public class RegistraTestAppController {
 	private static final Logger logger = Logger.getLogger(RegistraTestAppController.class.getName());
 	public void registraTest(TestBean bean){
 	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+	if (utenteCorrente == null) {
+        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+    }
 	String idTest = UUID.randomUUID().toString();
 	
 	Test nuovoTest = new Test(utenteCorrente, idTest, bean.getTipo(), bean.getData());

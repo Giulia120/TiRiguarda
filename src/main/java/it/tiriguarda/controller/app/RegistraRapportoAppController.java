@@ -53,6 +53,9 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	public RapportoBean valutaRischio(RapportoBean bean) {
 
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+		if (utenteCorrente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
 		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
 		
 		Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente, "temp-id", bean.getData(), rischioCalcolato);

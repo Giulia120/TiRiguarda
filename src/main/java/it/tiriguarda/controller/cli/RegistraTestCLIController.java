@@ -42,8 +42,8 @@ public class RegistraTestCLIController {
 				System.out.println("\n[ERRORE DI VALIDAZIONE]: " + e.getMessage());
 				System.out.println("Premi INVIO per riprovare...");
 				scanner.nextLine();
-			} catch (Exception e) {
-				System.out.println("\n[ERRORE DI SISTEMA]: Impossibile salvare il test. " + e.getMessage());
+			} catch (IllegalStateException e) {
+				System.out.println("\n[ERRORE DI SISTEMA]: " + e.getMessage());
 				fine = true; 
 			}
 		}

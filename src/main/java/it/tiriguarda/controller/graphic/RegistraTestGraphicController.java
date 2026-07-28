@@ -49,6 +49,9 @@ public class RegistraTestGraphicController {
 	        }catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraSceltaConfig();
+	        }catch(IllegalStateException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraLogin();
 	        }
 	}
 	
