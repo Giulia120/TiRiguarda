@@ -24,7 +24,7 @@ public class GestioneSmsAppController {
 
         DAOFactory factory = DAOFactoryProvider.getDAOFactory();
         SmsDAO smsDao = factory.createSmsDAO(); 
-        	Sms sms = new Sms(utenteCorrente, UUID.randomUUID().toString(), bean.getTesto(), bean.getDataSpedizione(), bean.getTipo());
+        	Sms sms = new Sms(utenteCorrente.getUsername(), UUID.randomUUID().toString(), bean.getTesto(), bean.getDataSpedizione(), bean.getTipo());
             smsDao.salvaSms(sms);
         logger.info("Programmato SMS nel sistema.");
     }

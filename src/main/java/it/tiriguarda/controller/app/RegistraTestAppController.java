@@ -20,7 +20,7 @@ public class RegistraTestAppController {
     }
 	String idTest = UUID.randomUUID().toString();
 	
-	Test nuovoTest = new Test(utenteCorrente, idTest, bean.getTipo(), bean.getData());
+	Test nuovoTest = new Test(utenteCorrente.getUsername(), idTest, bean.getTipo(), bean.getData());
 
 	DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 	TestDAO dao = factory.createTestDAO();
