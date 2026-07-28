@@ -2,8 +2,8 @@ package it.tiriguarda.logic.observer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
 import it.tiriguarda.dao.DAOFactory;
@@ -12,10 +12,9 @@ import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
 import it.tiriguarda.domain.Rapporto;
-import it.tiriguarda.domain.StatoSms;
+import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.domain.Utente;
-import it.tiriguarda.dto.SmsBean;
 
 public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
 	private RegistraRapportoAppController subject; 
@@ -34,6 +33,6 @@ public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
 
         if (protocollo instanceof ProtocolloPrEPOnDemand) {
         	
-        }
+        } 	
     }
 }

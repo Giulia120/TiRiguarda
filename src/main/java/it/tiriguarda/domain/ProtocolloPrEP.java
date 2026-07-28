@@ -8,13 +8,13 @@ import java.util.List;
 
 public abstract class ProtocolloPrEP {
 	private final String idProtocollo;
-	private Utente utente;
+	private final String utente;
 	private final TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private boolean statoPrEP;
 	private LocalDate dataFine;
 	
-	protected ProtocolloPrEP(String idProtocollo, Utente utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
+	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
 		this.idProtocollo = idProtocollo;
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
@@ -29,7 +29,7 @@ public abstract class ProtocolloPrEP {
 		return idProtocollo;
 	}
 	
-	public Utente getUtente() {
+	public String getUtente() {
 		return utente;
 	}
 	

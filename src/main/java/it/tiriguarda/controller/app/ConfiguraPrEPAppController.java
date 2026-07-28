@@ -2,6 +2,7 @@ package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -31,16 +32,17 @@ public class ConfiguraPrEPAppController {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
 		
-		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
+		TipologiaPrEP protocollo = utente.getProtocolloAttivo();
 		
-		if(protocollo != null && protocollo.getStatoPrEP()) {
+		if(protocollo != null) {
 			throw new ProtocolloAttivoException();
 		}
+		String idProtocollo = UUID.randomUUID().toString();
 		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    protocollo = new ProtocolloPrEPDaily(utente, bean.getDataInizio());
+		    protocollo = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio());
 		}else {
-			ProtocolloPrEPOnDemand protocolloOnDemand = new ProtocolloPrEPOnDemand(utente, bean.getDataInizio());
+			ProtocolloPrEPOnDemand protocolloOnDemand = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio());
 			protocolloOnDemand.aggiornaDataFine(bean.getDataInizio());
 			protocollo = protocolloOnDemand;
 		}

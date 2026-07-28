@@ -28,5 +28,3 @@ public class RegistraTestAppController {
 	logger.info("Test registrato con successo.");
 	}
 }
-	
-
