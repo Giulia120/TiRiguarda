@@ -40,11 +40,13 @@ public class ConfiguraPrEPAppController {
 		
 		ProtocolloPrEP protocollo;
 		
+		logger.info("Tipo ricevuto dal bean: " + bean.getTipoPrEP());
+		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio());
+		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true);
 		    protocollo = protocolloDaily;
 		}else {
-			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio());
+			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true);
 			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
 			protocollo = protocolloOnD;
 		}
@@ -52,7 +54,11 @@ public class ConfiguraPrEPAppController {
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		
-		if(protocollo.getDataFine().isBefore(LocalDate.now()) && protocollo.getDataFine() != null) {
+		logger.info("Tipo PrEP: " + protocollo.getTipoPrEP());
+		logger.info("Data fine: " + protocollo.getDataFine());
+		logger.info("Oggi: " + LocalDate.now());
+		
+		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now())) {
 			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
 	        
 	        protocollo.setStatoPrEP(false);

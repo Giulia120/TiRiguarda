@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	
-	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio) {
-        super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio);
+	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP) {
+        super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio, statoPrEP);
     }
 
     @Override

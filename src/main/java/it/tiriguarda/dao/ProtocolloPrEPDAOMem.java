@@ -7,11 +7,22 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
+import it.tiriguarda.domain.Utente;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	private static final Logger logger = Logger.getLogger(RapportoDAOMem.class.getName());
 	
 	private static List<ProtocolloPrEP> protocolliInMemoria = new ArrayList<>();
+	
+	@Override
+	public ProtocolloPrEP trovaProtocolloAttivo(String username) {
+		for (ProtocolloPrEP p : protocolliInMemoria) {
+			if (p.getUtente().equals(username)) {
+				return p;
+			}
+		}
+		return null;
+	}
 	@Override
 	public void configuraProtocollo(ProtocolloPrEP protocolloPrEP) {
 		protocolliInMemoria.add(protocolloPrEP);

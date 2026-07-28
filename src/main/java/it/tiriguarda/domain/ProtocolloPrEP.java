@@ -14,12 +14,12 @@ public abstract class ProtocolloPrEP {
 	private boolean statoPrEP;
 	private LocalDate dataFine;
 	
-	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio) {
+	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, boolean statoPrEP) {
 		this.idProtocollo = idProtocollo;
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
-		this.statoPrEP = true;
+		this.statoPrEP = statoPrEP;
 		this.dataFine = null;
 	}
 	

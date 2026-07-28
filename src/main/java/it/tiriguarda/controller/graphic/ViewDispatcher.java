@@ -112,7 +112,17 @@ public class ViewDispatcher {
     }
     
     public static void mostraConfiguraPrEP(TipologiaPrEP tipoPrEP) {
-    	cambiaSchermata("/it/tiriguarda/view/ConfiguraPrEP.fxml");
+    	 try {
+    		 FXMLLoader loader = new FXMLLoader(
+    	     ViewDispatcher.class.getResource("/it/tiriguarda/view/ConfiguraPrEP.fxml"));
+    	        Parent nuovaVista = loader.load();
+    	        ConfiguraPrEPGraphicController controller = loader.getController();
+    	        controller.initData(tipoPrEP);
+    	        finestraPrincipale.setScene(new Scene(nuovaVista));
+    	        finestraPrincipale.show();
+    	    } catch (Exception e) {
+    	        logger.log(Level.SEVERE, "Errore nel caricamento della schermata Configura PrEP", e);
+    	    }
     }
 	
     private static void mostraPopup(String fxmlPath, String titolo) {
