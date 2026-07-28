@@ -36,6 +36,9 @@ public class ModificaTelefonoGraphicController {
         	chiudiFinestra();
         	ViewDispatcher.mostraErrore(e.getMessage());
         	ViewDispatcher.mostraSceltaConfig();
+        }catch(IllegalStateException e) {
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraLogin();
         }
     }
     

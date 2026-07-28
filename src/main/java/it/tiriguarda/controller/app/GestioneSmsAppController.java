@@ -18,6 +18,9 @@ public class GestioneSmsAppController {
 	public void programmaSms(SmsBean bean) {
 		
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+		if (utenteCorrente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
 
         DAOFactory factory = DAOFactoryProvider.getDAOFactory();
         SmsDAO smsDao = factory.createSmsDAO(); 
