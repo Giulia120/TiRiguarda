@@ -3,13 +3,13 @@ package it.tiriguarda.domain;
 import java.time.LocalDate;
 
 public class Rapporto {
-	private Utente utente;
+	private final String utente;
 	private final String idRapporto;
 	private final LocalDate data;
 	private final LivelloRischio rischio;
 	private final LocalDate dataFinePeriodoFinestra;
 	
-	public Rapporto (Utente utente, String idRapporto, LocalDate data, LivelloRischio rischio) {
+	public Rapporto (String utente, String idRapporto, LocalDate data, LivelloRischio rischio) {
 		this.utente = utente;
 		this.idRapporto = idRapporto;
 		this.data = data;
@@ -24,12 +24,8 @@ public class Rapporto {
 		return data.plusDays(28);
 	}
 
-	public Utente getUtente() {
+	public String getUtente() {
 		return utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
 	}
 
 	public String getIdRapporto() {

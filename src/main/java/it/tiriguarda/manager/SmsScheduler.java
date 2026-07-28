@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.SmsDAO;
+import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;
@@ -25,6 +26,7 @@ public class SmsScheduler {
             try {
                 DAOFactory factory = DAOFactoryProvider.getDAOFactory();
                 SmsDAO smsDao = factory.createSmsDAO();
+                UtenteDAO utenteDao = factory.createUtenteDAO();
                 
                 List<Sms> smsDaInviare = smsDao.recuperaSmsDaInviare();
                 
@@ -33,7 +35,8 @@ public class SmsScheduler {
                     
                     for (Sms sms : smsDaInviare) {
                         try {
-                            smsManager.inviaSms(sms);
+                        	String numeroDestinatario = utenteDao.recuperaNumeroTelefono(sms.getUtente());
+                            smsManager.inviaSms(sms, numeroDestinatario);
                             if (sms.getTipo() == TipoSms.PREP_DAILY) {
                             	smsDao.aggiornaData(sms);
                             }

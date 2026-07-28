@@ -10,8 +10,8 @@ import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
-import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
+import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.logic.observer.NuoviRapportiSubject;
@@ -27,7 +27,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	
 	private List<NuovoRapportoObserver> observers = new ArrayList<>();
 	
-	private Rapporto ultimoRapportoSalvato; 
+	private Utente utenteRapportoSalvato; 
 
     @Override
     public void attach(NuovoRapportoObserver observer) { 
@@ -46,8 +46,8 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
         }
     }
     
-    public Rapporto getUltimoRapportoSalvato() {
-        return this.ultimoRapportoSalvato;
+    public Utente getUtenteRapportoSalvato() {
+        return this.utenteRapportoSalvato;
     }
 	
 	public RapportoBean valutaRischio(RapportoBean bean) {
@@ -58,7 +58,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	    }
 		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
 		
-		Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente, "temp-id", bean.getData(), rischioCalcolato);
+		Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente.getUsername(), "temp-id", bean.getData(), rischioCalcolato);
 		
 		bean.setRischio(rischioCalcolato);
 		bean.setDataFinePeriodoFinestra(rapportoTemporaneo.getDataFinePeriodoFinestra());
@@ -73,8 +73,8 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 			calcolatore = new PreservativoDecorator(calcolatore);
 		}
 		
-		ProtocolloPrEP prep = utente.getProtocolloAttivo();
-		if (prep != null && bean.getData().isAfter(prep.getDataInizio())) {
+		TipologiaPrEP prep = utente.getProtocolloAttivo();
+		if (prep != null) {
 			calcolatore = new PrEPDecorator(calcolatore);
 		}
 		
@@ -85,13 +85,13 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		String idRapporto = UUID.randomUUID().toString();
 		
-		Rapporto nuovoRapporto = new Rapporto(utenteCorrente, idRapporto, bean.getData(), bean.getRischio());
+		Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
 		
-		this.ultimoRapportoSalvato = nuovoRapporto;
+		this.utenteRapportoSalvato = utenteCorrente;
 		notifyObservers();
 		
 		logger.info("Rapporto registrato definitivamente con successo.");

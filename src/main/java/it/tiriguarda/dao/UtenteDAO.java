@@ -12,4 +12,6 @@ public interface UtenteDAO {
 	void aggiornaPwdUtente(Utente utente);
 	
 	void aggiornaTelUtente(Utente utente);
+	
+	String recuperaNumeroTelefono(String username);
 }

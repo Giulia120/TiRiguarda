@@ -3,14 +3,14 @@ package it.tiriguarda.domain;
 import java.time.LocalDateTime;
 
 public class Sms {
-	private final Utente utente;
+	private final String utente;
 	private final String idSms;
     private final String testo;
     private final LocalDateTime dataSpedizione;
     private StatoSms stato; 
     private final TipoSms tipo;
 	
-    public Sms(Utente utente, String idSms, String testo, LocalDateTime dataSpedizione, TipoSms tipo) {
+    public Sms(String utente, String idSms, String testo, LocalDateTime dataSpedizione, TipoSms tipo) {
 		this.utente = utente;
 		this.idSms = idSms;
 		this.testo = testo;
@@ -19,7 +19,7 @@ public class Sms {
 		this.tipo = tipo;
 	}
 
-	public Utente getUtente() {
+	public String getUtente() {
 		return utente;
 	}
 

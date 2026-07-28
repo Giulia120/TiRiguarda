@@ -12,9 +12,8 @@ public class SmsManager {
 
     private static final String FILE_SMS = "sms_inviati.txt";
 
-    public void inviaSms(Sms sms) {
+    public void inviaSms(Sms sms, String numeroDestinatario) {
     	String testoMessaggio = sms.getTesto();
-    	String numeroDestinatario = sms.getUtente().getNumeroTelefono();
     	LocalDateTime oraAttuale = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String timestamp = oraAttuale.format(formatter);

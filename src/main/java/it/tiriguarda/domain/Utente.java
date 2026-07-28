@@ -7,7 +7,7 @@ public class Utente {
 	private String password;
 	private final SessoBiologico sessoBiologico;
 	private String numeroTelefono;
-	private ProtocolloPrEP protocolloAttivo;
+	private TipologiaPrEP protocolloAttivo;
 	
 	
 	public Utente (String username, String passwordHash, SessoBiologico sessoBiologico, String numeroTelefono) {
@@ -37,12 +37,12 @@ public class Utente {
 	}
 
 
-	public void setProtocolloAttivo(ProtocolloPrEP protocolloAttivo) {
+	public void setProtocolloAttivo(TipologiaPrEP protocolloAttivo) {
 		this.protocolloAttivo = protocolloAttivo;
 	}
 
 
-	public ProtocolloPrEP getProtocolloAttivo() {
+	public TipologiaPrEP getProtocolloAttivo() {
 	    return protocolloAttivo;
 	}
 

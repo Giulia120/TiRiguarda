@@ -91,4 +91,23 @@ public class UtenteDAODB implements UtenteDAO{
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
+	
+	@Override
+	public String recuperaNumeroTelefono(String username) {
+		String sql = "Select `numeroTelefono` from `Utente` where `username` = ?";
+		String numeroTelefono = null;
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareCall(sql);) {
+			ps.setString(1, username);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	               numeroTelefono = rs.getString("numeroTelefono");
+	            }
+	        }
+			}catch(SQLException e) {
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+		}
+		return numeroTelefono;
+	}
 }
