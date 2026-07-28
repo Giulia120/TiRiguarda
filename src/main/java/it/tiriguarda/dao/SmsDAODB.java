@@ -34,7 +34,7 @@ public class SmsDAODB implements SmsDAO {
 	
 	@Override
 	public void eliminaSmsProgrammati(String username, TipoSms tipoSms) {
-		String sql = "delete from `Sms` where (`utente` = ? AND tipo = ? )";
+		String sql = "delete from `Sms` where (`utente` = ? AND `tipo` = ? )";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);){
 			ps.setString(1, username);
@@ -48,7 +48,7 @@ public class SmsDAODB implements SmsDAO {
 	
 	@Override
 	public List<Sms> recuperaSmsDaInviare(){
-		String sql = "select * from `Sms` where (dataSpedizione < ? AND stato =  ?)";
+		String sql = "select * from `Sms` where (`dataSpedizione` < ? AND `stato` =  ?)";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);){
 			ps.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
@@ -71,8 +71,32 @@ public class SmsDAODB implements SmsDAO {
 	}
 	
 	@Override
-    public void aggiornaStato(Sms sms, StatoSms nuovoStato) {}
+    public void aggiornaStato(Sms sms, StatoSms nuovoStato) {
+		String sql = "update `statoSms` = ? from `Sms` where (`idSms` =  ?)";
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareCall(sql);){
+			ps.setString(1, nuovoStato.name());
+			ps.setString(2, sms.getIdSms());
+			
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+		}
+	}
+	
 	@Override
-	public void aggiornaData(Sms sms) {}
+	public void aggiornaData(Sms sms) {
+		String sql = "update `Sms` set `dataSpedizione` = ? where `idSms` = ?";
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareCall(sql);){
+			LocalDateTime nuovaData = sms.getDataSpedizione().plusDays(1);
+	        ps.setTimestamp(1, java.sql.Timestamp.valueOf(nuovaData));
+			ps.setString(2, sms.getIdSms());
+			
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+		}
+	}
 
 }

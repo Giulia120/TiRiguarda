@@ -6,7 +6,7 @@ public class Sms {
 	private final String utente;
 	private final String idSms;
     private final String testo;
-    private final LocalDateTime dataSpedizione;
+    private LocalDateTime dataSpedizione;
     private StatoSms stato; 
     private final TipoSms tipo;
 	
@@ -33,6 +33,11 @@ public class Sms {
 
 	public LocalDateTime getDataSpedizione() {
 		return dataSpedizione;
+	}
+	
+
+	public void setDataSpedizione(LocalDateTime dataSpedizione) {
+		this.dataSpedizione = dataSpedizione;
 	}
 
 	public StatoSms getStato() {

@@ -14,7 +14,7 @@ public class TestDAOFS implements TestDAO {
     @Override
     public void salvaTest(Test test) {
         String riga = String.format("%s,%s,%s,%s", 
-                test.getUtente().getUsername(),
+                test.getUtente(),
                 test.getidTest(),
                 test.getTipo().name(),
                 test.getData().toString());

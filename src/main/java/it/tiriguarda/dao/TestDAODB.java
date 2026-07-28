@@ -14,7 +14,7 @@ public class TestDAODB implements TestDAO {
 		String sql = "insert into `Test` (`utente`, `idTest`, `tipoTest`,`data`) values (?,?,?,?)";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);) {
-			ps.setString(1, test.getUtente().getUsername());
+			ps.setString(1, test.getUtente());
 			ps.setString(2, test.getidTest());
 			ps.setString(3, test.getTipo().name());
 			ps.setDate(4, java.sql.Date.valueOf(test.getData()));
