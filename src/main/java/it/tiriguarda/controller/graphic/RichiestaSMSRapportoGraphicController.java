@@ -52,7 +52,8 @@ public class RichiestaSMSRapportoGraphicController {
 		 salvaEConcludi();
 		 SmsBean bean = new SmsBean();
 		 bean.setTesto("[PROMEMORIA]: È ora di fare il test!");
-		 LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
+		 //LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
+		 LocalDateTime dataEOra = LocalDateTime.now();
 		 bean.setDataSpedizione(dataEOra);
 		 bean.setTipo(TipoSms.TEST);
 		 bean.setStato(StatoSms.DA_INVIARE);

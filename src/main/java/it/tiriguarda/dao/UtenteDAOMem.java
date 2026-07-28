@@ -39,4 +39,9 @@ public class UtenteDAOMem implements UtenteDAO{
 	public void aggiornaTelUtente(Utente utente) {
 		System.out.println("Ciao");
 	}
+	
+	@Override
+	public String recuperaNumeroTelefono(String username) {
+		
+	}
 }

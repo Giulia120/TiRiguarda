@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import it.tiriguarda.controller.cli.LoginCLIController;
 import it.tiriguarda.controller.graphic.ViewDispatcher;
+import it.tiriguarda.manager.SmsScheduler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,6 +19,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        SmsScheduler scheduler = new SmsScheduler();
+        scheduler.avviaScheduler();
         
         System.out.println("========================================");
         System.out.println("       BENVENUTO IN TIRIGUARDA          ");

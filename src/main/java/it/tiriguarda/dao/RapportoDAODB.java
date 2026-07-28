@@ -14,7 +14,7 @@ public class RapportoDAODB implements RapportoDAO {
 		String sql = "insert into `Rapporto` (`utente`, `idRapporto`, `data`,`rischio`, `dataFinePeriodoFinestra`) values (?,?,?,?,?)";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);) {
-			ps.setString(1, rapporto.getUtente().getUsername());
+			ps.setString(1, rapporto.getUtente());
 			ps.setString(2, rapporto.getIdRapporto());
 			ps.setDate(3, java.sql.Date.valueOf(rapporto.getData()));
 			ps.setString(4, rapporto.getRischio().name());

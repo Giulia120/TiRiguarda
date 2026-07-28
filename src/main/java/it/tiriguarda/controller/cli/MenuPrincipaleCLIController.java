@@ -35,7 +35,8 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "3":
-					System.out.println("\n[INFO] Sezione Profilo aperta.");
+					ProfiloCLIController profiloController = new ProfiloCLIController();
+					profiloController.avviaProfilo(scanner);
 					break;
 					
 				case "4":
