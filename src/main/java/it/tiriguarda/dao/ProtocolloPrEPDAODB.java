@@ -15,7 +15,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 		try(Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareCall(sql);) {
 			ps.setString(1, protocolloPrEP.getIdProtocollo());
-			ps.setString(2, protocolloPrEP.getUtente().getUsername());
+			ps.setString(2, protocolloPrEP.getUtente());
 			ps.setString(3, protocolloPrEP.getTipoPrEP().name());
 			ps.setDate(4, java.sql.Date.valueOf(protocolloPrEP.getDataInizio()));
 			ps.setBoolean(5, protocolloPrEP.getStatoPrEP());

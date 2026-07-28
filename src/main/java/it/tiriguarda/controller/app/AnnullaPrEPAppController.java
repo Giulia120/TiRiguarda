@@ -7,6 +7,7 @@ import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
+import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.service.SessionManager;
@@ -20,9 +21,9 @@ public class AnnullaPrEPAppController  {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
 		
-		ProtocolloPrEP protocollo = utente.getProtocolloAttivo();
+		TipologiaPrEP prep = utente.getProtocolloAttivo();
 	 
-		if(protocollo == null  || !protocollo.getStatoPrEP()) {
+		if(prep == null) {
 			throw new AnnullamentoPrEPException();
 		}
 	}

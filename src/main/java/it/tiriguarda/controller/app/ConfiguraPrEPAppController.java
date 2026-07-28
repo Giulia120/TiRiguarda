@@ -25,26 +25,28 @@ public class ConfiguraPrEPAppController {
 		if(bean.getDataInizio() == null || bean.getOrario() == null) {
 			throw new DatiIncompletiException();
 		}
-		
-		boolean vecchio = false;
+	
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
 		
-		TipologiaPrEP protocollo = utente.getProtocolloAttivo();
+		TipologiaPrEP prep = utente.getProtocolloAttivo();
 		
-		if(protocollo != null) {
+		if(prep != null) {
 			throw new ProtocolloAttivoException();
 		}
 		String idProtocollo = UUID.randomUUID().toString();
 		
+		ProtocolloPrEP protocollo;
+		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    protocollo = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio());
+		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio());
+		    protocollo = protocolloDaily;
 		}else {
-			ProtocolloPrEPOnDemand protocolloOnDemand = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio());
-			protocolloOnDemand.aggiornaDataFine(bean.getDataInizio());
-			protocollo = protocolloOnDemand;
+			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio());
+			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
+			protocollo = protocolloOnD;
 		}
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
@@ -59,12 +61,12 @@ public class ConfiguraPrEPAppController {
 	        utente.setProtocolloAttivo(null);
 		}
 		else {
-			List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio());
+			List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio(), utente.getSessoBiologico());
 			
 			if(bean.getRicevereSMS()) {
 				attivaSMS(promemoria);
 			}
-			utente.setProtocolloAttivo(protocollo);
+			utente.setProtocolloAttivo(protocollo.getTipoPrEP());
 			dao.configuraProtocollo(protocollo);
 			logger.info("Protocollo attivo registrato con successo.");
 		}

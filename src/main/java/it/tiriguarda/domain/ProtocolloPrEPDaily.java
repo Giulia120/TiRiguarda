@@ -7,12 +7,12 @@ import java.util.List;
 
 public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	
-	public ProtocolloPrEPDaily(String idProtocollo, Utente utente, LocalDate dataInizio) {
+	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio) {
         super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio);
     }
 
     @Override
-    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio) {
+    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso) {
     	List<LocalDate> promemoria = new ArrayList<>();
 
         for(int i = 0; i < 30; i++) {
@@ -22,11 +22,11 @@ public class ProtocolloPrEPDaily extends ProtocolloPrEP{
         return promemoria;
     }
     
-    public void ricalcolo() {
+    /*public void ricalcolo() {
     	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
     	LocalDate fineMese = getDataInizio().plusDays(30);
     	if(oggi.isAfter(fineMese)) {
     		calcolaGiorniPromemoria(fineMese);
     	}
-    } 
+    } */
 }

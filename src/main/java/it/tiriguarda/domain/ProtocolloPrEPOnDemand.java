@@ -6,16 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
-	public ProtocolloPrEPOnDemand(String idProtocollo, Utente utente, LocalDate dataInizio) {
+	public ProtocolloPrEPOnDemand(String idProtocollo, String utente, LocalDate dataInizio) {
         super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio);
     }
 	
     @Override
-    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio){
+    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso){
     	List<LocalDate> promemoria = new ArrayList<>();
-    	Utente utente = getUtente();
-    	SessoBiologico sessoBiologico = utente.getSessoBiologico();
-    	if(sessoBiologico == SessoBiologico.MASCHILE) {
+    	String utente = getUtente();
+    	if(sesso == SessoBiologico.MASCHILE) {
     		promemoria.add(dataInizio.plusDays(1));
         	promemoria.add(dataInizio.plusDays(2));
         	return promemoria;
@@ -37,10 +36,8 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     	return false;
     }
     
-    public void aggiornaDataFine(LocalDate dataInizio) {
-    	Utente utente = getUtente();
-    	SessoBiologico sessoBiologico = utente.getSessoBiologico();
-    	if(sessoBiologico == SessoBiologico.MASCHILE) {
+    public void aggiornaDataFine(LocalDate dataInizio, SessoBiologico sesso) {
+    	if(sesso == SessoBiologico.MASCHILE) {
         	setDataFine(dataInizio.plusDays(2));
     	}
     	else {
@@ -48,8 +45,8 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     		}
     }
    
-    public List<LocalDate> aggiornaPrEPOnDemand(LocalDate dataRapporto) {
-    	aggiornaDataFine(dataRapporto);
-    	return calcolaGiorniPromemoria(dataRapporto);
+    public List<LocalDate> aggiornaPrEPOnDemand(LocalDate dataRapporto, SessoBiologico sesso) {
+    	aggiornaDataFine(dataRapporto, sesso);
+    	return calcolaGiorniPromemoria(dataRapporto, sesso);
     }
 }

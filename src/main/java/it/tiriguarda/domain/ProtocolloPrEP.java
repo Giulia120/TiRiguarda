@@ -23,7 +23,7 @@ public abstract class ProtocolloPrEP {
 		this.dataFine = null;
 	}
 	
-	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio);
+	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso);
 	
 	public String getIdProtocollo() {
 		return idProtocollo;
