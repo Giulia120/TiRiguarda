@@ -43,6 +43,9 @@ public class ModificaPwdGraphicController {
         	chiudiFinestra();
         	ViewDispatcher.mostraErrore(e.getMessage());
         	ViewDispatcher.mostraSceltaConfig();
+        }catch (IllegalStateException e) {
+        	ViewDispatcher.mostraErrore(e.getMessage());
+        	ViewDispatcher.mostraLogin();
         }
     }
     

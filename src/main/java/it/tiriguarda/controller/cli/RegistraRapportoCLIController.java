@@ -61,8 +61,8 @@ public class RegistraRapportoCLIController {
 				System.out.println("Premi INVIO per correggere i dati...");
 				scanner.nextLine(); 
 				
-			} catch (Exception e) {
-				System.out.println("\n[ERRORE DI SISTEMA]: Impossibile salvare il rapporto. " + e.getMessage());
+			} catch (IllegalStateException e) {
+				System.out.println("\n[ERRORE DI SISTEMA]: " + e.getMessage());
 				completato = true; 
 			}
 		}

@@ -62,7 +62,10 @@ public class RichiestaSMSRapportoGraphicController {
 		 }catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraSceltaConfig();
-	        }
+	     }catch (IllegalStateException e) {
+	    	 	ViewDispatcher.mostraErrore(e.getMessage());
+	    	 	ViewDispatcher.mostraLogin();
+	     }
 		 ViewDispatcher.mostraSuccesso();
 	 }
 	 

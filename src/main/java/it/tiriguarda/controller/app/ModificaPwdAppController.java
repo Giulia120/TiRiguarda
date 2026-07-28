@@ -16,6 +16,10 @@ public class ModificaPwdAppController {
 
     public void cambiaPassword(CambioPwdBean bean) throws CredenzialiErrateException {
         Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+        if (utenteCorrente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
+
         
         if (!utenteCorrente.verificaPassword(bean.getVecchiaPassword())) {
             throw new CredenzialiErrateException("La vecchia password non è corretta!");
