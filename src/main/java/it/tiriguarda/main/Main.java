@@ -2,7 +2,7 @@ package it.tiriguarda.main;
 
 import java.util.Scanner;
 
-import it.tiriguarda.controller.cli.LoginCLIController;
+import it.tiriguarda.controller.cli.SceltaConfigCLIController;
 import it.tiriguarda.controller.graphic.ViewDispatcher;
 import it.tiriguarda.manager.SmsScheduler;
 import javafx.application.Application;
@@ -16,11 +16,14 @@ public class Main extends Application {
     	ViewDispatcher.setFinestraPrincipale(primaryStage);
         ViewDispatcher.mostraSceltaConfig();
     }
+    
+    @Override
+    public void stop() {
+        SmsScheduler.getInstance().arrestaScheduler();
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SmsScheduler scheduler = new SmsScheduler();
-        scheduler.avviaScheduler();
         
         System.out.println("========================================");
         System.out.println("       BENVENUTO IN TIRIGUARDA          ");
@@ -35,8 +38,8 @@ public class Main extends Application {
         if (scelta.equals("1")) {
             System.out.println("\n--- Avvio in modalità CLI ---\n");
             
-            LoginCLIController loginCLI = new LoginCLIController();
-            loginCLI.avviaLogin(scanner); 
+            SceltaConfigCLIController sceltaCLI = new SceltaConfigCLIController();
+            sceltaCLI.avviaScelta(scanner); 
             
         } else if (scelta.equals("2")) {
             System.out.println("\n--- Avvio in modalità Grafica ---");

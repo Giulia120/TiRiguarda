@@ -1,5 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -34,10 +35,12 @@ public class RichiestaSMSRapportoGraphicController {
 	 
 	 public void inizializza(RapportoBean bean) {
 		 this.beanInSospeso = bean;
-		 if (bean.getDataFinePeriodoFinestra() != null) {
+		 if (bean.getDataFinePeriodoFinestra() != null && bean.getDataFinePeriodoFinestra().isAfter(LocalDate.now())) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		        String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
 		        dataFinestraLabel.setText(dataFormattata);
+			} else {
+				dataFinestraLabel.setText("Oggi");
 			}
 			
 			if(bean.getRischio() == LivelloRischio.ALTO) {
@@ -52,8 +55,7 @@ public class RichiestaSMSRapportoGraphicController {
 		 salvaEConcludi();
 		 SmsBean bean = new SmsBean();
 		 bean.setTesto("[PROMEMORIA]: È ora di fare il test!");
-		 //LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
-		 LocalDateTime dataEOra = LocalDateTime.now();
+		 LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
 		 bean.setDataSpedizione(dataEOra);
 		 bean.setTipo(TipoSms.TEST);
 		 bean.setStato(StatoSms.DA_INVIARE);
@@ -87,6 +89,9 @@ public class RichiestaSMSRapportoGraphicController {
 				}catch (DatabaseNonRaggiungibileException e) {
 		        	ViewDispatcher.mostraErrore(e.getMessage());
 		        	ViewDispatcher.mostraSceltaConfig();
+		        }catch(IllegalStateException e) {
+		        	ViewDispatcher.mostraErrore(e.getMessage());
+		        	ViewDispatcher.mostraLogin();
 		        }
 		}
 }
