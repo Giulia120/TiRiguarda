@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.RapportoBean;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +83,7 @@ public class ViewDispatcher {
     }
 
     public static void mostraQuestionario() {
-        cambiaSchermata("/it/tiriguarda/view/Questionario.fxml");
+    	mostraPopup("/it/tiriguarda/view/QuestionarioDomanda.fxml", "Valutazione Rischio HIV");
     }
     
     public static void mostraMenuPrincipale() {
@@ -123,6 +124,21 @@ public class ViewDispatcher {
     	    } catch (Exception e) {
     	        logger.log(Level.SEVERE, "Errore nel caricamento della schermata Configura PrEP", e);
     	    }
+    }
+
+    public static void mostraRisultatoQuestionario(LivelloRischio rischio, int score) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/QuestionarioRisultato.fxml"));
+            Parent nuovaVista = loader.load();
+            
+            QuestionarioRisultatoGraphicController controller = loader.getController();
+            controller.inizializza(rischio, score);
+            
+            finestraPrincipale.setScene(new Scene(nuovaVista));
+            finestraPrincipale.show();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Errore nel caricamento del risultato questionario", e);
+        }
     }
 	
     private static void mostraPopup(String fxmlPath, String titolo) {

@@ -6,4 +6,5 @@ public interface DAOFactory {
 	public UtenteDAO createUtenteDAO();
 	public TestDAO createTestDAO();
 	public SmsDAO createSmsDAO();
+	public QuestionDAO createQuestionDAO();
 }

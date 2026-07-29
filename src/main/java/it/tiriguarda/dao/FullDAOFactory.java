@@ -23,5 +23,10 @@ public class FullDAOFactory implements DAOFactory{
 	public SmsDAO createSmsDAO() {
 		return new SmsDAODB();
 	}
+	
+	@Override 
+	public QuestionDAO createQuestionDAO() {
+		return new QuestionDAOMem();
+	}
 
 }
