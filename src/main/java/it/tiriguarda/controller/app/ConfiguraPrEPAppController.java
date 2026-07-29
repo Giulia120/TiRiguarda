@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -40,23 +41,17 @@ public class ConfiguraPrEPAppController {
 		
 		ProtocolloPrEP protocollo;
 		
-		logger.info("Tipo ricevuto dal bean: " + bean.getTipoPrEP());
-		
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true);
+		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
 		    protocollo = protocolloDaily;
 		}else {
-			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true);
+			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
 			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
 			protocollo = protocolloOnD;
 		}
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-		
-		logger.info("Tipo PrEP: " + protocollo.getTipoPrEP());
-		logger.info("Data fine: " + protocollo.getDataFine());
-		logger.info("Oggi: " + LocalDate.now());
 		
 		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now())) {
 			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
@@ -67,17 +62,18 @@ public class ConfiguraPrEPAppController {
 	        utente.setProtocolloAttivo(null);
 		}
 		else {
-			List<LocalDate> promemoria = protocollo.calcolaGiorniPromemoria(bean.getDataInizio(), utente.getSessoBiologico());
-			
 			if(bean.getRicevereSMS()) {
-				attivaSMS(promemoria);
+				attivaSMS(protocollo, utente);
 			}
 			utente.setProtocolloAttivo(protocollo.getTipoPrEP());
 			dao.configuraProtocollo(protocollo);
 			logger.info("Protocollo attivo registrato con successo.");
 		}
 	}
-	public void attivaSMS(List<LocalDate> promemoria) {
-		//da fare
+	public void attivaSMS(ProtocolloPrEP protocollo, Utente utente) {
+		List<LocalDateTime> promemoria = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
+		
+		GestioneSmsController smsController = new GestioneSmsController();
+		
 	}
 }

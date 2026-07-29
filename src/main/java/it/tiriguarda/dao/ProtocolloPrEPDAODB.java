@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
-import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
@@ -29,15 +29,16 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 				String tipoPrEP = (rs.getString("tipoPrEP"));
 				LocalDate dataInizio = (rs.getDate("dataInizio").toLocalDate());
 				boolean statoPrEP = (rs.getBoolean("statoPrEP"));
+				LocalTime ora = (rs.getTime("ora").toLocalTime());
 				
 				ProtocolloPrEP prot;
 				
 				if(tipoPrEP.equals("DAILY")) {
-					ProtocolloPrEPDaily protocollo = new ProtocolloPrEPDaily(idProtocollo, utente, dataInizio, statoPrEP);
+					ProtocolloPrEPDaily protocollo = new ProtocolloPrEPDaily(idProtocollo, utente, dataInizio, statoPrEP, ora);
 					prot = protocollo;
 				}
 				else {
-					ProtocolloPrEPOnDemand protocollo = new ProtocolloPrEPOnDemand(idProtocollo, utente, dataInizio, statoPrEP);
+					ProtocolloPrEPOnDemand protocollo = new ProtocolloPrEPOnDemand(idProtocollo, utente, dataInizio, statoPrEP, ora);
 					prot = protocollo;
 				}
 				return prot;

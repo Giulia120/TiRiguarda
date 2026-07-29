@@ -1,27 +1,30 @@
 package it.tiriguarda.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
-	public ProtocolloPrEPOnDemand(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP) {
-        super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio, statoPrEP);
+	public ProtocolloPrEPOnDemand(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP, LocalTime ora) {
+        super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio, statoPrEP, ora);
     }
 	
     @Override
-    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso){
-    	List<LocalDate> promemoria = new ArrayList<>();
+    public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso){
+    	List<LocalDateTime> promemoria = new ArrayList<>();
     	String utente = getUtente();
+   
     	if(sesso == SessoBiologico.MASCHILE) {
-    		promemoria.add(dataInizio.plusDays(1));
-        	promemoria.add(dataInizio.plusDays(2));
+    		promemoria.add(LocalDateTime.of(dataInizio.plusDays(1), ora));
+        	promemoria.add(LocalDateTime.of(dataInizio.plusDays(2), ora));
         	return promemoria;
     	}
     	else {
     		for(int i = 1; i <= 7; i++) {
-    			promemoria.add(dataInizio.plusDays(i));
+    			promemoria.add(LocalDateTime.of(dataInizio.plusDays(i), ora));
     		}
     		return promemoria;
     	}
@@ -45,8 +48,8 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     		}
     }
    
-    public List<LocalDate> aggiornaPrEPOnDemand(LocalDate dataRapporto, SessoBiologico sesso) {
+   /* public List<LocalDate> aggiornaPrEPOnDemand(LocalDate dataRapporto, SessoBiologico sesso) {
     	aggiornaDataFine(dataRapporto, sesso);
     	return calcolaGiorniPromemoria(dataRapporto, sesso);
-    }
+    }*/
 }

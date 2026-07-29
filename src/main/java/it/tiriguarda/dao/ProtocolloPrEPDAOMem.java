@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
-import it.tiriguarda.domain.Utente;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	private static final Logger logger = Logger.getLogger(RapportoDAOMem.class.getName());

@@ -13,17 +13,19 @@ public abstract class ProtocolloPrEP {
 	private LocalDate dataInizio;
 	private boolean statoPrEP;
 	private LocalDate dataFine;
+	private LocalTime ora;
 	
-	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, boolean statoPrEP) {
+	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, boolean statoPrEP, LocalTime ora) {
 		this.idProtocollo = idProtocollo;
 		this.utente = utente;
 		this.tipoPrEP = tipoPrEP;
 		this.dataInizio = dataInizio;
 		this.statoPrEP = statoPrEP;
 		this.dataFine = null;
+		this.ora = ora;
 	}
 	
-	public abstract List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso);
+	public abstract List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso);
 	
 	public String getIdProtocollo() {
 		return idProtocollo;
@@ -59,5 +61,13 @@ public abstract class ProtocolloPrEP {
 	
 	public void setDataFine(LocalDate dataFine) {
 		this.dataFine = dataFine;
+	}
+
+	public LocalTime getOra() {
+		return ora;
+	}
+
+	public void setOra(LocalTime ora) {
+		this.ora = ora;
 	}
 }

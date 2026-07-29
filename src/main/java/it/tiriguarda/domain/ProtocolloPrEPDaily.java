@@ -1,23 +1,25 @@
 package it.tiriguarda.domain;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	
-	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP) {
-        super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio, statoPrEP);
+	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP, LocalTime ora) {
+        super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio, statoPrEP, ora);
     }
 
     @Override
-    public List<LocalDate> calcolaGiorniPromemoria(LocalDate dataInizio, SessoBiologico sesso) {
-    	List<LocalDate> promemoria = new ArrayList<>();
+    public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso) {
+    	List<LocalDateTime> promemoria = new ArrayList<>();
 
         for(int i = 0; i < 30; i++) {
-            LocalDate giorno = getDataInizio().plusDays(i);
-            promemoria.add(giorno);
+        	LocalDate giorno = dataInizio.plusDays(i);
+            LocalDateTime dataOra = LocalDateTime.of(giorno, ora);
+            promemoria.add(dataOra);
         }
         return promemoria;
     }

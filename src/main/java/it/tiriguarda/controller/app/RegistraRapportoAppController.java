@@ -28,6 +28,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	private List<NuovoRapportoObserver> observers = new ArrayList<>();
 	
 	private Utente utenteRapportoSalvato; 
+	private Rapporto ultimoRapportoSalvato;
 
     @Override
     public void attach(NuovoRapportoObserver observer) { 
@@ -49,7 +50,11 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
     public Utente getUtenteRapportoSalvato() {
         return this.utenteRapportoSalvato;
     }
-	
+    
+    public Rapporto getUltimoRapportoSalvato() {
+        return this.ultimoRapportoSalvato;
+    }
+  
 	public RapportoBean valutaRischio(RapportoBean bean) {
 
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
@@ -91,6 +96,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 		RapportoDAO dao = factory.createRapportoDAO();
 		dao.salvaRapporto(nuovoRapporto);
 		
+		this.ultimoRapportoSalvato = nuovoRapporto;
 		this.utenteRapportoSalvato = utenteCorrente;
 		notifyObservers();
 		
