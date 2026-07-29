@@ -2,9 +2,14 @@ package it.tiriguarda.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Rapporto;
+import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class RapportoDAODB implements RapportoDAO {
@@ -30,4 +35,24 @@ public class RapportoDAODB implements RapportoDAO {
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}
+	
+	@Override
+    public List<Rapporto> riepilogoRapporti(Utente utente) {
+		String sql = "select * from `Rapporto` where `utente` = ?";
+		List<Rapporto> rapporti = new ArrayList<>();
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, utente.getUsername());
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Rapporto r = new Rapporto(rs.getString("utente"), rs.getString("idRapporto"), rs.getDate("data").toLocalDate(), LivelloRischio.valueOf(rs.getString("rischio")));
+				rapporti.add(r);
+			}
+			return rapporti;
+			
+			}catch(SQLException e) {
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+			}
+    }
 }

@@ -3,8 +3,10 @@ package it.tiriguarda.dao;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import it.tiriguarda.domain.Test;
+import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException; 
 
 public class TestDAOFS implements TestDAO {
@@ -25,5 +27,10 @@ public class TestDAOFS implements TestDAO {
         } catch (IOException e) {
             throw new FileSystemNonRaggiungibileException("Impossibile salvare il test sul file system locale.");
         }
+    }
+    
+    @Override
+    public List<Test> riepilogoTest(Utente utente) {
+    	
     }
 }

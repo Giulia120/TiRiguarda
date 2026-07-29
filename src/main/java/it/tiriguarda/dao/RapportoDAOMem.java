@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Rapporto;
+import it.tiriguarda.domain.Utente;
 
 public class RapportoDAOMem implements RapportoDAO {
 	private static final Logger logger = Logger.getLogger(RapportoDAOMem.class.getName());
@@ -16,4 +17,14 @@ public class RapportoDAOMem implements RapportoDAO {
 		rapportiInMemoria.add(rapporto);
 		logger.info("Rapporto salvato correttamente");
 	}
+	
+	@Override
+    public List<Rapporto> riepilogoRapporti(Utente utente) {
+	    for (Rapporto r : rapportiInMemoria) {
+	        if (r.getUtente() != null && r.getUtente().equals(utente.getUsername())) {
+	            rapportiInMemoria.add(r);
+	        }
+	    }
+	    return rapportiInMemoria;
+    }
 }
