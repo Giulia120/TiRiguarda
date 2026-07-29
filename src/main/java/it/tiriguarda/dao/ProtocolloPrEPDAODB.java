@@ -80,7 +80,16 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	
 	@Override
 	public void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP) {
-		System.out.println("Aggiornato nel DB");
+		String sql = "UPDATE `ProtocolloPrEP` SET `dataFine` = ? WHERE `idProtocollo` = ?";
+	    try (Connection conn = ConnectionFactory.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setDate(1, java.sql.Date.valueOf(protocolloPrEP.getDataFine()));
+	        ps.setString(2, protocolloPrEP.getIdProtocollo());
+	        ps.executeUpdate();
+	        System.out.println("Protocollo aggiornato nel DB");
+	    } catch(SQLException e) {
+	        throw new DatabaseNonRaggiungibileException("Impossibile aggiornare il protocollo.");
+	    }
 	}
 	
 	@Override

@@ -18,12 +18,13 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     	String utente = getUtente();
    
     	if(sesso == SessoBiologico.MASCHILE) {
+    		promemoria.add(LocalDateTime.of(dataInizio, ora));
     		promemoria.add(LocalDateTime.of(dataInizio.plusDays(1), ora));
         	promemoria.add(LocalDateTime.of(dataInizio.plusDays(2), ora));
         	return promemoria;
     	}
     	else {
-    		for(int i = 1; i <= 7; i++) {
+    		for(int i = 0; i <= 7; i++) {
     			promemoria.add(LocalDateTime.of(dataInizio.plusDays(i), ora));
     		}
     		return promemoria;

@@ -50,9 +50,10 @@ public class SmsScheduler {
                             smsManager.inviaSms(sms, numeroDestinatario);
                             if (sms.getTipo() == TipoSms.PREP_DAILY) {
                             	smsDao.aggiornaData(sms);
+                            }else {
+                            	smsDao.aggiornaStato(sms, StatoSms.INVIATO);
+                                logger.info("SMS inviato con successo a: " + numeroDestinatario + " (Utente: " + sms.getUtente() + ")");
                             }
-                            smsDao.aggiornaStato(sms, StatoSms.INVIATO);
-                            logger.info("SMS inviato con successo a: " + numeroDestinatario + " (Utente: " + sms.getUtente() + ")");
                         } catch (Exception e) {
                             logger.severe("Errore durante l'invio dell'SMS: " + e.getMessage());
                             smsDao.aggiornaStato(sms, StatoSms.ERRORE);

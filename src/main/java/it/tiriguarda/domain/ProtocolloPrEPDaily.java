@@ -15,12 +15,7 @@ public class ProtocolloPrEPDaily extends ProtocolloPrEP{
     @Override
     public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso) {
     	List<LocalDateTime> promemoria = new ArrayList<>();
-
-        for(int i = 0; i < 30; i++) {
-        	LocalDate giorno = dataInizio.plusDays(i);
-            LocalDateTime dataOra = LocalDateTime.of(giorno, ora);
-            promemoria.add(dataOra);
-        }
+    	promemoria.add(LocalDateTime.of(dataInizio, ora));
         return promemoria;
     }
     

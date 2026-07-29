@@ -68,7 +68,7 @@ CREATE TABLE `tiriguardadatabase`.`Sms`(
     `testo` VARCHAR(45) NOT NULL,
     `dataSpedizione` TIMESTAMP NOT NULL,
     `stato` ENUM('DA_INVIARE', 'INVIATO','ERRORE') NOT NULL,
-    `tipo` ENUM('PREP_ON', 'PREP_DAILY', 'TEST') NOT NULL,
+    `tipo` ENUM('PREP_OD', 'PREP_DAILY', 'TEST') NOT NULL,
     PRIMARY KEY (`idSms`),
     
     CONSTRAINT `sms_utente`

@@ -32,8 +32,16 @@ public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
         ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utente.getUsername());
 
         if (protocollo instanceof ProtocolloPrEPOnDemand) {
-        	List<LocalDateTime> date = protocollo.calcolaGiorniPromemoria(nuovoRapporto.getData(), protocollo.getOra(), utente.getSessoBiologico());
+        	ProtocolloPrEPOnDemand onDemand = (ProtocolloPrEPOnDemand) protocollo;
+        	onDemand.aggiornaDataFine(nuovoRapporto.getData(), utente.getSessoBiologico());
+        
+            dao.aggiornaProtocollo(onDemand);
+        	
         	GestioneSmsAppController smsController = new GestioneSmsAppController();
+            smsController.cancellaSmsProgrammati(utente.getUsername(), TipoSms.PREP_OD);
+            
+        	List<LocalDateTime> date = onDemand.calcolaGiorniPromemoria(nuovoRapporto.getData(), protocollo.getOra(), utente.getSessoBiologico());
+        	
             for (LocalDateTime data : date) {
                 SmsBean bean = new SmsBean();
                 bean.setTesto("Ricordati di assumere la PrEP");
@@ -42,6 +50,6 @@ public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
                 bean.setTipo(TipoSms.PREP_OD);
                 smsController.programmaSms(bean);
             }
-        } 	
+        }
     }
 }

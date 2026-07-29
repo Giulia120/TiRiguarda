@@ -46,9 +46,6 @@ public class GestioneSmsAppController {
 	    SmsDAO smsDao = factory.createSmsDAO();
 
 	    List<LocalDateTime> date = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
-	    
-	    System.out.println("Tipo protocollo: " + protocollo.getTipoPrEP());
-	    System.out.println("Numero promemoria: " + date.size());
 
 	    for(LocalDateTime data : date) {
 	    	String idSms = UUID.randomUUID().toString();
