@@ -31,11 +31,6 @@ public class ConfiguraPrEPGraphicController {
 	@FXML
 	private TextField orarioPrEP;
 	
-	@FXML
-	public void onAttivaSMS() {
-		//cose
-	}
-	
 	private TipologiaPrEP tipoPrEP;
 
 	public void initData(TipologiaPrEP tipoPrEP) {

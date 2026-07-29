@@ -7,12 +7,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import it.tiriguarda.domain.Sms;
+import it.tiriguarda.exception.SmsNonInviatoException;
 
 public class SmsManager {
 
     private static final String FILE_SMS = "sms_inviati.txt";
 
-    public void inviaSms(Sms sms, String numeroDestinatario) {
+    public void inviaSms(Sms sms, String numeroDestinatario) throws SmsNonInviatoException {
     	String testoMessaggio = sms.getTesto();
     	LocalDateTime oraAttuale = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -30,8 +31,7 @@ public class SmsManager {
             bw.write("--------------------------------------------------");
             bw.newLine();
         } catch (IOException e) {
-        	System.out.println("Errore durante la simulazione dell'invio SMS ");
-            //throw new SmsNonInviatoException("Errore durante la simulazione dell'invio SMS ");
+            throw new SmsNonInviatoException("Errore durante la simulazione dell'invio SMS ");
         }
     }
 }

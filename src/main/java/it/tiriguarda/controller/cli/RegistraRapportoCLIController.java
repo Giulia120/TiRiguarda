@@ -14,6 +14,7 @@ import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
 
 public class RegistraRapportoCLIController {
 
@@ -44,6 +45,7 @@ public class RegistraRapportoCLIController {
 				bean.setPrecauzioniUsate(precauzioni);
 
 				RegistraRapportoAppController appController = new RegistraRapportoAppController();
+				new RicalcoloSMSPrEPObserver(appController);
 				RapportoBean beanAggiornato = appController.valutaRischio(bean);
 
 				if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {

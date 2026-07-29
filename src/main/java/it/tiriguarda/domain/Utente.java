@@ -17,6 +17,7 @@ public class Utente {
 		this.numeroTelefono = numeroTelefono;
 	}
 	
+	
 	public boolean verificaPassword(String passwordInseritaInChiaro) {
         String hashCalcolato = SecurityUtil.hashPassword(passwordInseritaInChiaro);
         return this.password.equals(hashCalcolato);

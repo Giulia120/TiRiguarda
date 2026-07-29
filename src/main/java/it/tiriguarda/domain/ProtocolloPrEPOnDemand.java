@@ -15,20 +15,18 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     @Override
     public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso){
     	List<LocalDateTime> promemoria = new ArrayList<>();
-    	String utente = getUtente();
+    	
+    	LocalDateTime adesso = LocalDateTime.now(ZoneId.systemDefault());
+    	
+    	int giorniTot = (sesso == SessoBiologico.MASCHILE) ? 2 : 7;
    
-    	if(sesso == SessoBiologico.MASCHILE) {
-    		promemoria.add(LocalDateTime.of(dataInizio, ora));
-    		promemoria.add(LocalDateTime.of(dataInizio.plusDays(1), ora));
-        	promemoria.add(LocalDateTime.of(dataInizio.plusDays(2), ora));
-        	return promemoria;
-    	}
-    	else {
-    		for(int i = 0; i <= 7; i++) {
-    			promemoria.add(LocalDateTime.of(dataInizio.plusDays(i), ora));
-    		}
+   		for(int i = 0; i <= giorniTot; i++) {
+   			LocalDateTime dataPromemoria = LocalDateTime.of(dataInizio.plusDays(i), ora);
+   			if (dataPromemoria.isAfter(adesso)) {
+   				promemoria.add(dataPromemoria);
+   			}
+   		}
     		return promemoria;
-    	}
     }
     
     public boolean verificaScadenza() {

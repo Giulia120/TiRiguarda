@@ -72,22 +72,5 @@ public class ConfiguraPrEPAppController {
 			logger.info("Protocollo attivo registrato con successo.");
 		}
 	}
-	/*public void attivaSMS(ProtocolloPrEP protocollo, Utente utente) {
-		List<LocalDateTime> promemoria = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
-		
-		GestioneSmsAppController smsController = new GestioneSmsAppController();
-		for (LocalDateTime dataInvio : promemoria) {
-			SmsBean sms = new SmsBean();
-			sms.setTesto("Ricordati di assumere la PrEP");
-			sms.setDataSpedizione(dataInvio);
-			sms.setStato(StatoSms.DA_INVIARE);
-		    if (protocollo.getTipoPrEP() == TipologiaPrEP.DAILY) {
-				sms.setTipo(TipoSms.PREP_DAILY);
-			}
-			else{
-				sms.setTipo(TipoSms.PREP_OD);
-			}
-		    smsController.programmaSms(sms);
-		}
-	}*/
+
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.tiriguarda.domain.SessoBiologico;
+import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
@@ -41,8 +42,10 @@ public class UtenteDAODB implements UtenteDAO{
 				String password = (rs.getString("password"));
 				String sesso = (rs.getString("sessoBiologico"));
 				String telefono = (rs.getString("numeroTelefono"));
-				
 				Utente utente = new Utente(username, password, SessoBiologico.valueOf(sesso), telefono);
+				if (rs.getString("protocolloAttivo") != null) {
+					utente.setProtocolloAttivo(TipologiaPrEP.valueOf(rs.getString("protocolloAttivo")));
+				}
 				return utente;
 			}else {
 				return null;
@@ -113,7 +116,7 @@ public class UtenteDAODB implements UtenteDAO{
 	
 	@Override
 	public void aggiornaProtocolloAttivo(Utente utente) {
-		String sql = "UPDATE Utente SET protocolloAttivo = ? WHERE username = ?";
+		String sql = "update `Utente` set `protocolloAttivo` = ? where `username` = ?";
 	    try(Connection conn = ConnectionFactory.getConnection();
 	        PreparedStatement ps = conn.prepareStatement(sql)) {
 
