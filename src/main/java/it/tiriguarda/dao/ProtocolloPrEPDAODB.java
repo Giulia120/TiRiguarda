@@ -74,8 +74,6 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 		}catch(SQLException e) {
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
-		
-		System.out.println("Salvato nel DB");
 	}
 	
 	@Override
@@ -86,7 +84,6 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	        ps.setDate(1, java.sql.Date.valueOf(protocolloPrEP.getDataFine()));
 	        ps.setString(2, protocolloPrEP.getIdProtocollo());
 	        ps.executeUpdate();
-	        System.out.println("Protocollo aggiornato nel DB");
 	    } catch(SQLException e) {
 	        throw new DatabaseNonRaggiungibileException("Impossibile aggiornare il protocollo.");
 	    }
@@ -103,8 +100,6 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	        ps.setString(3, protocolloPrEP.getIdProtocollo());
 
 	        ps.executeUpdate();
-
-	        System.out.println("Protocollo eliminato nel DB");
 
 	    } catch(SQLException e) {
 	        throw new DatabaseNonRaggiungibileException("Errore aggiornamento protocollo.");

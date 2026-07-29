@@ -39,9 +39,7 @@ public class AnnullaPrEPCLIController {
 			if(risposta.equalsIgnoreCase("si")) {
 				try {
 					controller.annullaPrEP();
-					System.out.println("\n****************************************");
-					System.out.println("*  Protocollo annullato con successo!   *");
-					System.out.println("****************************************");
+					ViewCLI.stampaSuccesso();
 					return true;
 				}catch(Exception e) {
 					logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP");

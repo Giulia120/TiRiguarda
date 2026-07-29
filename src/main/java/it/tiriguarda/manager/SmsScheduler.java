@@ -13,6 +13,7 @@ import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;
+import it.tiriguarda.exception.SmsNonInviatoException;
 
 public class SmsScheduler {
 	private static SmsScheduler instance;
@@ -54,9 +55,14 @@ public class SmsScheduler {
                             	smsDao.aggiornaStato(sms, StatoSms.INVIATO);
                                 logger.info("SMS inviato con successo a: " + numeroDestinatario + " (Utente: " + sms.getUtente() + ")");
                             }
-                        } catch (Exception e) {
+                        } catch (SmsNonInviatoException e) {
                             logger.severe("Errore durante l'invio dell'SMS: " + e.getMessage());
-                            smsDao.aggiornaStato(sms, StatoSms.ERRORE);
+                            if (sms.getTipo() == TipoSms.PREP_DAILY) {
+                                smsDao.aggiornaData(sms); 
+                            } else {
+                                smsDao.aggiornaStato(sms, StatoSms.ERRORE);
+                            }
+                        
                         }
                     }
                 }

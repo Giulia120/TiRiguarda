@@ -19,9 +19,7 @@ public class ProfiloCLIController {
 				return;
 			}
 			
-			System.out.println("\n========================================");
-			System.out.println("              IL MIO PROFILO            ");
-			System.out.println("========================================");
+			ViewCLI.stampaTitolo("Profilo");
 			
 			System.out.println("Username: " + utenteCorrente.getUsername());
 			System.out.println("Telefono: " + utenteCorrente.getNumeroTelefono());
@@ -35,7 +33,7 @@ public class ProfiloCLIController {
 			System.out.println("----------------------------------------");
 			System.out.println("1. Modifica Password");
 			System.out.println("2. Modifica Numero di Telefono");
-			System.out.println("3. Torna al Menu Principale");
+			System.out.println("q. Torna al Menu Principale");
 			System.out.print("Scegli un'opzione: ");
 			
 			String scelta = scanner.nextLine().trim();
@@ -51,12 +49,12 @@ public class ProfiloCLIController {
 					telController.avvia(scanner);
 					break;
 					
-				case "3":
+				case "q":
 					System.out.println("\nTorno al Menu Principale...");
 					return;
 					
 				default:
-					System.out.println("\n[ERRORE] Scelta non valida. Inserisci 1, 2 o 3.");
+					ViewCLI.stampaInvalido();
 			}
 		}
 	}

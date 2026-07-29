@@ -2,7 +2,6 @@ package it.tiriguarda.controller.cli;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -16,12 +15,9 @@ public class ConfiguraPrEPCLIController {
 	public void avviaConfigurazione(TipologiaPrEP tipoPrEP, Scanner scanner) {
         boolean completato = false;
         while (!completato) {
-            System.out.println("\n========================================");
-            System.out.println("          CONFIGURAZIONE PrEP           ");
-            System.out.println("========================================");
+            ViewCLI.stampaTitolo("CONFIGURAZIONE PrEP");
             System.out.println("Tipo PrEP selezionato: " + tipoPrEP);
-            System.out.println("(Digita 'q' in qualsiasi momento per tornare al menu)\n");
-            LocalDate dataInizio = leggiData(scanner);
+            LocalDate dataInizio = ViewCLI.leggiData(scanner);
             if (dataInizio == null) return;
             
             LocalTime orario = leggiOrario(scanner);
@@ -49,21 +45,7 @@ public class ConfiguraPrEPCLIController {
             }
         }
     }
-    private LocalDate leggiData(Scanner scanner) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        while (true) {
-            System.out.print("Inserisci la data di inizio (gg/mm/aaaa): ");
-            String input = scanner.nextLine();
-            if(input.equalsIgnoreCase("q")) {
-                return null;
-            }
-            try{
-                return LocalDate.parse(input, formatter);
-            }catch(DateTimeParseException e) {
-                System.out.println("Formato data non valido.");
-            }
-        }
-    }
+
     private LocalTime leggiOrario(Scanner scanner) {
         while(true) {
             System.out.print("Inserisci l'orario dei promemoria (HH:mm): ");

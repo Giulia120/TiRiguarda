@@ -11,6 +11,7 @@ import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -66,6 +67,7 @@ public class RegistraRapportoGraphicController {
 		        bean.setPrecauzioniUsate(precauzioneSelezionata);
 		        
 		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
+		        new RicalcoloSMSPrEPObserver(appController);
 	        	RapportoBean beanAggiornato = appController.valutaRischio(bean);
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
 	            	ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);

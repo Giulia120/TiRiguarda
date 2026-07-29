@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ public class ConfiguraPrEPAppController {
 			protocollo = protocolloOnD;
 		}
 				
-		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now())) {
+		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now(ZoneId.systemDefault()))) {
 			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
 	        
 	        protocollo.setStatoPrEP(false);
@@ -72,22 +73,5 @@ public class ConfiguraPrEPAppController {
 			logger.info("Protocollo attivo registrato con successo.");
 		}
 	}
-	/*public void attivaSMS(ProtocolloPrEP protocollo, Utente utente) {
-		List<LocalDateTime> promemoria = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
-		
-		GestioneSmsAppController smsController = new GestioneSmsAppController();
-		for (LocalDateTime dataInvio : promemoria) {
-			SmsBean sms = new SmsBean();
-			sms.setTesto("Ricordati di assumere la PrEP");
-			sms.setDataSpedizione(dataInvio);
-			sms.setStato(StatoSms.DA_INVIARE);
-		    if (protocollo.getTipoPrEP() == TipologiaPrEP.DAILY) {
-				sms.setTipo(TipoSms.PREP_DAILY);
-			}
-			else{
-				sms.setTipo(TipoSms.PREP_OD);
-			}
-		    smsController.programmaSms(sms);
-		}
-	}*/
+
 }

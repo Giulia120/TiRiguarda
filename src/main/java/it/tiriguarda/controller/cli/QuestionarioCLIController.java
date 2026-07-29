@@ -15,52 +15,55 @@ public class QuestionarioCLIController {
 		List<QuestionBean> domande = appController.getQuestionBeans();
 		List<Integer> risposteUtente = new ArrayList<>();
 
-		System.out.println("\n========================================");
-		System.out.println("        VALUTAZIONE RISCHIO HIV         ");
-		System.out.println("========================================");
-		System.out.println("(Digita 'q' per tornare indietro)\n");
+		ViewCLI.stampaTitolo("VALUTAZIONE DEL COMPORTAMENTO SESSUALE");
 
-		for (int i = 0; i < domande.size(); i++) {
-			QuestionBean q = domande.get(i);
+		for (QuestionBean q : domande) {
+			Integer risposta = chiediDomanda(scanner, q);
 			
-			while (true) {
-				System.out.println("Domanda " + q.getTesto());
-				
-				List<String> opzioni = q.getOpzioni();
-				for (int j = 0; j < opzioni.size(); j++) {
-					System.out.println((j + 1) + " - " + opzioni.get(j));
-				}
-				
-				System.out.print("Scegli un'opzione (1-" + opzioni.size() + "): ");
-				String input = scanner.nextLine();
-
-				if (input.equalsIgnoreCase("q")) {
-					return;
-				}
-
-				try {
-					int scelta = Integer.parseInt(input);
-					if (scelta >= 1 && scelta <= opzioni.size()) {
-						risposteUtente.add(scelta - 1);
-						System.out.println();
-						break;
-					} else {
-						System.out.println("[ERRORE] Opzione non valida, riprova!\n");
-					}
-				} catch (NumberFormatException e) {
-					System.out.println("[ERRORE] Inserisci un numero valido!\n");
-				}
+			if (risposta == null) {
+				return;
 			}
+			risposteUtente.add(risposta);
 		}
 
 		LivelloRischio rischio = appController.valutaRischio(risposteUtente);
 		mostraRisultato(rischio);
 	}
 
+	private Integer chiediDomanda(Scanner scanner, QuestionBean q) {
+		while (true) {
+			System.out.println("Domanda " + q.getTesto());
+			
+			List<String> opzioni = q.getOpzioni();
+			for (int j = 0; j < opzioni.size(); j++) {
+				System.out.println((j + 1) + " - " + opzioni.get(j));
+			}
+			
+			System.out.print("Scegli un'opzione (1-" + opzioni.size() + "): ");
+			String input = scanner.nextLine();
+
+			if (input.equalsIgnoreCase("q")) {
+				return null;
+			}
+
+			try {
+				int scelta = Integer.parseInt(input);
+				if (scelta >= 1 && scelta <= opzioni.size()) {
+					System.out.println();
+					return scelta - 1;
+				} else {
+					ViewCLI.stampaInvalido();
+				}
+			} catch (NumberFormatException e) {
+				ViewCLI.stampaInvalido();
+			}
+		}
+	}
+
 	private void mostraRisultato(LivelloRischio rischio) {
-		System.out.println("========================================");
+		ViewCLI.stampaSeparatore();
 		System.out.println("          RISULTATO VALUTAZIONE         ");
-		System.out.println("========================================");
+		ViewCLI.stampaSeparatore();
 
 		switch (rischio) {
 			case NULLO:
@@ -77,6 +80,6 @@ public class QuestionarioCLIController {
 				break;
 		}
 		
-		System.out.println("========================================\n");
+		 ViewCLI.stampaSeparatore();
 	}
 }

@@ -8,9 +8,7 @@ public class MenuPrincipaleCLIController {
 		boolean esci = false;
 
 		while (!esci) {
-			System.out.println("\n========================================");
-			System.out.println("            MENU PRINCIPALE           ");
-			System.out.println("========================================");
+			ViewCLI.stampaTitolo("Menu Principale");
 			System.out.println("1 - Registra Rapporto");
 			System.out.println("2 - Registra Test");
 			System.out.println("3 - Visualizza Profilo");
@@ -18,8 +16,8 @@ public class MenuPrincipaleCLIController {
 			System.out.println("5 - PrEP");
 			System.out.println("6 - Questionario");
 			System.out.println("7 - Informazioni");
-			System.out.println("8 - Logout");
-			System.out.print("Scegli un'opzione (1-8): ");
+			System.out.println("q - Logout");
+			System.out.print("Scegli un'opzione (1-7 o q): ");
 
 			String scelta = scanner.nextLine();
 
@@ -58,13 +56,13 @@ public class MenuPrincipaleCLIController {
 					System.out.println("\n[INFO] Sezione Informazioni aperta.");
 					break;
 					
-				case "8":
+				case "q":
 					System.out.println("\nLogout effettuato con successo. Chiusura sessione CLI.");
 					esci = true;
 					break;
 					
 				default:
-					System.out.println("\n[ERRORE] Scelta non valida! Inserisci un numero da 1 a 8.");
+					ViewCLI.stampaInvalido();
 			}
 		}
 	}

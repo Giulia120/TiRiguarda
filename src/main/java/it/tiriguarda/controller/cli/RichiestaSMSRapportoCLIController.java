@@ -20,7 +20,7 @@ public class RichiestaSMSRapportoCLIController {
 		
 		System.out.println("\n========================================");
 		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
-		System.out.println("========================================");
+		ViewCLI.stampaSeparatore();
 		
 		if (bean.getRischio() == LivelloRischio.ALTO) {
 			System.out.print("Questo rapporto è un alto rischio, quindi ");
@@ -71,7 +71,7 @@ public class RichiestaSMSRapportoCLIController {
 					return; 
 				}
 				
-				System.out.println("Rapporto registrato definitivamente con successo! Torno al menu principale...");
+				ViewCLI.stampaSuccesso();
 				return;
 				
 			} else if (risposta.equals("no")) {
@@ -79,11 +79,11 @@ public class RichiestaSMSRapportoCLIController {
 					return;
 				}
 				System.out.println("\n[INFO] Hai detto NO agli SMS.");
-				System.out.println("Rapporto registrato definitivamente con successo! Torno al menu principale...");
+				ViewCLI.stampaSuccesso();
 				return;
 			}
 			
-			System.out.println("Risposta non valida. Inserisci 'si', 'no' o 'q'.");
+			ViewCLI.stampaInvalido();
 		}
 	}
 	
