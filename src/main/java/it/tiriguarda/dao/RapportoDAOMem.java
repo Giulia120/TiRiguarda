@@ -20,11 +20,12 @@ public class RapportoDAOMem implements RapportoDAO {
 	
 	@Override
     public List<Rapporto> riepilogoRapporti(Utente utente) {
+		List<Rapporto> rapporti = new ArrayList<>();
 	    for (Rapporto r : rapportiInMemoria) {
 	        if (r.getUtente() != null && r.getUtente().equals(utente.getUsername())) {
-	            rapportiInMemoria.add(r);
+	            rapporti.add(r);
 	        }
 	    }
-	    return rapportiInMemoria;
+	    return rapporti;
     }
 }

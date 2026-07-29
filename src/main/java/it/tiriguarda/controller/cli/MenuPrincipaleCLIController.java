@@ -40,7 +40,8 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "4":
-					System.out.println("\n[INFO] Sezione Riepilogo aperta.");
+					RiepilogoCLIController riepilogoController = new RiepilogoCLIController();
+					riepilogoController.mostraRiepilogo(scanner);
 					break;
 					
 				case "5":

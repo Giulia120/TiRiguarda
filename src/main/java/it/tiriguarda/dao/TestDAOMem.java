@@ -20,12 +20,13 @@ private static List<Test> testInMemoria = new ArrayList<>();
 	
 	@Override
     public List<Test> riepilogoTest(Utente utente) {
+		List<Test> test = new ArrayList<>();
 	    for (Test t : testInMemoria) {
 	        if (t.getUtente() != null && t.getUtente().equals(utente.getUsername())) {
-	            testInMemoria.add(t);
+	            test.add(t);
 	        }
 	    }
-	    return testInMemoria;
+	    return test;
     }
 
 }
