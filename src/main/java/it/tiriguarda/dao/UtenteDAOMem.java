@@ -44,4 +44,15 @@ public class UtenteDAOMem implements UtenteDAO{
 	public String recuperaNumeroTelefono(String username) {
 		
 	}
+	
+	@Override
+	public void aggiornaProtocolloAttivo(Utente utente) {
+
+	    for (Utente u : utentiInMemoria) {
+	        if (u.getUsername().equals(utente.getUsername())) {
+	            u.setProtocolloAttivo(utente.getProtocolloAttivo());
+	            return;
+	        }
+	    }
+	}
 }

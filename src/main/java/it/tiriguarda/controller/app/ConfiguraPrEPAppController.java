@@ -1,14 +1,13 @@
 package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
+import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
@@ -32,7 +31,10 @@ public class ConfiguraPrEPAppController {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
 		
-		TipologiaPrEP prep = utente.getProtocolloAttivo();
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
+
+		ProtocolloPrEP prep = dao.trovaProtocolloAttivo(utente.getUsername());
 		
 		if(prep != null) {
 			throw new ProtocolloAttivoException();
@@ -49,10 +51,7 @@ public class ConfiguraPrEPAppController {
 			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
 			protocollo = protocolloOnD;
 		}
-		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-		
+				
 		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now())) {
 			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
 	        
@@ -63,17 +62,32 @@ public class ConfiguraPrEPAppController {
 		}
 		else {
 			if(bean.getRicevereSMS()) {
-				attivaSMS(protocollo, utente);
+				GestioneSmsAppController smsController = new GestioneSmsAppController();
+			    smsController.programmaPromemoriaPrEP(protocollo, utente);
 			}
 			utente.setProtocolloAttivo(protocollo.getTipoPrEP());
 			dao.configuraProtocollo(protocollo);
+			UtenteDAO daoUtente = factory.createUtenteDAO();
+			daoUtente.aggiornaProtocolloAttivo(utente);
 			logger.info("Protocollo attivo registrato con successo.");
 		}
 	}
-	public void attivaSMS(ProtocolloPrEP protocollo, Utente utente) {
+	/*public void attivaSMS(ProtocolloPrEP protocollo, Utente utente) {
 		List<LocalDateTime> promemoria = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
 		
-		GestioneSmsController smsController = new GestioneSmsController();
-		
-	}
+		GestioneSmsAppController smsController = new GestioneSmsAppController();
+		for (LocalDateTime dataInvio : promemoria) {
+			SmsBean sms = new SmsBean();
+			sms.setTesto("Ricordati di assumere la PrEP");
+			sms.setDataSpedizione(dataInvio);
+			sms.setStato(StatoSms.DA_INVIARE);
+		    if (protocollo.getTipoPrEP() == TipologiaPrEP.DAILY) {
+				sms.setTipo(TipoSms.PREP_DAILY);
+			}
+			else{
+				sms.setTipo(TipoSms.PREP_OD);
+			}
+		    smsController.programmaSms(sms);
+		}
+	}*/
 }

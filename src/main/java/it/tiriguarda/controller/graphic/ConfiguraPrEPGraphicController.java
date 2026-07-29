@@ -84,8 +84,10 @@ public class ConfiguraPrEPGraphicController {
         }
 	}
 	
+	
 	@FXML
 	public void onMenuPrincipale(ActionEvent event) {
 		ViewDispatcher.mostraMenuPrincipale();
 	 }
+	
 }

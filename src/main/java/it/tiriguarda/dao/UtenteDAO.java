@@ -14,4 +14,6 @@ public interface UtenteDAO {
 	void aggiornaTelUtente(Utente utente);
 	
 	String recuperaNumeroTelefono(String username);
+	
+	void aggiornaProtocolloAttivo(Utente utente);
 }

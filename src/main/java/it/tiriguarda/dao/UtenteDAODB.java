@@ -110,4 +110,19 @@ public class UtenteDAODB implements UtenteDAO{
 		}
 		return numeroTelefono;
 	}
+	
+	@Override
+	public void aggiornaProtocolloAttivo(Utente utente) {
+		String sql = "UPDATE Utente SET protocolloAttivo = ? WHERE username = ?";
+	    try(Connection conn = ConnectionFactory.getConnection();
+	        PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, utente.getProtocolloAttivo().name());
+	        ps.setString(2, utente.getUsername());
+	        ps.executeUpdate();
+
+	    } catch(SQLException e) {
+	        throw new DatabaseNonRaggiungibileException("Errore aggiornamento utente.");
+	    }
+	}
 }

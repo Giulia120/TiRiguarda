@@ -20,6 +20,7 @@ CREATE TABLE `tiriguardadatabase`.`ProtocolloPrEP`(
     `dataInizio` DATE NOT NULL,
     `statoPrEP` BOOLEAN NOT NULL DEFAULT 1,
     `dataFine` DATE,
+    `ora` TIME NOT NULL,
 	PRIMARY KEY (`idProtocollo`),
 
     CONSTRAINT `protocollo_utente`
@@ -79,4 +80,4 @@ ENGINE = InnoDB;
 
 DROP USER IF EXISTS tiriguarda;
 CREATE USER 'tiriguarda' IDENTIFIED BY 'password123';
-GRANT ALL PRIVILEGES ON tiriguardadatabase.* TO 'tiriguarda';utenteutente
+GRANT ALL PRIVILEGES ON tiriguardadatabase.* TO 'tiriguarda';
