@@ -49,7 +49,8 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "6":
-					System.out.println("\n[INFO] Sezione Questionario aperta.");
+					QuestionarioCLIController questionarioController = new QuestionarioCLIController();
+					questionarioController.avviaQuestionario(scanner);
 					break;
 					
 				case "7":

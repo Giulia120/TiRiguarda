@@ -23,5 +23,10 @@ public class DemoDAOFactory implements DAOFactory{
 	public SmsDAO createSmsDAO() {
 		return new SmsDAOMem();
 	}
+	
+	@Override 
+	public QuestionDAO createQuestionDAO() {
+		return new QuestionDAOMem();
+	}
 
 }
