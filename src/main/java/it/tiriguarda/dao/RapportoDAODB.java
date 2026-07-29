@@ -18,7 +18,11 @@ public class RapportoDAODB implements RapportoDAO {
 			ps.setString(2, rapporto.getIdRapporto());
 			ps.setDate(3, java.sql.Date.valueOf(rapporto.getData()));
 			ps.setString(4, rapporto.getRischio().name());
-			ps.setDate(5, java.sql.Date.valueOf(rapporto.getDataFinePeriodoFinestra()));
+			if (rapporto.getDataFinePeriodoFinestra() != null) {
+			    ps.setDate(5, java.sql.Date.valueOf(rapporto.getDataFinePeriodoFinestra()));
+			} else {
+			    ps.setNull(5, java.sql.Types.DATE);
+			}
 			
 			ps.executeUpdate();
 			

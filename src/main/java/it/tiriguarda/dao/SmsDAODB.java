@@ -18,7 +18,7 @@ public class SmsDAODB implements SmsDAO {
 	public void salvaSms(Sms sms) {
 		String sql = "insert into `Sms`(`utente`, `idSms`, `testo`, `dataSpedizione`, `stato`, `tipo` ) values(?,?,?,?,?,?)";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);){
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setString(1, sms.getUtente());
 			ps.setString(2, sms.getIdSms());
 			ps.setString(3, sms.getTesto());
@@ -36,7 +36,7 @@ public class SmsDAODB implements SmsDAO {
 	public void eliminaSmsProgrammati(String username, TipoSms tipoSms) {
 		String sql = "delete from `Sms` where (`utente` = ? AND `tipo` = ? )";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);){
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setString(1, username);
 			ps.setString(2, tipoSms.name());
 			
@@ -50,7 +50,7 @@ public class SmsDAODB implements SmsDAO {
 	public List<Sms> recuperaSmsDaInviare(){
 		String sql = "select * from `Sms` where (`dataSpedizione` < ? AND `stato` =  ?)";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);){
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
 			ps.setString(2, StatoSms.DA_INVIARE.name());
 			
@@ -72,9 +72,9 @@ public class SmsDAODB implements SmsDAO {
 	
 	@Override
     public void aggiornaStato(Sms sms, StatoSms nuovoStato) {
-		String sql = "update `statoSms` = ? from `Sms` where (`idSms` =  ?)";
+		String sql = "update `Sms` set `stato` = ? where `idSms` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);){
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setString(1, nuovoStato.name());
 			ps.setString(2, sms.getIdSms());
 			
@@ -88,7 +88,7 @@ public class SmsDAODB implements SmsDAO {
 	public void aggiornaData(Sms sms) {
 		String sql = "update `Sms` set `dataSpedizione` = ? where `idSms` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);){
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			LocalDateTime nuovaData = sms.getDataSpedizione().plusDays(1);
 	        ps.setTimestamp(1, java.sql.Timestamp.valueOf(nuovaData));
 			ps.setString(2, sms.getIdSms());

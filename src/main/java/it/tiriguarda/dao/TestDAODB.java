@@ -13,7 +13,7 @@ public class TestDAODB implements TestDAO {
 	public void salvaTest(Test test) {
 		String sql = "insert into `Test` (`utente`, `idTest`, `tipoTest`,`data`) values (?,?,?,?)";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, test.getUtente());
 			ps.setString(2, test.getidTest());
 			ps.setString(3, test.getTipo().name());

@@ -14,7 +14,7 @@ public class UtenteDAODB implements UtenteDAO{
 	public void registraUtente(Utente utente) {
 		String sql = "insert into `Utente`(`username`, `password`, `sessoBiologico`, `numeroTelefono`) values(?,?,?,?)";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getUsername());
 			ps.setString(2, utente.getPassword());
 			ps.setString(3, utente.getSessoBiologico().name());
@@ -31,7 +31,7 @@ public class UtenteDAODB implements UtenteDAO{
 	public Utente trovaPerUsername(String usernameDaTrovare) {
 		String sql = "select * from `Utente` where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, usernameDaTrovare);
 			
 			ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class UtenteDAODB implements UtenteDAO{
 	public void eliminaProtocolloAttivo(Utente utente) {
 		String sql = "update `Utente` set `protocolloAttivo` = NULL where `username` = ? ";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getUsername());
 			ps.executeUpdate();
 			
@@ -70,7 +70,7 @@ public class UtenteDAODB implements UtenteDAO{
 	public void aggiornaPwdUtente(Utente utente) {
 		String sql = "update `Utente` set `password` = ? where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getPassword());
 			ps.setString(2, utente.getUsername());
 			ps.executeUpdate();
@@ -83,7 +83,7 @@ public class UtenteDAODB implements UtenteDAO{
 	public void aggiornaTelUtente(Utente utente) {
 		String sql = "update `Utente` set `numeroTelefono` = ? where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getNumeroTelefono());
 			ps.setString(2, utente.getUsername());
 			ps.executeUpdate();
@@ -97,7 +97,7 @@ public class UtenteDAODB implements UtenteDAO{
 		String sql = "Select `numeroTelefono` from `Utente` where `username` = ?";
 		String numeroTelefono = null;
 		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareCall(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, username);
 			
 			try (ResultSet rs = ps.executeQuery()) {

@@ -84,6 +84,9 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	public void salvaRapportoDefinitivo(RapportoBean bean) {
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		String idRapporto = UUID.randomUUID().toString();
+		if (utenteCorrente == null) {
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
 		
 		Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());
 		

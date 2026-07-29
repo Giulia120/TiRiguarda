@@ -15,13 +15,24 @@ import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;
 
 public class SmsScheduler {
+	private static SmsScheduler instance;
     private static final Logger logger = Logger.getLogger(SmsScheduler.class.getName());
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final SmsManager smsManager = new SmsManager();
+    private boolean isAvviato = false;    
+    
+    private SmsScheduler() {}
+
+    public static synchronized SmsScheduler getInstance() {
+        if (instance == null) {
+            instance = new SmsScheduler();
+        }
+        return instance;
+    }
 
     public void avviaScheduler() {
-
+    	if(isAvviato) return;
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 DAOFactory factory = DAOFactoryProvider.getDAOFactory();
@@ -41,6 +52,7 @@ public class SmsScheduler {
                             	smsDao.aggiornaData(sms);
                             }
                             smsDao.aggiornaStato(sms, StatoSms.INVIATO);
+                            logger.info("SMS inviato con successo a: " + numeroDestinatario + " (Utente: " + sms.getUtente() + ")");
                         } catch (Exception e) {
                             logger.severe("Errore durante l'invio dell'SMS: " + e.getMessage());
                             smsDao.aggiornaStato(sms, StatoSms.ERRORE);
@@ -51,11 +63,15 @@ public class SmsScheduler {
                 logger.severe("Errore nel task di background degli SMS: " + e.getMessage());
             }
         }, 0, 1, TimeUnit.MINUTES);
+        isAvviato = true;
+        logger.info("Scheduler SMS avviato in background.");
     }
 
     public void arrestaScheduler() {
-        if (scheduler != null) {
+        if (scheduler != null && !scheduler.isShutdown()) {
             scheduler.shutdown();
+            isAvviato = false;
+            logger.info("Scheduler SMS fermato.");
         }
     }
 }
