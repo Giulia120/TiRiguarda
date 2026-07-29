@@ -11,9 +11,7 @@ public class ModificaTelefonoCLIController {
 
 	public void avvia(Scanner scanner) {
 		
-		System.out.println("\n========================================");
-		System.out.println("      MODIFICA NUMERO DI TELEFONO       ");
-		System.out.println("========================================");
+		ViewCLI.stampaTitolo("Modfica Telefono");
 		
 		while (true) {
 			System.out.print("\nInserisci il nuovo numero di telefono (oppure 'q' per annullare): ");
@@ -31,8 +29,7 @@ public class ModificaTelefonoCLIController {
 				ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
 				appController.cambiaTelefono(bean);
 				
-				System.out.println("\n[SUCCESSO] Numero di telefono modificato correttamente!");
-				System.out.println("Torno al tuo Profilo...");
+				ViewCLI.stampaSuccesso();
 				return;
 				
 			} catch (DatiIncompletiException e) {

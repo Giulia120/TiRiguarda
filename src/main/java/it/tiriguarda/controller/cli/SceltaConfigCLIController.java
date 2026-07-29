@@ -10,9 +10,7 @@ public class SceltaConfigCLIController {
 	public void avviaScelta(Scanner scanner) {
 		
 		while (true) {
-			System.out.println("\n========================================");
-			System.out.println("                  SCEGLI LA VERSIONE                 ");
-			System.out.println("========================================");
+			ViewCLI.stampaTitolo("Configurazione versione");
 			System.out.println("1 - Demo");
 			System.out.println("2 - Full");
 			System.out.println("q - Esci");
@@ -33,7 +31,7 @@ public class SceltaConfigCLIController {
 			case "q":
 				break;
 			default:
-				System.out.println("\n[ERRORE] Scelta non valida.");
+				ViewCLI.stampaInvalido();
 			}
 		}
 	}

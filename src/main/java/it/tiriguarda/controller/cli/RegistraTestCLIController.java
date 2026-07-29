@@ -17,12 +17,9 @@ public class RegistraTestCLIController {
 		boolean fine = false;
 
 		while (!fine) {
-			System.out.println("\n========================================");
-			System.out.println("          REGISTRAZIONE TEST            ");
-			System.out.println("========================================");
-			System.out.println("(Digita 'q' in qualsiasi momento per tornare indietro)");
+			ViewCLI.stampaTitolo("registrazione test");
 
-			LocalDate dataTest = leggiData(scanner);
+			LocalDate dataTest = ViewCLI.leggiData(scanner);
 
 			TipoTest tipoScelto = leggiTipoTest(scanner);
 
@@ -35,7 +32,7 @@ public class RegistraTestCLIController {
 				RegistraTestAppController appController = new RegistraTestAppController();
 				appController.registraTest(bean);
 				
-				System.out.println("\nTest registrato con successo! Torno al menu principale...");
+				ViewCLI.stampaSuccesso();
 				fine = true;
 				
 			} catch (DatiIncompletiException | DataFuturaException e) {
@@ -48,26 +45,6 @@ public class RegistraTestCLIController {
 			}
 		}
 	}
-
-	private LocalDate leggiData(Scanner scanner) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    
-	    while (true) {
-	        System.out.print("Inserisci la data (gg/mm/aaaa): ");
-	        String input = scanner.nextLine();
-	        
-	        if (input.equalsIgnoreCase("q")) {
-	            return null;
-	        }
-	        
-	        try {
-	        	return LocalDate.parse(input, formatter);
-	        } catch (DateTimeParseException e) {
-	            System.out.println("Formato o data non valido! Usa gg/mm/aaaa.");
-	        }
-	    }
-	}
-
 
 	private TipoTest leggiTipoTest(Scanner scanner) {
 		while (true) {

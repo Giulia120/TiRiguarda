@@ -13,9 +13,7 @@ public class LoginCLIController {
 		boolean fine = false;
 		
 		while (!fine) {
-			System.out.println("\n========================================");
-			System.out.println("                  LOGIN                 ");
-			System.out.println("========================================");
+			ViewCLI.stampaTitolo("Login");
 			System.out.println("1 - Accedi");
 			System.out.println("2 - Registrati");
 			System.out.println("q - Esci");
@@ -37,8 +35,7 @@ public class LoginCLIController {
 				case "q":
 					fine = true;
 					break;
-				default:
-					System.out.println("\n[ERRORE] Scelta non valida.");
+				default: ViewCLI.stampaInvalido();
 			}
 		}
 	}

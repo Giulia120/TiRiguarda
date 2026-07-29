@@ -14,10 +14,7 @@ public class RegistraUtenteCLIController {
 		boolean fine = false;
 
 		while (!fine) {
-			System.out.println("\n========================================");
-			System.out.println("              REGISTRAZIONE             ");
-			System.out.println("========================================");
-			System.out.println("(Digita 'q' per tornare indietro)");
+			ViewCLI.stampaTitolo("Registrazione");
 
 			System.out.print("Username: ");
 			String username = scanner.nextLine();
@@ -51,7 +48,7 @@ public class RegistraUtenteCLIController {
 				RegistraUtenteAppController appController = new RegistraUtenteAppController();
 				appController.registraUtente(bean);
 				
-				System.out.println("\nRegistrazione completata con successo! Torno al menu di Login...");
+				ViewCLI.stampaSuccesso();
 				fine = true;
 				
 			} catch (DatiIncompletiException | UsernameEsistenteException e) {
@@ -73,7 +70,7 @@ public class RegistraUtenteCLIController {
             switch (input) {
                 case "1": return SessoBiologico.FEMMINILE;
                 case "2": return SessoBiologico.MASCHILE;
-                default: System.out.println("[ERRORE] Opzione non valida, riprova!\n");
+                default: ViewCLI.stampaInvalido();
             }
         }
     }

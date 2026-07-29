@@ -38,7 +38,7 @@ public class GestioneSmsAppController {
         SmsDAO smsDao = factory.createSmsDAO(); 
         
         smsDao.eliminaSmsProgrammati(username, tipoSms);
-        logger.info("Cancellati SMS futuri di tipo " + tipoSms.name() + " per l'utente " + username);
+        logger.info(() -> "Cancellati SMS futuri di tipo " + tipoSms.name() + " per l'utente " + username);
     }
 	
 	public void programmaPromemoriaPrEP(ProtocolloPrEP protocollo, Utente utente) {

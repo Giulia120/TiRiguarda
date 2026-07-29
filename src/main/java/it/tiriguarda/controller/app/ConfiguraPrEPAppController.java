@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.app;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ public class ConfiguraPrEPAppController {
 			protocollo = protocolloOnD;
 		}
 				
-		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now())) {
+		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now(ZoneId.systemDefault()))) {
 			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come già chiuso.");
 	        
 	        protocollo.setStatoPrEP(false);

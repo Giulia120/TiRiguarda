@@ -12,9 +12,7 @@ public class ModificaPwdCLIController {
 
 	public void avvia(Scanner scanner) {
 		
-		System.out.println("\n========================================");
-		System.out.println("           MODIFICA PASSWORD            ");
-		System.out.println("========================================");
+		ViewCLI.stampaTitolo("Modifica Password");
 		
 		while (true) {
 			System.out.print("\nInserisci la vecchia password (oppure 'q' per annullare): ");
@@ -36,8 +34,7 @@ public class ModificaPwdCLIController {
 				ModificaPwdAppController appController = new ModificaPwdAppController();
 				appController.cambiaPassword(bean);
 				
-				System.out.println("\n[SUCCESSO] Password modificata correttamente!");
-				System.out.println("Torno al tuo Profilo...");
+				ViewCLI.stampaSuccesso();
 				return;
 				
 			} catch (DatiIncompletiException | CredenzialiErrateException e) {
