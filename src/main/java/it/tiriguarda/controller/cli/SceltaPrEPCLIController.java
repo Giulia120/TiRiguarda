@@ -2,6 +2,8 @@ package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
 
+import it.tiriguarda.domain.TipologiaPrEP;
+
 public class SceltaPrEPCLIController {
 	public void avviaPrEP(Scanner scanner) {
 		boolean fine = false;
@@ -20,9 +22,14 @@ public class SceltaPrEPCLIController {
 			switch(scelta) {
 				case "1":
 					System.out.println("scelta PrEP daily");
+					ConfiguraPrEPCLIController configuraPrEPcontrollerD = new ConfiguraPrEPCLIController();
+					configuraPrEPcontrollerD.avviaConfigurazione(TipologiaPrEP.DAILY, scanner);
+					System.out.println("scelta PrEP daily");
 					break;
 				case "2":
 					System.out.println("scelta PrEP on demand");
+					ConfiguraPrEPCLIController configuraPrEPcontrollerOD = new ConfiguraPrEPCLIController();
+					configuraPrEPcontrollerOD.avviaConfigurazione(TipologiaPrEP.ON_DEMAND, scanner);
 					break;
 				case "3":
 					AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
