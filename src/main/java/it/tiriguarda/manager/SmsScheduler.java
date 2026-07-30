@@ -76,7 +76,7 @@ public class SmsScheduler {
 				logger.info("SMS inviato con successo a: " + sms.getUtente());
 			}
 		} catch (SmsNonInviatoException e) {
-			logger.log(Level.SEVERE, "Errore durante l''invio dell''SMS", e.getMessage());
+			logger.log(Level.SEVERE, "Errore durante l''invio dell''SMS", e);
 			}
 			
 			if (sms.getTipo() == TipoSms.PREP_DAILY) {
