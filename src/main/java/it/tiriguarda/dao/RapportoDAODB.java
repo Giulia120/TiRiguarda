@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Rapporto;
@@ -14,6 +16,7 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class RapportoDAODB implements RapportoDAO {
+	private static final Logger logger = Logger.getLogger(RapportoDAODB.class.getName());
 	
 	@Override
 	public void salvaRapporto (Rapporto rapporto) {
@@ -33,28 +36,29 @@ public class RapportoDAODB implements RapportoDAO {
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la registrazione del rapporto", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}
 	
 	@Override
-	public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
-	    String sql = "select * from `Rapporto` where `utente` = ? and `data` >= ?";
-	    List<Rapporto> rapporti = new ArrayList<>();
-	    try (Connection conn = ConnectionFactory.getConnection();
-	            PreparedStatement ps = conn.prepareStatement(sql);) {
-	        ps.setString(1, utente.getUsername());
-	        ps.setDate(2, java.sql.Date.valueOf(data));
-	        
-	        ResultSet rs = ps.executeQuery();
-	        while(rs.next()) {
-	            Rapporto r = new Rapporto(rs.getString("utente"), rs.getString("idRapporto"), rs.getDate("data").toLocalDate(), LivelloRischio.valueOf(rs.getString("rischio")));
-	            rapporti.add(r);
-	        }
-	        return rapporti;
-	        
-	    } catch(SQLException e) {
-	        throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
-	    }
-	}
+    public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
+		String sql = "select `utente`, `idRapporto`, `data`, `rischio`, `dataFinePeriodoFinestra` from `Rapporto` where `utente` = ? and `data` >= ?";
+		List<Rapporto> rapporti = new ArrayList<>();
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, utente.getUsername());
+			ps.setDate(2, java.sql.Date.valueOf(data));
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Rapporto r = new Rapporto(rs.getString("utente"), rs.getString("idRapporto"), rs.getDate("data").toLocalDate(), LivelloRischio.valueOf(rs.getString("rischio")));
+				rapporti.add(r);
+			}
+			return rapporti;
+			
+			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante il riepilogo (rapporti)", e);
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+			}
+    }
 }

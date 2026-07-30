@@ -52,7 +52,10 @@ public class RegistraUtenteCLIController {
 				fine = true;
 				
 			} catch (DatiIncompletiException | UsernameEsistenteException e) {
-				System.out.println("\n[ERRORE] " + e.getMessage());
+				ViewCLI.stampaErrore(e.getMessage());
+			}catch(IllegalStateException e) {
+				ViewCLI.stampaErroreSistema(e.getMessage());
+				throw e;
 			}
 		}
 	}

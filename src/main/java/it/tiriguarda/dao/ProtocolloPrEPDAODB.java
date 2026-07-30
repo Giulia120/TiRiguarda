@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
@@ -17,10 +19,11 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
+	private static final Logger logger = Logger.getLogger(ProtocolloPrEPDAODB.class.getName());
 	
 	@Override
 	public ProtocolloPrEP trovaProtocolloAttivo(String username) {
-		String sql = "select * from `ProtocolloPrEP` where `utente` = ? and `statoPrEP` = 1";
+		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ? and `statoPrEP` = 1";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, username);
@@ -51,6 +54,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 			}
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la ricerca del protocollo attivo", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -76,6 +80,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 			ps.executeUpdate();
 
 		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante la configurazione del protocllo", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -89,6 +94,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	        ps.setString(2, protocolloPrEP.getIdProtocollo());
 	        ps.executeUpdate();
 	    } catch(SQLException e) {
+	    	logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento del protocollo", e);
 	        throw new DatabaseNonRaggiungibileException("Impossibile aggiornare il protocollo.");
 	    }
 	}
@@ -112,7 +118,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	
 	@Override
     public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
-		String sql = "select * from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
+		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -122,20 +128,26 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				TipologiaPrEP tipoPrEP = TipologiaPrEP.valueOf(rs.getString("tipoPrEP"));
+				String idProtocollo = rs.getString("idProtocollo");
+				String username = rs.getString("utente");
+				LocalDate dataInizio = rs.getDate("dataInizio").toLocalDate();
+				boolean statoPrEP = rs.getBoolean("statoPrEP");
+				LocalTime ora = rs.getTime("ora").toLocalTime();
+				java.sql.Date dataFine = rs.getDate("dataFine");
 				ProtocolloPrEP p;
 				if(tipoPrEP == TipologiaPrEP.DAILY) {
-					p = new ProtocolloPrEPDaily(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("dataInizio").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
-				}else {
-					p = new ProtocolloPrEPOnDemand(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("dataInizio").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
-				}
-				java.sql.Date dataFine = rs.getDate("dataFine");
+	                p = new ProtocolloPrEPDaily(idProtocollo, username, dataInizio, statoPrEP, ora);
+	            } else {
+	                p = new ProtocolloPrEPOnDemand(idProtocollo, username, dataInizio, statoPrEP, ora);
+	            }
 				if (dataFine != null) {
-				    p.setDataFine(dataFine.toLocalDate());
+					p.setDataFine(dataFine.toLocalDate());
 				}
 				protocolli.add(p);
 			}
 			return protocolli;
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante il riepilogo (PrEP)", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
     }

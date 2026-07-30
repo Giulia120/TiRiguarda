@@ -15,7 +15,7 @@ public class QuestionarioRisultatoGraphicController {
     @FXML private Label testoRisultato;
     @FXML private Button menuPrincipaleButton;
 
-    public void inizializza(LivelloRischio rischio, int score) {
+    public void inizializza(LivelloRischio rischio) {
         
         switch (rischio) {
             case NULLO:

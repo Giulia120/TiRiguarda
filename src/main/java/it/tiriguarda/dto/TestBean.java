@@ -28,6 +28,7 @@ public class TestBean {
 	public LocalDate getData() {
 		return data;
 	}
+	
 	public void setData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
 		controllaData(data);
 		this.data = data;

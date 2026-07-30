@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
@@ -14,6 +16,7 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class TestDAODB implements TestDAO {
+	private static final Logger logger = Logger.getLogger(TestDAODB.class.getName());
 	
 	@Override
 	public void salvaTest(Test test) {
@@ -28,28 +31,30 @@ public class TestDAODB implements TestDAO {
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la registrazione del test", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}
 	
 	@Override
-	public List<Test> riepilogoTest(Utente utente, LocalDate data) {
-	    String sql = "select * from `Test` where `utente` = ? and `data` >= ?";
-	    List<Test> test = new ArrayList<>();
-	    try (Connection conn = ConnectionFactory.getConnection();
-	            PreparedStatement ps = conn.prepareStatement(sql);) {
-	        ps.setString(1, utente.getUsername());
-	        ps.setDate(2, java.sql.Date.valueOf(data));
-	        
-	        ResultSet rs = ps.executeQuery();
-	        while(rs.next()) {
-	            Test t = new Test(rs.getString("utente"), rs.getString("idTest"), TipoTest.valueOf(rs.getString("tipoTest")), rs.getDate("data").toLocalDate());
-	            test.add(t);
-	        }
-	        return test;
-	        
-	    } catch(SQLException e) {
-	        throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
-	    }
-	}
+    public List<Test> riepilogoTest(Utente utente, LocalDate data) {
+		String sql = "select `utente`, `idTest`, `tipoTest`, `data` from `Test` where `utente` = ? and `data` >= ?";
+		List<Test> test = new ArrayList<>();
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, utente.getUsername());
+			ps.setDate(2, java.sql.Date.valueOf(data));
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Test t = new Test(rs.getString("utente"), rs.getString("idTest"), TipoTest.valueOf(rs.getString("tipoTest")), rs.getDate("data").toLocalDate());
+				test.add(t);
+			}
+			return test;
+			
+			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante il riepilogo (test)", e);
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+			}
+    }
 }

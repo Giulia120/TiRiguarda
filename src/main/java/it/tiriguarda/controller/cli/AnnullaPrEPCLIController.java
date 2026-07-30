@@ -1,15 +1,13 @@
 package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 
 public class AnnullaPrEPCLIController {
-	private static final Logger logger = Logger.getLogger(AnnullaPrEPCLIController.class.getName());
 	public boolean avvioAnnullamento(Scanner scanner) {
 		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
@@ -18,16 +16,15 @@ public class AnnullaPrEPCLIController {
 			System.out.println("Stato del tuo protocollo attivo");
 			return confermaAnnullamento(controller, scanner);
 		}catch(IllegalStateException e) {
-			logger.log(Level.WARNING, e.getMessage());
 			ViewCLI.stampaErroreSistema(e.getMessage());
 			throw e;
 		}catch(AnnullamentoPrEPException e) {
-			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e);
+			ViewCLI.stampaErrore(e.getMessage());
 			return false;
-		}catch(Exception e) {
-			logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e);
-			return false;
-		}
+		}catch(DatabaseNonRaggiungibileException e) {
+	        ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+	        return false;
+	    }
 	}
 		
 		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
@@ -42,10 +39,13 @@ public class AnnullaPrEPCLIController {
 					controller.annullaPrEP();
 					ViewCLI.stampaSuccesso();
 					return true;
-				}catch(Exception e) {
-					logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP");
-					return false;
-				}	
+				}catch(DatabaseNonRaggiungibileException e) {
+		            ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+		            return false;
+				}catch(IllegalStateException e) {
+					ViewCLI.stampaErroreSistema(e.getMessage());
+					throw e;
+					}	
 			}
 			else {
 				System.out.println("Protocollo PrEP ancora attivo.");

@@ -15,28 +15,28 @@ public class SmsBean {
         return testo;
     }
 
-    public void setTesto(String testo) {
-        this.testo = testo;
-    }
-
     public LocalDateTime getDataSpedizione() {
         return dataSpedizione;
-    }
-
-    public void setDataSpedizione(LocalDateTime dataSpedizione) {
-        this.dataSpedizione = dataSpedizione;
     }
 
     public StatoSms getStato() {
         return stato;
     }
 
-    public void setStato(StatoSms stato) {
-        this.stato = stato;
-    }
-
     public TipoSms getTipo() {
         return tipo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+
+    public void setDataSpedizione(LocalDateTime dataSpedizione) {
+        this.dataSpedizione = dataSpedizione;
+    }
+
+    public void setStato(StatoSms stato) {
+        this.stato = stato;
     }
 
     public void setTipo(TipoSms tipo) {

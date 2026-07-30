@@ -25,15 +25,6 @@ public class RapportoBean {
 		controllaData(data);
 		this.data = data;
 	}
-	
-	private void controllaData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
-		if (data == null) {
-			throw new DatiIncompletiException("Devi inserire la data!");
-		}
-		if (data.isAfter(LocalDate.now(ZoneId.systemDefault()))) {
-            throw new DataFuturaException();
-        }
-	}
 
 	public List<TipoRapporto> getTipo() {
 		return tipo;
@@ -79,6 +70,15 @@ public class RapportoBean {
 
 	public void setDataFinePeriodoFinestra(LocalDate dataFinePeriodoFinestra) {
 		this.dataFinePeriodoFinestra = dataFinePeriodoFinestra;
+	}
+	
+	private void controllaData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
+		if (data == null) {
+			throw new DatiIncompletiException("Devi inserire la data!");
+		}
+		if (data.isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+            throw new DataFuturaException();
+        }
 	}
     
 }

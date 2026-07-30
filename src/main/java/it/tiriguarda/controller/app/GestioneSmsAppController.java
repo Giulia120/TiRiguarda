@@ -46,7 +46,7 @@ public class GestioneSmsAppController {
 	    SmsDAO smsDao = factory.createSmsDAO();
 
 	    List<LocalDateTime> date = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());
-
+	    
 	    for(LocalDateTime data : date) {
 	    	String idSms = UUID.randomUUID().toString();
 	    	String testo = "Ricordati di assumere la PrEP";
@@ -58,6 +58,7 @@ public class GestioneSmsAppController {
 	    		Sms sms = new Sms(utente.getUsername(), idSms, testo, data, TipoSms.PREP_OD);
 	    		smsDao.salvaSms(sms);
 	    	}
+	    	logger.info("Programmato SMS nel sistema.");
 	    }
 	}
 }

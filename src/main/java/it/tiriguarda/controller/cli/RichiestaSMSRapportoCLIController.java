@@ -16,8 +16,30 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class RichiestaSMSRapportoCLIController {
 
-	public void avvia(RapportoBean bean, Scanner scanner) {
+public void avvia(RapportoBean bean, Scanner scanner) {
 		
+		stampaIntestazione(bean);
+
+		String risposta = leggiSceltaValida(scanner);
+		
+		if (risposta.equals("q")) {
+			System.out.println("\n[INFO] Registrazione rapporto annullata! Torno al menu principale...");
+			return;
+		}
+		
+		if (!salvaEConcludi(bean)) {
+			return;
+		}
+		
+		if (risposta.equals("si")) {
+			programmaNotificaSms(bean);
+		} else {
+			System.out.println("\n[INFO] Hai detto NO agli SMS.");
+			ViewCLI.stampaSuccesso();
+		}
+	}
+	
+	private void stampaIntestazione(RapportoBean bean) {
 		System.out.println("\n========================================");
 		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
 		ViewCLI.stampaSeparatore();
@@ -34,56 +56,39 @@ public class RichiestaSMSRapportoCLIController {
 			String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
 			System.out.println("Data fine periodo finestra: " + dataFormattata);
 		}
-		
+	}
+	
+	private String leggiSceltaValida(Scanner scanner) {
 		while (true) {
 			System.out.println("\nVuoi attivare le notifiche SMS per ricordarti di fare il test?");
 			System.out.print("Rispondi (si/no, oppure 'q' per annullare TUTTA la registrazione): ");
 			
 			String risposta = scanner.nextLine().trim().toLowerCase();
-			
-			if (risposta.equals("q")) {
-				System.out.println("\n[INFO] Registrazione rapporto annullata! Torno al menu principale...");
-				return;
+			if (risposta.equals("q") || risposta.equals("si") || risposta.equals("no")) {
+				return risposta;
 			}
-			
-			if (risposta.equals("si")) {
-				if (!salvaEConcludi(bean)) {
-					return;
-				}
-				SmsBean beanSms = new SmsBean();
-				beanSms.setTesto("[PROMEMORIA]: È ora di fare il test!");
-				LocalDateTime dataEOra = LocalDateTime.of(bean.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
-				beanSms.setDataSpedizione(dataEOra);
-				beanSms.setTipo(TipoSms.TEST);
-				beanSms.setStato(StatoSms.DA_INVIARE);
-				
-				try {
-					GestioneSmsAppController smsController = new GestioneSmsAppController();
-					smsController.programmaSms(beanSms);
-					System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
-				} catch (DatabaseNonRaggiungibileException e) {
-					System.out.println("\n[ERRORE DB]: " + e.getMessage());
-					System.out.println("-> Ritorno al menu di configurazione...");
-					return; 
-				} catch (IllegalStateException e) {
-					System.out.println("\n[ERRORE SESSIONE]: " + e.getMessage());
-					System.out.println("-> Ritorno al Login...");
-					return; 
-				}
-				
-				ViewCLI.stampaSuccesso();
-				return;
-				
-			} else if (risposta.equals("no")) {
-				if (!salvaEConcludi(bean)) {
-					return;
-				}
-				System.out.println("\n[INFO] Hai detto NO agli SMS.");
-				ViewCLI.stampaSuccesso();
-				return;
-			}
-			
 			ViewCLI.stampaInvalido();
+		}
+	}
+	
+	private void programmaNotificaSms(RapportoBean bean) {
+		SmsBean beanSms = new SmsBean();
+		beanSms.setTesto("[PROMEMORIA]: È ora di fare il test!");
+		LocalDateTime dataEOra = LocalDateTime.of(bean.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
+		beanSms.setDataSpedizione(dataEOra);
+		beanSms.setTipo(TipoSms.TEST);
+		beanSms.setStato(StatoSms.DA_INVIARE);
+		
+		try {
+			GestioneSmsAppController smsController = new GestioneSmsAppController();
+			smsController.programmaSms(beanSms);
+			System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
+			ViewCLI.stampaSuccesso();
+		} catch (DatabaseNonRaggiungibileException e) {
+			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+		} catch (IllegalStateException e) {
+			ViewCLI.stampaErroreSistema(e.getMessage());
+			throw e;
 		}
 	}
 	
@@ -93,9 +98,8 @@ public class RichiestaSMSRapportoCLIController {
 			appController.salvaRapportoDefinitivo(bean);
 			return true;
 		} catch (DatabaseNonRaggiungibileException e) {
-			System.out.println("\n[ERRORE DB]: " + e.getMessage());
-			System.out.println("-> Ritorno al menu di configurazione...");
-			return false;
+			ViewCLI.stampaErroreSistema(e.getMessage());
+			throw e;
 		}
 	}
 }

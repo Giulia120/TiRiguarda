@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import it.tiriguarda.controller.app.GestioneSmsAppController;
@@ -35,7 +36,7 @@ public class RichiestaSMSRapportoGraphicController {
 	 
 	 public void inizializza(RapportoBean bean) {
 		 this.beanInSospeso = bean;
-		 if (bean.getDataFinePeriodoFinestra() != null && bean.getDataFinePeriodoFinestra().isAfter(LocalDate.now())) {
+		 if (bean.getDataFinePeriodoFinestra() != null && bean.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		        String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
 		        dataFinestraLabel.setText(dataFormattata);

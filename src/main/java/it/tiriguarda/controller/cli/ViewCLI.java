@@ -6,6 +6,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ViewCLI {
+	
+	private ViewCLI() {
+        // Costruttore privato per nascondere quello pubblico di default
+    }
 	    
 	    private static final String SEPARATORE = "========================================";
 	    

@@ -15,11 +15,10 @@ public class ModificaPwdCLIController {
 		ViewCLI.stampaTitolo("Modifica Password");
 		
 		while (true) {
-			System.out.print("\nInserisci la vecchia password (oppure 'q' per annullare): ");
+			System.out.print("\nInserisci la vecchia password: ");
 			String vecchiaPwd = scanner.nextLine().trim();
 			
 			if (vecchiaPwd.equalsIgnoreCase("q")) {
-				System.out.println("\n[INFO] Modifica password annullata. Torno al profilo...");
 				return;
 			}
 			
@@ -38,17 +37,14 @@ public class ModificaPwdCLIController {
 				return;
 				
 			} catch (DatiIncompletiException | CredenzialiErrateException e) {
-				System.out.println("\n[ATTENZIONE]: " + e.getMessage());
+				ViewCLI.stampaErrore(e.getMessage());
 				System.out.println("Riprova a inserire i dati.");
 				
 			} catch (DatabaseNonRaggiungibileException e) {
-				System.out.println("\n[ERRORE DB]: " + e.getMessage());
-				System.out.println("-> Ritorno al menu di configurazione del database...");
-				return;
+				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
 			} catch (IllegalStateException e) {
-				System.out.println("\n[ERRORE SESSIONE]: " + e.getMessage());
-				System.out.println("-> Ritorno alla schermata di Login...");
+				ViewCLI.stampaErroreSistema(e.getMessage());
 				return;
 			}
 		}

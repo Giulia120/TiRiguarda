@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.domain.TipologiaPrEP;
@@ -11,6 +13,8 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class UtenteDAODB implements UtenteDAO{
+	private static final Logger logger = Logger.getLogger(UtenteDAODB.class.getName());
+	
 	@Override
 	public void registraUtente(Utente utente) {
 		String sql = "insert into `Utente`(`username`, `password`, `sessoBiologico`, `numeroTelefono`) values(?,?,?,?)";
@@ -24,13 +28,14 @@ public class UtenteDAODB implements UtenteDAO{
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la registrazione dell'utente", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}
 	
 	@Override
 	public Utente trovaPerUsername(String usernameDaTrovare) {
-		String sql = "select * from `Utente` where `username` = ?";
+		String sql = "select `username`, `password`, `sessoBiologico`, `numeroTelefono`, `protocolloAttivo` from `Utente` where `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, usernameDaTrovare);
@@ -52,6 +57,7 @@ public class UtenteDAODB implements UtenteDAO{
 			}
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la ricerca dell'utente", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -65,6 +71,7 @@ public class UtenteDAODB implements UtenteDAO{
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante l'eliminazione del protocollo attivo", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -78,6 +85,7 @@ public class UtenteDAODB implements UtenteDAO{
 			ps.setString(2, utente.getUsername());
 			ps.executeUpdate();
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento della password", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -91,6 +99,7 @@ public class UtenteDAODB implements UtenteDAO{
 			ps.setString(2, utente.getUsername());
 			ps.executeUpdate();
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento del telefono", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -109,6 +118,7 @@ public class UtenteDAODB implements UtenteDAO{
 	            }
 	        }
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante il recupero del numero di telefono", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 		return numeroTelefono;
@@ -125,6 +135,7 @@ public class UtenteDAODB implements UtenteDAO{
 	        ps.executeUpdate();
 
 	    } catch(SQLException e) {
+	    	logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento del protocollo attivo", e);
 	        throw new DatabaseNonRaggiungibileException("Errore aggiornamento utente.");
 	    }
 	}

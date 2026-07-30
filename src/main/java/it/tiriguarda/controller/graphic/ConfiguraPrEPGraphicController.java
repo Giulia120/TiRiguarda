@@ -56,12 +56,7 @@ public class ConfiguraPrEPGraphicController {
         
         bean.setOrario(ora);
         
-        if(checkSMS.isSelected()) {
-        	bean.setRicevereSMS(true);
-        }
-        else {
-        	bean.setRicevereSMS(false);
-        }
+        bean.setRicevereSMS(checkSMS.isSelected());
         
         ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
         try {
