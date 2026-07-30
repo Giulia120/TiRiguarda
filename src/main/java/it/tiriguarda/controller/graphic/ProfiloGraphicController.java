@@ -1,8 +1,8 @@
 package it.tiriguarda.controller.graphic;
 
+import it.tiriguarda.controller.app.ProfiloAppController;
 import it.tiriguarda.domain.SessoBiologico;
-import it.tiriguarda.domain.Utente;
-import it.tiriguarda.service.SessionManager;
+import it.tiriguarda.dto.DatiProfiloBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,13 +25,22 @@ public class ProfiloGraphicController {
 	
 	@FXML
 	public void initialize() {
-		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-		usernameLabel.setText(utenteCorrente.getUsername());
-		telLabel.setText(utenteCorrente.getNumeroTelefono());
-		if (utenteCorrente.getSessoBiologico() == SessoBiologico.FEMMINILE) {
-			sessoLabel.setText("Femminile");
-		} else {
-			sessoLabel.setText("Maschile");
+		
+		try {
+			ProfiloAppController controller = new ProfiloAppController();
+			DatiProfiloBean bean =controller.getDatiProfilo();
+			
+			usernameLabel.setText(bean.getUsername());
+			telLabel.setText(bean.getNumTelefono());
+			if (bean.getSesso() == SessoBiologico.FEMMINILE) {
+				sessoLabel.setText("Femminile");
+			} else {
+				sessoLabel.setText("Maschile");
+			}
+			
+		}catch (IllegalStateException e) {
+			ViewDispatcher.mostraErrore(e.getMessage());
+			ViewDispatcher.mostraLogin();
 		}
 	} 
 	

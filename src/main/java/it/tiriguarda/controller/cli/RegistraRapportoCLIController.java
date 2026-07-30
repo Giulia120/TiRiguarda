@@ -11,6 +11,7 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
 
@@ -54,10 +55,12 @@ public class RegistraRapportoCLIController {
 			} catch (DatiIncompletiException | DataFuturaException e) {
 				ViewCLI.stampaErrore(e.getMessage());
 				System.out.println("Premi INVIO per correggere i dati...");
-				scanner.nextLine();
-				
-			} catch (IllegalStateException e) {
-				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+				scanner.nextLine();	
+			} catch (DatabaseNonRaggiungibileException e) {
+	        	ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+	        }catch (IllegalStateException e) {
+				ViewCLI.stampaErroreSistema(e.getMessage());
+				throw e;
 			}
 		}
 	}

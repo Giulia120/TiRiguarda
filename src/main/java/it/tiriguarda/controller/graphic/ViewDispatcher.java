@@ -167,7 +167,7 @@ public class ViewDispatcher {
 	public static void mostraErroreCriticoEChiudi(String messaggioGrave) {
 	    mostraErrore("Si è verificato un errore critico di connessione:\n" 
 	                 + messaggioGrave 
-	                 + "\n\nPer evitare la perdita dei dati, l'applicazione verrà chiusa.");
+	                 + "\nPer evitare la perdita dei dati, l'applicazione verrà chiusa.");
 	    javafx.application.Platform.exit();
 	    System.exit(1);
 	}

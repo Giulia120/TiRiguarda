@@ -14,11 +14,10 @@ public class ModificaTelefonoCLIController {
 		ViewCLI.stampaTitolo("Modfica Telefono");
 		
 		while (true) {
-			System.out.print("\nInserisci il nuovo numero di telefono (oppure 'q' per annullare): ");
+			System.out.print("\nInserisci il nuovo numero di telefono: ");
 			String nuovoTelefono = scanner.nextLine().trim();
 			
 			if (nuovoTelefono.equalsIgnoreCase("q")) {
-				System.out.println("\n[INFO] Modifica numero annullata. Torno al profilo...");
 				return;
 			}
 			
@@ -33,17 +32,14 @@ public class ModificaTelefonoCLIController {
 				return;
 				
 			} catch (DatiIncompletiException e) {
-				System.out.println("\n[ATTENZIONE]: " + e.getMessage());
-				System.out.println("Riprova a inserire il dato.");
+				ViewCLI.stampaErrore(e.getMessage());
+				System.out.println("Riprova a inserire i dati.");
 				
 			} catch (DatabaseNonRaggiungibileException e) {
-				System.out.println("\n[ERRORE DB]: " + e.getMessage());
-				System.out.println("-> Ritorno al menu di configurazione del database...");
-				return;
+				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
 			} catch (IllegalStateException e) {
-				System.out.println("\n[ERRORE SESSIONE]: " + e.getMessage());
-				System.out.println("-> Ritorno alla schermata di Login...");
+				ViewCLI.stampaErroreSistema(e.getMessage());
 				return;
 			}
 		}

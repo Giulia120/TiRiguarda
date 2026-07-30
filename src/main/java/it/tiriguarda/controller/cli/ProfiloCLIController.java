@@ -2,35 +2,35 @@ package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
 
+import it.tiriguarda.controller.app.ProfiloAppController;
 import it.tiriguarda.domain.SessoBiologico;
-import it.tiriguarda.domain.Utente;
-import it.tiriguarda.service.SessionManager;
+import it.tiriguarda.dto.DatiProfiloBean;
 
 public class ProfiloCLIController {
 
 	public void avviaProfilo(Scanner scanner) {
 		
 		while (true) {
-			Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-			
-			if (utenteCorrente == null) {
-				System.out.println("\n[ERRORE CRITICO]: Nessun utente loggato in sessione.");
-				System.out.println("Torno al Login...");
-				return;
-			}
-			
 			ViewCLI.stampaTitolo("Profilo");
 			
-			System.out.println("Username: " + utenteCorrente.getUsername());
-			System.out.println("Telefono: " + utenteCorrente.getNumeroTelefono());
+			try {
+				ProfiloAppController controller = new ProfiloAppController();
+				DatiProfiloBean bean =controller.getDatiProfilo();
+				
+				System.out.println("Username: " + bean.getUsername());
+				System.out.println("Telefono: " + bean.getNumTelefono());
+				
+				if (bean.getSesso() == SessoBiologico.FEMMINILE) {
+					System.out.println("Sesso:    Femminile");
+				} else {
+					System.out.println("Sesso:    Maschile");
+				}
+				}catch (IllegalStateException e) {
+				ViewCLI.stampaErroreSistema(e.getMessage());
+				throw e;
+			} 
 			
-			if (utenteCorrente.getSessoBiologico() == SessoBiologico.FEMMINILE) {
-				System.out.println("Sesso:    Femminile");
-			} else {
-				System.out.println("Sesso:    Maschile");
-			}
-			
-			System.out.println("----------------------------------------");
+			ViewCLI.stampaSeparatore();
 			System.out.println("1. Modifica Password");
 			System.out.println("2. Modifica Numero di Telefono");
 			System.out.println("q. Torna al Menu Principale");

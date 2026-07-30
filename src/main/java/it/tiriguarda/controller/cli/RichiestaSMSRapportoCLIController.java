@@ -62,13 +62,11 @@ public class RichiestaSMSRapportoCLIController {
 					smsController.programmaSms(beanSms);
 					System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
 				} catch (DatabaseNonRaggiungibileException e) {
-					System.out.println("\n[ERRORE DB]: " + e.getMessage());
-					System.out.println("-> Ritorno al menu di configurazione...");
+					ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 					return; 
 				} catch (IllegalStateException e) {
-					System.out.println("\n[ERRORE SESSIONE]: " + e.getMessage());
-					System.out.println("-> Ritorno al Login...");
-					return; 
+					ViewCLI.stampaErroreSistema(e.getMessage());
+					throw e;
 				}
 				
 				ViewCLI.stampaSuccesso();
@@ -93,9 +91,8 @@ public class RichiestaSMSRapportoCLIController {
 			appController.salvaRapportoDefinitivo(bean);
 			return true;
 		} catch (DatabaseNonRaggiungibileException e) {
-			System.out.println("\n[ERRORE DB]: " + e.getMessage());
-			System.out.println("-> Ritorno al menu di configurazione...");
-			return false;
+			ViewCLI.stampaErroreSistema(e.getMessage());
+			throw e;
 		}
 	}
 }

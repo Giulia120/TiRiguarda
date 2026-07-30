@@ -1,8 +1,6 @@
 package it.tiriguarda.controller.cli;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import it.tiriguarda.controller.app.RegistraTestAppController;
@@ -36,12 +34,12 @@ public class RegistraTestCLIController {
 				fine = true;
 				
 			} catch (DatiIncompletiException | DataFuturaException e) {
-				System.out.println("\n[ERRORE DI VALIDAZIONE]: " + e.getMessage());
+				ViewCLI.stampaErrore(e.getMessage());
 				System.out.println("Premi INVIO per riprovare...");
 				scanner.nextLine();
 			} catch (IllegalStateException e) {
-				System.out.println("\n[ERRORE DI SISTEMA]: " + e.getMessage());
-				fine = true; 
+				ViewCLI.stampaErroreSistema(e.getMessage());
+				throw e;
 			}
 		}
 	}
@@ -63,7 +61,7 @@ public class RegistraTestCLIController {
 			} else if (input.equals("2")) {
 				return TipoTest.PRELIEVO;
 			} else {
-				System.out.println("[ERRORE] Scelta non valida! Inserisci 1 o 2.");
+				ViewCLI.stampaInvalido();
 			}
 		}
 	}
