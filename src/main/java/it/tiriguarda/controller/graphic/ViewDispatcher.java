@@ -122,7 +122,7 @@ public class ViewDispatcher {
     	    }
     }
 
-    public static void mostraRisultatoQuestionario(LivelloRischio rischio, int score) {
+    public static void mostraRisultatoQuestionario(LivelloRischio rischio) {
         try {
             FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/QuestionarioRisultato.fxml"));
             Parent nuovaVista = loader.load();

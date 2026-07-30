@@ -17,7 +17,7 @@ public class UtenteDAOMem implements UtenteDAO {
     
     @Override
     public Utente trovaPerUsername(String username) {
-        logger.info("Ricerca utente in memoria per username: " + username);
+        logger.info(() ->"Ricerca utente in memoria per username: " + username);
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(username)) {
                 Utente utente = new Utente(u.getUsername(), u.getPassword(), u.getSessoBiologico(), u.getNumeroTelefono());
@@ -27,7 +27,7 @@ public class UtenteDAOMem implements UtenteDAO {
                 return utente;
             }
         }
-        logger.warning("Nessun utente trovato in memoria con username: {0} " + username);
+        logger.warning(() ->"Nessun utente trovato in memoria con username: " + username);
         return null;
     }
     
@@ -71,7 +71,7 @@ public class UtenteDAOMem implements UtenteDAO {
                 return u.getNumeroTelefono();
             }
         }
-        logger.warning("Impossibile recuperare telefono: utente non trovato in memoria ( {0} )" + username);
+        logger.warning(() ->"Impossibile recuperare telefono: utente non trovato in memoria ( " + username + " )");
         return null;
     }
     

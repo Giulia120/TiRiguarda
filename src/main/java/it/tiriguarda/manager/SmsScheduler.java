@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -33,46 +34,57 @@ public class SmsScheduler {
     }
 
     public void avviaScheduler() {
-    	if(isAvviato) return;
-        scheduler.scheduleAtFixedRate(() -> {
-            try {
-                DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-                SmsDAO smsDao = factory.createSmsDAO();
-                UtenteDAO utenteDao = factory.createUtenteDAO();
-                
-                List<Sms> smsDaInviare = smsDao.recuperaSmsDaInviare();
-                
-                if (smsDaInviare != null && !smsDaInviare.isEmpty()) {
-                    logger.info("Trovati " + smsDaInviare.size() + " SMS da inviare.");
-                    
-                    for (Sms sms : smsDaInviare) {
-                        try {
-                        	String numeroDestinatario = utenteDao.recuperaNumeroTelefono(sms.getUtente());
-                            smsManager.inviaSms(sms, numeroDestinatario);
-                            if (sms.getTipo() == TipoSms.PREP_DAILY) {
-                            	smsDao.aggiornaData(sms);
-                            }else {
-                            	smsDao.aggiornaStato(sms, StatoSms.INVIATO);
-                                logger.info("SMS inviato con successo a: " + numeroDestinatario + " (Utente: " + sms.getUtente() + ")");
-                            }
-                        } catch (SmsNonInviatoException e) {
-                            logger.severe("Errore durante l'invio dell'SMS: " + e.getMessage());
-                            if (sms.getTipo() == TipoSms.PREP_DAILY) {
-                                smsDao.aggiornaData(sms); 
-                            } else {
-                                smsDao.aggiornaStato(sms, StatoSms.ERRORE);
-                            }
-                        
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                logger.severe("Errore nel task di background degli SMS: " + e.getMessage());
-            }
-        }, 0, 1, TimeUnit.MINUTES);
-        isAvviato = true;
-        logger.info("Scheduler SMS avviato in background.");
-    }
+		if (isAvviato) {
+			return;
+		}
+
+		scheduler.scheduleAtFixedRate(this::eseguiTaskSms, 0, 1, TimeUnit.MINUTES);
+		isAvviato = true;
+		logger.info("Scheduler SMS avviato in background.");
+	}
+
+	private void eseguiTaskSms() {
+		try {
+			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			SmsDAO smsDao = factory.createSmsDAO();
+			UtenteDAO utenteDao = factory.createUtenteDAO();
+			
+			List<Sms> smsDaInviare = smsDao.recuperaSmsDaInviare();
+			
+			if (smsDaInviare != null && !smsDaInviare.isEmpty()) {
+				logger.info(()-> "Trovati " +  smsDaInviare.size() + " SMS da inviare.");
+				
+				for (Sms sms : smsDaInviare) {
+					elaboraSingoloSms(sms, smsDao, utenteDao);
+				}
+			}
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Errore nel task di background degli SMS", e);
+		}
+	}
+
+
+	private void elaboraSingoloSms(Sms sms, SmsDAO smsDao, UtenteDAO utenteDao) {
+		try {
+			String numeroDestinatario = utenteDao.recuperaNumeroTelefono(sms.getUtente());
+			smsManager.inviaSms(sms, numeroDestinatario);
+			
+			if (sms.getTipo() == TipoSms.PREP_DAILY) {
+				smsDao.aggiornaData(sms);
+			} else {
+				smsDao.aggiornaStato(sms, StatoSms.INVIATO);
+				logger.info("SMS inviato con successo a: " + sms.getUtente());
+			}
+		} catch (SmsNonInviatoException e) {
+			logger.log(Level.SEVERE, "Errore durante l''invio dell''SMS", e.getMessage());
+			}
+			
+			if (sms.getTipo() == TipoSms.PREP_DAILY) {
+				smsDao.aggiornaData(sms); 
+			} else {
+				smsDao.aggiornaStato(sms, StatoSms.ERRORE);
+			}
+		}
 
     public void arrestaScheduler() {
         if (scheduler != null && !scheduler.isShutdown()) {

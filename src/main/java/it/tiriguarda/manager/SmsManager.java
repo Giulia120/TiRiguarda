@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import it.tiriguarda.domain.Sms;
@@ -15,15 +16,12 @@ public class SmsManager {
 
     public void inviaSms(Sms sms, String numeroDestinatario) throws SmsNonInviatoException {
     	String testoMessaggio = sms.getTesto();
-    	LocalDateTime oraAttuale = LocalDateTime.now();
+    	LocalDateTime oraAttuale = LocalDateTime.now(ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String timestamp = oraAttuale.format(formatter);
     	
 
-        String logSms = String.format("[%s] INVIATO A: %s\nMESSAGGIO: %s", 
-                                      timestamp, 
-                                      numeroDestinatario, 
-                                      testoMessaggio);
+        String logSms = String.format("[%s] INVIATO A: %s%nMESSAGGIO: %s", timestamp, numeroDestinatario, testoMessaggio);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_SMS, true))) {
             bw.write(logSms);
