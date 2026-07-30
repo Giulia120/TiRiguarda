@@ -40,9 +40,11 @@ public class SceltaPrEPGraphicController {
 		}catch(AnnullamentoPrEPException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraMenuPrincipale();
-			}catch (DatabaseNonRaggiungibileException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	        	ViewDispatcher.mostraSceltaConfig();
+		}catch(IllegalStateException e) {
+			ViewDispatcher.mostraErrore(e.getMessage());
+			ViewDispatcher.mostraLogin();
+		}catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 	        }
 	}
 	

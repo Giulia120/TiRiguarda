@@ -17,11 +17,12 @@ public class AnnullaPrEPCLIController {
 			controller.verificaStatoPrEP();
 			System.out.println("Stato del tuo protocollo attivo");
 			return confermaAnnullamento(controller, scanner);
+		}catch(IllegalStateException e) {
+			logger.log(Level.WARNING, e.getMessage());
+			ViewCLI.stampaErroreSistema(e.getMessage());
+			throw e;
 		}catch(AnnullamentoPrEPException e) {
 			logger.log(Level.WARNING, "Protocollo PrEP gia annullato", e);
-			return false;
-		} catch(IllegalStateException e) {
-			logger.log(Level.WARNING, e.getMessage());
 			return false;
 		}catch(Exception e) {
 			logger.log(Level.SEVERE, "Errore imprevisto durante annullamento PrEP", e);

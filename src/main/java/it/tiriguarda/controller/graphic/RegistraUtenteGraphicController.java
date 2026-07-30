@@ -62,8 +62,7 @@ public class RegistraUtenteGraphicController {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			usernameField.setText(null);
 		}catch (DatabaseNonRaggiungibileException e) {
-        	ViewDispatcher.mostraErrore(e.getMessage());
-        	ViewDispatcher.mostraSceltaConfig();
+        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
         }
 	}	
 	

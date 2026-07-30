@@ -42,8 +42,7 @@ public class LoginGraphicController {
 			usernameField.setText(null);
 			passwordField.setText(null);
 		}catch (DatabaseNonRaggiungibileException e) {
-        	ViewDispatcher.mostraErrore(e.getMessage());
-        	ViewDispatcher.mostraSceltaConfig();
+        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
         }
 	}
 	

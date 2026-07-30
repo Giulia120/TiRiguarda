@@ -63,8 +63,7 @@ public class RichiestaSMSRapportoGraphicController {
 			 GestioneSmsAppController controller = new GestioneSmsAppController();
 			 controller.programmaSms(bean);
 		 }catch (DatabaseNonRaggiungibileException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	        	ViewDispatcher.mostraSceltaConfig();
+	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 	     }catch (IllegalStateException e) {
 	    	 	ViewDispatcher.mostraErrore(e.getMessage());
 	    	 	ViewDispatcher.mostraLogin();
@@ -87,8 +86,7 @@ public class RichiestaSMSRapportoGraphicController {
 			try{ RegistraRapportoAppController appController = new RegistraRapportoAppController();
 				appController.salvaRapportoDefinitivo(beanInSospeso);
 				}catch (DatabaseNonRaggiungibileException e) {
-		        	ViewDispatcher.mostraErrore(e.getMessage());
-		        	ViewDispatcher.mostraSceltaConfig();
+		        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 		        }catch(IllegalStateException e) {
 		        	ViewDispatcher.mostraErrore(e.getMessage());
 		        	ViewDispatcher.mostraLogin();

@@ -13,8 +13,11 @@ public class DAOFactoryProvider {
 			if (AppConfig.getCurrentMode() == AppMode.DEMO) {
 				dAOFactoryInstance = new DemoDAOFactory();
 			}
-			else {
+			else if  (AppConfig.getCurrentMode() == AppMode.FULL_DB)  {
 				dAOFactoryInstance = new FullDAOFactory();
+			}
+			else {
+				dAOFactoryInstance = new FullMixDAOFactory();
 			}
 		}
 		return dAOFactoryInstance;

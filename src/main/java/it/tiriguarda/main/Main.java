@@ -2,7 +2,8 @@ package it.tiriguarda.main;
 
 import java.util.Scanner;
 
-import it.tiriguarda.controller.cli.SceltaConfigCLIController;
+import it.tiriguarda.controller.cli.ConfigController;
+import it.tiriguarda.controller.cli.LoginCLIController;
 import it.tiriguarda.controller.graphic.ViewDispatcher;
 import it.tiriguarda.manager.SmsScheduler;
 import javafx.application.Application;
@@ -14,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
     	ViewDispatcher.setFinestraPrincipale(primaryStage);
-        ViewDispatcher.mostraSceltaConfig();
+        ViewDispatcher.mostraLogin();
     }
     
     @Override
@@ -25,32 +26,17 @@ public class Main extends Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("========================================");
-        System.out.println("       BENVENUTO IN TIRIGUARDA          ");
-        System.out.println("========================================");
-        System.out.println("Quale interfaccia vuoi utilizzare?");
-        System.out.println("1 - Command Line Interface (Terminale)");
-        System.out.println("2 - Interfaccia Grafica (JavaFX)");
-        System.out.print("Inserisci la tua scelta (1 o 2): ");
+        ConfigController configurazione = new ConfigController();
+        String scelta = configurazione.configuraApp(scanner);
         
-        String scelta = scanner.nextLine();
-        
-        if (scelta.equals("1")) {
+        if (scelta.equals("CLI")) {
             System.out.println("\n--- Avvio in modalità CLI ---\n");
+            LoginCLIController loginCLI = new LoginCLIController();
+            loginCLI.avviaLogin(scanner); 
             
-            SceltaConfigCLIController sceltaCLI = new SceltaConfigCLIController();
-            sceltaCLI.avviaScelta(scanner); 
-            
-        } else if (scelta.equals("2")) {
+        } else if (scelta.equals("GUI")) {
             System.out.println("\n--- Avvio in modalità Grafica ---");
-            
             launch(args);
-            
-        } else {
-            System.out.println("\nScelta non valida. Il programma verrà chiuso.");
-        }
-        if (!scelta.equals("1")) {
-             scanner.close();
-        }
+            }
     }
 }
