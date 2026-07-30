@@ -2,10 +2,8 @@ package it.tiriguarda.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 
 import it.tiriguarda.domain.TipologiaPrEP;
-import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class ProtocolloPrEPBean {

@@ -31,8 +31,8 @@ public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
         ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
         ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utente.getUsername());
 
-        if (protocollo instanceof ProtocolloPrEPOnDemand) {
-        	ProtocolloPrEPOnDemand onDemand = (ProtocolloPrEPOnDemand) protocollo;
+        if (protocollo instanceof ProtocolloPrEPOnDemand onDemand) {
+        	onDemand = (ProtocolloPrEPOnDemand) protocollo;
         	onDemand.aggiornaDataFine(nuovoRapporto.getData(), utente.getSessoBiologico());
         
             dao.aggiornaProtocollo(onDemand);
