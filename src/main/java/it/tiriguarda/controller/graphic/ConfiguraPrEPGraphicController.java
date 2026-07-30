@@ -39,27 +39,19 @@ public class ConfiguraPrEPGraphicController {
 	
 	@FXML
 	public void onConfermaPrEP() {
-		if(dataInizioPrEPPicker.getValue() == null) {
-			ViewDispatcher.mostraErrore("Inserire la data di inizio assunzione!");
-			return;
-		}
-		if(orarioPrEP.getText().isBlank()) {
-			ViewDispatcher.mostraErrore("Inserire la data di inizio assunzione!");
-			return;
-		}
-		ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
-		bean.setTipoPrEP(tipoPrEP);
-        bean.setDataInizio(dataInizioPrEPPicker.getValue());
+		 try {
+			 ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
+			 bean.setTipoPrEP(tipoPrEP);
+			 bean.setDataInizio(dataInizioPrEPPicker.getValue());
        
-        String oraInserita = orarioPrEP.getText();
-        LocalTime ora = LocalTime.parse(oraInserita);
+			 String oraInserita = orarioPrEP.getText();
+			 LocalTime ora = LocalTime.parse(oraInserita);
         
-        bean.setOrario(ora);
+			 bean.setOrario(ora);
         
-        bean.setRicevereSMS(checkSMS.isSelected());
+			 bean.setRicevereSMS(checkSMS.isSelected());
         
-        ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
-        try {
+			 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
         	controller.configuraPrEP(bean);
 			ViewDispatcher.mostraSuccesso();
 			
