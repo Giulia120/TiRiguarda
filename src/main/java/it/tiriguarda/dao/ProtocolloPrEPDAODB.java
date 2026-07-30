@@ -6,10 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
+import it.tiriguarda.domain.TipologiaPrEP;
+import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
@@ -105,4 +109,29 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	        throw new DatabaseNonRaggiungibileException("Errore aggiornamento protocollo.");
 	    }
 	}
+	
+	@Override
+    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente) {
+		String sql = "select * from `ProtocolloPrEP` where `utente` = ?";
+		List<ProtocolloPrEP> protocolli = new ArrayList<>();
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, utente.getUsername());
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				TipologiaPrEP tipoPrEP = TipologiaPrEP.valueOf(rs.getString("tipoPrEP"));
+				if(tipoPrEP == TipologiaPrEP.DAILY) {
+					ProtocolloPrEP p = new ProtocolloPrEPDaily(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("data").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
+					protocolli.add(p);
+				}else {
+					ProtocolloPrEP p = new ProtocolloPrEPOnDemand(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("data").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
+					protocolli.add(p);
+				}
+			}
+			return protocolli;
+			}catch(SQLException e) {
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+			}
+    }
 }

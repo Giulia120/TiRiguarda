@@ -1,11 +1,19 @@
 package it.tiriguarda.dao;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.tiriguarda.domain.Test;
+import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException; 
 
@@ -31,6 +39,36 @@ public class TestDAOFS implements TestDAO {
     
     @Override
     public List<Test> riepilogoTest(Utente utente) {
+    	List<Test> test = new ArrayList<>();
+    	Path path = Paths.get(FILE_PATH);
     	
+    	if (!Files.exists(path)) {
+            return test;
+        }
+    	try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+            String riga;
+            while ((riga = br.readLine()) != null) {
+                if (riga.trim().isEmpty()) {
+                    continue;
+                }
+                String[] campi = riga.split(",");
+                
+                if (campi.length >= 4) {
+                	
+                	String username = campi[0];
+                	
+                	if(username.equals(utente.getUsername())){
+                		String idTest = campi[1];
+                		TipoTest tipo = TipoTest.valueOf(campi[2]);
+                		LocalDate data = LocalDate.parse(campi[3]);
+                		Test t = new Test(username, idTest, tipo, data);
+                    	test.add(t);
+                	}
+                }
+            }
+        } catch (IOException e) {
+            throw new FileSystemNonRaggiungibileException("Impossibile leggere i test dal file system locale.");
+        }
+        return test;
     }
 }

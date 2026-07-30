@@ -16,12 +16,12 @@ import it.tiriguarda.service.SessionManager;
 
 public class RiepilogoAppController {
 	
-	public RiepilogoBean effettuaRiepilogo() {
+	public RiepilogoBean effettuaRiepilogo(){
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO daoPrEP = factory.createProtocolloPrEPDAO();
-		//List<ProtocolloPrEP> prep = daoPrEP.riepilogoPrEP(utenteCorrente);
+		List<ProtocolloPrEP> prep = daoPrEP.riepilogoPrEP(utenteCorrente);
 		
 		RapportoDAO daoRapporto = factory.createRapportoDAO();
 		List<Rapporto> rapporti = daoRapporto.riepilogoRapporti(utenteCorrente);
@@ -30,7 +30,7 @@ public class RiepilogoAppController {
 		List<Test> test = daoTest.riepilogoTest(utenteCorrente);
 		
 		RiepilogoBean bean = new RiepilogoBean();
-		//bean.setPrep(prep);
+		bean.setPrep(prep);
 		bean.setRapporti(rapporti);
 		bean.setTest(test);
 		

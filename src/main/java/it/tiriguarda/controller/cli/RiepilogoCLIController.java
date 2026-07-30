@@ -7,43 +7,48 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.dto.RiepilogoBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 
 public class RiepilogoCLIController {
 	public void mostraRiepilogo(Scanner scanner) {
-		System.out.println("\n========================================");
-		System.out.println("          RIEPILOGO TEST                ");
-		System.out.println("========================================");
-		System.out.println("(Digita 'q' in qualsiasi momento per tornare al menu)\n");
+		ViewCLI.stampaTitolo("Riepilogo Test");
+		try {
+            RiepilogoAppController controller = new RiepilogoAppController();
+            RiepilogoBean bean = controller.effettuaRiepilogo();
+            
+            System.out.println("\n--- PROTOCOLLO PrEP ---");
+            if (bean.getPrep() == null || bean.getPrep().isEmpty()) {
+                System.out.println("Nessun protocollo PrEP registrato.");
+            } else {
+                for (ProtocolloPrEP p : bean.getPrep()) {
+                    System.out.println("ID: " + p.getIdProtocollo() + " | Tipo: " + p.getTipoPrEP() + " | Data Inizio: " + p.getDataInizio());
+                }
+            }
+            
+            System.out.println("\n--- RAPPORTI ---");
+            if (bean.getRapporti() == null || bean.getRapporti().isEmpty()) {
+                System.out.println("Nessun rapporto registrato.");
+            } else {
+                for (Rapporto r : bean.getRapporti()) {
+                    System.out.println("ID: " + r.getIdRapporto() + " | Data: " + r.getData() + " | Rischio: " + r.getRischio());
+                }
+            }
+            
+            System.out.println("\n--- TEST ---");
+            if (bean.getTest() == null || bean.getTest().isEmpty()) {
+                System.out.println("Nessun test registrato.");
+            } else {
+                for (Test t : bean.getTest()) {
+                    System.out.println("ID: " + t.getidTest() + " | Tipo: " + t.getTipo() + " | Data: " + t.getData());
+                }
+            }
+            
+        } catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
+            System.out.println("\n[ERRORE TECNICO]: " + e.getMessage());
+            System.out.println("Impossibile caricare i dati in questo momento. Riprova più tardi.");
+        }
 		
-		RiepilogoAppController controller = new RiepilogoAppController();
-		RiepilogoBean bean = controller.effettuaRiepilogo();
-		
-		System.out.println("\n--- PROTOCOLLO PrEP ---");
-		if (bean.getPrep() == null || bean.getPrep().isEmpty()) {
-			System.out.println("Nessun protocollo PrEP registrato.");
-		} else {
-			for (ProtocolloPrEP p : bean.getPrep()) {
-				System.out.println("ID: " + p.getIdProtocollo() + " | Tipo: " + p.getTipoPrEP() + " | Data Inizio: " + p.getDataInizio());
-			}
-		}
-		
-		System.out.println("\n--- RAPPORTI ---");
-		if (bean.getRapporti() == null || bean.getRapporti().isEmpty()) {
-			System.out.println("Nessun rapporto registrato.");
-		} else {
-			for (Rapporto r : bean.getRapporti()) {
-				System.out.println("ID: " + r.getIdRapporto() + " | Data: " + r.getData() + " | Rischio: " + r.getRischio());
-			}
-		}
-		
-		System.out.println("\n--- TEST ---");
-		if (bean.getTest() == null || bean.getTest().isEmpty()) {
-			System.out.println("Nessun test registrato.");
-		} else {
-			for (Test t : bean.getTest()) {
-				System.out.println("ID: " + t.getidTest() + " | Tipo: " + t.getTipo() + " | Data: " + t.getData());
-			}
-		}
 		String input = scanner.nextLine();
 		if (input.equalsIgnoreCase("q")) {
 			return;

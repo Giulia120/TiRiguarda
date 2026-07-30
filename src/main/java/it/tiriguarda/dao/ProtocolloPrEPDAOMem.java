@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
+import it.tiriguarda.domain.Test;
+import it.tiriguarda.domain.Utente;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	private static final Logger logger = Logger.getLogger(RapportoDAOMem.class.getName());
@@ -50,4 +52,15 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 		protocolloPrEP.setDataFine(LocalDate.now(ZoneId.systemDefault()));
 		logger.info("Protocollo annullato.");
 	}
+	
+	@Override
+    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente) {
+		List<ProtocolloPrEP> protocolli = new ArrayList<>();
+	    for (ProtocolloPrEP p : protocolliInMemoria) {
+	        if (p.getUtente() != null && p.getUtente().equals(utente.getUsername())) {
+	            protocolli.add(p);
+	        }
+	    }
+	    return protocolli;
+    }
 }
