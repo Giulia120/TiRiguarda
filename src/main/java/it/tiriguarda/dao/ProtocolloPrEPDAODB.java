@@ -111,23 +111,28 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
-    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente) {
-		String sql = "select * from `ProtocolloPrEP` where `utente` = ?";
+    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
+		String sql = "select * from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getUsername());
+			ps.setDate(2, java.sql.Date.valueOf(data));
 			
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				TipologiaPrEP tipoPrEP = TipologiaPrEP.valueOf(rs.getString("tipoPrEP"));
+				ProtocolloPrEP p;
 				if(tipoPrEP == TipologiaPrEP.DAILY) {
-					ProtocolloPrEP p = new ProtocolloPrEPDaily(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("data").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
-					protocolli.add(p);
+					p = new ProtocolloPrEPDaily(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("dataInizio").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
 				}else {
-					ProtocolloPrEP p = new ProtocolloPrEPOnDemand(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("data").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
-					protocolli.add(p);
+					p = new ProtocolloPrEPOnDemand(rs.getString("idProtocollo"), rs.getString("utente"), rs.getDate("dataInizio").toLocalDate(), rs.getBoolean("statoPrEP"), rs.getTime("ora").toLocalTime());
 				}
+				java.sql.Date dataFine = rs.getDate("dataFine");
+				if (dataFine != null) {
+				    p.setDataFine(dataFine.toLocalDate());
+				}
+				protocolli.add(p);
 			}
 			return protocolli;
 			}catch(SQLException e) {

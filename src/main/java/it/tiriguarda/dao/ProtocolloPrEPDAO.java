@@ -1,5 +1,6 @@
 package it.tiriguarda.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
@@ -10,5 +11,5 @@ public interface ProtocolloPrEPDAO {
 	void configuraProtocollo(ProtocolloPrEP protocolloPrEP);
 	void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP);
 	void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP);
-	List<ProtocolloPrEP> riepilogoPrEP(Utente utente);
+	List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data);
 }

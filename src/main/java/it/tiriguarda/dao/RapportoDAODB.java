@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,22 +38,23 @@ public class RapportoDAODB implements RapportoDAO {
 	}
 	
 	@Override
-    public List<Rapporto> riepilogoRapporti(Utente utente) {
-		String sql = "select * from `Rapporto` where `utente` = ?";
-		List<Rapporto> rapporti = new ArrayList<>();
-		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setString(1, utente.getUsername());
-			
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Rapporto r = new Rapporto(rs.getString("utente"), rs.getString("idRapporto"), rs.getDate("data").toLocalDate(), LivelloRischio.valueOf(rs.getString("rischio")));
-				rapporti.add(r);
-			}
-			return rapporti;
-			
-			}catch(SQLException e) {
-				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
-			}
-    }
+	public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
+	    String sql = "select * from `Rapporto` where `utente` = ? and `data` >= ?";
+	    List<Rapporto> rapporti = new ArrayList<>();
+	    try (Connection conn = ConnectionFactory.getConnection();
+	            PreparedStatement ps = conn.prepareStatement(sql);) {
+	        ps.setString(1, utente.getUsername());
+	        ps.setDate(2, java.sql.Date.valueOf(data));
+	        
+	        ResultSet rs = ps.executeQuery();
+	        while(rs.next()) {
+	            Rapporto r = new Rapporto(rs.getString("utente"), rs.getString("idRapporto"), rs.getDate("data").toLocalDate(), LivelloRischio.valueOf(rs.getString("rischio")));
+	            rapporti.add(r);
+	        }
+	        return rapporti;
+	        
+	    } catch(SQLException e) {
+	        throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+	    }
+	}
 }

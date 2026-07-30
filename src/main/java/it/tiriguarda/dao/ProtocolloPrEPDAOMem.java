@@ -54,10 +54,12 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
-    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente) {
+    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 	    for (ProtocolloPrEP p : protocolliInMemoria) {
-	        if (p.getUtente() != null && p.getUtente().equals(utente.getUsername())) {
+	    	boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente.getUsername());
+            boolean dataValida = p.getDataInizio() != null && !p.getDataInizio().isBefore(data);
+	        if (stessoUtente && dataValida) {
 	            protocolli.add(p);
 	        }
 	    }
