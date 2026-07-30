@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
@@ -18,6 +20,7 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException; 
 
 public class TestDAOFS implements TestDAO {
+	private static final Logger logger = Logger.getLogger(TestDAOFS.class.getName());
 
     private static final String FILE_PATH = "test_records.csv";
 
@@ -33,6 +36,7 @@ public class TestDAOFS implements TestDAO {
             bw.write(riga);
             bw.newLine();
         } catch (IOException e) {
+        	logger.log(Level.SEVERE, "Errore SQL durante la registrazione del test", e);
             throw new FileSystemNonRaggiungibileException("Impossibile salvare il test sul file system locale.");
         }
     }
@@ -67,6 +71,7 @@ public class TestDAOFS implements TestDAO {
                 }
             }
         } catch (IOException e) {
+        	logger.log(Level.SEVERE, "Errore SQL durante il riepilogo (test)", e);
             throw new FileSystemNonRaggiungibileException("Impossibile leggere i test dal file system locale.");
         }
         return test;

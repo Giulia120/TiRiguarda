@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Rapporto;
@@ -13,6 +15,7 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class RapportoDAODB implements RapportoDAO {
+	private static final Logger logger = Logger.getLogger(RapportoDAODB.class.getName());
 	
 	@Override
 	public void salvaRapporto (Rapporto rapporto) {
@@ -32,13 +35,14 @@ public class RapportoDAODB implements RapportoDAO {
 			ps.executeUpdate();
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la registrazione del rapporto", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
 	}
 	
 	@Override
     public List<Rapporto> riepilogoRapporti(Utente utente) {
-		String sql = "select * from `Rapporto` where `utente` = ?";
+		String sql = "select `utente`, `idRapporto`, `data`, `rischio`, `dataFinePeriodoFinestra` from `Rapporto` where `utente` = ?";
 		List<Rapporto> rapporti = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -52,6 +56,7 @@ public class RapportoDAODB implements RapportoDAO {
 			return rapporti;
 			
 			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante il riepilogo (rapporti)", e);
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
     }

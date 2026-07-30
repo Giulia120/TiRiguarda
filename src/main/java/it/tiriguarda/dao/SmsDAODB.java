@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.StatoSms;
@@ -14,6 +17,8 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class SmsDAODB implements SmsDAO {
+	private static final Logger logger = Logger.getLogger(SmsDAODB.class.getName());
+	
 	@Override
 	public void salvaSms(Sms sms) {
 		String sql = "insert into `Sms`(`utente`, `idSms`, `testo`, `dataSpedizione`, `stato`, `tipo` ) values(?,?,?,?,?,?)";
@@ -28,6 +33,7 @@ public class SmsDAODB implements SmsDAO {
 			
 			ps.executeUpdate();
 		}catch (SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante la registrazione dell'sms", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -42,16 +48,17 @@ public class SmsDAODB implements SmsDAO {
 			
 			ps.executeUpdate();
 		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante l'eliminazione dell'sms", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
 	
 	@Override
 	public List<Sms> recuperaSmsDaInviare(){
-		String sql = "select * from `Sms` where (`dataSpedizione` < ? AND `stato` =  ?)";
+		String sql = "select `utente`, `idSms`, `testo`, `dataSpedizione`, `stato`, `tipo` from `Sms` where (`dataSpedizione` < ? AND `stato` =  ?)";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);){
-			ps.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+			ps.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now(ZoneId.systemDefault())));
 			ps.setString(2, StatoSms.DA_INVIARE.name());
 			
 			ResultSet rs = ps.executeQuery();
@@ -66,6 +73,7 @@ public class SmsDAODB implements SmsDAO {
 			}
 			return smsDaInviare;
 		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante il recupero dell'sms", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -80,6 +88,7 @@ public class SmsDAODB implements SmsDAO {
 			
 			ps.executeUpdate();
 		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento di stato dell'sms", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}
@@ -95,6 +104,7 @@ public class SmsDAODB implements SmsDAO {
 			
 			ps.executeUpdate();
 		}catch(SQLException e) {
+			logger.log(Level.SEVERE, "Errore SQL durante l'aggiornamento della data dell'sms", e);
 			throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 		}
 	}

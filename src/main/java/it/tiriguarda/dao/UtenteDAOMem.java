@@ -13,7 +13,6 @@ public class UtenteDAOMem implements UtenteDAO {
     @Override
     public void registraUtente(Utente utente) {
         utentiInMemoria.add(utente);
-        logger.info("Registrato nuovo utente in memoria: " + utente.getUsername());
     }
     
     @Override
@@ -25,21 +24,18 @@ public class UtenteDAOMem implements UtenteDAO {
                 if (u.getProtocolloAttivo() != null) {
                     utente.setProtocolloAttivo(u.getProtocolloAttivo());
                 }
-                logger.info("Utente trovato in memoria: " + username);
                 return utente;
             }
         }
-        logger.warning("Nessun utente trovato in memoria con username: " + username);
+        logger.warning("Nessun utente trovato in memoria con username: {0} " + username);
         return null;
     }
     
     @Override
     public void eliminaProtocolloAttivo(Utente utente) {
-        logger.info("Richiesta eliminazione protocollo attivo per l'utente: " + utente.getUsername());
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(utente.getUsername())) {
                 u.setProtocolloAttivo(null);
-                logger.info("Protocollo attivo eliminato con successo in memoria per: " + utente.getUsername());
                 return;
             }
         }
@@ -48,11 +44,9 @@ public class UtenteDAOMem implements UtenteDAO {
     
     @Override
     public void aggiornaPwdUtente(Utente utente) {
-        logger.info("Richiesta aggiornamento password per l'utente: " + utente.getUsername());
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(utente.getUsername())) {
                 u.setPassword(utente.getPassword());
-                logger.info("Password aggiornata con successo in memoria per: " + utente.getUsername());
                 return;
             }
         }
@@ -61,11 +55,9 @@ public class UtenteDAOMem implements UtenteDAO {
     
     @Override
     public void aggiornaTelUtente(Utente utente) {
-        logger.info("Richiesta aggiornamento numero di telefono per l'utente: " + utente.getUsername());
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(utente.getUsername())) {
                 u.setNumeroTelefono(utente.getNumeroTelefono());
-                logger.info("Numero di telefono aggiornato con successo in memoria per: " + utente.getUsername());
                 return;
             }
         }
@@ -74,24 +66,20 @@ public class UtenteDAOMem implements UtenteDAO {
     
     @Override
     public String recuperaNumeroTelefono(String username) {
-        logger.info("Richiesta recupero numero di telefono in memoria per: " + username);
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(username)) {
-                logger.info("Numero di telefono recuperato con successo per: " + username);
                 return u.getNumeroTelefono();
             }
         }
-        logger.warning("Impossibile recuperare telefono: utente non trovato in memoria (" + username + ")");
+        logger.warning("Impossibile recuperare telefono: utente non trovato in memoria ( {0} )" + username);
         return null;
     }
     
     @Override
     public void aggiornaProtocolloAttivo(Utente utente) {
-        logger.info("Richiesta aggiornamento protocollo attivo per l'utente: " + utente.getUsername());
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(utente.getUsername())) {
                 u.setProtocolloAttivo(utente.getProtocolloAttivo());
-                logger.info("Protocollo attivo aggiornato con successo in memoria per: " + utente.getUsername());
                 return;
             }
         }

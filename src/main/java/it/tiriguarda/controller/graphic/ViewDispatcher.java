@@ -128,7 +128,7 @@ public class ViewDispatcher {
             Parent nuovaVista = loader.load();
             
             QuestionarioRisultatoGraphicController controller = loader.getController();
-            controller.inizializza(rischio, score);
+            controller.inizializza(rischio);
             
             finestraPrincipale.setScene(new Scene(nuovaVista));
             finestraPrincipale.show();
@@ -152,7 +152,7 @@ public class ViewDispatcher {
             popupStage.showAndWait();
             
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Errore nel caricamento del popup: " + titolo, e);
+            logger.log(Level.SEVERE, "Errore nel caricamento del popup: ", e);
         }
     }
     

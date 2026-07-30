@@ -61,7 +61,7 @@ public class AnnullaPrEPAppController  {
 		else {
 		    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_OD);
 		}
-		logger.info("Eliminato riferimento a protocollo attivo.");
+		logger.info("Eliminati promemoria per il protocollo PrEP.");
 		
 	}
 	

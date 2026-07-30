@@ -2,6 +2,7 @@ package it.tiriguarda.controller.cli;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,46 +23,54 @@ public class RegistraRapportoCLIController {
 		
 		while (!completato) {
 			ViewCLI.stampaTitolo("Registra Rapporto");
+			
 			LocalDate dataRapporto = ViewCLI.leggiData(scanner);
 			if (dataRapporto == null) return; 
 
 			List<TipoRapporto> tipi = leggiTipiRapporto(scanner);
-			if (tipi == null) return;
+			if (tipi.isEmpty()) return;
 
 			Precauzioni precauzioni = leggiPrecauzioni(scanner);
 			if (precauzioni == null) return;
+			
+			completato = elaboraESalvaRapporto(dataRapporto, tipi, precauzioni, scanner);
+			ViewCLI.stampaSuccesso();
+		}
+	}
 
+	private boolean elaboraESalvaRapporto(LocalDate dataRapporto, List<TipoRapporto> tipi, Precauzioni precauzioni, Scanner scanner) {
+		try {
+			RapportoBean bean = new RapportoBean();
+			bean.setData(dataRapporto);
+			bean.setTipo(tipi);
+			bean.setPrecauzioniUsate(precauzioni);
 
-			try {
-				RapportoBean bean = new RapportoBean();
-				bean.setData(dataRapporto);
-				bean.setTipo(tipi);
-				bean.setPrecauzioniUsate(precauzioni);
+			RegistraRapportoAppController appController = new RegistraRapportoAppController();
+			new RicalcoloSMSPrEPObserver(appController);
+			RapportoBean beanAggiornato = appController.valutaRischio(bean);
 
-				RegistraRapportoAppController appController = new RegistraRapportoAppController();
-				new RicalcoloSMSPrEPObserver(appController);
-				RapportoBean beanAggiornato = appController.valutaRischio(bean);
-
-				if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
-					RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
-					smsController.avvia(beanAggiornato, scanner); 
-				} else {
-					appController.salvaRapportoDefinitivo(beanAggiornato);
-					System.out.println("\nRapporto registrato con successo! Torno al menu principale...");
-				}
-				
-				completato = true;
-
-			} catch (DatiIncompletiException | DataFuturaException e) {
-				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Premi INVIO per correggere i dati...");
-				scanner.nextLine();	
-			} catch (DatabaseNonRaggiungibileException e) {
-	        	ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
-	        }catch (IllegalStateException e) {
-				ViewCLI.stampaErroreSistema(e.getMessage());
-				throw e;
+			if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
+				RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
+				smsController.avvia(beanAggiornato, scanner); 
+			} else {
+				appController.salvaRapportoDefinitivo(beanAggiornato);
 			}
+			
+			return true;
+
+		} catch (DatiIncompletiException | DataFuturaException e) {
+			ViewCLI.stampaErrore(e.getMessage());
+			System.out.println("Premi INVIO per correggere i dati...");
+			scanner.nextLine();
+			return false;
+			
+		} catch (DatabaseNonRaggiungibileException e) {
+			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+			return true;
+			
+		} catch (IllegalStateException e) {
+			ViewCLI.stampaErroreSistema(e.getMessage());
+			throw e;
 		}
 	}
 
@@ -71,12 +80,12 @@ public class RegistraRapportoCLIController {
 		while (tipi.isEmpty()) {
 			System.out.print("È stato un rapporto penetrativo? (si/no): ");
 			String risp1 = scanner.nextLine();
-			if (risp1.equalsIgnoreCase("q")) return null;
+			if (risp1.equalsIgnoreCase("q")) Collections.emptyList();
 			if (risp1.equalsIgnoreCase("si")) tipi.add(TipoRapporto.PENETRATIVO);
 			
 			System.out.print("È stato un rapporto orale? (si/no): ");
 			String risp2 = scanner.nextLine();
-			if (risp2.equalsIgnoreCase("q")) return null;
+			if (risp2.equalsIgnoreCase("q")) Collections.emptyList();
 			if (risp2.equalsIgnoreCase("si")) tipi.add(TipoRapporto.ORALE);
 			
 			if (tipi.isEmpty()) {
