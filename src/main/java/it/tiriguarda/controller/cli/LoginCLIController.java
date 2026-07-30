@@ -59,7 +59,7 @@ public class LoginCLIController {
 			MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
 			menuController.avviaMenu(scanner);
 			
-			return true;
+			return false;
 		} catch (CredenzialiErrateException | DatiIncompletiException e) {
 			System.out.println("\n[ERRORE] " + e.getMessage());
 			return false;

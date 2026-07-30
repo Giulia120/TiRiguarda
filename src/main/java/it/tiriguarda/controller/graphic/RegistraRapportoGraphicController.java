@@ -81,8 +81,7 @@ public class RegistraRapportoGraphicController {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	            dataRapportoPicker.setValue(null);          
 	        }catch (DatabaseNonRaggiungibileException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	        	ViewDispatcher.mostraSceltaConfig();
+	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 	        }catch(IllegalStateException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraLogin();

@@ -74,8 +74,7 @@ public class ConfiguraPrEPGraphicController {
 		}catch(DatiIncompletiException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 		}catch (DatabaseNonRaggiungibileException e) {
-        	ViewDispatcher.mostraErrore(e.getMessage());
-        	ViewDispatcher.mostraSceltaConfig();
+        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
         }
 	}
 	

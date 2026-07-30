@@ -52,13 +52,12 @@ public class RegistraRapportoCLIController {
 				completato = true;
 
 			} catch (DatiIncompletiException | DataFuturaException e) {
-				System.out.println("\n[ERRORE DI VALIDAZIONE]: " + e.getMessage());
+				ViewCLI.stampaErrore(e.getMessage());
 				System.out.println("Premi INVIO per correggere i dati...");
-				scanner.nextLine(); 
+				scanner.nextLine();
 				
 			} catch (IllegalStateException e) {
-				System.out.println("\n[ERRORE DI SISTEMA]: " + e.getMessage());
-				completato = true; 
+				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 			}
 		}
 	}

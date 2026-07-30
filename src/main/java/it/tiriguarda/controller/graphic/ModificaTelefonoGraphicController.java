@@ -34,8 +34,7 @@ public class ModificaTelefonoGraphicController {
             ViewDispatcher.mostraErrore(e.getMessage());
         }catch (DatabaseNonRaggiungibileException e) {
         	chiudiFinestra();
-        	ViewDispatcher.mostraErrore(e.getMessage());
-        	ViewDispatcher.mostraSceltaConfig();
+        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
         }catch(IllegalStateException e) {
         	ViewDispatcher.mostraErrore(e.getMessage());
         	ViewDispatcher.mostraLogin();

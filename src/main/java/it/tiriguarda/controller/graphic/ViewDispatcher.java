@@ -42,10 +42,6 @@ public class ViewDispatcher {
 		cambiaSchermata("/it/tiriguarda/view/Successo.fxml");
 	}
 	
-	public static void mostraSceltaConfig() {
-        cambiaSchermata("/it/tiriguarda/view/SceltaConfig.fxml");
-    }
-	
 	public static void mostraTest() {
         cambiaSchermata("/it/tiriguarda/view/Test.fxml");
     }
@@ -167,4 +163,12 @@ public class ViewDispatcher {
 	   	 alert.setContentText(messaggio);
 	   	 alert.showAndWait();
 	 }
+	
+	public static void mostraErroreCriticoEChiudi(String messaggioGrave) {
+	    mostraErrore("Si è verificato un errore critico di connessione:\n" 
+	                 + messaggioGrave 
+	                 + "\n\nPer evitare la perdita dei dati, l'applicazione verrà chiusa.");
+	    javafx.application.Platform.exit();
+	    System.exit(1);
+	}
 }

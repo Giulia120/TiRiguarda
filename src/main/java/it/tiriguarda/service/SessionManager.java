@@ -16,7 +16,8 @@ public class SessionManager {
 	}
 	
 	public Utente getUtenteLoggato() {
-		return utenteLoggato;
+		//return utenteLoggato;
+		return null;
 	}
 	
 	public void setUtenteLoggato(Utente utenteLoggato) {

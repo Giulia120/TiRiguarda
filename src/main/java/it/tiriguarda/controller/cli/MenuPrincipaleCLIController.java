@@ -21,7 +21,8 @@ public class MenuPrincipaleCLIController {
 
 			String scelta = scanner.nextLine();
 
-			switch (scelta) {
+			try{
+				switch (scelta) {
 				case "1":
 					RegistraRapportoCLIController registraRapportoController = new RegistraRapportoCLIController();
 					registraRapportoController.avviaRegistrazioneRapporto(scanner);
@@ -63,6 +64,10 @@ public class MenuPrincipaleCLIController {
 					
 				default:
 					ViewCLI.stampaInvalido();
+					}
+			}catch(IllegalStateException e) {
+				esci = true;
+				return;
 			}
 		}
 	}

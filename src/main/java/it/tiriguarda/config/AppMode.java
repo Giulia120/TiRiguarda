@@ -2,6 +2,7 @@ package it.tiriguarda.config;
 
 public enum AppMode {
 	DEMO,
-	FULL;
+	FULL_DB,
+	FULL_FS;
 
 }

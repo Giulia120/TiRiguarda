@@ -28,8 +28,7 @@ public class AnnullaPrEPGraphicController {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraLogin();
 		}catch (DatabaseNonRaggiungibileException e) {
-        	ViewDispatcher.mostraErrore(e.getMessage());
-        	ViewDispatcher.mostraSceltaConfig();
+        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
         }
 	}
 	@FXML
