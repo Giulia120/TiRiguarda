@@ -84,11 +84,6 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="TasP (Terapia come Prevenzione): Persone con HIV in terapia efficace e carica virale azzerata NON trasmettono il virus (U=U, Undetectable = Untransmittable);" textAlignment="JUSTIFY" wrapText="true">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                  </Label>
                   <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Test periodico: L'unico modo per conoscere il proprio stato e iniziare subito le cure protettive;" textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />

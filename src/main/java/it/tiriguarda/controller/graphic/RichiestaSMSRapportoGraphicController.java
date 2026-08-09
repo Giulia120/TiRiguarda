@@ -36,7 +36,7 @@ public class RichiestaSMSRapportoGraphicController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
 		dataFinestraLabel.setText(dataFormattata);
-		livelloRischioLabel.setText(String.format("è un %s rischio, quindi", bean.getRischio().toString()));
+		livelloRischioLabel.setText(String.format("è un %s rischio", bean.getRischio().toString()));
 	 }
 	 
 	 @FXML
