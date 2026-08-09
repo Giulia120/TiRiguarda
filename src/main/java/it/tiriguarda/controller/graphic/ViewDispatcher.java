@@ -38,8 +38,19 @@ public class ViewDispatcher {
 		}
 	}
 	
-	public static void mostraSuccesso() {
-		cambiaSchermata("/it/tiriguarda/view/Successo.fxml");
+	public static void mostraSuccesso(String mess) {
+		try {
+            FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/Successo.fxml"));
+            Parent nuovaVista = loader.load();
+            
+            SuccessoGraphicController controller = loader.getController();
+            controller.setMessaggio(mess);
+            
+            finestraPrincipale.setScene(new Scene(nuovaVista));
+            finestraPrincipale.show();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Errore nel caricamento della schermata di successo", e);
+        }
 	}
 	
 	public static void mostraTest() {

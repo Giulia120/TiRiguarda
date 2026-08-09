@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
+import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.Rapporto;
-import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.logic.observer.NuoviRapportiSubject;
@@ -78,8 +78,9 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 			calcolatore = new PreservativoDecorator(calcolatore);
 		}
 		
-		TipologiaPrEP prep = utente.getProtocolloAttivo();
-		if (prep != null) {
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
+		if (dao.esisteProtocollo(utente.getUsername(), bean.getData())) {
 			calcolatore = new PrEPDecorator(calcolatore);
 		}
 		

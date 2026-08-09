@@ -30,7 +30,7 @@ public class RegistraTestCLIController {
 				RegistraTestAppController appController = new RegistraTestAppController();
 				appController.registraTest(bean);
 				
-				ViewCLI.stampaSuccesso();
+				ViewCLI.stampaSuccesso(scanner);
 				fine = true;
 				
 			} catch (DatiIncompletiException | DataFuturaException e) {

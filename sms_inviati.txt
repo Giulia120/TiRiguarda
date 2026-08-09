@@ -137,3 +137,6 @@ MESSAGGIO: Ricordati di assumere la PrEP
 >>>>>>> fccd86016ab4e5ca38bcadaa4690f4567ddece82
 MESSAGGIO: Ricordati di assumere la PrEP
 --------------------------------------------------
+[09/08/2026 17:38:27] INVIATO A: 3245567789
+MESSAGGIO: [PROMEMORIA]: È ora di fare il test!
+--------------------------------------------------

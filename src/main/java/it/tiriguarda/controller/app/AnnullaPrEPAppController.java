@@ -24,13 +24,8 @@ public class AnnullaPrEPAppController  {
 		if (utente == null) {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
 	    }
-		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-	    ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-
-	    ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
 	 
-		if(prot == null) {
+		if(utente.getProtocolloAttivo() == null) {
 			throw new AnnullamentoPrEPException();
 		}
 	}
@@ -51,7 +46,9 @@ public class AnnullaPrEPAppController  {
 		
 	
 		UtenteDAO daoUtente = factory.createUtenteDAO();
-		daoUtente.eliminaProtocolloAttivo(utente);	
+		daoUtente.eliminaProtocolloAttivo(utente);
+		
+		utente.setProtocolloAttivo(null);
 		
 		SmsDAO smsDAO = factory.createSmsDAO();
 

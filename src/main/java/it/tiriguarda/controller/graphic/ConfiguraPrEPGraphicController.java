@@ -53,7 +53,7 @@ public class ConfiguraPrEPGraphicController {
         
 			 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
         	controller.configuraPrEP(bean);
-			ViewDispatcher.mostraSuccesso();
+			ViewDispatcher.mostraSuccesso("PrEP registrata con successo! Ricordati di seguire correttamente il protocollo. Visita la sezione INFORMAZIONI per maggiori info.");
 			
 		}catch(ProtocolloAttivoException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());

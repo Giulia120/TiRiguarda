@@ -12,9 +12,9 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.InfoGraphicController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
          <content>
-            <VBox prefHeight="946.0" prefWidth="798.0" spacing="20.0" style="-fx-background-color: #faefe6;">
+            <VBox spacing="20.0" style="-fx-background-color: #faefe6;">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="759.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,27 +29,87 @@
                         <Font name="Arial Rounded MT Bold" size="36.0" />
                      </font>
                   </Label>
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" prefWidth="724.0" text="L'HIV (Virus dell'Immunodeficienza Umana) è un virus che attacca e indebolisce il sistema immunitario, riducendo la capacità del corpo di difendersi dalle infezioni. Se non trattato con i farmaci antiretrovirali, può evolvere in AIDS." textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
                   <Label alignment="CENTER" prefHeight="28.0" prefWidth="799.0" text="Cos'è l'HIV?" textAlignment="CENTER" textFill="#ab399f">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="Qui scrivi quello che ti pareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="È un virus che colpisce i linfociti CD4, cellule fondamentali per le difese immunitarie. Si tratta di un’infezione cronica: non esiste una cura definitiva, ma i farmaci odierni permettono una vita lunga e sana. HIV e AIDS sono due cose distinte, quest’ultimo è lo stadio clinico avanzato dell'infezione, che si manifesta solo senza terapie." textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="799.0" text="Cos'è la PrEP?" textAlignment="CENTER" textFill="#ab399f">
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="799.0" text="Come si contrae l'HIV?" textAlignment="CENTER" textFill="#ab399f">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Qui scrivi quello che ti pareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Si trasmette solo tramite sangue, sperma, secrezioni vaginali e latte materno. Per via vaginale, anale o orale senza protezione con persone con carica virale rilevabile. Tramite scambio di siringhe, aghi o strumenti da taglio contaminati. Da madre a figlio durante la gravidanza, il parto o l'allattamento al seno. NON contagiano invece: saliva, baci, abbracci, strette di mano, sudore o uso di servizi igienici comuni." textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                   <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="799.0" text="Strumenti di prevenzione:" textAlignment="CENTER" textFill="#ab399f">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Preservativo: Uso corretto del condom maschile o femminile nei rapporti penetrativi;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="TasP (Terapia come Prevenzione): Persone con HIV in terapia efficace e carica virale azzerata NON trasmettono il virus (U=U, Undetectable = Untransmittable);" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="PrEP (Profilassi Pre-Esposizione): Farmaco assunto da persone sieronegative prima dei rapporti per prevenire il contagio;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+				  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="PEP (Profilassi Post-Esposizione): Trattamento farmacologico d'emergenza da iniziare entro 72 ore da un rapporto a rischio;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Materiale sterile: Utilizzo esclusivo di siringhe e strumenti monouso per iniezioni o tatuaggi;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="TasP (Terapia come Prevenzione): Persone con HIV in terapia efficace e carica virale azzerata NON trasmettono il virus (U=U, Undetectable = Untransmittable);" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Test periodico: L'unico modo per conoscere il proprio stato e iniziare subito le cure protettive;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                    <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="799.0" text="PrEP:" textAlignment="CENTER" textFill="#ab399f">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="Daily: Va assunta una compressa ogni 24 ore;" textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                   <Label alignment="CENTER" layoutX="10.0" layoutY="38.0" text="On Demand: Vanno assunte due compresse da 24 a 2 ore prima dal rapporto e successivamente 1 ogni 24 per 2 giorni (sesso biologico maschile), per 7 giorni (sesso biologico femminile)." textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="backButton" focusTraversable="false" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>

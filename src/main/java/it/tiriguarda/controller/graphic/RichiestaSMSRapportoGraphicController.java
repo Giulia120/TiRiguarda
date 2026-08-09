@@ -1,14 +1,11 @@
 package it.tiriguarda.controller.graphic;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
-import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.dto.RapportoBean;
@@ -36,19 +33,10 @@ public class RichiestaSMSRapportoGraphicController {
 	 
 	 public void inizializza(RapportoBean bean) {
 		 this.beanInSospeso = bean;
-		 if (bean.getDataFinePeriodoFinestra() != null && bean.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		        String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
-		        dataFinestraLabel.setText(dataFormattata);
-			} else {
-				dataFinestraLabel.setText("Oggi");
-			}
-			
-			if(bean.getRischio() == LivelloRischio.ALTO) {
-				 livelloRischioLabel.setText("è un alto rischio, quindi");
-			} else if (bean.getRischio() == LivelloRischio.BASSO) {
-				 livelloRischioLabel.setText("è un basso rischio, ma");
-			}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
+		dataFinestraLabel.setText(dataFormattata);
+		livelloRischioLabel.setText(String.format("è un %s rischio, quindi", bean.getRischio().toString()));
 	 }
 	 
 	 @FXML
@@ -69,13 +57,13 @@ public class RichiestaSMSRapportoGraphicController {
 	    	 	ViewDispatcher.mostraErrore(e.getMessage());
 	    	 	ViewDispatcher.mostraLogin();
 	     }
-		 ViewDispatcher.mostraSuccesso();
+		 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 	 }
 	 
 	 @FXML
 	 private void onNoButton(ActionEvent event){
 		 salvaEConcludi();
-		 ViewDispatcher.mostraSuccesso();
+		 ViewDispatcher.mostraSuccesso("Rapporto registrato con successo! Ricorda di fare il test!");
 	 }
 	 
 	 @FXML

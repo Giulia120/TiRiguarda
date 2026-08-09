@@ -28,19 +28,20 @@ public class ModificaTelefonoCLIController {
 				ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
 				appController.cambiaTelefono(bean);
 				
-				ViewCLI.stampaSuccesso();
+				ViewCLI.stampaSuccesso(scanner);
 				return;
 				
 			} catch (DatiIncompletiException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Riprova a inserire i dati.");
+				System.out.println("Premi INVIO per riprovare...");
+				scanner.nextLine();
 				
 			} catch (DatabaseNonRaggiungibileException e) {
 				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
 			} catch (IllegalStateException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
-				return;
+				throw e;
 			}
 		}
 	}

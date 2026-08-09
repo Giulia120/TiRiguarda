@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Rapporto;
-import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class RapportoDAODB implements RapportoDAO {
@@ -42,12 +41,12 @@ public class RapportoDAODB implements RapportoDAO {
 	}
 	
 	@Override
-    public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
+    public List<Rapporto> riepilogoRapporti(String utente, LocalDate data) {
 		String sql = "select `utente`, `idRapporto`, `data`, `rischio`, `dataFinePeriodoFinestra` from `Rapporto` where `utente` = ? and `data` >= ?";
 		List<Rapporto> rapporti = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setString(1, utente.getUsername());
+			ps.setString(1, utente);
 			ps.setDate(2, java.sql.Date.valueOf(data));
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

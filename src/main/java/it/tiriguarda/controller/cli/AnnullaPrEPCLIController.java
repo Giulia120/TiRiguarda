@@ -11,9 +11,7 @@ public class AnnullaPrEPCLIController {
 	public boolean avvioAnnullamento(Scanner scanner) {
 		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
-			System.out.println("...Verifico lo stato del tuo protocollo...");
 			controller.verificaStatoPrEP();
-			System.out.println("Stato del tuo protocollo attivo");
 			return confermaAnnullamento(controller, scanner);
 		}catch(IllegalStateException e) {
 			ViewCLI.stampaErroreSistema(e.getMessage());
@@ -28,6 +26,7 @@ public class AnnullaPrEPCLIController {
 	}
 		
 		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
+			ViewCLI.stampaTitolo("Annullamento Prep");
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
 			System.out.print("Rispondi si/no: ");
 			String risposta = scanner.nextLine();
@@ -37,7 +36,7 @@ public class AnnullaPrEPCLIController {
 			if(risposta.equalsIgnoreCase("si")) {
 				try {
 					controller.annullaPrEP();
-					ViewCLI.stampaSuccesso();
+					ViewCLI.stampaSuccesso(scanner);
 					return true;
 				}catch(DatabaseNonRaggiungibileException e) {
 		            ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());

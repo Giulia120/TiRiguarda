@@ -1,5 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,10 +72,15 @@ public class RegistraRapportoGraphicController {
 		        new RicalcoloSMSPrEPObserver(appController);
 	        	RapportoBean beanAggiornato = appController.valutaRischio(bean);
 	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
-	            	ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
+	            	if(beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+	            		ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
+	            	} else {
+	            		appController.salvaRapportoDefinitivo(beanAggiornato);
+		            	ViewDispatcher.mostraSuccesso(String.format("Rapporto registrato con successo! ATTENZIONE: il tuo rapporto ha un %s rischio, quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
+	            	}
 	            } else {
 	            	appController.salvaRapportoDefinitivo(beanAggiornato);
-	            	ViewDispatcher.mostraSuccesso();
+	            	ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
 	            }
 	        } catch (DatiIncompletiException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());

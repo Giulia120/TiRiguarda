@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiriguarda.domain.Rapporto;
-import it.tiriguarda.domain.Utente;
 
 public class RapportoDAOMem implements RapportoDAO {
 	
@@ -17,10 +16,10 @@ public class RapportoDAOMem implements RapportoDAO {
 	}
 	
 	@Override
-	public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
+	public List<Rapporto> riepilogoRapporti(String utente, LocalDate data) {
 	    List<Rapporto> rapporti = new ArrayList<>();
 	    for (Rapporto r : rapportiInMemoria) {
-	        boolean stessoUtente = r.getUtente() != null && r.getUtente().equals(utente.getUsername());
+	        boolean stessoUtente = r.getUtente() != null && r.getUtente().equals(utente);
 	        boolean dataValida = r.getData() != null && !r.getData().isBefore(data);
 	        
 	        if (stessoUtente && dataValida) {

@@ -7,15 +7,21 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.dto.RiepilogoBean;
+import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 
 public class RiepilogoCLIController {
 	public void mostraRiepilogo(Scanner scanner) {
 		ViewCLI.stampaTitolo("Riepilogo Test");
 		try {
+			RiepilogoBean bean = new RiepilogoBean();
+			
+			bean.setData(ViewCLI.leggiData(scanner));			
+			
             RiepilogoAppController controller = new RiepilogoAppController();
-            RiepilogoBean bean = controller.effettuaRiepilogo();
+            controller.effettuaRiepilogo(bean);
             
             System.out.println("\n--- PROTOCOLLO PrEP ---");
             if (bean.getPrep() == null || bean.getPrep().isEmpty()) {
@@ -45,9 +51,11 @@ public class RiepilogoCLIController {
             }
             
         } catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
-            System.out.println("\n[ERRORE TECNICO]: " + e.getMessage());
-            System.out.println("Impossibile caricare i dati in questo momento. Riprova più tardi.");
-        }
+            ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+        } catch (DatiIncompletiException | DataFuturaException e) {
+			ViewCLI.stampaErrore(e.getMessage());
+			return;
+			}
 		
 		String input = scanner.nextLine();
 		if (input.equalsIgnoreCase("q")) {

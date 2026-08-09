@@ -34,7 +34,6 @@ public class RegistraRapportoCLIController {
 			if (precauzioni == null) return;
 			
 			completato = elaboraESalvaRapporto(dataRapporto, tipi, precauzioni, scanner);
-			ViewCLI.stampaSuccesso();
 		}
 	}
 
@@ -55,7 +54,7 @@ public class RegistraRapportoCLIController {
 			} else {
 				appController.salvaRapportoDefinitivo(beanAggiornato);
 			}
-			
+			ViewCLI.stampaSuccesso(scanner);
 			return true;
 
 		} catch (DatiIncompletiException | DataFuturaException e) {
@@ -80,12 +79,12 @@ public class RegistraRapportoCLIController {
 		while (tipi.isEmpty()) {
 			System.out.print("È stato un rapporto penetrativo? (si/no): ");
 			String risp1 = scanner.nextLine();
-			if (risp1.equalsIgnoreCase("q")) Collections.emptyList();
+			if (risp1.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp1.equalsIgnoreCase("si")) tipi.add(TipoRapporto.PENETRATIVO);
 			
 			System.out.print("È stato un rapporto orale? (si/no): ");
 			String risp2 = scanner.nextLine();
-			if (risp2.equalsIgnoreCase("q")) Collections.emptyList();
+			if (risp2.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp2.equalsIgnoreCase("si")) tipi.add(TipoRapporto.ORALE);
 			
 			if (tipi.isEmpty()) {

@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
-import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.dto.RapportoBean;
@@ -35,7 +34,6 @@ public void avvia(RapportoBean bean, Scanner scanner) {
 			programmaNotificaSms(bean);
 		} else {
 			System.out.println("\n[INFO] Hai detto NO agli SMS.");
-			ViewCLI.stampaSuccesso();
 		}
 	}
 	
@@ -44,12 +42,7 @@ public void avvia(RapportoBean bean, Scanner scanner) {
 		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
 		ViewCLI.stampaSeparatore();
 		
-		if (bean.getRischio() == LivelloRischio.ALTO) {
-			System.out.print("Questo rapporto è un alto rischio, quindi ");
-		} else if (bean.getRischio() == LivelloRischio.BASSO) {
-			System.out.print("Questo rapporto è un basso rischio, ma ");
-		}
-		System.out.println("ti consigliamo di fare un test allo scadere del periodo finestra.");
+		System.out.println(String.format("Il rapporto è a %s rischio, quindi ti consigliamo di fare un test allo scadere del periodo finestra.", bean.getRischio().toString()));
 		
 		if (bean.getDataFinePeriodoFinestra() != null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -83,7 +76,6 @@ public void avvia(RapportoBean bean, Scanner scanner) {
 			GestioneSmsAppController smsController = new GestioneSmsAppController();
 			smsController.programmaSms(beanSms);
 			System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
-			ViewCLI.stampaSuccesso();
 		} catch (DatabaseNonRaggiungibileException e) {
 			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 		} catch (IllegalStateException e) {

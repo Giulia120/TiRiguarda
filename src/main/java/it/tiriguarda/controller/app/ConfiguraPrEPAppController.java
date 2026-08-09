@@ -34,10 +34,8 @@ public class ConfiguraPrEPAppController {
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-
-		ProtocolloPrEP prep = dao.trovaProtocolloAttivo(utente.getUsername());
 		
-		if(prep != null) {
+		if(dao.esisteProtocollo(utente.getUsername(), bean.getDataInizio(), false)) {
 			throw new ProtocolloAttivoException();
 		}
 		String idProtocollo = UUID.randomUUID().toString();
@@ -47,10 +45,14 @@ public class ConfiguraPrEPAppController {
 		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
 		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
 		    protocollo = protocolloDaily;
+		    utente.setProtocolloAttivo(TipologiaPrEP.DAILY);
 		}else {
 			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
 			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
 			protocollo = protocolloOnD;
+			if (protocollo.getDataFine().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+				utente.setProtocolloAttivo(TipologiaPrEP.ON_DEMAND);
+			}
 		}
 				
 		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now(ZoneId.systemDefault()))) {

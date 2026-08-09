@@ -50,7 +50,6 @@ public class ProfiloCLIController {
 					break;
 					
 				case "q":
-					System.out.println("\nTorno al Menu Principale...");
 					return;
 					
 				default:

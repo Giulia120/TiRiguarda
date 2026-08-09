@@ -25,6 +25,10 @@ public class ModificaPwdCLIController {
 			System.out.print("Inserisci la nuova password: ");
 			String nuovaPwd = scanner.nextLine().trim();
 			
+			if (nuovaPwd.equalsIgnoreCase("q")) {
+				return;
+			}
+			
 			try {
 				CambioPwdBean bean = new CambioPwdBean();
 				bean.setVecchiaPassword(vecchiaPwd);
@@ -33,19 +37,20 @@ public class ModificaPwdCLIController {
 				ModificaPwdAppController appController = new ModificaPwdAppController();
 				appController.cambiaPassword(bean);
 				
-				ViewCLI.stampaSuccesso();
+				ViewCLI.stampaSuccesso(scanner);
 				return;
 				
 			} catch (DatiIncompletiException | CredenzialiErrateException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Riprova a inserire i dati.");
+				System.out.println("Premi INVIO per riprovare...");
+				scanner.nextLine();
 				
 			} catch (DatabaseNonRaggiungibileException e) {
 				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
 			} catch (IllegalStateException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
-				return;
+				throw e;
 			}
 		}
 	}

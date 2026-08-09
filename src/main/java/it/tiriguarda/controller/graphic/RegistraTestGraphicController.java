@@ -40,7 +40,7 @@ public class RegistraTestGraphicController {
 		     
 	    	 RegistraTestAppController controller = new RegistraTestAppController();
 	    	 controller.registraTest(bean);
-	    	 ViewDispatcher.mostraSuccesso();
+	    	 ViewDispatcher.mostraSuccesso("Test registrato con successo!");
 	     } catch (DatiIncompletiException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        } catch (DataFuturaException e) {

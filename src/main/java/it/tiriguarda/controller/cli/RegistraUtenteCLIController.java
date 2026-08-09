@@ -48,7 +48,7 @@ public class RegistraUtenteCLIController {
 				RegistraUtenteAppController appController = new RegistraUtenteAppController();
 				appController.registraUtente(bean);
 				
-				ViewCLI.stampaSuccesso();
+				ViewCLI.stampaSuccesso(scanner);
 				fine = true;
 				
 			} catch (DatiIncompletiException | UsernameEsistenteException e) {

@@ -35,7 +35,7 @@ public class ConfiguraPrEPCLIController {
             
                 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
                 controller.configuraPrEP(bean);
-                ViewCLI.stampaSuccesso();
+                ViewCLI.stampaSuccesso(scanner);
                 completato = true;
             } catch (ProtocolloAttivoException e) {
                 ViewCLI.stampaErrore(e.getMessage());
@@ -43,7 +43,6 @@ public class ConfiguraPrEPCLIController {
                 return;
             } catch (DatiIncompletiException e) {
             	ViewCLI.stampaErrore(e.getMessage());
-                System.out.println("Riprovare...");
             } catch (DatabaseNonRaggiungibileException e) {
             	ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
             	throw e;
@@ -61,8 +60,7 @@ public class ConfiguraPrEPCLIController {
             try{
                 return LocalTime.parse(input);
             } catch(DateTimeParseException e) {
-            	ViewCLI.stampaInvalido();
-                System.out.println("Formato orario non valido.");
+                System.out.println("[ERRORE] Formato orario non valido.");
             }
         }
     }

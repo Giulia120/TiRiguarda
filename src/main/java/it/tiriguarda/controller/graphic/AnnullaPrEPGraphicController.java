@@ -22,7 +22,7 @@ public class AnnullaPrEPGraphicController {
 		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			controller.annullaPrEP();
-			ViewDispatcher.mostraSuccesso();
+			ViewDispatcher.mostraSuccesso("PrEP annullata con successo!");
 			
 		}catch(IllegalStateException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());

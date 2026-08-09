@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
-import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException; 
 
 public class TestDAOFS implements TestDAO {
@@ -42,7 +41,7 @@ public class TestDAOFS implements TestDAO {
     }
     
     @Override
-    public List<Test> riepilogoTest(Utente utente, LocalDate data) {
+    public List<Test> riepilogoTest(String utente, LocalDate data) {
     	List<Test> test = new ArrayList<>();
     	Path path = Paths.get(FILE_PATH);
     	
@@ -61,7 +60,7 @@ public class TestDAOFS implements TestDAO {
                 	
                 	String username = campi[0];
                 	
-                	if(username.equals(utente.getUsername())){
+                	if(username.equals(utente)){
                 		LocalDate dataTest = LocalDate.parse(campi[3]);
                 		if (!dataTest.isBefore(data)) {
                             String idTest = campi[1];

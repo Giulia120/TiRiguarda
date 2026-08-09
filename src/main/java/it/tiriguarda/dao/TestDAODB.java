@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
-import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class TestDAODB implements TestDAO {
@@ -37,12 +36,12 @@ public class TestDAODB implements TestDAO {
 	}
 	
 	@Override
-    public List<Test> riepilogoTest(Utente utente, LocalDate data) {
+    public List<Test> riepilogoTest(String utente, LocalDate data) {
 		String sql = "select `utente`, `idTest`, `tipoTest`, `data` from `Test` where `utente` = ? and `data` >= ?";
 		List<Test> test = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setString(1, utente.getUsername());
+			ps.setString(1, utente);
 			ps.setDate(2, java.sql.Date.valueOf(data));
 			
 			ResultSet rs = ps.executeQuery();

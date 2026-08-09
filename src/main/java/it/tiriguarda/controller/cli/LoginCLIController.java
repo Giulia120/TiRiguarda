@@ -23,10 +23,7 @@ public class LoginCLIController {
 			
 			switch (scelta) {
 				case "1":
-					boolean successo = eseguiAccesso(scanner);
-					if (successo) {
-						fine = true;
-					}
+					fine = eseguiAccesso(scanner);
 					break;
 				case "2":
 					RegistraUtenteCLIController registrazioneController = new RegistraUtenteCLIController();
@@ -59,9 +56,10 @@ public class LoginCLIController {
 			MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
 			menuController.avviaMenu(scanner);
 			
-			return false;
+			return true;
 		} catch (CredenzialiErrateException | DatiIncompletiException e) {
-			System.out.println("\n[ERRORE] " + e.getMessage());
+			ViewCLI.stampaErrore(e.getMessage());
+			scanner.nextLine();
 			return false;
 		}
 	}

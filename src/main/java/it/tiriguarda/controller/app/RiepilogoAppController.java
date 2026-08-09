@@ -21,13 +21,13 @@ public class RiepilogoAppController {
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO daoPrEP = factory.createProtocolloPrEPDAO();
-		List<ProtocolloPrEP> prep = daoPrEP.riepilogoPrEP(utenteCorrente, bean.getData());
+		List<ProtocolloPrEP> prep = daoPrEP.riepilogoPrEP(utenteCorrente.getUsername(), bean.getData());
 		
 		RapportoDAO daoRapporto = factory.createRapportoDAO();
-		List<Rapporto> rapporti = daoRapporto.riepilogoRapporti(utenteCorrente, bean.getData());
+		List<Rapporto> rapporti = daoRapporto.riepilogoRapporti(utenteCorrente.getUsername(), bean.getData());
 		
 		TestDAO daoTest = factory.createTestDAO();
-		List<Test> test = daoTest.riepilogoTest(utenteCorrente, bean.getData());
+		List<Test> test = daoTest.riepilogoTest(utenteCorrente.getUsername(), bean.getData());
 		
 		bean.setPrep(prep);
 		bean.setRapporti(rapporti);

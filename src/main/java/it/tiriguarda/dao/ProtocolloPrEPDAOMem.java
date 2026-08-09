@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiriguarda.domain.ProtocolloPrEP;
-import it.tiriguarda.domain.Utente;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	
@@ -48,15 +47,34 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
-    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
+    public List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data) {
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 	    for (ProtocolloPrEP p : protocolliInMemoria) {
-	    	boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente.getUsername());
-            boolean dataValida = p.getDataInizio() != null && !p.getDataInizio().isBefore(data);
+	    	boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente);
+            boolean dataValida = p.getDataInizio().isBefore(data);
 	        if (stessoUtente && dataValida) {
 	            protocolli.add(p);
 	        }
 	    }
 	    return protocolli;
     }
+	
+	@Override
+	public boolean esisteProtocollo(String utente, LocalDate data) {
+		return esisteProtocollo(utente, data, true);
+	}
+	
+	@Override
+	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi) {
+	    for (ProtocolloPrEP p : protocolliInMemoria) {
+	        boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente);
+	        boolean statoValido = !soloAttivi || p.getStatoPrEP();
+	        boolean dataInizioValida = p.getDataInizio().isAfter(data);
+	        boolean dataFineValida = p.getDataFine() == null || !p.getDataFine().isBefore(data);
+	        if (stessoUtente && statoValido && dataInizioValida && dataFineValida) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 }

@@ -15,7 +15,6 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
 import it.tiriguarda.domain.TipologiaPrEP;
-import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
 public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
@@ -117,12 +116,12 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
-    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
+    public List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data) {
 		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setString(1, utente.getUsername());
+			ps.setString(1, utente);
 			ps.setDate(2, java.sql.Date.valueOf(data));
 			
 			ResultSet rs = ps.executeQuery();
@@ -151,4 +150,30 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
     }
+	@Override
+	public boolean  esisteProtocollo(String utente, LocalDate data) {
+		return esisteProtocollo(utente, data, true);
+	}
+	
+	@Override
+	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi) {
+		String sql = "select 1 from `ProtocolloPrEP` where `utente` = ? and `dataInizio` <=  ? and (`dataFine` >=  ? or `dataFine` is null)";
+		if(soloAttivi) {
+			sql+= " and `statoPrEP` = 1";
+		}
+		try (Connection conn = ConnectionFactory.getConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql)) {
+			 	ps.setString(1, utente);
+		        ps.setDate(2, java.sql.Date.valueOf(data));
+		        ps.setDate(3, java.sql.Date.valueOf(data));
+		        try (ResultSet rs = ps.executeQuery()) {
+		        	return rs.next();
+		        }
+			}catch(SQLException e) {
+				logger.log(Level.SEVERE, "Errore SQL durante la rierca del protocollo PrEP", e);
+				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
+			}
+	}
+	
+	
 }
