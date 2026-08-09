@@ -18,13 +18,10 @@ public class SceltaPrEPCLIController {
 			String scelta = scanner.nextLine();
 			switch(scelta) {
 				case "1":
-					System.out.println("scelta PrEP daily");
 					ConfiguraPrEPCLIController configuraPrEPcontrollerD = new ConfiguraPrEPCLIController();
 					configuraPrEPcontrollerD.avviaConfigurazione(TipologiaPrEP.DAILY, scanner);
-					System.out.println("scelta PrEP daily");
 					break;
 				case "2":
-					System.out.println("scelta PrEP on demand");
 					ConfiguraPrEPCLIController configuraPrEPcontrollerOD = new ConfiguraPrEPCLIController();
 					configuraPrEPcontrollerOD.avviaConfigurazione(TipologiaPrEP.ON_DEMAND, scanner);
 					break;

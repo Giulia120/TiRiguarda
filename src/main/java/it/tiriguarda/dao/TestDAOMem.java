@@ -1,5 +1,6 @@
 package it.tiriguarda.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +17,17 @@ private static List<Test> testInMemoria = new ArrayList<>();
 	}
 	
 	@Override
-    public List<Test> riepilogoTest(Utente utente) {
-		List<Test> test = new ArrayList<>();
+	public List<Test> riepilogoTest(Utente utente, LocalDate data) {
+	    List<Test> test = new ArrayList<>();
 	    for (Test t : testInMemoria) {
-	        if (t.getUtente() != null && t.getUtente().equals(utente.getUsername())) {
+	        boolean stessoUtente = t.getUtente() != null && t.getUtente().equals(utente.getUsername());
+	        boolean dataValida = t.getData() != null && !t.getData().isBefore(data);
+	        
+	        if (stessoUtente && dataValida) {
 	            test.add(t);
 	        }
 	    }
 	    return test;
-    }
+	}
 
 }

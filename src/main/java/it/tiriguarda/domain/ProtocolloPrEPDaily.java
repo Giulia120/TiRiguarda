@@ -18,12 +18,4 @@ public class ProtocolloPrEPDaily extends ProtocolloPrEP{
     	promemoria.add(LocalDateTime.of(dataInizio, ora));
         return promemoria;
     }
-    
-    /*public void ricalcolo() {
-    	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
-    	LocalDate fineMese = getDataInizio().plusDays(30);
-    	if(oggi.isAfter(fineMese)) {
-    		calcolaGiorniPromemoria(fineMese);
-    	}
-    } */
 }

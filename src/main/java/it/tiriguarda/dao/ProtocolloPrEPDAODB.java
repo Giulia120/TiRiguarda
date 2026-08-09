@@ -117,12 +117,13 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	}
 	
 	@Override
-    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente) {
-		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ?";
+    public List<ProtocolloPrEP> riepilogoPrEP(Utente utente, LocalDate data) {
+		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, utente.getUsername());
+			ps.setDate(2, java.sql.Date.valueOf(data));
 			
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {

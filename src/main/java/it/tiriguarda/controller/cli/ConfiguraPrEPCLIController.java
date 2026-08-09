@@ -8,43 +8,48 @@ import java.util.Scanner;
 import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 
 public class ConfiguraPrEPCLIController {
 	public void avviaConfigurazione(TipologiaPrEP tipoPrEP, Scanner scanner) {
-        boolean completato = false;
-        while (!completato) {
-            ViewCLI.stampaTitolo("CONFIGURAZIONE PrEP");
-            System.out.println("Tipo PrEP selezionato: " + tipoPrEP);
-            LocalDate dataInizio = ViewCLI.leggiData(scanner);
-            if (dataInizio == null) return;
+		boolean completato = false;
+		while (!completato) {
+			ViewCLI.stampaTitolo("CONFIGURAZIONE PrEP");
+			System.out.println("Tipo PrEP selezionato: " + tipoPrEP);
+			LocalDate dataInizio = ViewCLI.leggiData(scanner);
+			if (dataInizio == null) return;
             
-            LocalTime orario = leggiOrario(scanner);
-            if (orario == null) return;
+			LocalTime orario = leggiOrario(scanner);
+			if (orario == null) return;
 
-            Boolean ricevereSMS = leggiSMS(scanner);
-            if (ricevereSMS == null) return;
-
-            ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
-            bean.setTipoPrEP(tipoPrEP);
-            bean.setDataInizio(dataInizio);
-            bean.setOrario(orario);
-            bean.setRicevereSMS(ricevereSMS);
-            try {
+			Boolean ricevereSMS = leggiSMS(scanner);
+			if (ricevereSMS == null) return;
+			try {
+				ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
+				bean.setTipoPrEP(tipoPrEP);
+				bean.setDataInizio(dataInizio);
+				bean.setOrario(orario);
+				bean.setRicevereSMS(ricevereSMS);
+            
                 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
                 controller.configuraPrEP(bean);
-                System.out.println("\nProtocollo PrEP configurato con successo!");
+                ViewCLI.stampaSuccesso();
                 completato = true;
             } catch (ProtocolloAttivoException e) {
-                System.out.println("\n[ERRORE]: " + e.getMessage());
+                ViewCLI.stampaErrore(e.getMessage());
                 completato = true;
+                return;
             } catch (DatiIncompletiException e) {
-                System.out.println("\n[ERRORE DATI]: " + e.getMessage());
+            	ViewCLI.stampaErrore(e.getMessage());
                 System.out.println("Riprovare...");
+            } catch (DatabaseNonRaggiungibileException e) {
+            	ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
+            	throw e;
             }
-        }
     }
+}
 
     private LocalTime leggiOrario(Scanner scanner) {
         while(true) {
@@ -56,6 +61,7 @@ public class ConfiguraPrEPCLIController {
             try{
                 return LocalTime.parse(input);
             } catch(DateTimeParseException e) {
+            	ViewCLI.stampaInvalido();
                 System.out.println("Formato orario non valido.");
             }
         }
@@ -73,7 +79,7 @@ public class ConfiguraPrEPCLIController {
             else if(risposta.equalsIgnoreCase("no")) {
                 return false;
             }
-            System.out.println("Risposta non valida.");
+            ViewCLI.stampaInvalido();
         }
     }
 }

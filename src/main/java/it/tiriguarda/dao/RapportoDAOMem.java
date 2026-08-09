@@ -1,5 +1,6 @@
 package it.tiriguarda.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +17,16 @@ public class RapportoDAOMem implements RapportoDAO {
 	}
 	
 	@Override
-    public List<Rapporto> riepilogoRapporti(Utente utente) {
-		List<Rapporto> rapporti = new ArrayList<>();
+	public List<Rapporto> riepilogoRapporti(Utente utente, LocalDate data) {
+	    List<Rapporto> rapporti = new ArrayList<>();
 	    for (Rapporto r : rapportiInMemoria) {
-	        if (r.getUtente() != null && r.getUtente().equals(utente.getUsername())) {
+	        boolean stessoUtente = r.getUtente() != null && r.getUtente().equals(utente.getUsername());
+	        boolean dataValida = r.getData() != null && !r.getData().isBefore(data);
+	        
+	        if (stessoUtente && dataValida) {
 	            rapporti.add(r);
 	        }
 	    }
 	    return rapporti;
-    }
+	}
 }

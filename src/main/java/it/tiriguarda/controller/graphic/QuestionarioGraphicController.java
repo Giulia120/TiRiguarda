@@ -71,7 +71,7 @@ public class QuestionarioGraphicController {
 
             Stage stage = (Stage) avantiButton.getScene().getWindow();
             stage.close();
-            ViewDispatcher.mostraRisultatoQuestionario(rischio, 0);
+            ViewDispatcher.mostraRisultatoQuestionario(rischio);
         }
     }
 }

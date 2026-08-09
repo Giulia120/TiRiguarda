@@ -31,11 +31,7 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     
     public boolean verificaScadenza() {
     	LocalDate oggi = LocalDate.now(ZoneId.systemDefault());
-    	
-    	if(oggi.isAfter(getDataFine())) {
-    		return true;
-    	}
-    	return false;
+    	return oggi.isAfter(getDataFine());
     }
     
     public void aggiornaDataFine(LocalDate dataInizio, SessoBiologico sesso) {
@@ -46,9 +42,4 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     		setDataFine(dataInizio.plusDays(7));
     		}
     }
-   
-   /* public List<LocalDate> aggiornaPrEPOnDemand(LocalDate dataRapporto, SessoBiologico sesso) {
-    	aggiornaDataFine(dataRapporto, sesso);
-    	return calcolaGiorniPromemoria(dataRapporto, sesso);
-    }*/
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import it.tiriguarda.domain.TipologiaPrEP;
+import it.tiriguarda.exception.DatiIncompletiException;
 
 public class ProtocolloPrEPBean {
 	private TipologiaPrEP tipoPrEP;
@@ -20,10 +21,13 @@ public class ProtocolloPrEPBean {
 	public LocalDate getDataInizio() {
 		return dataInizio;
 	}
-	public void setDataInizio(LocalDate dataInizio) {
+	
+	public void setDataInizio(LocalDate dataInizio) throws DatiIncompletiException {
+		controllaData(dataInizio);
 		this.dataInizio = dataInizio;
 	}
-	public LocalTime getOrario() {
+	public LocalTime getOrario() throws DatiIncompletiException {
+		controllaOra(orario);
 		return orario;
 	}
 	public void setOrario(LocalTime orario) {
@@ -34,5 +38,16 @@ public class ProtocolloPrEPBean {
 	}
 	public void setRicevereSMS(boolean ricevereSMS) {
 		this.ricevereSMS = ricevereSMS;
+	}
+	private void controllaData(LocalDate data) throws DatiIncompletiException {
+		if (data == null) {
+			throw new DatiIncompletiException("Devi inserire la data!");
+		}
+	}
+	
+	private void controllaOra(LocalTime ora) throws DatiIncompletiException{
+		if (ora == null) {
+			throw new DatiIncompletiException("Devi inserire l'ora!");
+			}
 	}
 }
