@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +18,7 @@ import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
+import it.tiriguarda.exception.ProtocolloAttivoException;
 import it.tiriguarda.service.SessionManager;
 
 public class TestConfiguraPrEPAppController {
@@ -50,7 +52,7 @@ public class TestConfiguraPrEPAppController {
 	}
 	
 	@Test
-	@DisplayName("")
+	@DisplayName("aaaa")
 	void testProtocolloAttivoException() throws Exception{
 		SessionManager.getInstance();
 		ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
