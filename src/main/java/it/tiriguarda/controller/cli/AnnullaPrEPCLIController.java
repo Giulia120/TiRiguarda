@@ -6,7 +6,6 @@ import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
-@SuppressWarnings("java:S106")
 
 public class AnnullaPrEPCLIController {
 	public boolean avvioAnnullamento(Scanner scanner) {
@@ -25,7 +24,7 @@ public class AnnullaPrEPCLIController {
 	        return false;
 	    }
 	}
-		
+		@SuppressWarnings("java:S106")
 		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
 			ViewCLI.stampaTitolo("Annullamento Prep");
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
