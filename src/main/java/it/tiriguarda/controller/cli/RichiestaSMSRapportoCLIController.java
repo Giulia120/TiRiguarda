@@ -42,7 +42,7 @@ public class RichiestaSMSRapportoCLIController {
 		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
 		ViewCLI.stampaSeparatore();
 		
-		System.out.println(String.format("Il rapporto è a %s rischio, quindi ti consigliamo di fare un test allo scadere del periodo finestra.", bean.getRischio().toString()));
+		System.out.println(String.format("Il rapporto e' a %s rischio, quindi ti consigliamo di fare un test allo scadere del periodo finestra.", bean.getRischio().toString()));
 		
 		if (bean.getDataFinePeriodoFinestra() != null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -66,7 +66,7 @@ public class RichiestaSMSRapportoCLIController {
 	@SuppressWarnings("java:S106")
 	private void programmaNotificaSms(RapportoBean bean) {
 		SmsBean beanSms = new SmsBean();
-		beanSms.setTesto("[PROMEMORIA]: È ora di fare il test!");
+		beanSms.setTesto("[PROMEMORIA]: E' ora di fare il test!");
 		LocalDateTime dataEOra = LocalDateTime.of(bean.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
 		beanSms.setDataSpedizione(dataEOra);
 		beanSms.setTipo(TipoSms.TEST);

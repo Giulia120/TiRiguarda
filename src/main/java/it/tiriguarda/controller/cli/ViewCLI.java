@@ -49,7 +49,7 @@ public class ViewCLI {
 	@SuppressWarnings("java:S106")
 	    public static void stampaSuccesso(Scanner scanner) {
 	    	System.out.println("\n****************************************");
-			System.out.println("*            È un successo!             *");
+			System.out.println("*            E' un successo!             *");
 			System.out.println("****************************************");
 			System.out.println("Premi INVIO tornare al menu principale");
 			scanner.nextLine();

@@ -30,7 +30,7 @@ public class QuestionDAOMem implements QuestionDAO {
 
         	questions.add(new Question(
         	    "4. Numero di partner sessuali diversi negli ultimi 12 mesi",
-        	    List.of("0 o 1 partner.", "Da 2 a 5 partner.", "Più di 5 partner."),
+        	    List.of("0 o 1 partner.", "Da 2 a 5 partner.", "Piu' di 5 partner."),
         	    List.of(0, 1, 2)
         	));
 

@@ -22,7 +22,7 @@ public class ModificaPwdAppController {
 
         
         if (!utenteCorrente.verificaPassword(bean.getVecchiaPassword())) {
-            throw new CredenzialiErrateException("La vecchia password non è corretta!");
+            throw new CredenzialiErrateException("La vecchia password non e' corretta!");
         }
         
         utenteCorrente.setPassword(SecurityUtil.hashPassword(bean.getNuovaPassword()));

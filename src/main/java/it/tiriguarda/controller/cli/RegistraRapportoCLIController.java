@@ -77,12 +77,12 @@ public class RegistraRapportoCLIController {
 		List<TipoRapporto> tipi = new ArrayList<>();
 		
 		while (tipi.isEmpty()) {
-			System.out.print("È stato un rapporto penetrativo? (si/no): ");
+			System.out.print("E' stato un rapporto penetrativo? (si/no): ");
 			String risp1 = scanner.nextLine();
 			if (risp1.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp1.equalsIgnoreCase("si")) tipi.add(TipoRapporto.PENETRATIVO);
 			
-			System.out.print("È stato un rapporto orale? (si/no): ");
+			System.out.print("E' stato un rapporto orale? (si/no): ");
 			String risp2 = scanner.nextLine();
 			if (risp2.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp2.equalsIgnoreCase("si")) tipi.add(TipoRapporto.ORALE);

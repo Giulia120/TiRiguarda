@@ -60,7 +60,7 @@ public class RiepilogoGraphicController {
 		
 		for (var r : bean.getRapporti()) {  
 			String testo = "Data: " + r.getData() + " | Rischio: " + r.getRischio() + " | Fine Finestra: " + r.getDataFinePeriodoFinestra();
-			Label lblItem = new Label("• " + testo);  
+			Label lblItem = new Label("- " + testo);  
 			vboxContenutoRisultati.getChildren().add(lblItem);
 		}
 	}
@@ -75,7 +75,7 @@ public class RiepilogoGraphicController {
 		
 		for (var t : bean.getTest()) {
 			String testo = "Tipo: " + t.getTipo() + " | Data: " + t.getData();
-			Label lblItem = new Label("• " + testo);  
+			Label lblItem = new Label("- " + testo);  
 			vboxContenutoRisultati.getChildren().add(lblItem);
 		}
 	}
@@ -89,8 +89,8 @@ public class RiepilogoGraphicController {
 		vboxContenutoRisultati.getChildren().add(lblTitoloProtocolli);
 		
 		for (var p : bean.getPrep()) {
-			String testo = "Tipo PrEP: " + p.getTipoPrEP() + " | Inizio: " + p.getDataInizio() + " | Ora: " + p.getOra() + " | Attivo: " + (p.getStatoPrEP() ? "Sì" : "No") + (p.getDataFine() != null ? " | Fine: " + p.getDataFine() : "");
-			Label lblItem = new Label("• " + testo);  
+			String testo = "Tipo PrEP: " + p.getTipoPrEP() + " | Inizio: " + p.getDataInizio() + " | Ora: " + p.getOra() + " | Attivo: " + (p.getStatoPrEP() ? "Si" : "No") + (p.getDataFine() != null ? " | Fine: " + p.getDataFine() : "");
+			Label lblItem = new Label("- " + testo);  
 			vboxContenutoRisultati.getChildren().add(lblItem);
 		}
 	}
