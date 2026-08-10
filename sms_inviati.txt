@@ -140,3 +140,12 @@ MESSAGGIO: Ricordati di assumere la PrEP
 [09/08/2026 17:38:27] INVIATO A: 3245567789
 MESSAGGIO: [PROMEMORIA]: È ora di fare il test!
 --------------------------------------------------
+[10/08/2026 13:04:15] INVIATO A: 3333
+MESSAGGIO: Ricordati di assumere la PrEP
+--------------------------------------------------
+[10/08/2026 13:05:06] INVIATO A: 3333
+MESSAGGIO: Ricordati di assumere la PrEP
+--------------------------------------------------
+[10/08/2026 13:05:14] INVIATO A: 3333
+MESSAGGIO: Ricordati di assumere la PrEP
+--------------------------------------------------

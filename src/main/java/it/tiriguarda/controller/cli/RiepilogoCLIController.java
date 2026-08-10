@@ -35,13 +35,8 @@ public class RiepilogoCLIController {
 			ViewCLI.stampaErrore(e.getMessage());
 			return;
 			}
-		
-		String input = scanner.nextLine();
-		if (input.equalsIgnoreCase("q")) {
-			return;
-		}
 	}
-	
+	@SuppressWarnings("java:S106")
 	private void stampaSezionePrep(List<ProtocolloPrEP> listaPrep) {
 		System.out.println("\n--- PROTOCOLLO PrEP ---");
 		if (listaPrep == null || listaPrep.isEmpty()) {
@@ -52,7 +47,7 @@ public class RiepilogoCLIController {
 			}
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private void stampaSezioneRapporti(List<Rapporto> listaRapporti) {
 		System.out.println("\n--- RAPPORTI ---");
 		if (listaRapporti == null || listaRapporti.isEmpty()) {
@@ -63,7 +58,7 @@ public class RiepilogoCLIController {
 			}
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private void stampaSezioneTest(List<Test> listaTest) {
 		System.out.println("\n--- TEST ---");
 		if (listaTest == null || listaTest.isEmpty()) {
