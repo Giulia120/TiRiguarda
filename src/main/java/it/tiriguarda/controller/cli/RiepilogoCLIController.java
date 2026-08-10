@@ -33,8 +33,7 @@ public class RiepilogoCLIController {
             ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
         } catch (DatiIncompletiException | DataFuturaException e) {
 			ViewCLI.stampaErrore(e.getMessage());
-			return;
-			}
+		}
 	}
 	@SuppressWarnings("java:S106")
 	private void stampaSezionePrep(List<ProtocolloPrEP> listaPrep) {
