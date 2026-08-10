@@ -30,12 +30,12 @@ public class Main extends Application {
         String scelta = configurazione.configuraApp(scanner);
         
         if (scelta.equals("CLI")) {
-            System.out.println("\n--- Avvio in modalità CLI ---\n");
+            System.out.println("\n--- Avvio in modalita' CLI ---\n");
             LoginCLIController loginCLI = new LoginCLIController();
             loginCLI.avviaLogin(scanner); 
             
         } else if (scelta.equals("GUI")) {
-            System.out.println("\n--- Avvio in modalità Grafica ---");
+            System.out.println("\n--- Avvio in modalita' Grafica ---");
             launch(args);
             }
     }

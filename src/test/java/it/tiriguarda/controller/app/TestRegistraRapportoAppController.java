@@ -127,7 +127,7 @@ public class TestRegistraRapportoAppController {
     }
 	
 	@Test
-	@DisplayName("Se non c'è un utente loggato, salvaRapportoDefinitivo deve lanciare un'eccezione")
+	@DisplayName("Se non c'e' un utente loggato, salvaRapportoDefinitivo deve lanciare un'eccezione")
 	public void testSalvaRapportoDefinitivoSenzaUtenteLoggato() throws Exception {
 	    SessionManager.getInstance().clearSessione();
 	    
@@ -140,7 +140,7 @@ public class TestRegistraRapportoAppController {
 	}
 	
 	@Test
-	@DisplayName("Se non c'è un utente loggato, valutaRischio deve lanciare un'eccezione")
+	@DisplayName("Se non c'e' un utente loggato, valutaRischio deve lanciare un'eccezione")
 	public void testValutaRischioSenzaUtenteLoggato() throws Exception {
 	    SessionManager.getInstance().clearSessione();
 	    

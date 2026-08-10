@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +32,7 @@ public class TestDAOFS implements TestDAO {
                 test.getTipo().name(),
                 test.getData().toString());
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, StandardCharsets.UTF_8, true))) {
             bw.write(riga);
             bw.newLine();
         } catch (IOException e) {

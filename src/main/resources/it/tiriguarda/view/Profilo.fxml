@@ -22,7 +22,7 @@
             <Button fx:id="modificaTelButton" layoutX="487.0" layoutY="456.0" mnemonicParsing="false" onAction="#onModificaTel" prefHeight="52.0" prefWidth="111.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Label layoutX="394.0" layoutY="9.0" prefHeight="120.0" prefWidth="73.0" text=" ">
                <tooltip>
-                  <Tooltip text="Simbolo di supporto e solidarietà per la lotta contro l'AIDS" />
+                  <Tooltip text="Simbolo di supporto e solidarieta' per la lotta contro l'AIDS" />
                </tooltip>
             </Label>
             <Label fx:id="usernameLabel" layoutX="379.0" layoutY="228.0" prefHeight="18.0" prefWidth="263.0">

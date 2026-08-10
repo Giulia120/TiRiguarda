@@ -5,3 +5,6 @@ encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8
 encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8
+encoding/sms_inviati.txt=UTF-8
+encoding/test_records.csv=UTF-8
+encoding/tirguardadb.sql=UTF-8

@@ -29,17 +29,17 @@
                         <Font name="Arial Rounded MT Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" prefWidth="724.0" text="L'HIV (Virus dell'Immunodeficienza Umana) è un virus che attacca e indebolisce il sistema immunitario, riducendo la capacità del corpo di difendersi dalle infezioni. Se non trattato con i farmaci antiretrovirali, può evolvere in AIDS." textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" prefWidth="724.0" text="L'HIV (Virus dell'Immunodeficienza Umana) e' un virus che attacca e indebolisce il sistema immunitario, riducendo la capacita' del corpo di difendersi dalle infezioni. Se non trattato con i farmaci antiretrovirali, puo' evolvere in AIDS." textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="799.0" text="Cos'è l'HIV?" textAlignment="CENTER" textFill="#ab399f">
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="799.0" text="Cos'e' l'HIV?" textAlignment="CENTER" textFill="#ab399f">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="È un virus che colpisce i linfociti CD4, cellule fondamentali per le difese immunitarie. Si tratta di un’infezione cronica: non esiste una cura definitiva, ma i farmaci odierni permettono una vita lunga e sana. HIV e AIDS sono due cose distinte, quest’ultimo è lo stadio clinico avanzato dell'infezione, che si manifesta solo senza terapie." textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="E'un virus che colpisce i linfociti CD4, cellule fondamentali per le difese immunitarie. Si tratta di un'infezione cronica: non esiste una cura definitiva, ma i farmaci odierni permettono una vita lunga e sana. HIV e AIDS sono due cose distinte, quest'ultimo e' lo stadio clinico avanzato dell'infezione, che si manifesta solo senza terapie." textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>

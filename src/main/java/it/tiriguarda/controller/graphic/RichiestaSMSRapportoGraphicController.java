@@ -36,14 +36,14 @@ public class RichiestaSMSRapportoGraphicController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
 		dataFinestraLabel.setText(dataFormattata);
-		livelloRischioLabel.setText(String.format("è un %s rischio", bean.getRischio().toString()));
+		livelloRischioLabel.setText(String.format("e' un %s rischio", bean.getRischio().toString()));
 	 }
 	 
 	 @FXML
 	 private void onSiButton(){
 		 salvaEConcludi();
 		 SmsBean bean = new SmsBean();
-		 bean.setTesto("[PROMEMORIA]: È ora di fare il test!");
+		 bean.setTesto("[PROMEMORIA]: E' ora di fare il test!");
 		 LocalDateTime dataEOra = LocalDateTime.of(beanInSospeso.getDataFinePeriodoFinestra(), LocalTime.of(10, 00));
 		 bean.setDataSpedizione(dataEOra);
 		 bean.setTipo(TipoSms.TEST);

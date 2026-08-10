@@ -74,7 +74,7 @@ public class UtenteBean {
 
 	private void controllaFormatoTelefono(String numeroTelefono) throws DatiIncompletiException {
 		if (!numeroTelefono.matches("^\\d{9,11}$")) {
-			throw new DatiIncompletiException("Il numero di telefono non è valido (deve contenere solo numeri, tra 9 e 11 cifre)!");
+			throw new DatiIncompletiException("Il numero di telefono non e' valido (deve contenere solo numeri, tra 9 e 11 cifre)!");
 		}
 	}
 }
