@@ -18,7 +18,7 @@ public class ConfigController {
         
         return uiChoice;
     }
-
+    @SuppressWarnings("java:S106")
     private String scegliInterfaccia(Scanner scanner) {
         while(true) {
             System.out.println("\nQuale interfaccia vuoi utilizzare?");
@@ -32,7 +32,7 @@ public class ConfigController {
             ViewCLI.stampaInvalido();
         }
     }
-
+    @SuppressWarnings("java:S106")
     private void scegliModalita(Scanner scanner) {
         while (true) {
             System.out.println("\nScegli la modalità di persistenza dei dati:");
