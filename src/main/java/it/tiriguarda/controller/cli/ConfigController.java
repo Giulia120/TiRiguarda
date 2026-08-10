@@ -6,7 +6,7 @@ import it.tiriguarda.config.AppMode;
 import it.tiriguarda.manager.SmsScheduler;
 
 public class ConfigController {
-    
+	@SuppressWarnings("java:S106")
     public String configuraApp(Scanner scanner) {
         ViewCLI.stampaSeparatore();
         System.out.println("       BENVENUTO IN TIRIGUARDA          ");

@@ -10,7 +10,7 @@ import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class RegistraTestCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avviaRegistrazioneTest(Scanner scanner) {
 		boolean fine = false;
 
@@ -43,7 +43,7 @@ public class RegistraTestCLIController {
 			}
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private TipoTest leggiTipoTest(Scanner scanner) {
 		while (true) {
 			System.out.println("\nChe tipo di test hai effettuato?");

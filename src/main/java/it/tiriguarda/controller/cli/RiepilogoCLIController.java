@@ -13,6 +13,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 
 public class RiepilogoCLIController {
+	@SuppressWarnings("java:S106")
 	public void mostraRiepilogo(Scanner scanner) {
 		ViewCLI.stampaTitolo("Riepilogo Test");
 		try {

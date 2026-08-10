@@ -7,7 +7,7 @@ import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.DatiProfiloBean;
 
 public class ProfiloCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avviaProfilo(Scanner scanner) {
 		
 		while (true) {

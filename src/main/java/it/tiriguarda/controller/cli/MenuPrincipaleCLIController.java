@@ -3,7 +3,7 @@ package it.tiriguarda.controller.cli;
 import java.util.Scanner;
 
 public class MenuPrincipaleCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avviaMenu(Scanner scanner) {
 		boolean esci = false;
 

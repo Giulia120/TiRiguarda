@@ -8,7 +8,7 @@ import it.tiriguarda.exception.CredenzialiErrateException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class LoginCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avviaLogin(Scanner scanner) {
 		boolean fine = false;
 		
@@ -36,7 +36,7 @@ public class LoginCLIController {
 			}
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private boolean eseguiAccesso(Scanner scanner) {
 		System.out.print("Username: ");
 		String username = scanner.nextLine();

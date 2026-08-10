@@ -36,7 +36,7 @@ public class RegistraRapportoCLIController {
 			completato = elaboraESalvaRapporto(dataRapporto, tipi, precauzioni, scanner);
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private boolean elaboraESalvaRapporto(LocalDate dataRapporto, List<TipoRapporto> tipi, Precauzioni precauzioni, Scanner scanner) {
 		try {
 			RapportoBean bean = new RapportoBean();
@@ -72,7 +72,7 @@ public class RegistraRapportoCLIController {
 			throw e;
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private List<TipoRapporto> leggiTipiRapporto(Scanner scanner) {
 		List<TipoRapporto> tipi = new ArrayList<>();
 		
