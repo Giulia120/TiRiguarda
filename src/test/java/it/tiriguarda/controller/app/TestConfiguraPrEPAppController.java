@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,17 +14,19 @@ import org.junit.jupiter.api.Test;
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
-import it.tiriguarda.dao.UtenteDAO;
-import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.SessoBiologico;
-import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
-import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 import it.tiriguarda.service.SessionManager;
+
+
+/**
+ * Test class for ConfiguraPrEPAppController.
+ * author: Caterina Spinelli
+ */
 
 	public class TestConfiguraPrEPAppController {
 		private ConfiguraPrEPAppController controller;
