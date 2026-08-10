@@ -35,7 +35,7 @@ public class ConfigController {
     @SuppressWarnings("java:S106")
     private void scegliModalita(Scanner scanner) {
         while (true) {
-            System.out.println("\nScegli la modalità di persistenza dei dati:");
+            System.out.println("\nScegli la modalita' di persistenza dei dati:");
             System.out.println("1 - Demo (Dati su memoria volatile)");
             System.out.println("2 - Full (Tutto su Database)");
             System.out.println("3 - Mista (Database + Test su File System)");

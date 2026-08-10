@@ -3,6 +3,7 @@ package it.tiriguarda.manager;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +24,7 @@ public class SmsManager {
 
         String logSms = String.format("[%s] INVIATO A: %s%nMESSAGGIO: %s", timestamp, numeroDestinatario, testoMessaggio);
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_SMS, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_SMS, StandardCharsets.UTF_8, true))) {
             bw.write(logSms);
             bw.newLine();
             bw.write("--------------------------------------------------");

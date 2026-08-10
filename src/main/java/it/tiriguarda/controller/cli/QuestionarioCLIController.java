@@ -68,7 +68,7 @@ public class QuestionarioCLIController {
 		switch (rischio) {
 			case NULLO:
 				System.out.println("Livello di Rischio: BASSO O NULLO");
-				System.out.println("I tuoi comportamenti indicano un'eccellente attenzione alla prevenzione. \nIl rischio biologico attuale è minimo. \nContinua così e ricordati di inserire il test HIV nella tua normale routine \ndi controlli sanitari in caso di nuovi partner futuri.");
+				System.out.println("I tuoi comportamenti indicano un'eccellente attenzione alla prevenzione. \nIl rischio biologico attuale e' minimo. \nContinua così e ricordati di inserire il test HIV nella tua normale routine \ndi controlli sanitari in caso di nuovi partner futuri.");
 				break;
 			case BASSO:
 				System.out.println("Livello di Rischio: MODERATO");
@@ -76,7 +76,7 @@ public class QuestionarioCLIController {
 				break;
 			case ALTO:
 				System.out.println("Livello di Rischio: ALTO");
-				System.out.println("I tuoi comportamenti ti espongono a una concreta e frequente probabilità di contrarre l'HIV. \nSi raccomanda vivamente di effettuare un test HIV al più presto (se non eseguito di recente) \ne di prenotare un colloquio clinico per accedere alla PrEP o ad altre strategie mirate di riduzione del danno.");
+				System.out.println("I tuoi comportamenti ti espongono a una concreta e frequente probabilità di contrarre l'HIV. \nSi raccomanda vivamente di effettuare un test HIV al piu' presto (se non eseguito di recente) \ne di prenotare un colloquio clinico per accedere alla PrEP o ad altre strategie mirate di riduzione del danno.");
 				break;
 		}
 		
