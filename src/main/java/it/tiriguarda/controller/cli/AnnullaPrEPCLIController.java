@@ -6,6 +6,7 @@ import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 
+@SuppressWarnings("java:S106")
 
 public class AnnullaPrEPCLIController {
 	public boolean avvioAnnullamento(Scanner scanner) {
