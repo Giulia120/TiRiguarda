@@ -18,6 +18,9 @@ public class RiepilogoAppController {
 	
 	public void effettuaRiepilogo(RiepilogoBean bean){
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+		if(utenteCorrente == null){
+	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	    }
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO daoPrEP = factory.createProtocolloPrEPDAO();

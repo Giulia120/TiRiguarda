@@ -1,5 +1,6 @@
 package it.tiriguarda.controller.cli;
 
+import java.util.List;
 import java.util.Scanner;
 
 import it.tiriguarda.controller.app.RiepilogoAppController;
@@ -23,32 +24,9 @@ public class RiepilogoCLIController {
             RiepilogoAppController controller = new RiepilogoAppController();
             controller.effettuaRiepilogo(bean);
             
-            System.out.println("\n--- PROTOCOLLO PrEP ---");
-            if (bean.getPrep() == null || bean.getPrep().isEmpty()) {
-                System.out.println("Nessun protocollo PrEP registrato.");
-            } else {
-                for (ProtocolloPrEP p : bean.getPrep()) {
-                    System.out.println("ID: " + p.getIdProtocollo() + " | Tipo: " + p.getTipoPrEP() + " | Data Inizio: " + p.getDataInizio());
-                }
-            }
-            
-            System.out.println("\n--- RAPPORTI ---");
-            if (bean.getRapporti() == null || bean.getRapporti().isEmpty()) {
-                System.out.println("Nessun rapporto registrato.");
-            } else {
-                for (Rapporto r : bean.getRapporti()) {
-                    System.out.println("ID: " + r.getIdRapporto() + " | Data: " + r.getData() + " | Rischio: " + r.getRischio());
-                }
-            }
-            
-            System.out.println("\n--- TEST ---");
-            if (bean.getTest() == null || bean.getTest().isEmpty()) {
-                System.out.println("Nessun test registrato.");
-            } else {
-                for (Test t : bean.getTest()) {
-                    System.out.println("ID: " + t.getidTest() + " | Tipo: " + t.getTipo() + " | Data: " + t.getData());
-                }
-            }
+            stampaSezionePrep(bean.getPrep());
+			stampaSezioneRapporti(bean.getRapporti());
+			stampaSezioneTest(bean.getTest());
             
         } catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
             ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
@@ -60,6 +38,39 @@ public class RiepilogoCLIController {
 		String input = scanner.nextLine();
 		if (input.equalsIgnoreCase("q")) {
 			return;
+		}
+	}
+	
+	private void stampaSezionePrep(List<ProtocolloPrEP> listaPrep) {
+		System.out.println("\n--- PROTOCOLLO PrEP ---");
+		if (listaPrep == null || listaPrep.isEmpty()) {
+			System.out.println("Nessun protocollo PrEP registrato.");
+		} else {
+			for (ProtocolloPrEP p : listaPrep) {
+				System.out.println("ID: " + p.getIdProtocollo() + " | Tipo: " + p.getTipoPrEP() + " | Data Inizio: " + p.getDataInizio());
+			}
+		}
+	}
+
+	private void stampaSezioneRapporti(List<Rapporto> listaRapporti) {
+		System.out.println("\n--- RAPPORTI ---");
+		if (listaRapporti == null || listaRapporti.isEmpty()) {
+			System.out.println("Nessun rapporto registrato.");
+		} else {
+			for (Rapporto r : listaRapporti) {
+				System.out.println("ID: " + r.getIdRapporto() + " | Data: " + r.getData() + " | Rischio: " + r.getRischio());
+			}
+		}
+	}
+
+	private void stampaSezioneTest(List<Test> listaTest) {
+		System.out.println("\n--- TEST ---");
+		if (listaTest == null || listaTest.isEmpty()) {
+			System.out.println("Nessun test registrato.");
+		} else {
+			for (Test t : listaTest) {
+				System.out.println("ID: " + t.getidTest() + " | Tipo: " + t.getTipo() + " | Data: " + t.getData());
+			}
 		}
 	}
 		

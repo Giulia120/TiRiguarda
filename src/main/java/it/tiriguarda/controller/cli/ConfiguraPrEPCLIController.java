@@ -24,8 +24,12 @@ public class ConfiguraPrEPCLIController {
 			LocalTime orario = leggiOrario(scanner);
 			if (orario == null) return;
 
-			Boolean ricevereSMS = leggiSMS(scanner);
-			if (ricevereSMS == null) return;
+			String rispostaSMS = leggiSMS(scanner);
+			
+			if (rispostaSMS.equalsIgnoreCase("q")) {
+			    return;
+			}
+			Boolean ricevereSMS = rispostaSMS.equalsIgnoreCase("si");
 			try {
 				ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
 				bean.setTipoPrEP(tipoPrEP);
@@ -64,19 +68,17 @@ public class ConfiguraPrEPCLIController {
             }
         }
     }
-    private Boolean leggiSMS(Scanner scanner) {
-        while(true) {
+    private String leggiSMS(Scanner scanner) {
+    	while(true) {
             System.out.print("Vuoi ricevere SMS promemoria? (si/no): ");
-            String risposta = scanner.nextLine();
-            if(risposta.equalsIgnoreCase("q")) {
-                return null;
+            String risposta = scanner.nextLine().trim();
+            
+            if (risposta.equalsIgnoreCase("q") || 
+                risposta.equalsIgnoreCase("si") || 
+                risposta.equalsIgnoreCase("no")) {
+                return risposta;
             }
-            if(risposta.equalsIgnoreCase("si")) {
-                return true;
-            }
-            else if(risposta.equalsIgnoreCase("no")) {
-                return false;
-            }
+            
             ViewCLI.stampaInvalido();
         }
     }
