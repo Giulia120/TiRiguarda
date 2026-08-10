@@ -6,7 +6,7 @@ import it.tiriguarda.config.AppMode;
 import it.tiriguarda.manager.SmsScheduler;
 
 public class ConfigController {
-    
+	@SuppressWarnings("java:S106")
     public String configuraApp(Scanner scanner) {
         ViewCLI.stampaSeparatore();
         System.out.println("       BENVENUTO IN TIRIGUARDA          ");
@@ -18,7 +18,7 @@ public class ConfigController {
         
         return uiChoice;
     }
-
+    @SuppressWarnings("java:S106")
     private String scegliInterfaccia(Scanner scanner) {
         while(true) {
             System.out.println("\nQuale interfaccia vuoi utilizzare?");
@@ -32,7 +32,7 @@ public class ConfigController {
             ViewCLI.stampaInvalido();
         }
     }
-
+    @SuppressWarnings("java:S106")
     private void scegliModalita(Scanner scanner) {
         while (true) {
             System.out.println("\nScegli la modalità di persistenza dei dati:");

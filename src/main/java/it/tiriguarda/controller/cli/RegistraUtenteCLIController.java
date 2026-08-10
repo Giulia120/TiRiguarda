@@ -9,7 +9,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
 
 public class RegistraUtenteCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avviaRegistrazione(Scanner scanner) {
 		boolean fine = false;
 
@@ -59,7 +59,7 @@ public class RegistraUtenteCLIController {
 			}
 		}
 	}
-	
+	@SuppressWarnings("java:S106")
 	private SessoBiologico leggiSessoBiologico(Scanner scanner) {
         while (true) {
             System.out.println("Sesso Biologico:");

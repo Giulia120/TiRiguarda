@@ -13,6 +13,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 
 public class ConfiguraPrEPCLIController {
+	@SuppressWarnings("java:S106")
 	public void avviaConfigurazione(TipologiaPrEP tipoPrEP, Scanner scanner) {
 		boolean completato = false;
 		while (!completato) {
@@ -53,7 +54,7 @@ public class ConfiguraPrEPCLIController {
             }
     }
 }
-
+	@SuppressWarnings("java:S106")
     private LocalTime leggiOrario(Scanner scanner) {
         while(true) {
             System.out.print("Inserisci l'orario dei promemoria (HH:mm): ");
@@ -68,6 +69,7 @@ public class ConfiguraPrEPCLIController {
             }
         }
     }
+	@SuppressWarnings("java:S106")
     private String leggiSMS(Scanner scanner) {
     	while(true) {
             System.out.print("Vuoi ricevere SMS promemoria? (si/no): ");

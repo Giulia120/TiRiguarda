@@ -27,19 +27,19 @@ public class UtenteBean {
 	
 	public void setUsername(String username) throws DatiIncompletiException {
 		controllaStringa(username, "Devi inserire un username!");
-		//controllaLunghezzaUsername(username);
+		controllaLunghezzaUsername(username);
 		this.username = username;
 	}
 	
 	public void setPassword(String password) throws DatiIncompletiException {
 		controllaStringa(password, "Devi inserire una password!");
-		//controllaPassword(password);
+		controllaPassword(password);
 		this.password = password;
 	}
 	
 	public void setNumeroTelefono(String numeroTelefono) throws DatiIncompletiException {
 		controllaStringa(numeroTelefono, "Devi inserire un numero di telefono!");
-		//controllaFormatoTelefono(numeroTelefono);
+		controllaFormatoTelefono(numeroTelefono);
 		this.numeroTelefono = numeroTelefono;
 	}	
 
@@ -60,14 +60,14 @@ public class UtenteBean {
 		}
 	}
 	
-	/*private void controllaLunghezzaUsername(String username) throws DatiIncompletiException {
+	private void controllaLunghezzaUsername(String username) throws DatiIncompletiException {
 		if (username.length() < 3 || username.length() > 30) {
 			throw new DatiIncompletiException("L'username deve essere compreso tra 3 e 30 caratteri!");
 		}
 	}
 	
 	private void controllaPassword(String password) throws DatiIncompletiException {
-		if (nuovaPassword.length() < 6 || nuovaPassword.length() > 128) {
+		if (password.length() < 6 || password.length() > 128) {
 			throw new DatiIncompletiException("La nuova password deve avere almeno 6 caratteri e massimo 128!");
 		}
 	}
@@ -76,5 +76,5 @@ public class UtenteBean {
 		if (!numeroTelefono.matches("^\\d{9,11}$")) {
 			throw new DatiIncompletiException("Il numero di telefono non è valido (deve contenere solo numeri, tra 9 e 11 cifre)!");
 		}
-	}*/
+	}
 }

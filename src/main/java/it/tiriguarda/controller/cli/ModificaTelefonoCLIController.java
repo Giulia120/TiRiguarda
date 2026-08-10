@@ -8,7 +8,7 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class ModificaTelefonoCLIController {
-
+	@SuppressWarnings("java:S106")
 	public void avvia(Scanner scanner) {
 		
 		ViewCLI.stampaTitolo("Modfica Telefono");

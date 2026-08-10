@@ -69,7 +69,7 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	    for (ProtocolloPrEP p : protocolliInMemoria) {
 	        boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente);
 	        boolean statoValido = !soloAttivi || p.getStatoPrEP();
-	        boolean dataInizioValida = p.getDataInizio().isAfter(data);
+	        boolean dataInizioValida = p.getDataInizio().isBefore(data);
 	        boolean dataFineValida = p.getDataFine() == null || !p.getDataFine().isBefore(data);
 	        if (stessoUtente && statoValido && dataInizioValida && dataFineValida) {
 	            return true;
