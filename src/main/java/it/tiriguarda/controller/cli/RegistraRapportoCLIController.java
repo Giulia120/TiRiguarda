@@ -93,7 +93,7 @@ public class RegistraRapportoCLIController {
 		}
 		return tipi;
 	}
-
+	@SuppressWarnings("java:S106")
 	private Precauzioni leggiPrecauzioni(Scanner scanner) {
 		while (true) {
 			System.out.println("Che precauzioni hai usato?");

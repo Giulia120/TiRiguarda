@@ -59,7 +59,7 @@ public class QuestionarioCLIController {
 			}
 		}
 	}
-
+	@SuppressWarnings("java:S106")
 	private void mostraRisultato(LivelloRischio rischio) {
 		ViewCLI.stampaSeparatore();
 		System.out.println("          RISULTATO VALUTAZIONE         ");

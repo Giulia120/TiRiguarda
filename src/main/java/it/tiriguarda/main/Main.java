@@ -22,7 +22,7 @@ public class Main extends Application {
     public void stop() {
         SmsScheduler.getInstance().arrestaScheduler();
     }
-
+    @SuppressWarnings("java:S106")
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
