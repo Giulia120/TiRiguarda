@@ -56,8 +56,7 @@ public class ConfiguraPrEPAppController {
 		}
 				
 		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now(ZoneId.systemDefault()))) {
-			logger.info("Il protocollo inserito ha una data di fine nel passato. Viene registrato come già chiuso.");
-			logger.info("Il protocollo inserito ha una data d'inizio nel passato. Viene registrato come gia' chiuso.");
+			logger.info("Il protocollo inserito ha una data di fine nel passato. Viene registrato come gia' chiuso.");
 	        protocollo.setStatoPrEP(false);
 	        dao.configuraProtocollo(protocollo);
 	       
