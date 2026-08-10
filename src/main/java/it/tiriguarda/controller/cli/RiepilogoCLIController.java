@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import it.tiriguarda.controller.app.RiepilogoAppController;
-import it.tiriguarda.domain.ProtocolloPrEP;
-import it.tiriguarda.domain.Rapporto;
-import it.tiriguarda.domain.Test;
+import it.tiriguarda.dto.EventoRiepilogo;
 import it.tiriguarda.dto.RiepilogoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
@@ -16,18 +14,16 @@ import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 public class RiepilogoCLIController {
 	@SuppressWarnings("java:S106")
 	public void mostraRiepilogo(Scanner scanner) {
-		ViewCLI.stampaTitolo("Riepilogo Test");
+		ViewCLI.stampaTitolo("Riepilogo Attivita'");
 		try {
 			RiepilogoBean bean = new RiepilogoBean();
 			
 			bean.setData(ViewCLI.leggiData(scanner));			
 			
             RiepilogoAppController controller = new RiepilogoAppController();
-            controller.effettuaRiepilogo(bean);
+            List<EventoRiepilogo> eventi = controller.getReportRiepilogo(bean);
             
-            stampaSezionePrep(bean.getPrep());
-			stampaSezioneRapporti(bean.getRapporti());
-			stampaSezioneTest(bean.getTest());
+            stampaCronologiaEventi(eventi);
             
         } catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
             ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
@@ -35,38 +31,16 @@ public class RiepilogoCLIController {
 			ViewCLI.stampaErrore(e.getMessage());
 		}
 	}
+
 	@SuppressWarnings("java:S106")
-	private void stampaSezionePrep(List<ProtocolloPrEP> listaPrep) {
-		System.out.println("\n--- PROTOCOLLO PrEP ---");
-		if (listaPrep == null || listaPrep.isEmpty()) {
-			System.out.println("Nessun protocollo PrEP registrato.");
+	private void stampaCronologiaEventi(List<EventoRiepilogo> eventi) {
+		System.out.println("\n--- REPORT ---");
+		if (eventi == null || eventi.isEmpty()) {
+			System.out.println("Nessun dato trovato per la data selezionata.");
 		} else {
-			for (ProtocolloPrEP p : listaPrep) {
-				System.out.println("ID: " + p.getIdProtocollo() + " | Tipo: " + p.getTipoPrEP() + " | Data Inizio: " + p.getDataInizio());
+			for (EventoRiepilogo e : eventi) {
+				System.out.println("- " + e.getData() + " : " + e.getDescrizione());
 			}
 		}
 	}
-	@SuppressWarnings("java:S106")
-	private void stampaSezioneRapporti(List<Rapporto> listaRapporti) {
-		System.out.println("\n--- RAPPORTI ---");
-		if (listaRapporti == null || listaRapporti.isEmpty()) {
-			System.out.println("Nessun rapporto registrato.");
-		} else {
-			for (Rapporto r : listaRapporti) {
-				System.out.println("ID: " + r.getIdRapporto() + " | Data: " + r.getData() + " | Rischio: " + r.getRischio());
-			}
-		}
-	}
-	@SuppressWarnings("java:S106")
-	private void stampaSezioneTest(List<Test> listaTest) {
-		System.out.println("\n--- TEST ---");
-		if (listaTest == null || listaTest.isEmpty()) {
-			System.out.println("Nessun test registrato.");
-		} else {
-			for (Test t : listaTest) {
-				System.out.println("ID: " + t.getidTest() + " | Tipo: " + t.getTipo() + " | Data: " + t.getData());
-			}
-		}
-	}
-		
 }
