@@ -77,7 +77,6 @@ public class SmsScheduler {
 			}
 		} catch (SmsNonInviatoException e) {
 			logger.log(Level.SEVERE, "Errore durante l''invio dell''SMS", e);
-			}
 			
 			if (sms.getTipo() == TipoSms.PREP_DAILY) {
 				smsDao.aggiornaData(sms); 
@@ -85,6 +84,7 @@ public class SmsScheduler {
 				smsDao.aggiornaStato(sms, StatoSms.ERRORE);
 			}
 		}
+	}
 
     public void arrestaScheduler() {
         if (scheduler != null && !scheduler.isShutdown()) {
