@@ -17,6 +17,11 @@ import com.itextpdf.layout.properties.UnitValue;
 import it.tiriguarda.dto.EventoRiepilogo;
 
 public class GeneratorePDFUtil {
+	
+	private GeneratorePDFUtil() {
+	    // Costruttore privato per prevenire l'istanziazione di questa classe utility
+	}
+	
     public static void genera(File file, List<EventoRiepilogo> eventi) throws Exception {
         PdfWriter writer = new PdfWriter(file.getAbsolutePath());
         PdfDocument pdf = new PdfDocument(writer);
