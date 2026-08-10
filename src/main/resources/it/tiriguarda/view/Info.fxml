@@ -39,7 +39,7 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="E'un virus che colpisce i linfociti CD4, cellule fondamentali per le difese immunitarie. Si tratta di un’infezione cronica: non esiste una cura definitiva, ma i farmaci odierni permettono una vita lunga e sana. HIV e AIDS sono due cose distinte, quest’ultimo e' lo stadio clinico avanzato dell'infezione, che si manifesta solo senza terapie." textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="307.0" text="E'un virus che colpisce i linfociti CD4, cellule fondamentali per le difese immunitarie. Si tratta di un'infezione cronica: non esiste una cura definitiva, ma i farmaci odierni permettono una vita lunga e sana. HIV e AIDS sono due cose distinte, quest'ultimo e' lo stadio clinico avanzato dell'infezione, che si manifesta solo senza terapie." textAlignment="JUSTIFY" wrapText="true">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
