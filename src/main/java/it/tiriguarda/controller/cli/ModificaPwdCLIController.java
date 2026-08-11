@@ -7,6 +7,7 @@ import it.tiriguarda.dto.CambioPwdBean;
 import it.tiriguarda.exception.CredenzialiErrateException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ModificaPwdCLIController {
 	@SuppressWarnings("java:S106")
@@ -48,7 +49,7 @@ public class ModificaPwdCLIController {
 			} catch (DatabaseNonRaggiungibileException e) {
 				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
-			} catch (IllegalStateException e) {
+			} catch (UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
 				throw e;
 			}

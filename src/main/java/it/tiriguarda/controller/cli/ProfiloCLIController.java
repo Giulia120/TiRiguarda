@@ -5,6 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.controller.app.ProfiloAppController;
 import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.DatiProfiloBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ProfiloCLIController {
 	@SuppressWarnings("java:S106")
@@ -25,7 +26,7 @@ public class ProfiloCLIController {
 				} else {
 					System.out.println("Sesso:    Maschile");
 				}
-				}catch (IllegalStateException e) {
+				}catch (UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
 				throw e;
 			} 

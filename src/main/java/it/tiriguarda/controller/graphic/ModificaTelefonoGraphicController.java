@@ -4,6 +4,7 @@ import it.tiriguarda.controller.app.ModificaTelefonoAppController;
 import it.tiriguarda.dto.CambioTelefonoBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,7 +36,7 @@ public class ModificaTelefonoGraphicController {
         }catch (DatabaseNonRaggiungibileException e) {
         	chiudiFinestra();
         	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-        }catch(IllegalStateException e) {
+        }catch(UtenteNonLoggatoException e) {
         	ViewDispatcher.mostraErrore(e.getMessage());
         	ViewDispatcher.mostraLogin();
         }

@@ -8,6 +8,7 @@ import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.dto.TestBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RegistraTestCLIController {
 	@SuppressWarnings("java:S106")
@@ -37,7 +38,7 @@ public class RegistraTestCLIController {
 				ViewCLI.stampaErrore(e.getMessage());
 				System.out.println("Premi INVIO per riprovare...");
 				scanner.nextLine();
-			} catch (IllegalStateException e) {
+			} catch (UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
 				throw e;
 			}

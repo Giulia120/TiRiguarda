@@ -14,6 +14,7 @@ import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
 
 public class RegistraRapportoCLIController {
@@ -67,7 +68,7 @@ public class RegistraRapportoCLIController {
 			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 			return true;
 			
-		} catch (IllegalStateException e) {
+		} catch (UtenteNonLoggatoException e) {
 			ViewCLI.stampaErroreSistema(e.getMessage());
 			throw e;
 		}

@@ -14,6 +14,7 @@ import it.tiriguarda.domain.Precauzioni;
 import it.tiriguarda.domain.Rapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.NuoviRapportiSubject;
 import it.tiriguarda.logic.observer.NuovoRapportoObserver;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
@@ -59,7 +60,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		if (utenteCorrente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
 		
@@ -91,7 +92,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		String idRapporto = UUID.randomUUID().toString();
 		if (utenteCorrente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 		
 		Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());

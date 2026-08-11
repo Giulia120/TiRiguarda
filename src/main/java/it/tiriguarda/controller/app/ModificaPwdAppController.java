@@ -8,6 +8,7 @@ import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.CambioPwdBean;
 import it.tiriguarda.exception.CredenzialiErrateException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 import it.tiriguarda.util.SecurityUtil;
 
@@ -17,7 +18,7 @@ public class ModificaPwdAppController {
     public void cambiaPassword(CambioPwdBean bean) {
         Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
         if (utenteCorrente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 
         

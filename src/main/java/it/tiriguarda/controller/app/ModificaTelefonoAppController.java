@@ -7,6 +7,7 @@ import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.CambioTelefonoBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class ModificaTelefonoAppController {
@@ -15,7 +16,7 @@ public class ModificaTelefonoAppController {
     public void cambiaTelefono(CambioTelefonoBean bean) {
         Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
         if (utenteCorrente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
  
         utenteCorrente.setNumeroTelefono(bean.getNuovoTelefono());

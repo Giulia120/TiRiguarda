@@ -13,6 +13,7 @@ import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,7 +89,7 @@ public class RegistraRapportoGraphicController {
 	            dataRapportoPicker.setValue(null);          
 	        }catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-	        }catch(IllegalStateException e) {
+	        }catch(UtenteNonLoggatoException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraLogin();
 	        }

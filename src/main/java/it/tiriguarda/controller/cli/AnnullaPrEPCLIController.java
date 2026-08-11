@@ -5,6 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 
 public class AnnullaPrEPCLIController {
@@ -13,7 +14,7 @@ public class AnnullaPrEPCLIController {
 		try {
 			controller.verificaStatoPrEP();
 			return confermaAnnullamento(controller, scanner);
-		}catch(IllegalStateException e) {
+		}catch(UtenteNonLoggatoException e) {
 			ViewCLI.stampaErroreSistema(e.getMessage());
 			throw e;
 		}catch(AnnullamentoPrEPException e) {
@@ -41,7 +42,7 @@ public class AnnullaPrEPCLIController {
 				}catch(DatabaseNonRaggiungibileException e) {
 		            ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 		            return false;
-				}catch(IllegalStateException e) {
+				}catch(UtenteNonLoggatoException e) {
 					ViewCLI.stampaErroreSistema(e.getMessage());
 					throw e;
 					}	

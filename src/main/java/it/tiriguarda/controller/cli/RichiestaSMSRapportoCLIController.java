@@ -12,6 +12,7 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.dto.SmsBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RichiestaSMSRapportoCLIController {
 	@SuppressWarnings("java:S106")
@@ -78,7 +79,7 @@ public class RichiestaSMSRapportoCLIController {
 			System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
 		} catch (DatabaseNonRaggiungibileException e) {
 			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
-		} catch (IllegalStateException e) {
+		} catch (UtenteNonLoggatoException e) {
 			ViewCLI.stampaErroreSistema(e.getMessage());
 			throw e;
 		}

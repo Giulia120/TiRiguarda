@@ -7,6 +7,7 @@ import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,7 +49,7 @@ public class RegistraTestGraphicController {
 	            dataRapportoPicker.setValue(null);          
 	        }catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-	        }catch(IllegalStateException e) {
+	        }catch(UtenteNonLoggatoException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraLogin();
 	        }

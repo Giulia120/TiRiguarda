@@ -14,7 +14,7 @@ public class TestBean {
 	public TipoTest getTipo() {
 		return tipo;
 	}
-	public void setTipo(TipoTest tipo) throws DatiIncompletiException {
+	public void setTipo(TipoTest tipo) {
 		controllaTipo(tipo);
 		this.tipo = tipo;
 	}

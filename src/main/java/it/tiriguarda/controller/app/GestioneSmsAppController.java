@@ -14,6 +14,7 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.SmsBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class GestioneSmsAppController {
@@ -23,7 +24,7 @@ public class GestioneSmsAppController {
 		
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		if (utenteCorrente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 
         DAOFactory factory = DAOFactoryProvider.getDAOFactory();

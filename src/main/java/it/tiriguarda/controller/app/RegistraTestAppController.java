@@ -9,6 +9,7 @@ import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.TestBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class RegistraTestAppController {
@@ -16,7 +17,7 @@ public class RegistraTestAppController {
 	public void registraTest(TestBean bean){
 	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 	if (utenteCorrente == null) {
-        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+        throw new UtenteNonLoggatoException();
     }
 	String idTest = UUID.randomUUID().toString();
 	

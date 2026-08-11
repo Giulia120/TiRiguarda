@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,7 +33,7 @@ public class InfoRapportoGraphicController {
 			ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
 			}catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-	        }catch(IllegalStateException e) {
+	        }catch(UtenteNonLoggatoException e) {
 	        	ViewDispatcher.mostraErrore(e.getMessage());
 	        	ViewDispatcher.mostraLogin();
 	        }

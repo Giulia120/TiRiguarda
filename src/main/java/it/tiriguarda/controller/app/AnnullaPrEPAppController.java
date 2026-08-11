@@ -14,6 +14,7 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class AnnullaPrEPAppController  {
@@ -22,7 +23,7 @@ public class AnnullaPrEPAppController  {
 	public void verificaStatoPrEP() {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 	 
 		if(utente.getProtocolloAttivo() == null) {
@@ -33,7 +34,7 @@ public class AnnullaPrEPAppController  {
 	public void annullaPrEP() {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 	
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();

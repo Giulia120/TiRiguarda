@@ -3,6 +3,7 @@ package it.tiriguarda.controller.graphic;
 import it.tiriguarda.controller.app.ProfiloAppController;
 import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.DatiProfiloBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,7 +39,7 @@ public class ProfiloGraphicController {
 				sessoLabel.setText("Maschile");
 			}
 			
-		}catch (IllegalStateException e) {
+		}catch (UtenteNonLoggatoException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraLogin();
 		}

@@ -22,6 +22,7 @@ import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.domain.TipoRapporto;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.NuovoRapportoObserver;
 import it.tiriguarda.service.SessionManager;
 
@@ -134,7 +135,7 @@ public class TestRegistraRapportoAppController {
 	    RapportoBean beanInput = fakeBean(Precauzioni.NULLA);
 	    beanInput.setRischio(LivelloRischio.ALTO);
 	    
-	    assertThrows(IllegalStateException.class, () -> {
+	    assertThrows(UtenteNonLoggatoException.class, () -> {
 	        controllerTest.salvaRapportoDefinitivo(beanInput);
 	    });
 	}
@@ -146,7 +147,7 @@ public class TestRegistraRapportoAppController {
 	    
 	    RapportoBean beanInput = fakeBean(Precauzioni.NULLA);
 	    
-	    assertThrows(IllegalStateException.class, () -> {
+	    assertThrows(UtenteNonLoggatoException.class, () -> {
 	        controllerTest.valutaRischio(beanInput);
 	    });
 	}

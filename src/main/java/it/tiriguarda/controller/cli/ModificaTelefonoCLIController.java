@@ -6,6 +6,7 @@ import it.tiriguarda.controller.app.ModificaTelefonoAppController;
 import it.tiriguarda.dto.CambioTelefonoBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ModificaTelefonoCLIController {
 	@SuppressWarnings("java:S106")
@@ -39,7 +40,7 @@ public class ModificaTelefonoCLIController {
 			} catch (DatabaseNonRaggiungibileException e) {
 				ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 				
-			} catch (IllegalStateException e) {
+			} catch (UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
 				throw e;
 			}

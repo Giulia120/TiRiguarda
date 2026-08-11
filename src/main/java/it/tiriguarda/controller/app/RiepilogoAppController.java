@@ -15,6 +15,7 @@ import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.EventoRiepilogo;
 import it.tiriguarda.dto.RiepilogoBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class RiepilogoAppController {
@@ -22,7 +23,7 @@ public class RiepilogoAppController {
 	public void effettuaRiepilogo(RiepilogoBean bean){
 		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 		if(utenteCorrente == null){
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();

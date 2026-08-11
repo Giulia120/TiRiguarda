@@ -7,6 +7,7 @@ import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.UtenteBean;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UsernameEsistenteException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RegistraUtenteCLIController {
 	@SuppressWarnings("java:S106")
@@ -53,7 +54,7 @@ public class RegistraUtenteCLIController {
 				
 			} catch (DatiIncompletiException | UsernameEsistenteException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-			}catch(IllegalStateException e) {
+			}catch(UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
 				throw e;
 			}

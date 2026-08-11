@@ -2,6 +2,7 @@ package it.tiriguarda.controller.app;
 
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.DatiProfiloBean;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class ProfiloAppController {
@@ -9,7 +10,7 @@ public class ProfiloAppController {
     public DatiProfiloBean getDatiProfilo() {
         Utente utente = SessionManager.getInstance().getUtenteLoggato();
         if (utente == null) {
-        	throw new IllegalStateException();
+        	throw new UtenteNonLoggatoException();
         }
         
         DatiProfiloBean bean = new DatiProfiloBean();

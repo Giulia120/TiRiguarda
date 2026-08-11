@@ -17,6 +17,7 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 
 public class ConfiguraPrEPAppController {
@@ -29,7 +30,7 @@ public class ConfiguraPrEPAppController {
 	
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
-	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");
+	        throw new UtenteNonLoggatoException();
 	    }
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();

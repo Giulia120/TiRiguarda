@@ -11,6 +11,7 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.dto.SmsBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,7 +50,7 @@ public class RichiestaSMSRapportoGraphicController {
 			 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 		 }catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-	     }catch (IllegalStateException e) {
+	     }catch (UtenteNonLoggatoException e) {
 	    	 	ViewDispatcher.mostraErrore(e.getMessage());
 	    	 	ViewDispatcher.mostraLogin();
 	     }
@@ -71,7 +72,7 @@ public class RichiestaSMSRapportoGraphicController {
 				appController.salvaRapportoDefinitivo(beanInSospeso);
 				}catch (DatabaseNonRaggiungibileException e) {
 		        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-		        }catch(IllegalStateException e) {
+		        }catch(UtenteNonLoggatoException e) {
 		        	ViewDispatcher.mostraErrore(e.getMessage());
 		        	ViewDispatcher.mostraLogin();
 		        }
