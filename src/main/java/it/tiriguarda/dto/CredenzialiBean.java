@@ -10,7 +10,7 @@ public class CredenzialiBean {
 		return username;
 	}
 	
-	public void setUsername(String username) throws DatiIncompletiException {
+	public void setUsername(String username) {
 		controllaStringa(username, "Inserisci l'username!");
 		this.username = username;
 	}
@@ -19,12 +19,12 @@ public class CredenzialiBean {
 		return password;
 	}
 	
-	public void setPassword(String password) throws DatiIncompletiException {
+	public void setPassword(String password) {
 		controllaStringa(password, "Inserisci la password!");
 		this.password = password;
 	}
 	
-	private void controllaStringa(String valore, String messaggioErrore) throws DatiIncompletiException {
+	private void controllaStringa(String valore, String messaggioErrore) {
 		if (valore == null || valore.isBlank()) {
 			throw new DatiIncompletiException(messaggioErrore);
 		}

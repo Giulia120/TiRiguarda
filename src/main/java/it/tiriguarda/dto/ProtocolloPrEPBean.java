@@ -22,11 +22,11 @@ public class ProtocolloPrEPBean {
 		return dataInizio;
 	}
 	
-	public void setDataInizio(LocalDate dataInizio) throws DatiIncompletiException {
+	public void setDataInizio(LocalDate dataInizio) {
 		controllaData(dataInizio);
 		this.dataInizio = dataInizio;
 	}
-	public LocalTime getOrario() throws DatiIncompletiException {
+	public LocalTime getOrario() {
 		controllaOra(orario);
 		return orario;
 	}
@@ -39,13 +39,13 @@ public class ProtocolloPrEPBean {
 	public void setRicevereSMS(boolean ricevereSMS) {
 		this.ricevereSMS = ricevereSMS;
 	}
-	private void controllaData(LocalDate data) throws DatiIncompletiException {
+	private void controllaData(LocalDate data) {
 		if (data == null) {
 			throw new DatiIncompletiException("Devi inserire la data!");
 		}
 	}
 	
-	private void controllaOra(LocalTime ora) throws DatiIncompletiException{
+	private void controllaOra(LocalTime ora) {
 		if (ora == null) {
 			throw new DatiIncompletiException("Devi inserire l'ora!");
 			}

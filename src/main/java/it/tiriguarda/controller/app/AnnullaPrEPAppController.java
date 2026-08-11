@@ -19,7 +19,7 @@ import it.tiriguarda.service.SessionManager;
 public class AnnullaPrEPAppController  {
 	private static final Logger logger = Logger.getLogger(AnnullaPrEPAppController.class.getName());
 	
-	public void verificaStatoPrEP() throws AnnullamentoPrEPException {
+	public void verificaStatoPrEP() {
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");

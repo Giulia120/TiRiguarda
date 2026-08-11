@@ -30,12 +30,12 @@ public class RapportoBean {
 		return tipo;
 	}
 	
-	public void setTipo(List<TipoRapporto> tipo) throws DatiIncompletiException {
+	public void setTipo(List<TipoRapporto> tipo) {
 		controllaTipo(tipo);
 		this.tipo = tipo;
 	}
 	
-	private void controllaTipo(List<TipoRapporto> tipo) throws DatiIncompletiException {
+	private void controllaTipo(List<TipoRapporto> tipo) {
 		if(tipo == null || tipo.isEmpty()) {
 			throw new DatiIncompletiException("Devi selezionare almeno un tipo di rapporto!");
 		}
@@ -45,12 +45,12 @@ public class RapportoBean {
 		return precauzioniUsate;
 	}
 
-	public void setPrecauzioniUsate(Precauzioni precauzioniUsate) throws DatiIncompletiException {
+	public void setPrecauzioniUsate(Precauzioni precauzioniUsate) {
 		controllaPrecauzioni(precauzioniUsate);
 		this.precauzioniUsate = precauzioniUsate;
 	}
 	
-	private void controllaPrecauzioni(Precauzioni precauzioniUsate) throws DatiIncompletiException {
+	private void controllaPrecauzioni(Precauzioni precauzioniUsate) {
 		if (precauzioniUsate == null) {
 			throw new DatiIncompletiException("Devi selezionare le precauzioni usate!");
 		}

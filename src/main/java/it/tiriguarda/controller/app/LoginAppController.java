@@ -13,7 +13,7 @@ import it.tiriguarda.service.SessionManager;
 public class LoginAppController {
 	private static final Logger logger = Logger.getLogger(LoginAppController.class.getName());
 	
-	public void effettuaLogin(CredenzialiBean bean) throws CredenzialiErrateException{
+	public void effettuaLogin(CredenzialiBean bean) {
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		UtenteDAO dao = factory.createUtenteDAO();
 		Utente utenteTrovato = dao.trovaPerUsername(bean.getUsername());

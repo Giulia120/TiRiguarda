@@ -19,7 +19,7 @@ public class TestBean {
 		this.tipo = tipo;
 	}
 	
-	private void controllaTipo(TipoTest tipo) throws DatiIncompletiException {
+	private void controllaTipo(TipoTest tipo) {
 		if (tipo == null) {
 			throw new DatiIncompletiException("Devi selezionare il tipo!");
 		}
@@ -29,12 +29,12 @@ public class TestBean {
 		return data;
 	}
 	
-	public void setData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
+	public void setData(LocalDate data) {
 		controllaData(data);
 		this.data = data;
 	}
 	
-	private void controllaData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
+	private void controllaData(LocalDate data) {
 		if (data == null) {
 			throw new DatiIncompletiException("Devi inserire la data!");
 		}
