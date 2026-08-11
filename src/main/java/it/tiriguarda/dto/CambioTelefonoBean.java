@@ -9,12 +9,12 @@ public class CambioTelefonoBean {
         return nuovoTelefono;
     }
 
-    public void setNuovoTelefono(String nuovoTelefono) throws DatiIncompletiException {
+    public void setNuovoTelefono(String nuovoTelefono) {
         controllaTelefono(nuovoTelefono);
         this.nuovoTelefono = nuovoTelefono;
     }
 
-    private void controllaTelefono(String numero) throws DatiIncompletiException {
+    private void controllaTelefono(String numero)  {
         if (numero == null || numero.isBlank()) {
             throw new DatiIncompletiException("Devi inserire il nuovo numero di telefono!");
         }

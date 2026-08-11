@@ -1,6 +1,6 @@
 package it.tiriguarda.exception;
 
-public class DatabaseNonRaggiungibileException extends RuntimeException {
+public class DatabaseNonRaggiungibileException extends TiRiguardaException {
     
     public DatabaseNonRaggiungibileException(String messaggio) {
         super(messaggio);

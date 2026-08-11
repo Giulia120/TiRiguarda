@@ -14,7 +14,7 @@ public class RegistraUtenteAppController {
 	private static final Logger logger = Logger.getLogger(RegistraUtenteAppController.class.getName());
 	
 	
-	public void registraUtente (UtenteBean bean) throws UsernameEsistenteException{
+	public void registraUtente (UtenteBean bean) {
 		
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		UtenteDAO dao = factory.createUtenteDAO();

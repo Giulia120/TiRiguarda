@@ -51,7 +51,7 @@ public class TestRegistraRapportoAppController {
         	}
         }
 	
-	private RapportoBean fakeBean(Precauzioni precauzioni) throws Exception{
+	private RapportoBean fakeBean(Precauzioni precauzioni) {
 		RapportoBean beanInput = new RapportoBean();
 		beanInput.setData(LocalDate.now());
 		ArrayList<TipoRapporto> tipo = new ArrayList<>();
@@ -63,7 +63,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
 	@DisplayName("Se l'utente ha la PrEP attiva e non il preservativo, il rischio calcolato deve essere NULLO")
-	public void testValutaRischioConPrEP() throws Exception {
+	public void testValutaRischioConPrEP() {
 		ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
 		ProtocolloPrEPDaily protocolloDiTest = new ProtocolloPrEPDaily("id123", "utenteTest", LocalDate.now().minusDays(1), true, LocalTime.NOON); 
         dao.configuraProtocollo(protocolloDiTest);
@@ -76,7 +76,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
 	@DisplayName("Se l'utente usa solo il preservativo, il rischio calcolato deve essere NULLO")
-	public void testValutaRischioConPreservativo() throws Exception {
+	public void testValutaRischioConPreservativo() {
 		RapportoBean beanInput = fakeBean(Precauzioni.PRESERVATIVO);
 		
 		RapportoBean risultato = controllerTest.valutaRischio(beanInput);
@@ -87,7 +87,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
 	@DisplayName("Se l'utente non usa precauzioni in un rapp penetrativo, il rischio calcolato deve essere ALTO")
-	public void testValutaRischioSenzaPrecauzioni() throws Exception{
+	public void testValutaRischioSenzaPrecauzioni() {
 		RapportoBean beanInput = fakeBean(Precauzioni.NULLA);
 		
 		RapportoBean risultato = controllerTest.valutaRischio(beanInput);
@@ -97,7 +97,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
     @DisplayName("Il salvataggio definitivo deve aggiornare lo stato del controller e registrare il rapporto")
-    public void testSalvaRapportoDefinitivo() throws Exception {
+    public void testSalvaRapportoDefinitivo() {
         RapportoBean beanInput = fakeBean(Precauzioni.PRESERVATIVO);
         beanInput.setRischio(LivelloRischio.NULLO);
 
@@ -108,7 +108,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
     @DisplayName("Il salvataggio definitivo deve notificare gli observer registrati")
-    public void testSalvaRapportoNotificaObservers() throws Exception {
+    public void testSalvaRapportoNotificaObservers() {
         RapportoBean beanInput = fakeBean(Precauzioni.NULLA);
         beanInput.setRischio(LivelloRischio.ALTO);
         class FintoObserver implements NuovoRapportoObserver {
@@ -128,7 +128,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
 	@DisplayName("Se non c'e' un utente loggato, salvaRapportoDefinitivo deve lanciare un'eccezione")
-	public void testSalvaRapportoDefinitivoSenzaUtenteLoggato() throws Exception {
+	public void testSalvaRapportoDefinitivoSenzaUtenteLoggato() {
 	    SessionManager.getInstance().clearSessione();
 	    
 	    RapportoBean beanInput = fakeBean(Precauzioni.NULLA);
@@ -141,7 +141,7 @@ public class TestRegistraRapportoAppController {
 	
 	@Test
 	@DisplayName("Se non c'e' un utente loggato, valutaRischio deve lanciare un'eccezione")
-	public void testValutaRischioSenzaUtenteLoggato() throws Exception {
+	public void testValutaRischioSenzaUtenteLoggato() {
 	    SessionManager.getInstance().clearSessione();
 	    
 	    RapportoBean beanInput = fakeBean(Precauzioni.NULLA);

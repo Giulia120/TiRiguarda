@@ -21,7 +21,7 @@ public class RiepilogoBean {
 		return data;
 	}
 	
-	private void controllaData(LocalDate data) throws DatiIncompletiException, DataFuturaException {
+	private void controllaData(LocalDate data) {
 		if (data == null) {
 			throw new DatiIncompletiException("Devi inserire la data!");
 		}
@@ -30,7 +30,7 @@ public class RiepilogoBean {
         }
 	}
 	
-	public void setData(LocalDate data) throws DatiIncompletiException, DataFuturaException{
+	public void setData(LocalDate data) {
 		controllaData(data);
 		this.data = data;
 	}

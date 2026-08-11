@@ -14,7 +14,7 @@ import it.tiriguarda.util.SecurityUtil;
 public class ModificaPwdAppController {
     private static final Logger logger = Logger.getLogger(ModificaPwdAppController.class.getName());
 
-    public void cambiaPassword(CambioPwdBean bean) throws CredenzialiErrateException {
+    public void cambiaPassword(CambioPwdBean bean) {
         Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
         if (utenteCorrente == null) {
 	        throw new IllegalStateException("Errore critico: Nessun utente loggato in sessione.");

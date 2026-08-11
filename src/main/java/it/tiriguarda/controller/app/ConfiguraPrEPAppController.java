@@ -22,7 +22,7 @@ import it.tiriguarda.service.SessionManager;
 public class ConfiguraPrEPAppController {
 	private static final Logger logger = Logger.getLogger(ConfiguraPrEPAppController.class.getName());
 	
-	public void configuraPrEP(ProtocolloPrEPBean bean) throws ProtocolloAttivoException, DatiIncompletiException {
+	public void configuraPrEP(ProtocolloPrEPBean bean) {
 		if(bean.getDataInizio() == null || bean.getOrario() == null) {
 			throw new DatiIncompletiException();
 		}

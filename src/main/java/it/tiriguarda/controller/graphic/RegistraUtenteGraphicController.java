@@ -36,7 +36,7 @@ public class RegistraUtenteGraphicController {
 	private RadioButton radioMasc;
 	
 	@FXML
-	public void onRegistraUtenteButton(ActionEvent event) throws IOException, DatiIncompletiException {
+	public void onRegistraUtenteButton(ActionEvent event) throws IOException {
 		
 		try {
 			UtenteBean bean = new UtenteBean();
