@@ -18,7 +18,7 @@ public class InfoRapportoGraphicController {
 	 
 	 public void inizializza(RapportoBean bean) {
 		 this.beanInSospeso = bean;
-		 infoRapportoLabel.setText(String.format("ATTENZIONE: il tuo rapporto ha un %s rischio, quindi ti consigliamo di fare un test prima possibile!", bean.getRischio().toString()));
+		 infoRapportoLabel.setText(String.format("ATTENZIONE: il tuo rapporto ha un %s rischio. Il periodo finestra è già terminato: quindi ti consigliamo di fare un test prima possibile!", bean.getRischio().toString()));
 	 }
 	 
 	 @FXML

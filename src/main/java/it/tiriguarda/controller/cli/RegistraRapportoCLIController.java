@@ -50,10 +50,24 @@ public class RegistraRapportoCLIController {
 			RapportoBean beanAggiornato = appController.valutaRischio(bean);
 
 			if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
-				RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
-				smsController.avvia(beanAggiornato, scanner); 
+				if (beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(java.time.ZoneId.systemDefault()))) {
+			        RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
+			        smsController.avvia(beanAggiornato, scanner); 
+			    } else {
+			    	System.out.println(String.format("\nATTENZIONE: il tuo rapporto ha un %s rischio. Il periodo finestra è già terminato: quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
+			        System.out.print("Vuoi procedere con la registrazione? (si per confermare, q per annullare): ");
+			        
+			        String rispostaInfo = scanner.nextLine().trim().toLowerCase();
+			        
+			        if (rispostaInfo.equals("q")) {
+			            System.out.println("\n[INFO] Registrazione rapporto annullata! Torno al menu principale...");
+			            return false; 
+			        } else {
+			            appController.salvaRapportoDefinitivo(beanAggiornato);
+			        }
+			    }
 			} else {
-				appController.salvaRapportoDefinitivo(beanAggiornato);
+			    appController.salvaRapportoDefinitivo(beanAggiornato);
 			}
 			ViewCLI.stampaSuccesso(scanner);
 			return true;
