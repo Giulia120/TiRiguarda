@@ -15,7 +15,7 @@ public class SmsManager {
 
     private static final String FILE_SMS = "sms_inviati.txt";
 
-    public void inviaSms(Sms sms, String numeroDestinatario) throws SmsNonInviatoException {
+    public void inviaSms(Sms sms, String numeroDestinatario) {
     	String testoMessaggio = sms.getTesto();
     	LocalDateTime oraAttuale = LocalDateTime.now(ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
