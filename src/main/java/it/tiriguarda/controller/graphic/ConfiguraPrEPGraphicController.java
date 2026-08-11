@@ -67,8 +67,8 @@ public class ConfiguraPrEPGraphicController {
 	
 	
 	@FXML
-	public void onMenuPrincipale(ActionEvent event) {
-		ViewDispatcher.mostraMenuPrincipale();
+	public void onBackButton(ActionEvent event) {
+		ViewDispatcher.mostraPrEP();
 	 }
 	
 }

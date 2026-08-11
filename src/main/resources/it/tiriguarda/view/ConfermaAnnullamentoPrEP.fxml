@@ -17,7 +17,7 @@
          <children>
             <Button fx:id="siConfermaAnnullamento" layoutX="265.0" layoutY="382.0" mnemonicParsing="false" onAction="#onConfermaAnnullamento" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="noConfermaAnnullamento" layoutX="447.0" layoutY="382.0" mnemonicParsing="false" onAction="#onNoConfermaAnnullamento" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="menuPrincipale" layoutX="29.0" layoutY="561.0" mnemonicParsing="false" onAction="#onMenuPrincipale" prefHeight="33.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="backButton" layoutX="29.0" layoutY="561.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="33.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>

@@ -18,16 +18,11 @@ import javafx.scene.control.Label;
 
 public class RichiestaSMSRapportoGraphicController {
 
-	 @FXML
-	 private Button siButton;
-	 @FXML
-	 private Button noButton;
-	 @FXML
-	 private Button annullaButton;
-	 @FXML
-	 private Label livelloRischioLabel;
-	 @FXML 
-	 private Label dataFinestraLabel;
+	 @FXML private Button siButton;
+	 @FXML private Button noButton;
+	 @FXML private Button annullaButton;
+	 @FXML private Label livelloRischioLabel;
+	 @FXML private Label dataFinestraLabel;
 	 
 	 private RapportoBean beanInSospeso;
 	 
@@ -51,13 +46,13 @@ public class RichiestaSMSRapportoGraphicController {
 		 try {
 			 GestioneSmsAppController controller = new GestioneSmsAppController();
 			 controller.programmaSms(bean);
+			 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 		 }catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 	     }catch (IllegalStateException e) {
 	    	 	ViewDispatcher.mostraErrore(e.getMessage());
 	    	 	ViewDispatcher.mostraLogin();
 	     }
-		 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 	 }
 	 
 	 @FXML

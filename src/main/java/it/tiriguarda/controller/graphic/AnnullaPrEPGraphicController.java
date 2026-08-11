@@ -15,7 +15,7 @@ public class AnnullaPrEPGraphicController {
 	private Button noConfermaAnnullamento;
 	
 	@FXML
-	private Button menuPrincipale;
+	private Button backButton;
 	
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
@@ -37,7 +37,7 @@ public class AnnullaPrEPGraphicController {
 	}
 	
 	@FXML
-	public void onMenuPrincipale(ActionEvent event){
-		ViewDispatcher.mostraMenuPrincipale();
+	public void onBackButton(ActionEvent event){
+		ViewDispatcher.mostraPrEP();;
 	}
 }

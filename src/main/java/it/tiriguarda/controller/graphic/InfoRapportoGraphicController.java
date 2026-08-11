@@ -1,0 +1,41 @@
+package it.tiriguarda.controller.graphic;
+
+import it.tiriguarda.controller.app.RegistraRapportoAppController;
+import it.tiriguarda.dto.RapportoBean;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+public class InfoRapportoGraphicController {
+	 @FXML private Button hoCapitoButton;
+	 @FXML private Button annullaButton;
+	 @FXML private Label infoRapportoLabel;
+	 
+	 private RapportoBean beanInSospeso;
+	 
+	 public void inizializza(RapportoBean bean) {
+		 this.beanInSospeso = bean;
+		 infoRapportoLabel.setText(String.format("ATTENZIONE: il tuo rapporto ha un %s rischio, quindi ti consigliamo di fare un test prima possibile!", bean.getRischio().toString()));
+	 }
+	 
+	 @FXML
+	 private void onAnnullaButton(ActionEvent event) {
+		 ViewDispatcher.mostraMenuPrincipale();
+	 }
+	 
+	 @FXML
+	 private void onHoCapitoButton(ActionEvent event){
+		 try{ RegistraRapportoAppController appController = new RegistraRapportoAppController();
+			appController.salvaRapportoDefinitivo(beanInSospeso);
+			ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
+			}catch (DatabaseNonRaggiungibileException e) {
+	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
+	        }catch(IllegalStateException e) {
+	        	ViewDispatcher.mostraErrore(e.getMessage());
+	        	ViewDispatcher.mostraLogin();
+	        }
+	 }
+		 
+}

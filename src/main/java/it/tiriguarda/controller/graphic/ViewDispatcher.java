@@ -115,6 +115,19 @@ public class ViewDispatcher {
         }
     }
     
+    public static void mostraInfoRapporto(RapportoBean bean) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/InfoRapporto.fxml"));
+    		Parent nuovaVista = loader.load();            
+    		InfoRapportoGraphicController controller = loader.getController();
+    		controller.inizializza(bean);
+    		finestraPrincipale.setScene(new Scene(nuovaVista));
+    		finestraPrincipale.show();       
+       } catch (Exception e) {
+    	   logger.log(Level.SEVERE, "Errore nel caricamento della schermata Info Rapporto", e);
+       	}
+    }
+    
     public static void mostraConfermaAnnullamento() {
     	cambiaSchermata("/it/tiriguarda/view/ConfermaAnnullamentoPrEP.fxml");
     }

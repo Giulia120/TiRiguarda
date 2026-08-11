@@ -75,8 +75,7 @@ public class RegistraRapportoGraphicController {
 	            	if(beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
 	            		ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
 	            	} else {
-	            		appController.salvaRapportoDefinitivo(beanAggiornato);
-		            	ViewDispatcher.mostraSuccesso(String.format("Rapporto registrato con successo! ATTENZIONE: il tuo rapporto ha un %s rischio, quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
+	            		ViewDispatcher.mostraInfoRapporto(beanAggiornato);
 	            	}
 	            } else {
 	            	appController.salvaRapportoDefinitivo(beanAggiornato);
