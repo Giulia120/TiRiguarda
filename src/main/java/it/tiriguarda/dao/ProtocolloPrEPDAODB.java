@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -105,7 +106,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	        PreparedStatement ps = conn.prepareStatement(sql)) {
 
 	        ps.setBoolean(1, false);
-	        ps.setDate(2, java.sql.Date.valueOf(protocolloPrEP.getDataFine()));
+	        ps.setDate(2, java.sql.Date.valueOf(LocalDate.now(ZoneId.systemDefault())));
 	        ps.setString(3, protocolloPrEP.getIdProtocollo());
 
 	        ps.executeUpdate();

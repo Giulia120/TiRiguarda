@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
@@ -55,7 +56,10 @@ public class ConfiguraPrEPGraphicController {
         	controller.configuraPrEP(bean);
 			ViewDispatcher.mostraSuccesso("PrEP registrata con successo! Ricordati di seguire correttamente il protocollo. Visita la sezione INFORMAZIONI per maggiori info.");
 			
-		}catch(ProtocolloAttivoException e) {
+		 }catch(DateTimeParseException e) {
+			 ViewDispatcher.mostraErrore("Formato orario non valido. Inserisci l'orario nel formato HH:mm.");
+			 orarioPrEP.setText(null);
+		 }catch(ProtocolloAttivoException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraPrEP();
 		}catch(DatiIncompletiException e) {
