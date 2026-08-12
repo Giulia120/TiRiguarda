@@ -1,7 +1,5 @@
 package it.tiriguarda.controller.app;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -40,8 +38,6 @@ public class AnnullaPrEPAppController  {
 		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
-		prot.setStatoPrEP(false);
-	    prot.setDataFine(LocalDate.now(ZoneId.systemDefault()));
 		dao.annullaStatoProtocollo(prot);	
 		logger.info("Protocollo PrEP annullato correttamente");
 		
@@ -49,7 +45,6 @@ public class AnnullaPrEPAppController  {
 		UtenteDAO daoUtente = factory.createUtenteDAO();
 		daoUtente.eliminaProtocolloAttivo(utente);
 		
-		utente.setProtocolloAttivo(null);
 		
 		SmsDAO smsDAO = factory.createSmsDAO();
 
