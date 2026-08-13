@@ -14,7 +14,8 @@ public class SceltaPrEPCLIController {
 			System.out.println("1 - Daily");
 			System.out.println("2 - On Demand");
 			System.out.println("3 - Annulla PrEP");
-			System.out.print("Scegli un'opzione (1-3): ");
+			System.out.println("4 - Registra vecchia PrEP");
+			System.out.print("Scegli un'opzione (1-4): ");
 			
 			String scelta = scanner.nextLine();
 			switch(scelta) {
@@ -32,6 +33,10 @@ public class SceltaPrEPCLIController {
 					if(!tornaMenu) {
 						return;
 					}
+					break;
+				case "4":
+					OldPrEPCLIController configuraOld = new OldPrEPCLIController();
+					configuraOld.avviaConfigurazione(scanner);
 					break;
 				case "q":
 					return;
