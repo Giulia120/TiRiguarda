@@ -1,66 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.RiepilogoGraphicController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tiriguarda.controller.graphic.ProfiloGraphicController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
-         <content>
-            <VBox prefHeight="946.0" prefWidth="798.0" spacing="20.0" style="-fx-background-color: #faefe6;">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="759.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="799.0" text="Riepilogo" textAlignment="CENTER" textFill="#ab399f">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="31.0" prefWidth="738.0">
-                     <children>
-                        <DatePicker fx:id="dataRiepilogoPicker" prefHeight="46.0" prefWidth="291.0" />
-                        <Button fx:id="generaButton" mnemonicParsing="false" onAction="#onGeneraButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
-                           <graphic>
-                              <ImageView fitHeight="48.0" fitWidth="149.0">
-                                 <image>
-                                    <Image url="@images/generariepilogo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <VBox fx:id="vboxContenutoRisultati" prefHeight="200.0" prefWidth="100.0" />
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
-                     <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/backbutton.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-               </padding>
-            </VBox>
-         </content>
-      </ScrollPane>
+      <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/riepilogo.gif" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="scaricaButton" layoutX="507.0" layoutY="294.0" mnemonicParsing="false" onAction="#onScaricaButton" prefHeight="52.0" prefWidth="153.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="backButton" layoutX="27.0" layoutY="559.0" mnemonicParsing="false" onAction="#onTornaMenuPrincipale" prefHeight="36.0" prefWidth="46.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Label layoutX="343.0" layoutY="422.0" prefHeight="62.0" prefWidth="99.0">
+               <tooltip>
+                  <Tooltip text="MEWO" />
+               </tooltip>
+            </Label>
+            <DatePicker fx:id="dataRiepilogoPicker" layoutX="281.0" layoutY="298.0" prefHeight="45.0" prefWidth="217.0" style="-fx-background-color: transparent; -fx-control-inner-background: transparent; -fx-border-color: #4A5D3E; -fx-border-width: 2; -fx-border-radius: 4; -fx-text-inner-color: black; -fx-accent: #4A5D3E; -fx-text-background-color: black;" />
+         </children>
+      </AnchorPane>
    </children>
 </StackPane>
