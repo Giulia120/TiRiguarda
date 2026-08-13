@@ -5,7 +5,6 @@ import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.OldProtocolloPrEPBean;
 import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -19,11 +18,11 @@ public class OldPrEPGraphicController {
 	@FXML private RadioButton dailyRadio;
 	@FXML private RadioButton onDemandRadio;
 	
-	public void onBackButton(ActionEvent event) {
+	public void onBackButton() {
 		ViewDispatcher.mostraMenuPrincipale();
 	}
 	
-	public void onConfermaPrEP(ActionEvent event) {
+	public void onConfermaPrEP() {
 		try {
 			OldProtocolloPrEPBean bean = new OldProtocolloPrEPBean();
 			bean.setDataInizio(dataInizioPrEPPicker.getValue());

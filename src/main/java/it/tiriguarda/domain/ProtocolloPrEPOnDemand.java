@@ -7,6 +7,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.exception.DatiIncompletiException;
+
 public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
 	public ProtocolloPrEPOnDemand(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP, LocalTime ora) {
         super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio, statoPrEP, ora);
@@ -39,6 +41,9 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
     }
     
     public void aggiornaDataFine(LocalDate dataInizio, SessoBiologico sesso) {
+    	if(dataInizio == null) {
+    		throw new DatiIncompletiException("Devi inserire la data!");
+    	}
     	if(sesso == SessoBiologico.MASCHILE) {
         	setDataFine(dataInizio.plusDays(2));
     	}
