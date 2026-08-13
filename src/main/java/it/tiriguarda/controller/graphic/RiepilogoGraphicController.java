@@ -6,6 +6,10 @@ import java.util.List;
 import it.tiriguarda.controller.app.RiepilogoAppController;
 import it.tiriguarda.dto.EventoRiepilogo;
 import it.tiriguarda.dto.RiepilogoBean;
+import it.tiriguarda.exception.DataFuturaException;
+import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
+import it.tiriguarda.exception.DatiIncompletiException;
+import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 import it.tiriguarda.util.GeneratorePDFUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,18 +19,15 @@ import javafx.stage.FileChooser;
 
 public class RiepilogoGraphicController {
 	
-	@FXML
-	private DatePicker dataRiepilogoPicker;
+	@FXML private DatePicker dataRiepilogoPicker;
 	
-	@FXML
-	private Button generaButton;
+	@FXML private Button scaricaButton;
 	
-	@FXML
-	private Button backButton;
+	@FXML private Button backButton;
 	
 	
 	@FXML
-	public void onGeneraButton() {
+	public void onScaricaButton() {
 	    try {
 	        RiepilogoBean bean = new RiepilogoBean();
 	        bean.setData(dataRiepilogoPicker.getValue());
@@ -49,7 +50,14 @@ public class RiepilogoGraphicController {
 	            ViewDispatcher.mostraSuccesso("Report salvato correttamente!");
 	        }
 
-	    } catch (Exception e) {
+	    } catch (DatabaseNonRaggiungibileException | FileSystemNonRaggiungibileException e) {
+	    	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
+	    }catch (DataFuturaException e) {
+	    	ViewDispatcher.mostraErrore(e.getMessage());
+	    	dataRiepilogoPicker.setValue(null);
+	    }catch(DatiIncompletiException e) {
+	    	ViewDispatcher.mostraErrore(e.getMessage());
+	    }catch (Exception e) {
 	        ViewDispatcher.mostraErrore("Errore nella generazione del PDF: " + e.getMessage());
 	    }
 	}
