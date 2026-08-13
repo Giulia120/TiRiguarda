@@ -19,7 +19,7 @@
             <Button fx:id="dailyButton" layoutX="265.0" layoutY="207.0" mnemonicParsing="false" onAction="#onDaily" prefHeight="68.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="menuPrincipale" layoutX="29.0" layoutY="561.0" mnemonicParsing="false" onAction="#onMenuPrincipale" prefHeight="33.0" prefWidth="42.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="annullaButton" layoutX="265.0" layoutY="382.0" mnemonicParsing="false" onAction="#onAnnullaPrEP" prefHeight="70.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Button fx:id="vecchiaButton" layoutX="265.0" layoutY="471.0" mnemonicParsing="false" onAction="#onOld" prefHeight="68.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
+            <Button fx:id="oldButton" layoutX="265.0" layoutY="471.0" mnemonicParsing="false" onAction="#onOld" prefHeight="68.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>

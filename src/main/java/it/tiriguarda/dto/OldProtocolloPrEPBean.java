@@ -1,11 +1,13 @@
 package it.tiriguarda.dto;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import it.tiriguarda.domain.TipologiaPrEP;
+import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
-public class OldProcotolloPrEP {
+public class OldProtocolloPrEPBean {
 	private TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
@@ -35,6 +37,9 @@ public class OldProcotolloPrEP {
 	private void controllaData(LocalDate data) {
 		if (data == null) {
 			throw new DatiIncompletiException("Devi inserire la data!");
+		}
+		if (data.isAfter(LocalDate.now(ZoneId.systemDefault()))){
+			throw new DataFuturaException();
 		}
 	}
 	

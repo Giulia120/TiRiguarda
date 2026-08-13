@@ -14,8 +14,8 @@ import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
+import it.tiriguarda.dto.OldProtocolloPrEPBean;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
-import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
@@ -24,9 +24,6 @@ public class ConfiguraPrEPAppController {
 	private static final Logger logger = Logger.getLogger(ConfiguraPrEPAppController.class.getName());
 	
 	public void configuraPrEP(ProtocolloPrEPBean bean) {
-		if(bean.getDataInizio() == null || bean.getOrario() == null) {
-			throw new DatiIncompletiException();
-		}
 	
 		Utente utente = SessionManager.getInstance().getUtenteLoggato();
 		if (utente == null) {
@@ -39,42 +36,65 @@ public class ConfiguraPrEPAppController {
 		if(dao.esisteProtocollo(utente.getUsername(), bean.getDataInizio(), false)) {
 			throw new ProtocolloAttivoException();
 		}
-		String idProtocollo = UUID.randomUUID().toString();
-		
-		ProtocolloPrEP protocollo;
-		
-		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
-		    protocollo = protocolloDaily;
-		    utente.setProtocolloAttivo(TipologiaPrEP.DAILY);
-		}else {
-			ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
-			protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
-			protocollo = protocolloOnD;
-			if (protocollo.getDataFine().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
-				utente.setProtocolloAttivo(TipologiaPrEP.ON_DEMAND);
-			}
-		}
-				
+		ProtocolloPrEP protocollo = creaProtocolloPrEP(bean, utente);
 		if(protocollo.getDataFine() != null && protocollo.getDataFine().isBefore(LocalDate.now(ZoneId.systemDefault()))) {
-			logger.info("Il protocollo inserito ha una data di fine nel passato. Viene registrato come gia' chiuso.");
-	       
-	        utente.setProtocolloAttivo(null);
-	        protocollo.setStatoPrEP(false);
+			logger.info("Il protocollo inserito ha data di fine nel passato, viene ragistrato come non attivo.");
 			
-			dao.configuraProtocollo(protocollo);
-		}
-		else {
+			utente.setProtocolloAttivo(null);
+			protocollo.setStatoPrEP(false);
+		}else {
 			if(bean.getRicevereSMS()) {
 				GestioneSmsAppController smsController = new GestioneSmsAppController();
-			    smsController.programmaPromemoriaPrEP(protocollo, utente);
+				smsController.programmaPromemoriaPrEP(protocollo, utente);
 			}
 			utente.setProtocolloAttivo(protocollo.getTipoPrEP());
-			dao.configuraProtocollo(protocollo);
-			UtenteDAO daoUtente = factory.createUtenteDAO();
-			daoUtente.aggiornaProtocolloAttivo(utente);
-			logger.info("Protocollo attivo registrato con successo.");
-		}
+		UtenteDAO daoUtente = factory.createUtenteDAO();
+		daoUtente.aggiornaProtocolloAttivo(utente);
+		logger.info("Protocollo attivo registrato con successo.");
 	}
-
+		dao.configuraProtocollo(protocollo);
+		logger.info("Protocollo registrato con successo.");
+		}
+	
+	public void configuraVecchiaPrEP(OldProtocolloPrEPBean bean) {
+		Utente utente = SessionManager.getInstance().getUtenteLoggato();
+		if (utente == null) {
+	        throw new UtenteNonLoggatoException();
+	    }
+		
+		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
+		
+		ProtocolloPrEP oldProtocollo;
+		
+		String idProtocollo = UUID.randomUUID().toString();
+        boolean statoPrEP = false; 
+        
+        if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
+        	oldProtocollo = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), bean.getDataFine(), statoPrEP);
+        } else {
+        	oldProtocollo = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), bean.getDataFine(), statoPrEP);
+        }
+		
+		dao.configuraProtocollo(oldProtocollo);
+		logger.info("Protocollo registrato con successo.");
+	}
+	
+	private ProtocolloPrEP creaProtocolloPrEP(ProtocolloPrEPBean bean, Utente utente) {
+		String idProtocollo = UUID.randomUUID().toString();
+		
+		if(bean.getTipoPrEP() == TipologiaPrEP.DAILY) {
+            ProtocolloPrEPDaily protocolloDaily = new ProtocolloPrEPDaily(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
+            utente.setProtocolloAttivo(TipologiaPrEP.DAILY);
+            return protocolloDaily;
+        } else {
+            ProtocolloPrEPOnDemand protocolloOnD = new ProtocolloPrEPOnDemand(idProtocollo, utente.getUsername(), bean.getDataInizio(), true, bean.getOrario());
+            protocolloOnD.aggiornaDataFine(bean.getDataInizio(), utente.getSessoBiologico());
+            if (protocolloOnD.getDataFine().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+                utente.setProtocolloAttivo(TipologiaPrEP.ON_DEMAND);
+            }
+            return protocolloOnD;
+        }
+	}
+		
 }

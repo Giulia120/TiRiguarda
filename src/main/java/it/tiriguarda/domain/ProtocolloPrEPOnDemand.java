@@ -12,6 +12,10 @@ public class ProtocolloPrEPOnDemand extends ProtocolloPrEP{
         super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio, statoPrEP, ora);
     }
 	
+	public ProtocolloPrEPOnDemand(String idProtocollo, String utente, LocalDate dataInizio, LocalDate dataFine, boolean statoPrEP) {
+	    super(idProtocollo, utente, TipologiaPrEP.ON_DEMAND, dataInizio, dataFine, statoPrEP);
+	}
+	
     @Override
     public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso){
     	List<LocalDateTime> promemoria = new ArrayList<>();

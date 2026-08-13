@@ -24,6 +24,16 @@ public abstract class ProtocolloPrEP {
 		this.ora = ora;
 	}
 	
+	protected ProtocolloPrEP(String idProtocollo, String utente, TipologiaPrEP tipoPrEP, LocalDate dataInizio, LocalDate dataFine, boolean statoPrEP) {
+	    this.idProtocollo = idProtocollo;
+	    this.utente = utente;
+	    this.tipoPrEP = tipoPrEP;
+	    this.dataInizio = dataInizio;
+	    this.statoPrEP = statoPrEP;
+	    this.dataFine = dataFine;
+	    this.ora = null;
+	}
+	
 	public abstract List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso);
 	
 	public String getIdProtocollo() {

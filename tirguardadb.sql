@@ -20,7 +20,7 @@ CREATE TABLE `tiriguardadatabase`.`ProtocolloPrEP`(
     `dataInizio` DATE NOT NULL,
     `statoPrEP` BOOLEAN NOT NULL DEFAULT 1,
     `dataFine` DATE,
-    `ora` TIME NOT NULL,
+    `ora` TIME,
 	PRIMARY KEY (`idProtocollo`),
 
     CONSTRAINT `protocollo_utente`

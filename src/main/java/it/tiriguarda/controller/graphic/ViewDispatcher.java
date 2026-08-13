@@ -53,6 +53,9 @@ public class ViewDispatcher {
         }
 	}
 	
+	public static void mostraVecchiaPrEP() {
+		cambiaSchermata("/it/tiriguarda/view/VecchiaPrEP.fxml");
+	}
 	public static void mostraTest() {
         cambiaSchermata("/it/tiriguarda/view/Test.fxml");
     }

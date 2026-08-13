@@ -11,6 +11,10 @@ public class ProtocolloPrEPDaily extends ProtocolloPrEP{
 	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio, boolean statoPrEP, LocalTime ora) {
         super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio, statoPrEP, ora);
     }
+	
+	public ProtocolloPrEPDaily(String idProtocollo, String utente, LocalDate dataInizio, LocalDate dataFine, boolean statoPrEP) {
+	    super(idProtocollo, utente, TipologiaPrEP.DAILY, dataInizio, dataFine, statoPrEP);
+	}
 
     @Override
     public List<LocalDateTime> calcolaGiorniPromemoria(LocalDate dataInizio, LocalTime ora, SessoBiologico sesso) {

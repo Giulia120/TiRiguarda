@@ -75,7 +75,11 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 			} else {
 			    ps.setNull(6, java.sql.Types.DATE);
 			}
-			ps.setTime(7, java.sql.Time.valueOf(protocolloPrEP.getOra()));
+			if (protocolloPrEP.getOra() != null) {
+				ps.setTime(7, java.sql.Time.valueOf(protocolloPrEP.getOra()));
+			}else {
+				ps.setNull(7, java.sql.Types.TIME);
+			}
 			
 			ps.executeUpdate();
 

@@ -17,6 +17,8 @@ public class SceltaPrEPGraphicController {
 	
 	@FXML private Button annullaButton;
 	
+	@FXML private Button oldButton;
+	
 	@FXML private Button menuPrincipale;
 	
 	@FXML public void onDaily(ActionEvent event) {
@@ -24,6 +26,10 @@ public class SceltaPrEPGraphicController {
 	}
 	@FXML public void onOnDemand(ActionEvent event) {
 		ViewDispatcher.mostraConfiguraPrEP(TipologiaPrEP.ON_DEMAND);
+	}
+	
+	@FXML public void onOld(ActionEvent event) {
+		ViewDispatcher.mostraVecchiaPrEP();
 	}
 	
 	@FXML public void onAnnullaPrEP(ActionEvent event) {
