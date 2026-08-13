@@ -63,7 +63,7 @@ public class RiepilogoGraphicController {
 	}
 		
 	@FXML
-	public void onBackButton(ActionEvent event) {
+	public void onTornaMenuPrincipale(ActionEvent event) {
 		ViewDispatcher.mostraMenuPrincipale();
 	}
 	
