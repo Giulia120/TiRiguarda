@@ -11,29 +11,22 @@ import javafx.scene.control.Button;
 
 public class SceltaPrEPGraphicController {
 	
-	@FXML
-	private Button dailyButton;
+	@FXML private Button dailyButton;
 	
-	@FXML
-	private Button onDemandButton;
+	@FXML private Button onDemandButton;
 	
-	@FXML
-	private Button annullaButton;
+	@FXML private Button annullaButton;
 	
-	@FXML
-	private Button menuPrincipale;
+	@FXML private Button menuPrincipale;
 	
-	@FXML
-	public void onDaily(ActionEvent event) {
+	@FXML public void onDaily(ActionEvent event) {
 		ViewDispatcher.mostraConfiguraPrEP(TipologiaPrEP.DAILY);
 	}
-	@FXML
-	public void onOnDemand(ActionEvent event) {
+	@FXML public void onOnDemand(ActionEvent event) {
 		ViewDispatcher.mostraConfiguraPrEP(TipologiaPrEP.ON_DEMAND);
 	}
 	
-	@FXML
-	public void onAnnullaPrEP(ActionEvent event) {
+	@FXML public void onAnnullaPrEP(ActionEvent event) {
 		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 		try {
 			controller.verificaStatoPrEP();
@@ -49,8 +42,7 @@ public class SceltaPrEPGraphicController {
 	        }
 	}
 	
-	@FXML
-	public void onMenuPrincipale(ActionEvent event) {
+	@FXML public void onMenuPrincipale(ActionEvent event) {
 		ViewDispatcher.mostraMenuPrincipale();
 	}
 }

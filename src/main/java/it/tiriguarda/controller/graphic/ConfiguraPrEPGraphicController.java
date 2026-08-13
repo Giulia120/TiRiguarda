@@ -14,32 +14,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ConfiguraPrEPGraphicController {
-	@FXML
-	private DatePicker dataInizioPrEPPicker;
+	@FXML private DatePicker dataInizioPrEPPicker;
 	
-	@FXML
-	private CheckBox checkSMS;
+	@FXML private CheckBox checkSMS;
 	
-	@FXML
-	private Button confermaButton;
+	@FXML private Button confermaButton;
 	
-	@FXML
-	private Button backButton;
+	@FXML private Button backButton;
 	
-	@FXML
-	private TextField orarioPrEP;
+	@FXML private TextField orarioPrEP;
+	
+	@FXML private Label tipoPrEPLabel;
 	
 	private TipologiaPrEP tipoPrEP;
 
-	public void initData(TipologiaPrEP tipoPrEP) {
+	public void inizializza(TipologiaPrEP tipoPrEP) {
 	    this.tipoPrEP = tipoPrEP;
+	    tipoPrEPLabel.setText(tipoPrEP.toString().replace("_", " "));
 	}
 	
-	@FXML
-	public void onConfermaPrEP() {
+	@FXML public void onConfermaPrEP() {
 		 try {
 			 ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
 			 bean.setTipoPrEP(tipoPrEP);
@@ -70,8 +68,7 @@ public class ConfiguraPrEPGraphicController {
 	}
 	
 	
-	@FXML
-	public void onBackButton(ActionEvent event) {
+	@FXML public void onBackButton(ActionEvent event) {
 		ViewDispatcher.mostraPrEP();
 	 }
 	

@@ -138,7 +138,7 @@ public class ViewDispatcher {
     	     ViewDispatcher.class.getResource("/it/tiriguarda/view/ConfiguraPrEP.fxml"));
     	        Parent nuovaVista = loader.load();
     	        ConfiguraPrEPGraphicController controller = loader.getController();
-    	        controller.initData(tipoPrEP);
+    	        controller.inizializza(tipoPrEP);
     	        finestraPrincipale.setScene(new Scene(nuovaVista));
     	        finestraPrincipale.show();
     	    } catch (Exception e) {
