@@ -5,7 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.domain.TipologiaPrEP;
 
 public class SceltaPrEPCLIController {
-	@SuppressWarnings("java:S106")
+	
 	public void avviaPrEP(Scanner scanner) {
 		boolean fine = false;
 		while(!fine) {

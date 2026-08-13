@@ -15,7 +15,7 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RichiestaSMSRapportoCLIController {
-	@SuppressWarnings("java:S106")
+	
 	public void avvia(RapportoBean bean, Scanner scanner) {
 		
 		stampaIntestazione(bean);
@@ -37,7 +37,7 @@ public class RichiestaSMSRapportoCLIController {
 			System.out.println("\n[INFO] Hai detto NO agli SMS.");
 		}
 	}
-	@SuppressWarnings("java:S106")
+	
 	private void stampaIntestazione(RapportoBean bean) {
 		System.out.println("\n========================================");
 		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
@@ -51,7 +51,7 @@ public class RichiestaSMSRapportoCLIController {
 			System.out.println("Data fine periodo finestra: " + dataFormattata);
 		}
 	}
-	@SuppressWarnings("java:S106")
+	
 	private String leggiSceltaValida(Scanner scanner) {
 		while (true) {
 			System.out.println("\nVuoi attivare le notifiche SMS per ricordarti di fare il test?");
@@ -64,7 +64,7 @@ public class RichiestaSMSRapportoCLIController {
 			ViewCLI.stampaInvalido();
 		}
 	}
-	@SuppressWarnings("java:S106")
+	
 	private void programmaNotificaSms(RapportoBean bean) {
 		SmsBean beanSms = new SmsBean();
 		beanSms.setTesto("[PROMEMORIA]: E' ora di fare il test!");

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class MenuPrincipaleCLIController {
-	@SuppressWarnings("java:S106")
+	
 	public void avviaMenu(Scanner scanner) {
 		boolean esci = false;
 

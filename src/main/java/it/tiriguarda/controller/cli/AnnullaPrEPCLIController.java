@@ -25,7 +25,7 @@ public class AnnullaPrEPCLIController {
 	        return false;
 	    }
 	}
-		@SuppressWarnings("java:S106")
+		
 		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
 			ViewCLI.stampaTitolo("Annullamento Prep");
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");

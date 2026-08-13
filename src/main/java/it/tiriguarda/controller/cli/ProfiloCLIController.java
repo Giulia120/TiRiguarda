@@ -8,7 +8,7 @@ import it.tiriguarda.dto.DatiProfiloBean;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ProfiloCLIController {
-	@SuppressWarnings("java:S106")
+	
 	public void avviaProfilo(Scanner scanner) {
 		
 		while (true) {

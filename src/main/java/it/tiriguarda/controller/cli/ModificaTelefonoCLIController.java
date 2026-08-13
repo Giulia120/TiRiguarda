@@ -9,7 +9,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ModificaTelefonoCLIController {
-	@SuppressWarnings("java:S106")
+	
 	public void avvia(Scanner scanner) {
 		
 		ViewCLI.stampaTitolo("Modfica Telefono");

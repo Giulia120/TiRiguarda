@@ -12,7 +12,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 
 public class OldPrEPCLIController {
 
-	@SuppressWarnings("java:S106")
+	
 	public void avviaConfigurazione(Scanner scanner) {
 		boolean completato = false;
 		while (!completato) {
@@ -48,7 +48,7 @@ public class OldPrEPCLIController {
 		}
 	}
 	
-	@SuppressWarnings("java:S106")
+	
 	private TipologiaPrEP leggiTipoPrEP(Scanner scanner) {
 		while(true) {
 			System.out.print("Che tipo di PrEP hai usato? (1 - Daily, 2 - On Demand): ");
