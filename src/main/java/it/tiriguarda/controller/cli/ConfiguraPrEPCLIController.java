@@ -53,6 +53,7 @@ public class ConfiguraPrEPCLIController {
             	throw e;
             }
     }
+	return;
 }
 	@SuppressWarnings("java:S106")
     private LocalTime leggiOrario(Scanner scanner) {

@@ -39,6 +39,6 @@ public class AnnullaPrEPGraphicController {
 	
 	@FXML
 	public void onBackButton(ActionEvent event){
-		ViewDispatcher.mostraPrEP();;
+		ViewDispatcher.mostraPrEP();
 	}
 }
