@@ -19,13 +19,13 @@
          <children>
             <Button fx:id="siButton" layoutX="265.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSiButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
             <Button fx:id="noButton" layoutX="447.0" layoutY="386.0" mnemonicParsing="false" onAction="#onNoButton" prefHeight="54.0" prefWidth="88.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Label fx:id="dataFinestraLabel" layoutX="292.0" layoutY="286.0" prefHeight="18.0" prefWidth="216.0">
+            <Label fx:id="dataFinestraLabel" alignment="CENTER" layoutX="292.0" layoutY="286.0" prefHeight="18.0" prefWidth="216.0" textAlignment="CENTER">
                <font>
                   <Font name="Bodoni MT Black" size="28.0" />
                </font>
             </Label>
             <Button fx:id="annullaButton" layoutX="320.0" layoutY="482.0" mnemonicParsing="false" onAction="#onAnnullaButton" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
-            <Label fx:id="livelloRischioLabel" layoutX="288.0" layoutY="177.0" prefHeight="22.0" prefWidth="224.0" textAlignment="CENTER" textFill="#ab399f">
+            <Label fx:id="livelloRischioLabel" alignment="CENTER" layoutX="288.0" layoutY="177.0" prefHeight="22.0" prefWidth="224.0" textAlignment="CENTER" textFill="#ab399f">
                <font>
                   <Font name="Bodoni MT Black" size="18.0" />
                </font>
