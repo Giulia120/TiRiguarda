@@ -21,6 +21,7 @@ public class LoginGraphicController {
 	private TextField usernameField;
 	@FXML 
 	private PasswordField passwordField;
+	@FXML private Button noLoginButton;
 	
 	
 	@FXML
@@ -51,4 +52,8 @@ public class LoginGraphicController {
 			ViewDispatcher.mostraRegistrazione();
 	 	}
 	 
+	 @FXML
+	 public void onNoLoginButton(ActionEvent event) {
+		 ViewDispatcher.mostraMenuPrincipale();
+	 }
 }

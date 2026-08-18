@@ -1,5 +1,8 @@
 package it.tiriguarda.controller.graphic;
 
+import it.tiriguarda.domain.Utente;
+import it.tiriguarda.exception.UtenteNonLoggatoException;
+import it.tiriguarda.service.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,30 +18,51 @@ public class MenuPrincipaleGraphicController {
 	@FXML private Button infoButton;
 	@FXML private Button logoutButton;
 
+	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 	
 	@FXML
 	private void onTestButton(ActionEvent event) {
-		ViewDispatcher.mostraTest();
+		if (utenteCorrente == null) {
+	        ViewDispatcher.mostraErrore("Funzionalita' riservata ad utenti registrati");
+	    } else {
+	    	ViewDispatcher.mostraTest();	
+	    }
 	}
 	
 	@FXML
 	private void onProfiloButton(ActionEvent event) {
-		ViewDispatcher.mostraProfilo();
+		if (utenteCorrente == null) {
+	        ViewDispatcher.mostraErrore("Funzionalita' riservata ad utenti registrati");
+	    } else {
+	    	ViewDispatcher.mostraProfilo();
+	    	}
 	}
 	
 	@FXML
 	private void onRiepilogoButton(ActionEvent event) {
-		ViewDispatcher.mostraRiepilogo();
+		if (utenteCorrente == null) {
+	        ViewDispatcher.mostraErrore("Funzionalita' riservata ad utenti registrati");
+	    } else {
+			ViewDispatcher.mostraRiepilogo();
+			}
 	}
 	
 	@FXML
 	private void onRegistraRapportoButton(ActionEvent event) {
-		ViewDispatcher.mostraRegistraRapporto();
+		if (utenteCorrente == null) {
+	        ViewDispatcher.mostraErrore("Funzionalita' riservata ad utenti registrati");
+	    } else {
+	    	ViewDispatcher.mostraRegistraRapporto();
+	    	}
 	}
 	
 	@FXML
 	private void onPrEPButton(ActionEvent event) {
-		ViewDispatcher.mostraPrEP();
+		if (utenteCorrente == null) {
+	        ViewDispatcher.mostraErrore("Funzionalita' riservata ad utenti registrati");
+	    } else {
+	    	ViewDispatcher.mostraPrEP();
+	    	}
 	}
 	
 	@FXML

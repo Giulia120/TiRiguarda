@@ -1,8 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.domain.LivelloRischio;
-import it.tiriguarda.domain.Utente;
-import it.tiriguarda.service.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,11 +43,6 @@ public class QuestionarioRisultatoGraphicController {
 
     @FXML
     public void ongoback(ActionEvent event) {
-    	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-		if (utenteCorrente == null) {
-			ViewDispatcher.mostraLogin();
-		} else {
-			ViewDispatcher.mostraMenuPrincipale();
-			}
+		ViewDispatcher.mostraMenuPrincipale();
     }
 }
