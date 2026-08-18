@@ -1,6 +1,8 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.domain.LivelloRischio;
+import it.tiriguarda.domain.Utente;
+import it.tiriguarda.service.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +15,7 @@ public class QuestionarioRisultatoGraphicController {
     @FXML private Circle coloreRischio;
     @FXML private Label livelloRischio;
     @FXML private Label testoRisultato;
-    @FXML private Button menuPrincipaleButton;
+    @FXML private Button goback;
 
     public void inizializza(LivelloRischio rischio) {
         
@@ -42,7 +44,12 @@ public class QuestionarioRisultatoGraphicController {
     }
 
     @FXML
-    public void onMenuPrincipale(ActionEvent event) {
-        ViewDispatcher.mostraMenuPrincipale();
+    public void ongoback(ActionEvent event) {
+    	Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+		if (utenteCorrente == null) {
+			ViewDispatcher.mostraLogin();
+		} else {
+			ViewDispatcher.mostraMenuPrincipale();
+			}
     }
 }
