@@ -10,7 +10,6 @@ public class ProtocolloPrEPBean {
 	private TipologiaPrEP tipoPrEP;
 	private LocalDate dataInizio;
 	private LocalTime orario;
-	private boolean ricevereSMS;
 	
 	public TipologiaPrEP getTipoPrEP() {
 		return tipoPrEP;
@@ -33,12 +32,7 @@ public class ProtocolloPrEPBean {
 	public void setOrario(LocalTime orario) {
 		this.orario = orario;
 	}
-	public boolean getRicevereSMS() {
-		return ricevereSMS;
-	}
-	public void setRicevereSMS(boolean ricevereSMS) {
-		this.ricevereSMS = ricevereSMS;
-	}
+	
 	private void controllaData(LocalDate data) {
 		if (data == null) {
 			throw new DatiIncompletiException("Devi inserire la data!");

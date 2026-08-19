@@ -1,5 +1,6 @@
 package it.tiriguarda.controller.app;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -29,32 +30,35 @@ public class AnnullaPrEPAppController  {
 		}
 	}
 	
-	public void annullaPrEP() {
-		Utente utente = SessionManager.getInstance().getUtenteLoggato();
-		if (utente == null) {
-	        throw new UtenteNonLoggatoException();
-	    }
-	
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-		ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
-		dao.annullaStatoProtocollo(prot);	
-		logger.info("Protocollo PrEP annullato correttamente");
+	public CompletableFuture<Void> annullaPrEP() {
+		return CompletableFuture.runAsync(() -> {
+			
+			Utente utente = SessionManager.getInstance().getUtenteLoggato();
+			if (utente == null) {
+		        throw new UtenteNonLoggatoException();
+		    }
 		
-	
-		UtenteDAO daoUtente = factory.createUtenteDAO();
-		daoUtente.eliminaProtocolloAttivo(utente);
+			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
+			ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
+			dao.annullaStatoProtocollo(prot);	
+			logger.info("Protocollo PrEP annullato correttamente");
+			
 		
-		
-		SmsDAO smsDAO = factory.createSmsDAO();
+			UtenteDAO daoUtente = factory.createUtenteDAO();
+			daoUtente.eliminaProtocolloAttivo(utente);
+			
+			
+			SmsDAO smsDAO = factory.createSmsDAO();
 
-		if(prot.getTipoPrEP() == TipologiaPrEP.DAILY) {
-		    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_DAILY);
-		}
-		else {
-		    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_OD);
-		}
-		logger.info("Eliminati promemoria per il protocollo PrEP.");
+			if(prot.getTipoPrEP() == TipologiaPrEP.DAILY) {
+			    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_DAILY);
+			}
+			else {
+			    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_OD);
+			}
+			logger.info("Eliminati promemoria per il protocollo PrEP.");
+		});
 		
 	}
 	
