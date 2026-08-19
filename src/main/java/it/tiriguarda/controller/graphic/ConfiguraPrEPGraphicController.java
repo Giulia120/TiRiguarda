@@ -48,12 +48,9 @@ public class ConfiguraPrEPGraphicController {
         
 			 bean.setOrario(ora);
         
-			 bean.setRicevereSMS(checkSMS.isSelected());
-        
 			 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
         	controller.configuraPrEP(bean);
-			ViewDispatcher.mostraSuccesso("PrEP registrata con successo! Ricordati di seguire correttamente il protocollo. Visita la sezione INFORMAZIONI per maggiori info.");
-			
+			ViewDispatcher.mostraSchermataSmsPrEP(bean);
 		 }catch(DateTimeParseException e) {
 			 ViewDispatcher.mostraErrore("Formato orario non valido. Inserisci l'orario nel formato HH:mm.");
 			 orarioPrEP.setText(null);
