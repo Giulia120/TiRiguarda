@@ -1,7 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.domain.Utente;
-import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

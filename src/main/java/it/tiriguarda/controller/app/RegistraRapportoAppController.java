@@ -3,6 +3,7 @@ package it.tiriguarda.controller.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -56,20 +57,24 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
         return this.ultimoRapportoSalvato;
     }
   
-	public RapportoBean valutaRischio(RapportoBean bean) {
+	public CompletableFuture<RapportoBean> valutaRischio(RapportoBean bean) {
 
-		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-		if (utenteCorrente == null) {
-	        throw new UtenteNonLoggatoException();
-	    }
-		LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
-		
-		Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente.getUsername(), "temp-id", bean.getData(), rischioCalcolato);
-		
-		bean.setRischio(rischioCalcolato);
-		bean.setDataFinePeriodoFinestra(rapportoTemporaneo.getDataFinePeriodoFinestra());
-		
-		return bean;
+		return CompletableFuture.supplyAsync(() -> {
+	        
+	        Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+	        if (utenteCorrente == null) {
+	            throw new UtenteNonLoggatoException();
+	        }
+	        
+	        LivelloRischio rischioCalcolato = analizzaRischio(bean, utenteCorrente);
+	        
+	        Rapporto rapportoTemporaneo = new Rapporto(utenteCorrente.getUsername(), "temp-id", bean.getData(), rischioCalcolato);
+	        
+	        bean.setRischio(rischioCalcolato);
+	        bean.setDataFinePeriodoFinestra(rapportoTemporaneo.getDataFinePeriodoFinestra());
+	        
+	        return bean; 
+	    });
 	}
 	
 	private LivelloRischio analizzaRischio(RapportoBean bean, Utente utente) {
@@ -88,24 +93,28 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 		return calcolatore.calcola();
 	}
 	
-	public void salvaRapportoDefinitivo(RapportoBean bean) {
-		Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
-		String idRapporto = UUID.randomUUID().toString();
-		if (utenteCorrente == null) {
-	        throw new UtenteNonLoggatoException();
-	    }
-		
-		Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());
-		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
-		RapportoDAO dao = factory.createRapportoDAO();
-		dao.salvaRapporto(nuovoRapporto);
-		
-		this.ultimoRapportoSalvato = nuovoRapporto;
-		this.utenteRapportoSalvato = utenteCorrente;
-		notifyObservers();
-		
-		logger.info("Rapporto registrato definitivamente con successo.");
+	public CompletableFuture<Void> salvaRapportoDefinitivo(RapportoBean bean) {
+	    
+	    return CompletableFuture.runAsync(() -> {
+	        
+	        Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
+	        String idRapporto = UUID.randomUUID().toString();
+	        if (utenteCorrente == null) {
+	            throw new UtenteNonLoggatoException();
+	        }
+	        
+	        Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());
+	        
+	        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+	        RapportoDAO dao = factory.createRapportoDAO();
+	        dao.salvaRapporto(nuovoRapporto);
+	        
+	        this.ultimoRapportoSalvato = nuovoRapporto;
+	        this.utenteRapportoSalvato = utenteCorrente;
+	        notifyObservers();
+	        
+	        logger.info("Rapporto registrato definitivamente con successo.");
+	    });
 	}
 	
 }

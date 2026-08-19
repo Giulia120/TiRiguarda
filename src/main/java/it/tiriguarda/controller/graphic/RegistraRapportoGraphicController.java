@@ -15,6 +15,7 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,9 +46,8 @@ public class RegistraRapportoGraphicController {
 	 
 	 @FXML
 	 public void onConfermaRegistrazione(ActionEvent event) {
-	        try {
-	        	RapportoBean bean = new RapportoBean();
-		        
+		 try {
+		        RapportoBean bean = new RapportoBean();
 		        bean.setData(dataRapportoPicker.getValue());
 		        
 		        List<TipoRapporto> tipiSelezionati = new ArrayList<>();
@@ -61,39 +61,72 @@ public class RegistraRapportoGraphicController {
 		        
 		        Precauzioni precauzioneSelezionata = null;
 		        if (radioPreservativo.isSelected()) {
-		        	precauzioneSelezionata = Precauzioni.PRESERVATIVO;
+		            precauzioneSelezionata = Precauzioni.PRESERVATIVO;
 		        } else if (radioCoInt.isSelected()) {
-		        	precauzioneSelezionata = Precauzioni.COITO_INTERROTTO;
+		            precauzioneSelezionata = Precauzioni.COITO_INTERROTTO;
 		        } else if (radioNulla.isSelected()) {
-		        	precauzioneSelezionata = Precauzioni.NULLA;
+		            precauzioneSelezionata = Precauzioni.NULLA;
 		        }
 		        bean.setPrecauzioniUsate(precauzioneSelezionata);
 		        
+		        confermaButton.setDisable(true);
+		        
 		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
 		        new RicalcoloSMSPrEPObserver(appController);
-	        	RapportoBean beanAggiornato = appController.valutaRischio(bean);
-	            if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
-	            	if(beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
-	            		ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
-	            	} else {
-	            		ViewDispatcher.mostraInfoRapporto(beanAggiornato);
-	            	}
-	            } else {
-	            	appController.salvaRapportoDefinitivo(beanAggiornato);
-	            	ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
-	            }
-	        } catch (DatiIncompletiException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	        } catch (DataFuturaException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	            dataRapportoPicker.setValue(null);          
-	        }catch (DatabaseNonRaggiungibileException e) {
-	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
-	        }catch(UtenteNonLoggatoException e) {
-	        	ViewDispatcher.mostraErrore(e.getMessage());
-	        	ViewDispatcher.mostraLogin();
-	        }
-	 } 
+
+		        appController.valutaRischio(bean).thenAccept(beanAggiornato -> {
+		            
+		            if (beanAggiornato.getRischio() == LivelloRischio.NULLO) {
+
+		                appController.salvaRapportoDefinitivo(beanAggiornato).thenRun(() -> {
+		                    Platform.runLater(() -> {
+		                        confermaButton.setDisable(false);
+		                        ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
+		                    });
+		                }).exceptionally(ex -> {
+		                    Platform.runLater(() -> {
+		                        confermaButton.setDisable(false);
+		                        Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
+		                        ViewDispatcher.mostraErrore("Errore nel salvataggio: " + cause.getMessage());
+		                    });
+		                    return null;
+		                });
+                        
+		            } else {
+
+		                Platform.runLater(() -> {
+		                    confermaButton.setDisable(false);
+		                    if (beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+		                        ViewDispatcher.mostraSchermataSMSRapporto(beanAggiornato);
+		                    } else {
+		                        ViewDispatcher.mostraInfoRapporto(beanAggiornato);
+		                    }
+		                });
+		            }
+		            
+		        }).exceptionally(ex -> {
+		            Platform.runLater(() -> {
+		                confermaButton.setDisable(false); 
+		                Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
+		                
+		                if (cause instanceof DatabaseNonRaggiungibileException) {
+		                    ViewDispatcher.mostraErroreCriticoEChiudi(cause.getMessage());
+		                } else if (cause instanceof UtenteNonLoggatoException) {
+		                    ViewDispatcher.mostraErrore(cause.getMessage());
+		                    ViewDispatcher.mostraLogin();
+		                } else {
+		                    ViewDispatcher.mostraErrore("Si è verificato un errore imprevisto: " + cause.getMessage());
+		                }
+		            });
+		            return null;
+		        });
+		     } catch (DataFuturaException e) {
+		    	 ViewDispatcher.mostraErrore(e.getMessage());
+		    	 dataRapportoPicker.setValue(null);
+		     } catch (DatiIncompletiException e) {
+		    	 ViewDispatcher.mostraErrore(e.getMessage());
+		     }
+	 }
 	 @FXML
 		public void onMenuPrincipale(ActionEvent event) {
 		 ViewDispatcher.mostraMenuPrincipale();
