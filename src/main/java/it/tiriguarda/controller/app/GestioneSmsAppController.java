@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.DAOFactoryProvider;
+import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.Sms;
@@ -42,8 +43,15 @@ public class GestioneSmsAppController {
         logger.info(() -> "Cancellati SMS futuri di tipo " + tipoSms.name() + " per l'utente " + username);
     }
 	
-	public void programmaPromemoriaPrEP(ProtocolloPrEP protocollo, Utente utente) {
+	public void programmaPromemoriaPrEP() {
+		Utente utente = SessionManager.getInstance().getUtenteLoggato();
+	    if (utente == null) {
+	        throw new UtenteNonLoggatoException();
+	    }
 	    DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+	    ProtocolloPrEPDAO protocolloDao = factory.createProtocolloPrEPDAO();
+	    ProtocolloPrEP protocollo = protocolloDao.trovaProtocolloAttivo(utente.getUsername());
+	    
 	    SmsDAO smsDao = factory.createSmsDAO();
 
 	    List<LocalDateTime> date = protocollo.calcolaGiorniPromemoria(protocollo.getDataInizio(), protocollo.getOra(), utente.getSessoBiologico());

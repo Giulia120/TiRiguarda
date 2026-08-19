@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.TipologiaPrEP;
+import it.tiriguarda.dto.ProtocolloPrEPBean;
 import it.tiriguarda.dto.RapportoBean;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -147,6 +148,19 @@ public class ViewDispatcher {
     	    } catch (Exception e) {
     	        logger.log(Level.SEVERE, "Errore nel caricamento della schermata Configura PrEP", e);
     	    }
+    }
+    
+    public static void mostraSchermataSmsPrEP(ProtocolloPrEPBean bean) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewDispatcher.class.getResource("/it/tiriguarda/view/RichiestaSMSPrEP.fxml"));
+            Parent nuovaVista = loader.load();            
+            RichiestaSMSPrEPGraphicController controller = loader.getController();
+            controller.inizializza(bean);
+            finestraPrincipale.setScene(new Scene(nuovaVista));
+            finestraPrincipale.show();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Errore nel caricamento della schermata SMS Rapporto", e);
+        }
     }
 
     public static void mostraRisultatoQuestionario(LivelloRischio rischio) {

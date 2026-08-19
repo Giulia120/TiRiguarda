@@ -43,15 +43,11 @@ public class ConfiguraPrEPAppController {
 			utente.setProtocolloAttivo(null);
 			protocollo.setStatoPrEP(false);
 		}else {
-			if(bean.getRicevereSMS()) {
-				GestioneSmsAppController smsController = new GestioneSmsAppController();
-				smsController.programmaPromemoriaPrEP(protocollo, utente);
-			}
 			utente.setProtocolloAttivo(protocollo.getTipoPrEP());
-		UtenteDAO daoUtente = factory.createUtenteDAO();
-		daoUtente.aggiornaProtocolloAttivo(utente);
-		logger.info("Protocollo attivo registrato con successo.");
-	}
+			UtenteDAO daoUtente = factory.createUtenteDAO();
+			daoUtente.aggiornaProtocolloAttivo(utente);
+			logger.info("Protocollo attivo registrato con successo.");
+		}
 		dao.configuraProtocollo(protocollo);
 		logger.info("Protocollo registrato con successo.");
 		}
