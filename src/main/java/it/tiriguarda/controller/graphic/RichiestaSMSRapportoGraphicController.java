@@ -3,7 +3,6 @@ package it.tiriguarda.controller.graphic;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.CompletableFuture;
 
 import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
@@ -13,7 +12,6 @@ import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.dto.SmsBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,51 +47,28 @@ public class RichiestaSMSRapportoGraphicController {
 		 siButton.setDisable(true);
 		 noButton.setDisable(true);
 
-		 salvaEConcludi().thenRun(() -> {
+		 salvaEConcludi();
 			 try {
 				 GestioneSmsAppController controller = new GestioneSmsAppController();
 				 controller.programmaSms(bean);
-				 Platform.runLater(() -> {
-				     ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
-				 });
+				 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 			 } catch (DatabaseNonRaggiungibileException e) {
-                 Platform.runLater(() -> ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage()));
+                 ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 		     } catch (UtenteNonLoggatoException e) {
-                 Platform.runLater(() -> {
-                     ViewDispatcher.mostraErrore(e.getMessage());
-                     ViewDispatcher.mostraLogin();
-                 });
+                 ViewDispatcher.mostraErrore(e.getMessage());
+                 ViewDispatcher.mostraLogin();
 		     }
-		 }).exceptionally(ex -> {
-             Platform.runLater(() -> {
-                 siButton.setDisable(false);
-                 noButton.setDisable(false);
-                 ViewDispatcher.mostraErrore("Errore nel salvataggio del rapporto: " + (ex.getCause() != null ? ex.getCause().getMessage() : ex.getMessage()));
-             });
-             return null;
-         });
 	 }
 	 
 	 @FXML
 	 private void onNoButton(ActionEvent event){
-		 siButton.setDisable(true);
-		 noButton.setDisable(true);
-		 
-		 salvaEConcludi().thenRun(() -> {
-             Platform.runLater(() -> ViewDispatcher.mostraSuccesso("Rapporto registrato con successo! Ricorda di fare il test!"));
-		 }).exceptionally(ex -> {
-             Platform.runLater(() -> {
-                 siButton.setDisable(false);
-                 noButton.setDisable(false);
-                 ViewDispatcher.mostraErrore("Errore nel salvataggio: " + (ex.getCause() != null ? ex.getCause().getMessage() : ex.getMessage()));
-             });
-             return null;
-         });
+		 salvaEConcludi();
+		 ViewDispatcher.mostraSuccesso("Rapporto registrato con successo! Ricorda di fare il test!");
 	 }
 	 
-	 private CompletableFuture<Void> salvaEConcludi() {
+	 private void salvaEConcludi() {
 		RegistraRapportoAppController appController = new RegistraRapportoAppController();
-		return appController.salvaRapportoDefinitivo(beanInSospeso);
+		appController.salvaRapportoDefinitivo(beanInSospeso);
 	 }
 	 
 	 @FXML
