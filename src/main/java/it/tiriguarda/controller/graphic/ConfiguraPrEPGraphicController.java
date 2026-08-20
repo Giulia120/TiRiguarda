@@ -3,7 +3,7 @@ package it.tiriguarda.controller.graphic;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
@@ -48,7 +48,7 @@ public class ConfiguraPrEPGraphicController {
         
 			 bean.setOrario(ora);
         
-			 ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
+			 PrEPAppController controller = new PrEPAppController();
         	controller.configuraPrEP(bean);
 			ViewDispatcher.mostraSchermataSmsPrEP(bean);
 		 }catch(DateTimeParseException e) {

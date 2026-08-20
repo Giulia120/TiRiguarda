@@ -1,6 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
-import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.OldProtocolloPrEPBean;
 import it.tiriguarda.exception.DataFuturaException;
@@ -33,7 +33,7 @@ public class OldPrEPGraphicController {
 				bean.setTipoPrEP(TipologiaPrEP.ON_DEMAND);
 			}
 			
-			ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
+			PrEPAppController controller = new PrEPAppController();
 			controller.configuraVecchiaPrEP(bean);
 			ViewDispatcher.mostraSuccesso("PrEP registrata con successo!");
 			

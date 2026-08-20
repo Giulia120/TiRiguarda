@@ -1,6 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
-import it.tiriguarda.controller.app.AnnullaPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
@@ -33,7 +33,7 @@ public class SceltaPrEPGraphicController {
 	}
 	
 	@FXML public void onAnnullaPrEP(ActionEvent event) {
-		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
+		PrEPAppController controller = new PrEPAppController();
 		try {
 			controller.verificaStatoPrEP();
 			ViewDispatcher.mostraConfermaAnnullamento();

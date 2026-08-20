@@ -2,7 +2,7 @@ package it.tiriguarda.controller.cli;
 
 import java.util.Scanner;
 
-import it.tiriguarda.controller.app.AnnullaPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
@@ -10,7 +10,7 @@ import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class AnnullaPrEPCLIController {
 	public boolean avvioAnnullamento(Scanner scanner) {
-		AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
+		PrEPAppController controller = new PrEPAppController();
 		try {
 			controller.verificaStatoPrEP();
 			return confermaAnnullamento(controller, scanner);
@@ -26,7 +26,7 @@ public class AnnullaPrEPCLIController {
 	    }
 	}
 		
-		private boolean confermaAnnullamento(AnnullaPrEPAppController controller, Scanner scanner) {
+		private boolean confermaAnnullamento(PrEPAppController controller, Scanner scanner) {
 			ViewCLI.stampaTitolo("Annullamento Prep");
 			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
 			System.out.print("Rispondi si/no: ");

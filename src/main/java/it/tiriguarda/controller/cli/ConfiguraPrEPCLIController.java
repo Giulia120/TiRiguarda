@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
@@ -38,7 +38,7 @@ public class ConfiguraPrEPCLIController {
 				bean.setOrario(orario);
 				bean.setRicevereSMS(ricevereSMS);
             
-                ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
+                PrEPAppController controller = new PrEPAppController();
                 controller.configuraPrEP(bean);
                 ViewCLI.stampaSuccesso(scanner);
                 completato = true;

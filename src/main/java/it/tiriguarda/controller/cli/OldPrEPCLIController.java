@@ -3,7 +3,7 @@ package it.tiriguarda.controller.cli;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import it.tiriguarda.controller.app.ConfiguraPrEPAppController;
+import it.tiriguarda.controller.app.PrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.dto.OldProtocolloPrEPBean;
 import it.tiriguarda.exception.DataFuturaException;
@@ -35,7 +35,7 @@ public class OldPrEPCLIController {
 				bean.setDataInizio(dataInizio);
 				bean.setDataFine(dataFine);
             
-				ConfiguraPrEPAppController controller = new ConfiguraPrEPAppController();
+				PrEPAppController controller = new PrEPAppController();
 				controller.configuraVecchiaPrEP(bean);
 				ViewCLI.stampaSuccesso(scanner);
 				completato = true;

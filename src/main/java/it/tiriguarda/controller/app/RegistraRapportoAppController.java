@@ -3,7 +3,6 @@ package it.tiriguarda.controller.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
@@ -57,9 +56,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
         return this.ultimoRapportoSalvato;
     }
   
-	public CompletableFuture<RapportoBean> valutaRischio(RapportoBean bean) {
-
-		return CompletableFuture.supplyAsync(() -> {
+	public RapportoBean valutaRischio(RapportoBean bean) {
 	        
 	        Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 	        if (utenteCorrente == null) {
@@ -74,7 +71,6 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	        bean.setDataFinePeriodoFinestra(rapportoTemporaneo.getDataFinePeriodoFinestra());
 	        
 	        return bean; 
-	    });
 	}
 	
 	private LivelloRischio analizzaRischio(RapportoBean bean, Utente utente) {
@@ -93,10 +89,8 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 		return calcolatore.calcola();
 	}
 	
-	public CompletableFuture<Void> salvaRapportoDefinitivo(RapportoBean bean) {
+	public void salvaRapportoDefinitivo(RapportoBean bean) {
 	    
-	    return CompletableFuture.runAsync(() -> {
-	        
 	        Utente utenteCorrente = SessionManager.getInstance().getUtenteLoggato();
 	        String idRapporto = UUID.randomUUID().toString();
 	        if (utenteCorrente == null) {
@@ -114,7 +108,6 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	        notifyObservers();
 	        
 	        logger.info("Rapporto registrato definitivamente con successo.");
-	    });
 	}
 	
 }
