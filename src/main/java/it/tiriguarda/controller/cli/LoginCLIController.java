@@ -14,10 +14,10 @@ public class LoginCLIController {
 		
 		while (!fine) {
 			ViewCLI.stampaTitolo("Login");
-			System.out.println("1 - Accedi");
-			System.out.println("2 - Registrati");
-			System.out.println("q - Esci");
-			System.out.print("Scegli un'opzione: ");
+			ViewCLI.mostraMenu(
+					"Accedi",
+					"Registrati",
+					"Continua come ospite");
 			
 			String scelta = scanner.nextLine();
 			
@@ -29,6 +29,10 @@ public class LoginCLIController {
 					RegistraUtenteCLIController registrazioneController = new RegistraUtenteCLIController();
 					registrazioneController.avviaRegistrazione(scanner);
 					break;
+				case "3":
+					OspiteCLIController ospiteController = new OspiteCLIController();
+					ospiteController.avvia(scanner);
+					break;
 				case "q":
 					fine = true;
 					break;
@@ -38,10 +42,10 @@ public class LoginCLIController {
 	}
 	
 	private boolean eseguiAccesso(Scanner scanner) {
-		System.out.print("Username: ");
+		ViewCLI.stampaMessaggio("Username: ");
 		String username = scanner.nextLine();
 		
-		System.out.print("Password: ");
+		ViewCLI.stampaMessaggio("Password: ");
 		String password = scanner.nextLine();
 		
 		

@@ -21,11 +21,11 @@ public class OldPrEPCLIController {
 			TipologiaPrEP tipoPrEP = leggiTipoPrEP(scanner);
 			if (tipoPrEP == null) return;
 			
-			System.out.println("Data di inizio:");
+			ViewCLI.stampaMessaggio("Data di inizio:");
 			LocalDate dataInizio = ViewCLI.leggiData(scanner);
 			if (dataInizio == null) return;
             
-			System.out.println("Data di fine:");
+			ViewCLI.stampaMessaggio("Data di fine:");
 			LocalDate dataFine = ViewCLI.leggiData(scanner);
 			if (dataFine == null) return;
 
@@ -51,7 +51,10 @@ public class OldPrEPCLIController {
 	
 	private TipologiaPrEP leggiTipoPrEP(Scanner scanner) {
 		while(true) {
-			System.out.print("Che tipo di PrEP hai usato? (1 - Daily, 2 - On Demand): ");
+			ViewCLI.stampaMessaggio("Che tipo di PrEP hai usato?\n");
+			ViewCLI.mostraMenu(
+					"Daily",
+					"On Demand");
 			String risposta = scanner.nextLine().trim();
 			
 			if (risposta.equalsIgnoreCase("q")) {

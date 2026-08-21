@@ -11,15 +11,14 @@ public class MenuPrincipaleCLIController {
 
 		while (!esci) {
 			ViewCLI.stampaTitolo("Menu Principale");
-			System.out.println("1 - Registra Rapporto");
-			System.out.println("2 - Registra Test");
-			System.out.println("3 - Visualizza Profilo");
-			System.out.println("4 - Riepilogo");
-			System.out.println("5 - PrEP");
-			System.out.println("6 - Questionario");
-			System.out.println("7 - Informazioni");
-			System.out.println("q - Logout");
-			System.out.print("Scegli un'opzione (1-7 o q): ");
+			ViewCLI.mostraMenu(
+					"Registra Rapporto", 
+					"Registra Test", 
+					"Visualizza Profilo",
+					"Riepilogo",
+					"PrEP",
+					"Questionario",
+					"Informazioni" );
 
 			String scelta = scanner.nextLine();
 
@@ -60,7 +59,7 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "q":
-					System.out.println("\nLogout effettuato con successo. Chiusura sessione CLI.");
+					ViewCLI.stampaMessaggio("Chiusura sessione CLI");
 					esci = true;
 					break;
 					

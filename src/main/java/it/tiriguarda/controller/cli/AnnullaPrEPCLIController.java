@@ -28,8 +28,8 @@ public class AnnullaPrEPCLIController {
 		
 		private boolean confermaAnnullamento(PrEPAppController controller, Scanner scanner) {
 			ViewCLI.stampaTitolo("Annullamento Prep");
-			System.out.println("Sei sicuro di voler annullare il tuo protocollo PrEP?");
-			System.out.print("Rispondi si/no: ");
+			ViewCLI.stampaMessaggio("Sei sicuro di voler annullare il tuo protocollo PrEP?");
+			ViewCLI.stampaMessaggio("Rispondi si/no: ");
 			String risposta = scanner.nextLine();
 			if(risposta.equalsIgnoreCase("q")) {
 		        return false;
@@ -48,7 +48,7 @@ public class AnnullaPrEPCLIController {
 					}	
 			}
 			else {
-				System.out.println("Protocollo PrEP ancora attivo.");
+				ViewCLI.stampaMessaggio("Protocollo PrEP ancora attivo.");
 				return false;
 			}
 	}

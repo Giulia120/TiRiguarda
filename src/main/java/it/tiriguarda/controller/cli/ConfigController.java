@@ -9,7 +9,7 @@ public class ConfigController {
 	
     public String configuraApp(Scanner scanner) {
         ViewCLI.stampaSeparatore();
-        System.out.println("       BENVENUTO IN TIRIGUARDA          ");
+        ViewCLI.stampaMessaggio("       BENVENUTO IN TIRIGUARDA          ");
         ViewCLI.stampaSeparatore();
         
         String uiChoice = scegliInterfaccia(scanner);
@@ -21,10 +21,10 @@ public class ConfigController {
     
     private String scegliInterfaccia(Scanner scanner) {
         while(true) {
-            System.out.println("\nQuale interfaccia vuoi utilizzare?");
-            System.out.println("1 - Command Line Interface (Terminale)");
-            System.out.println("2 - Interfaccia Grafica (JavaFX)");
-            System.out.print("Scegli un'opzione (1 o 2): ");
+        	ViewCLI.stampaMessaggio("Quale interfaccia vuoi utilizzare?");
+        	ViewCLI.stampaMessaggio("1 - Command Line Interface (Terminale)");
+        	ViewCLI.stampaMessaggio("2 - Interfaccia Grafica (JavaFX)");
+        	ViewCLI.stampaMessaggio("Scegli un'opzione (1 o 2): ");
             
             String scelta = scanner.nextLine();
             if (scelta.equals("1")) return "CLI";
@@ -35,11 +35,11 @@ public class ConfigController {
     
     private void scegliModalita(Scanner scanner) {
         while (true) {
-            System.out.println("\nScegli la modalita' di persistenza dei dati:");
-            System.out.println("1 - Demo (Dati su memoria volatile)");
-            System.out.println("2 - Full (Tutto su Database)");
-            System.out.println("3 - Mista (Database + Test su File System)");
-            System.out.print("Scegli un'opzione (1, 2 o 3): ");
+        	ViewCLI.stampaMessaggio("Scegli la modalita' di persistenza dei dati:");
+        	ViewCLI.stampaMessaggio("1 - Demo (Dati su memoria volatile)");
+        	ViewCLI.stampaMessaggio("2 - Full (Tutto su Database)");
+        	ViewCLI.stampaMessaggio("3 - Mista (Database + Test su File System)");
+        	ViewCLI.stampaMessaggio("Scegli un'opzione (1, 2 o 3): ");
             
             String scelta = scanner.nextLine();
             switch (scelta) {

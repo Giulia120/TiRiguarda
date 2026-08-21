@@ -79,4 +79,7 @@ public abstract class ProtocolloPrEP {
 	public void setOra(LocalTime ora) {
 		this.ora = ora;
 	}
+	
+	
+
 }

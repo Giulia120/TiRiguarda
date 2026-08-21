@@ -34,12 +34,12 @@ public class RiepilogoCLIController {
 
 	
 	private void stampaCronologiaEventi(List<EventoRiepilogo> eventi) {
-		System.out.println("\n--- REPORT ---");
+		ViewCLI.stampaMessaggio("--- REPORT ---");
 		if (eventi == null || eventi.isEmpty()) {
-			System.out.println("Nessun dato trovato per la data selezionata.");
+			ViewCLI.stampaMessaggio("Nessun dato trovato per la data selezionata.");
 		} else {
 			for (EventoRiepilogo e : eventi) {
-				System.out.println("- " + e.getData() + " : " + e.getDescrizione());
+				ViewCLI.stampaMessaggio("- " + e.getData() + " : " + e.getDescrizione());
 			}
 		}
 	}

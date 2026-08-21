@@ -17,26 +17,27 @@ public class RegistraUtenteCLIController {
 		while (!fine) {
 			ViewCLI.stampaTitolo("Registrazione");
 
-			System.out.print("Username: ");
+			ViewCLI.stampaMessaggio("Username: ");
 			String username = scanner.nextLine();
 			
 			if (username.equalsIgnoreCase("q")) {
 				return;
 			}
 
-			System.out.print("Password: ");
+			ViewCLI.stampaMessaggio("Password: ");
 			String password = scanner.nextLine();
 			
 			if (password.equalsIgnoreCase("q")) {
 				return;
 			}
-			System.out.print("Numero di telefono: ");
+			ViewCLI.stampaMessaggio("Numero di telefono: ");
 			String telefono = scanner.nextLine();
 			if (telefono.equalsIgnoreCase("q")) {
 				return;
 			}
 			
 			SessoBiologico sesso = leggiSessoBiologico(scanner);
+			if (sesso == null) return;
 
 
 			try {
@@ -63,10 +64,10 @@ public class RegistraUtenteCLIController {
 	
 	private SessoBiologico leggiSessoBiologico(Scanner scanner) {
         while (true) {
-            System.out.println("Sesso Biologico:");
-            System.out.println("1 - Femminile");
-            System.out.println("2 - Maschile");
-            System.out.print("Scegli un'opzione: ");
+        	ViewCLI.stampaMessaggio("Sesso Biologico:\n");
+            ViewCLI.mostraMenu(
+            		"Femminile", 
+            		"Maschile");
             
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("q")) return null;

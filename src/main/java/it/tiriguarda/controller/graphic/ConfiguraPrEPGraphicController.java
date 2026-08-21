@@ -49,8 +49,8 @@ public class ConfiguraPrEPGraphicController {
 			 bean.setOrario(ora);
         
 			 PrEPAppController controller = new PrEPAppController();
-        	controller.configuraPrEP(bean);
-			ViewDispatcher.mostraSchermataSmsPrEP(bean);
+        	 controller.configuraPrEP(bean);
+			 ViewDispatcher.mostraSchermataSmsPrEP(bean);
 		 }catch(DateTimeParseException e) {
 			 ViewDispatcher.mostraErrore("Formato orario non valido. Inserisci l'orario nel formato HH:mm.");
 			 orarioPrEP.setText(null);

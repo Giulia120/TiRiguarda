@@ -35,7 +35,7 @@ public class UtenteDAODB implements UtenteDAO{
 	
 	@Override
 	public Utente trovaPerUsername(String usernameDaTrovare) {
-		String sql = "select `username`, `password`, `sessoBiologico`, `numeroTelefono`, `protocolloAttivo` from `Utente` where `username` = ?";
+		String sql = "select `username`, `password`, `sessoBiologico`, `numeroTelefono`, `protocolloAttivo` from `Utente` where binary `username` = ?";
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, usernameDaTrovare);

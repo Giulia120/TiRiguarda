@@ -1,7 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
 import it.tiriguarda.controller.app.ProfiloAppController;
-import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.dto.DatiProfiloBean;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
@@ -33,11 +32,7 @@ public class ProfiloGraphicController {
 			
 			usernameLabel.setText(bean.getUsername());
 			telLabel.setText(bean.getNumTelefono());
-			if (bean.getSesso() == SessoBiologico.FEMMINILE) {
-				sessoLabel.setText("Femminile");
-			} else {
-				sessoLabel.setText("Maschile");
-			}
+			sessoLabel.setText(bean.getSesso().toString().toLowerCase());
 			
 		}catch (UtenteNonLoggatoException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());

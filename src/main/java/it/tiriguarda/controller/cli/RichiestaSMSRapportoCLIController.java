@@ -91,7 +91,7 @@ public class RichiestaSMSRapportoCLIController {
 			appController.salvaRapportoDefinitivo(bean);
 			return true;
 		} catch (DatabaseNonRaggiungibileException e) {
-			ViewCLI.stampaErroreSistema(e.getMessage());
+			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 			throw e;
 		}
 	}

@@ -16,14 +16,14 @@ public class ModificaPwdCLIController {
 		ViewCLI.stampaTitolo("Modifica Password");
 		
 		while (true) {
-			System.out.print("\nInserisci la vecchia password: ");
+			ViewCLI.stampaMessaggio("Inserisci la vecchia password: ");
 			String vecchiaPwd = scanner.nextLine().trim();
 			
 			if (vecchiaPwd.equalsIgnoreCase("q")) {
 				return;
 			}
 			
-			System.out.print("Inserisci la nuova password: ");
+			ViewCLI.stampaMessaggio("Inserisci la nuova password: ");
 			String nuovaPwd = scanner.nextLine().trim();
 			
 			if (nuovaPwd.equalsIgnoreCase("q")) {
@@ -43,7 +43,7 @@ public class ModificaPwdCLIController {
 				
 			} catch (DatiIncompletiException | CredenzialiErrateException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Premi INVIO per riprovare...");
+				ViewCLI.stampaMessaggio("Premi INVIO per riprovare...");
 				scanner.nextLine();
 				
 			} catch (DatabaseNonRaggiungibileException e) {

@@ -19,8 +19,10 @@ public class RegistraTestCLIController {
 			ViewCLI.stampaTitolo("registrazione test");
 
 			LocalDate dataTest = ViewCLI.leggiData(scanner);
+			if (dataTest == null) return;
 
 			TipoTest tipoScelto = leggiTipoTest(scanner);
+			if (tipoScelto == null) return;
 
 			try {
 				
@@ -36,7 +38,7 @@ public class RegistraTestCLIController {
 				
 			} catch (DatiIncompletiException | DataFuturaException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Premi INVIO per riprovare...");
+				ViewCLI.stampaMessaggio("Premi INVIO per riprovare...");
 				scanner.nextLine();
 			} catch (UtenteNonLoggatoException e) {
 				ViewCLI.stampaErroreSistema(e.getMessage());
@@ -47,10 +49,10 @@ public class RegistraTestCLIController {
 	
 	private TipoTest leggiTipoTest(Scanner scanner) {
 		while (true) {
-			System.out.println("\nChe tipo di test hai effettuato?");
-			System.out.println("1) Rapido");
-			System.out.println("2) Prelievo");
-			System.out.print("Scegli un'opzione: ");
+			ViewCLI.stampaMessaggio("Che tipo di test hai effettuato?\n");
+			ViewCLI.mostraMenu(
+					"Rapido",
+					"Prelievo");
 			String input = scanner.nextLine();
 			
 			if (input.equalsIgnoreCase("q")) {

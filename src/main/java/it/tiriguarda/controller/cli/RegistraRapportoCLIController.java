@@ -54,13 +54,13 @@ public class RegistraRapportoCLIController {
 			        RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
 			        smsController.avvia(beanAggiornato, scanner); 
 			    } else {
-			    	System.out.println(String.format("%nATTENZIONE: il tuo rapporto ha un %s rischio. Il periodo finestra è già terminato: quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
-			        System.out.print("Vuoi procedere con la registrazione? (si per confermare, q per annullare): ");
+			    	ViewCLI.stampaMessaggio(String.format("%nATTENZIONE: il tuo rapporto ha un %s rischio. Il periodo finestra è già terminato: quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
+			    	ViewCLI.stampaMessaggio("Vuoi procedere con la registrazione? (si per confermare, q per annullare): ");
 			        
 			        String rispostaInfo = scanner.nextLine().trim().toLowerCase();
 			        
 			        if (rispostaInfo.equals("q")) {
-			            System.out.println("\n[INFO] Registrazione rapporto annullata!");
+			        	ViewCLI.stampaMessaggio("[INFO] Registrazione rapporto annullata!");
 			            return false; 
 			        } else {
 			            appController.salvaRapportoDefinitivo(beanAggiornato);
@@ -74,7 +74,7 @@ public class RegistraRapportoCLIController {
 
 		} catch (DatiIncompletiException | DataFuturaException e) {
 			ViewCLI.stampaErrore(e.getMessage());
-			System.out.println("Premi INVIO per correggere i dati...");
+			ViewCLI.stampaMessaggio("Premi INVIO per correggere i dati...");
 			scanner.nextLine();
 			return false;
 			
@@ -92,18 +92,18 @@ public class RegistraRapportoCLIController {
 		List<TipoRapporto> tipi = new ArrayList<>();
 		
 		while (tipi.isEmpty()) {
-			System.out.print("E' stato un rapporto penetrativo? (si/no): ");
+			ViewCLI.stampaMessaggio("E' stato un rapporto penetrativo? (si/no): ");
 			String risp1 = scanner.nextLine();
 			if (risp1.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp1.equalsIgnoreCase("si")) tipi.add(TipoRapporto.PENETRATIVO);
 			
-			System.out.print("E' stato un rapporto orale? (si/no): ");
+			ViewCLI.stampaMessaggio("E' stato un rapporto orale? (si/no): ");
 			String risp2 = scanner.nextLine();
 			if (risp2.equalsIgnoreCase("q")) return Collections.emptyList();
 			if (risp2.equalsIgnoreCase("si")) tipi.add(TipoRapporto.ORALE);
 			
 			if (tipi.isEmpty()) {
-				System.out.println("Devi selezionare almeno un tipo di rapporto! Riprova.");
+				ViewCLI.stampaMessaggio("Devi selezionare almeno un tipo di rapporto! Riprova.\n");
 			}
 		}
 		return tipi;
@@ -111,11 +111,11 @@ public class RegistraRapportoCLIController {
 	
 	private Precauzioni leggiPrecauzioni(Scanner scanner) {
 		while (true) {
-			System.out.println("Che precauzioni hai usato?");
-			System.out.println("1 - Preservativo");
-			System.out.println("2 - Coito Interrotto");
-			System.out.println("3 - Nessuna (Nulla)");
-			System.out.print("Scegli un'opzione: ");
+			ViewCLI.stampaMessaggio("Che precauzioni hai usato?\n");
+			ViewCLI.mostraMenu(
+					"Preservativo",
+					"Coito Interrotto",
+					"Nessuna (Nulla)");
 			
 			String input = scanner.nextLine();
 			if (input.equalsIgnoreCase("q")) return null;

@@ -15,7 +15,7 @@ public class ModificaTelefonoCLIController {
 		ViewCLI.stampaTitolo("Modfica Telefono");
 		
 		while (true) {
-			System.out.print("\nInserisci il nuovo numero di telefono: ");
+			ViewCLI.stampaMessaggio("Inserisci il nuovo numero di telefono: ");
 			String nuovoTelefono = scanner.nextLine().trim();
 			
 			if (nuovoTelefono.equalsIgnoreCase("q")) {
@@ -34,7 +34,7 @@ public class ModificaTelefonoCLIController {
 				
 			} catch (DatiIncompletiException e) {
 				ViewCLI.stampaErrore(e.getMessage());
-				System.out.println("Premi INVIO per riprovare...");
+				ViewCLI.stampaMessaggio("Premi INVIO per riprovare...");
 				scanner.nextLine();
 				
 			} catch (DatabaseNonRaggiungibileException e) {

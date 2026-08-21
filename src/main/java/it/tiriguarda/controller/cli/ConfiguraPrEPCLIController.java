@@ -19,28 +19,26 @@ public class ConfiguraPrEPCLIController {
 		while (!completato) {
 			ViewCLI.stampaTitolo("CONFIGURAZIONE PrEP");
 			System.out.println("Tipo PrEP selezionato: " + tipoPrEP);
+			if (tipoPrEP == TipologiaPrEP.ON_DEMAND) {
+				System.out.println("Prendere 2 pasticche da 2 a 24 ore prima del rapporto");
+			}
 			LocalDate dataInizio = ViewCLI.leggiData(scanner);
 			if (dataInizio == null) return;
             
 			LocalTime orario = leggiOrario(scanner);
 			if (orario == null) return;
 
-			String rispostaSMS = leggiSMS(scanner);
 			
-			if (rispostaSMS.equalsIgnoreCase("q")) {
-			    return;
-			}
-			Boolean ricevereSMS = rispostaSMS.equalsIgnoreCase("si");
 			try {
 				ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
 				bean.setTipoPrEP(tipoPrEP);
 				bean.setDataInizio(dataInizio);
 				bean.setOrario(orario);
-				bean.setRicevereSMS(ricevereSMS);
             
                 PrEPAppController controller = new PrEPAppController();
                 controller.configuraPrEP(bean);
-                ViewCLI.stampaSuccesso(scanner);
+                RichiestaSMSPrEPCLIController smsController = new RichiestaSMSPrEPCLIController();
+                smsController.avvia(bean, scanner);
                 completato = true;
             } catch (ProtocolloAttivoException e) {
                 ViewCLI.stampaErrore(e.getMessage());
@@ -70,19 +68,5 @@ public class ConfiguraPrEPCLIController {
         }
     }
 	
-    private String leggiSMS(Scanner scanner) {
-    	while(true) {
-            System.out.print("Vuoi ricevere SMS promemoria? (si/no): ");
-            String risposta = scanner.nextLine().trim();
-            
-            if (risposta.equalsIgnoreCase("q") || 
-                risposta.equalsIgnoreCase("si") || 
-                risposta.equalsIgnoreCase("no")) {
-                return risposta;
-            }
-            
-            ViewCLI.stampaInvalido();
-        }
-    }
 }
 

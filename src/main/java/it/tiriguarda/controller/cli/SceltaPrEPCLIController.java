@@ -10,12 +10,11 @@ public class SceltaPrEPCLIController {
 		boolean fine = false;
 		while(!fine) {
 			ViewCLI.stampaTitolo("Scelta prep");
-			System.out.println("Cosa vuoi fare?");
-			System.out.println("1 - Daily");
-			System.out.println("2 - On Demand");
-			System.out.println("3 - Annulla PrEP");
-			System.out.println("4 - Registra vecchia PrEP");
-			System.out.print("Scegli un'opzione (1-4): ");
+			ViewCLI.mostraMenu(
+			"Daily",
+			"On Demand",
+			"Annulla PrEP",
+			"Registra vecchia PrEP");
 			
 			String scelta = scanner.nextLine();
 			switch(scelta) {
