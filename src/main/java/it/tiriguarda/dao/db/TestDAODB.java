@@ -1,4 +1,4 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.ConnectionFactory;
+import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;

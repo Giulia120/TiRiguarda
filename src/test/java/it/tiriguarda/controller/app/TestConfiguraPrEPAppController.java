@@ -28,7 +28,7 @@ import it.tiriguarda.service.SessionManager;
  * author: Caterina Spinelli
  */
 
-	public class TestPrEPAppController {
+	public class TestConfiguraPrEPAppController {
 		private PrEPAppController controller;
 		private Utente utenteTest;
 		

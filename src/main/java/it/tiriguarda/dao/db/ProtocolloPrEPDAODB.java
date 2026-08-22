@@ -1,4 +1,4 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.ConnectionFactory;
+import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;

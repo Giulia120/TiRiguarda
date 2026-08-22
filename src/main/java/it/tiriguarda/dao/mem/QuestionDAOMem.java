@@ -1,8 +1,9 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.dao.QuestionDAO;
 import it.tiriguarda.domain.Question;
 
 public class QuestionDAOMem implements QuestionDAO {

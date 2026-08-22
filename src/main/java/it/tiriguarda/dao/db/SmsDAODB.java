@@ -1,4 +1,4 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.ConnectionFactory;
+import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;

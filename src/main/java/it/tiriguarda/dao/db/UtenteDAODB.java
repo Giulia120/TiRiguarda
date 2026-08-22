@@ -1,4 +1,4 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.ConnectionFactory;
+import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.SessoBiologico;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;

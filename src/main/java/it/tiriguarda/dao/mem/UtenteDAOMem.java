@@ -1,9 +1,10 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Utente;
 
 public class UtenteDAOMem implements UtenteDAO {
@@ -17,7 +18,6 @@ public class UtenteDAOMem implements UtenteDAO {
     
     @Override
     public Utente trovaPerUsername(String username) {
-        logger.info(() ->"Ricerca utente in memoria per username: " + username);
         for (Utente u : utentiInMemoria) {
             if (u.getUsername().equals(username)) {
                 Utente utente = new Utente(u.getUsername(), u.getPassword(), u.getSessoBiologico(), u.getNumeroTelefono());

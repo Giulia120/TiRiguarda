@@ -1,10 +1,11 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{

@@ -1,10 +1,11 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.domain.Sms;
 import it.tiriguarda.domain.StatoSms;
 import it.tiriguarda.domain.TipoSms;

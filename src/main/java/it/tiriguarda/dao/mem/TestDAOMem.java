@@ -1,9 +1,10 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
 
 public class TestDAOMem implements TestDAO {

@@ -1,4 +1,4 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.fs;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.TipoTest;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException; 

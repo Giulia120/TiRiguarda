@@ -1,9 +1,10 @@
-package it.tiriguarda.dao;
+package it.tiriguarda.dao.mem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.domain.Rapporto;
 
 public class RapportoDAOMem implements RapportoDAO {
