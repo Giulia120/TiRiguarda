@@ -30,8 +30,8 @@ public class LoginCLIController {
 					registrazioneController.avviaRegistrazione(scanner);
 					break;
 				case "3":
-					OspiteCLIController ospiteController = new OspiteCLIController();
-					ospiteController.avvia(scanner);
+					MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
+					menuController.avviaMenu(scanner);
 					break;
 				case "q":
 					fine = true;
@@ -60,7 +60,7 @@ public class LoginCLIController {
 			MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
 			menuController.avviaMenu(scanner);
 			
-			return true;
+			return false;
 		} catch (CredenzialiErrateException | DatiIncompletiException e) {
 			ViewCLI.stampaErrore(e.getMessage());
 			scanner.nextLine();

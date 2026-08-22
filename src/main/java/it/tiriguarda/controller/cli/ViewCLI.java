@@ -54,7 +54,7 @@ public class ViewCLI {
 	        System.out.println(SEPARATORE);
 	        System.out.println("        " + titolo.toUpperCase() + "        ");
 	        System.out.println(SEPARATORE);
-	        System.out.println("(Digita 'q' in qualsiasi momento per annullare e tornare al menu)\n");
+	        System.out.println("(Digita 'q' in qualsiasi momento per annullare e tornare indietro)\n");
 	    }
 	
 	    public static void stampaInvalido() {

@@ -9,7 +9,7 @@ import it.tiriguarda.domain.Rapporto;
 
 public class RapportoDAOMem implements RapportoDAO {
 	
-	private static List<Rapporto> rapportiInMemoria = new ArrayList<>();
+	private static List<Rapporto> rapportiInMemoria = Storage.getInstance().getRapporti();
 	
 	@Override
 	public void salvaRapporto (Rapporto rapporto) {

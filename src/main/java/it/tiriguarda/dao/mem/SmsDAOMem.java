@@ -12,7 +12,7 @@ import it.tiriguarda.domain.TipoSms;
 
 public class SmsDAOMem implements SmsDAO {
 	
-	private static List<Sms> smsInMemoria = new ArrayList<>();
+	private static List<Sms> smsInMemoria = Storage.getInstance().getSms();
 
 	@Override
 	public void salvaSms(Sms sms) {

@@ -9,7 +9,7 @@ import it.tiriguarda.domain.Test;
 
 public class TestDAOMem implements TestDAO {
 	
-private static List<Test> testInMemoria = new ArrayList<>();
+private static List<Test> testInMemoria = Storage.getInstance().getTest();
 	
 	@Override
 	public void salvaTest (Test test) {

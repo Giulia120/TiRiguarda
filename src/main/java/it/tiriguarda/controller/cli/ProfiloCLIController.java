@@ -27,10 +27,9 @@ public class ProfiloCLIController {
 			} 
 			
 			ViewCLI.stampaSeparatore();
-			System.out.println("1. Modifica Password");
-			System.out.println("2. Modifica Numero di Telefono");
-			System.out.println("q. Torna al Menu Principale");
-			System.out.print("Scegli un'opzione: ");
+			ViewCLI.mostraMenu(
+					"Modifica Password", 
+					"Modifica Numero di Telefono");
 			
 			String scelta = scanner.nextLine().trim();
 			

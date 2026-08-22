@@ -1,6 +1,5 @@
 package it.tiriguarda.dao.mem;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -9,7 +8,7 @@ import it.tiriguarda.domain.Utente;
 
 public class UtenteDAOMem implements UtenteDAO {
     private static final Logger logger = Logger.getLogger(UtenteDAOMem.class.getName());
-    private static List<Utente> utentiInMemoria = new ArrayList<>();
+    private static List<Utente> utentiInMemoria = Storage.getInstance().getUtenti();
     
     @Override
     public void registraUtente(Utente utente) {

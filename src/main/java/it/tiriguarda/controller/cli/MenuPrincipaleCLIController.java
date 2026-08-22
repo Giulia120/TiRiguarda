@@ -1,13 +1,19 @@
 package it.tiriguarda.controller.cli;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
+import java.util.List;
+
 import it.tiriguarda.exception.UtenteNonLoggatoException;
+import it.tiriguarda.service.SessionManager;
 
 public class MenuPrincipaleCLIController {
 	
 	public void avviaMenu(Scanner scanner) {
 		boolean esci = false;
+		
+		List<String> opzioniRiservate = Arrays.asList("1", "2", "3", "4", "5");
 
 		while (!esci) {
 			ViewCLI.stampaTitolo("Menu Principale");
@@ -21,6 +27,13 @@ public class MenuPrincipaleCLIController {
 					"Informazioni" );
 
 			String scelta = scanner.nextLine();
+			
+			boolean isGuest = SessionManager.getInstance().getUtenteLoggato() == null;
+
+			if (isGuest && opzioniRiservate.contains(scelta)) {
+				ViewCLI.stampaErrore("Funzionalita' riservata ad utenti registrati");
+				continue;
+			}
 
 			try{
 				switch (scelta) {
@@ -55,13 +68,13 @@ public class MenuPrincipaleCLIController {
 					break;
 					
 				case "7":
-					System.out.println("\n[INFO] Sezione Informazioni aperta.");
+					InfoCLIController infoController = new InfoCLIController();
+					infoController.avvia(scanner);
 					break;
 					
 				case "q":
-					ViewCLI.stampaMessaggio("Chiusura sessione CLI");
-					esci = true;
-					break;
+					SessionManager.getInstance().clearSessione();
+					return;
 					
 				default:
 					ViewCLI.stampaInvalido();

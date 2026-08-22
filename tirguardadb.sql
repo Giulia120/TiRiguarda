@@ -78,11 +78,14 @@ CREATE TABLE `tiriguardadatabase`.`Sms`(
 ENGINE = InnoDB;
 
 --- simulazione LOGINAPI
+DELIMITER //
 CREATE PROCEDURE `tiriguardadatabase`.`login`( IN var_username VARCHAR(45), IN var_password CHAR(64))
 BEGIN
 SELECT * FROM `tiriguardadatabase`.`Utente`
-WHERE `Username` = var_username AND `Password` = var_password; 
-END;
+WHERE `username` = var_username AND `password` = var_password;
+END//
+
+DELIMITER ;
 
 DROP USER IF EXISTS tiriguarda;
 CREATE USER 'tiriguarda' IDENTIFIED BY 'password123';

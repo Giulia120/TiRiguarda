@@ -10,7 +10,7 @@ import it.tiriguarda.domain.ProtocolloPrEP;
 
 public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	
-	private static List<ProtocolloPrEP> protocolliInMemoria = new ArrayList<>();
+	private static List<ProtocolloPrEP> protocolliInMemoria = Storage.getInstance().getProtocolli();
 	
 	@Override
 	public ProtocolloPrEP trovaProtocolloAttivo(String username) {
