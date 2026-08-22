@@ -4,13 +4,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import it.tiriguarda.exception.DatiIncompletiException;
+
 public class SecurityUtil {
 	private SecurityUtil() {
 		// Costruttore privato per nascondere quello pubblico di default
 	}
     public static String hashPassword(String passwordInChiaro) {
     	if (passwordInChiaro == null) {
-            throw new IllegalArgumentException("La password da decifrare non può essere null");
+            throw new DatiIncompletiException("La password da decifrare non può essere null");
         }
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -13,14 +13,10 @@ import javafx.scene.control.TextField;
 
 public class LoginGraphicController {
 	
-	@FXML
-	private Button loginButton;
-	@FXML
-	private Button registratiButton;
-	@FXML
-	private TextField usernameField;
-	@FXML 
-	private PasswordField passwordField;
+	@FXML private Button loginButton;
+	@FXML private Button registratiButton;
+	@FXML private TextField usernameField;
+	@FXML private PasswordField passwordField;
 	@FXML private Button noLoginButton;
 	
 	
