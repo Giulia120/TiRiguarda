@@ -9,6 +9,9 @@ public class SecurityUtil {
 		// Costruttore privato per nascondere quello pubblico di default
 	}
     public static String hashPassword(String passwordInChiaro) {
+    	if (passwordInChiaro == null) {
+            throw new IllegalArgumentException("La password da decifrare non può essere null");
+        }
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(passwordInChiaro.getBytes());

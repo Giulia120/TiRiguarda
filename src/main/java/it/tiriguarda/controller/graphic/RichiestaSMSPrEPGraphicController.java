@@ -6,7 +6,6 @@ import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +29,7 @@ public class RichiestaSMSPrEPGraphicController {
         oraSmsLabel.setText(oraFormattata);
 	}
 	
-	public void onSiButton(ActionEvent event) {
+	public void onSiButton() {
 		 try {
 			 GestioneSmsAppController controller = new GestioneSmsAppController();
 			 controller.programmaPromemoriaPrEP();
@@ -43,11 +42,11 @@ public class RichiestaSMSPrEPGraphicController {
 	     }
 	}
 	
-	public void onNoButton(ActionEvent event) {
+	public void onNoButton() {
 		ViewDispatcher.mostraSuccesso("Protocollo registrato con successo!");
 	}
 	
-	public void onBackButton(ActionEvent event) {
+	public void onBackButton() {
 		ViewDispatcher.mostraConfiguraPrEP(protocolloBean.getTipoPrEP());
 	}
 }

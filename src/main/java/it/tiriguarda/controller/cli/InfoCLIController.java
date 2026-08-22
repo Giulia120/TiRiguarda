@@ -6,10 +6,7 @@ public class InfoCLIController {
 	
 	public void avvia(Scanner scanner) {
 		ViewCLI.stampaTitolo("Informazioni");
-		ViewCLI.stampaMessaggio("Qui ci sono le info!"
-				+ "\n..."
-				+"\n"
-				+ "\nNon è vero, per le vere info accedere alla modalità grafica!");
+		ViewCLI.stampaMessaggio("Qui ci sono le info!\n...\n\nNon è vero, per le vere info accedere alla modalità grafica!");
 		
 		boolean esci = false;
 		

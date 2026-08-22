@@ -12,7 +12,6 @@ import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.dto.SmsBean;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -61,7 +60,7 @@ public class RichiestaSMSRapportoGraphicController {
 	 }
 	 
 	 @FXML
-	 private void onNoButton(ActionEvent event){
+	 private void onNoButton(){
 		 salvaEConcludi();
 		 ViewDispatcher.mostraSuccesso("Rapporto registrato con successo! Ricorda di fare il test!");
 	 }
