@@ -23,7 +23,7 @@ public class RichiestaSMSRapportoCLIController {
 		String risposta = leggiSceltaValida(scanner);
 		
 		if (risposta.equals("q")) {
-			System.out.println("\n[INFO] Registrazione rapporto annullata! Torno al menu principale...");
+			ViewCLI.stampaMessaggio("[INFO] Registrazione rapporto annullata! Torno al menu principale...");
 			return;
 		}
 		
@@ -34,28 +34,28 @@ public class RichiestaSMSRapportoCLIController {
 		if (risposta.equals("si")) {
 			programmaNotificaSms(bean);
 		} else {
-			System.out.println("\n[INFO] Hai detto NO agli SMS.");
+			ViewCLI.stampaMessaggio("[INFO] Hai detto NO agli SMS.");
 		}
 	}
 	
 	private void stampaIntestazione(RapportoBean bean) {
-		System.out.println("\n========================================");
-		System.out.println("    ATTENZIONE: RISCHIO RILEVATO  ");
+		ViewCLI.stampaSeparatore();
+		ViewCLI.stampaMessaggio("    ATTENZIONE: RISCHIO RILEVATO  ");
 		ViewCLI.stampaSeparatore();
 		
-		System.out.println(String.format("Il rapporto e' a %s rischio, quindi ti consigliamo di fare un test allo scadere del periodo finestra.", bean.getRischio().toString()));
+		ViewCLI.stampaMessaggio(String.format("Il rapporto e' a %s rischio, quindi ti consigliamo di fare un test allo scadere del periodo finestra.", bean.getRischio().toString()));
 		
 		if (bean.getDataFinePeriodoFinestra() != null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			String dataFormattata = bean.getDataFinePeriodoFinestra().format(formatter);
-			System.out.println("Data fine periodo finestra: " + dataFormattata);
+			ViewCLI.stampaMessaggio("Data fine periodo finestra: " + dataFormattata);
 		}
 	}
 	
 	private String leggiSceltaValida(Scanner scanner) {
 		while (true) {
-			System.out.println("\nVuoi attivare le notifiche SMS per ricordarti di fare il test?");
-			System.out.print("Rispondi (si/no, oppure 'q' per annullare TUTTA la registrazione): ");
+			ViewCLI.stampaMessaggio("Vuoi attivare le notifiche SMS per ricordarti di fare il test?");
+			ViewCLI.stampaMessaggio("Rispondi (si/no, oppure 'q' per annullare TUTTA la registrazione): ");
 			
 			String risposta = scanner.nextLine().trim().toLowerCase();
 			if (risposta.equals("q") || risposta.equals("si") || risposta.equals("no")) {
@@ -76,7 +76,7 @@ public class RichiestaSMSRapportoCLIController {
 		try {
 			GestioneSmsAppController smsController = new GestioneSmsAppController();
 			smsController.programmaSms(beanSms);
-			System.out.println("\n[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
+			ViewCLI.stampaMessaggio("[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
 		} catch (DatabaseNonRaggiungibileException e) {
 			ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());
 		} catch (UtenteNonLoggatoException e) {

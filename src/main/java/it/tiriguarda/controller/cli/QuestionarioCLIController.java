@@ -29,7 +29,7 @@ public class QuestionarioCLIController {
 		LivelloRischio rischio = appController.valutaRischio(risposteUtente);
 		mostraRisultato(rischio);
 	}
-	
+	@SuppressWarnings("java:S106")
 	private Integer chiediDomanda(Scanner scanner, QuestionBean q) {
 		while (true) {
 			ViewCLI.stampaMessaggio("Domanda " + q.getTesto());

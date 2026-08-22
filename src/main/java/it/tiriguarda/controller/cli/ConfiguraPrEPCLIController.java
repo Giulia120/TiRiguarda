@@ -18,9 +18,9 @@ public class ConfiguraPrEPCLIController {
 		boolean completato = false;
 		while (!completato) {
 			ViewCLI.stampaTitolo("CONFIGURAZIONE PrEP");
-			System.out.println("Tipo PrEP selezionato: " + tipoPrEP);
+			ViewCLI.stampaMessaggio("Tipo PrEP selezionato: " + tipoPrEP);
 			if (tipoPrEP == TipologiaPrEP.ON_DEMAND) {
-				System.out.println("Prendere 2 pasticche da 2 a 24 ore prima del rapporto");
+				ViewCLI.stampaMessaggio("Prendere 2 pasticche da 2 a 24 ore prima del rapporto");
 			}
 			LocalDate dataInizio = ViewCLI.leggiData(scanner);
 			if (dataInizio == null) return;
@@ -55,7 +55,7 @@ public class ConfiguraPrEPCLIController {
 	
     private LocalTime leggiOrario(Scanner scanner) {
         while(true) {
-            System.out.print("Inserisci l'orario dei promemoria (HH:mm): ");
+        	ViewCLI.stampaMessaggio("Inserisci l'orario dei promemoria (HH:mm): ");
             String input = scanner.nextLine();
             if(input.equalsIgnoreCase("q")) {
                 return null;
@@ -63,7 +63,7 @@ public class ConfiguraPrEPCLIController {
             try{
                 return LocalTime.parse(input);
             } catch(DateTimeParseException e) {
-                System.out.println("[ERRORE] Formato orario non valido.");
+            	ViewCLI.stampaMessaggio("[ERRORE] Formato orario non valido.");
             }
         }
     }

@@ -12,7 +12,7 @@ public class ViewCLI {
     }
 	
 	    private static final String SEPARATORE = "\n========================================";
-	    
+	    @SuppressWarnings("java:S106")
 	    public static void mostraMenu(String... opzioni) {
 	    	if (opzioni == null || opzioni.length == 0) {
 	            return;
@@ -23,10 +23,12 @@ public class ViewCLI {
 	        System.out.print("Scegli un'opzione (1-" + opzioni.length + " o q): ");
 	    }
 	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaMessaggio(String mes) {
 	    	System.out.print("\n" + mes);
 	    }
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static LocalDate leggiData(Scanner scanner) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			
@@ -45,11 +47,13 @@ public class ViewCLI {
 				}
 			}
 		}
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaSeparatore() {
 	        System.out.println(SEPARATORE);
 	    }
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaTitolo(String titolo) {
 	        System.out.println(SEPARATORE);
 	        System.out.println("        " + titolo.toUpperCase() + "        ");
@@ -57,10 +61,12 @@ public class ViewCLI {
 	        System.out.println("(Digita 'q' in qualsiasi momento per annullare e tornare indietro)\n");
 	    }
 	
+	    @SuppressWarnings("java:S106")
 	    public static void stampaInvalido() {
 	    	System.out.println("[ERRORE] Opzione non valida, riprova!");
 	    }
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaSuccesso(Scanner scanner) {
 	    	System.out.println("\n****************************************");
 			System.out.println("*            E' un successo!             *");
@@ -68,17 +74,20 @@ public class ViewCLI {
 			System.out.println("Premi INVIO tornare indietro");
 			scanner.nextLine();
 	    }
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaErrore (String messaggio) {
 	    	System.out.println("\n[ERRORE DI VALIDAZIONE]: " + messaggio);
 	    }
-	
+	    
+	    @SuppressWarnings("java:S106")
 	    public static void stampaErroreSistema(String messaggio) {
 	    	System.out.println("\n[ERRORE DI SISTEMA]: ");
 	    	System.out.println(messaggio);
 	        System.out.println("Verrai reindirizzato alla schermata di Login...");
 	    }  
 	
+	    @SuppressWarnings("java:S106")
 	    public static void stampaErroreCriticoEChiudi(String messaggio) {
 	        System.out.println(SEPARATORE);
 	        System.out.println("[ERRORE CRITICO DI CONNESSIONE]");
