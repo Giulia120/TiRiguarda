@@ -1,5 +1,7 @@
 package it.tiriguarda.domain;
 
+import it.tiriguarda.util.SecurityUtil;
+
 public class Utente {
 	private final String username;
 	private String password;
@@ -16,10 +18,10 @@ public class Utente {
 	}
 	
 	
-	/*public boolean verificaPassword(String passwordInseritaInChiaro) {
+	public boolean verificaPassword(String passwordInseritaInChiaro) {
         String hashCalcolato = SecurityUtil.hashPassword(passwordInseritaInChiaro);
         return this.password.equals(hashCalcolato);
-    } */
+    }
 
 
 	public String getUsername() {
