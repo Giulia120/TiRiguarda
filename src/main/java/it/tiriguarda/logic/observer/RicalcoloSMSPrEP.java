@@ -15,10 +15,10 @@ import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.SmsBean;
 
-public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
+public class RicalcoloSMSPrEP implements NuovoRapportoObserver {
 	private RegistraRapportoAppController subject; 
 
-    public RicalcoloSMSPrEPObserver(RegistraRapportoAppController subject) {
+    public RicalcoloSMSPrEP(RegistraRapportoAppController subject) {
         this.subject = subject;
         this.subject.attach(this);
     }

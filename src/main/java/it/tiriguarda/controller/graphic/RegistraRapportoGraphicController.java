@@ -14,7 +14,7 @@ import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
-import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
+import it.tiriguarda.logic.observer.RicalcoloSMSPrEP;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -69,7 +69,7 @@ public class RegistraRapportoGraphicController {
 		        bean.setPrecauzioniUsate(precauzioneSelezionata);
 		        
 		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
-		        new RicalcoloSMSPrEPObserver(appController);
+		        new RicalcoloSMSPrEP(appController);
 
 		        RapportoBean beanAggiornato = appController.valutaRischio(bean);
 		            

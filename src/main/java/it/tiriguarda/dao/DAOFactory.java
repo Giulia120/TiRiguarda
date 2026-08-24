@@ -12,10 +12,10 @@ public abstract class DAOFactory {
 				dAOFactoryInstance = new DemoDAOFactory();
 			}
 			else if  (AppConfig.getCurrentMode() == AppMode.FULL_DB)  {
-				dAOFactoryInstance = new FullDAOFactory();
+				dAOFactoryInstance = new FullDBDAOFactory();
 			}
 			else {
-				dAOFactoryInstance = new FullMixDAOFactory();
+				dAOFactoryInstance = new FullFSDAOFactory();
 			}
 		}
 		return dAOFactoryInstance;

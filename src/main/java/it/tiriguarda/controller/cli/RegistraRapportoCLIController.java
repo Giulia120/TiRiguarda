@@ -15,7 +15,7 @@ import it.tiriguarda.exception.DataFuturaException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
-import it.tiriguarda.logic.observer.RicalcoloSMSPrEPObserver;
+import it.tiriguarda.logic.observer.RicalcoloSMSPrEP;
 
 public class RegistraRapportoCLIController {
 
@@ -46,7 +46,7 @@ public class RegistraRapportoCLIController {
 			bean.setPrecauzioniUsate(precauzioni);
 
 			RegistraRapportoAppController appController = new RegistraRapportoAppController();
-			new RicalcoloSMSPrEPObserver(appController);
+			new RicalcoloSMSPrEP(appController);
 			RapportoBean beanAggiornato = appController.valutaRischio(bean);
 
 			if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {

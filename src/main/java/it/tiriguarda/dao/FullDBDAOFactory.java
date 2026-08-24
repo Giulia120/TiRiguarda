@@ -8,7 +8,7 @@ import it.tiriguarda.dao.db.TestDAODB;
 import it.tiriguarda.dao.db.UtenteDAODB;
 import it.tiriguarda.dao.mem.QuestionDAOMem;
 
-public class FullDAOFactory extends DAOFactory{
+public class FullDBDAOFactory extends DAOFactory{
 	@Override
 	public LoginDAO createLoginDAO() {
 		return new LoginDAODB();
