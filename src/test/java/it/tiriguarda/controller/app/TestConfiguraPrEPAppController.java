@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
+import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.SessoBiologico;
@@ -40,7 +40,7 @@ import it.tiriguarda.service.SessionManager;
 		@AfterEach
 		public void tearDown() {
 			SessionManager.getInstance().clearSessione();
-			ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
+			ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
 			ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utenteTest.getUsername());
 			if (protocollo != null) {
 				dao.annullaStatoProtocollo(protocollo);
@@ -64,7 +64,7 @@ import it.tiriguarda.service.SessionManager;
 			
 			controller.configuraPrEP(beanTest);
 			
-			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			DAOFactory factory = DAOFactory.getDAOFactory();
 			ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 			ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utenteTest.getUsername());
 
@@ -111,7 +111,7 @@ import it.tiriguarda.service.SessionManager;
 			bean.setDataInizio(dataInizioPassata);
 			bean.setOrario(LocalTime.of(10, 0));
 			controller.configuraPrEP(bean);
-			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			DAOFactory factory = DAOFactory.getDAOFactory();
 			ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 			ProtocolloPrEP protocolloAttivo = dao.trovaProtocolloAttivo(utenteTest.getUsername());
 			assertEquals(false, protocolloAttivo.getStatoPrEP());

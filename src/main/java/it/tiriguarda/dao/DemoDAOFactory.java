@@ -8,7 +8,7 @@ import it.tiriguarda.dao.mem.SmsDAOMem;
 import it.tiriguarda.dao.mem.TestDAOMem;
 import it.tiriguarda.dao.mem.UtenteDAOMem;
 
-public class DemoDAOFactory implements DAOFactory{
+public class DemoDAOFactory extends DAOFactory{
 	@Override
 	public LoginDAO createLoginDAO() {
 		return new LoginDAOMem();

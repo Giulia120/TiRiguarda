@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import it.tiriguarda.dao.DAOFactoryProvider;
+import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Precauzioni;
@@ -45,7 +45,7 @@ public class TestRegistraRapportoAppController {
 	@AfterEach
 	public void tearDown() {
 		SessionManager.getInstance().clearSessione();
-		ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
+		ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
 		ProtocolloPrEP protocolloDiTest = dao.trovaProtocolloAttivo(utenteTest.getUsername()); 
         if (protocolloDiTest!= null) {
         	dao.annullaStatoProtocollo(protocolloDiTest);
@@ -65,7 +65,7 @@ public class TestRegistraRapportoAppController {
 	@Test
 	@DisplayName("Se l'utente ha la PrEP attiva e non il preservativo, il rischio calcolato deve essere NULLO")
 	public void testValutaRischioConPrEP() {
-		ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
+		ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
 		ProtocolloPrEPDaily protocolloDiTest = new ProtocolloPrEPDaily("id123", "utenteTest", LocalDate.now().minusDays(1), true, LocalTime.NOON); 
         dao.configuraProtocollo(protocolloDiTest);
 		RapportoBean beanInput = fakeBean(Precauzioni.NULLA);

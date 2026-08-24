@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.TestDAO;
 import it.tiriguarda.domain.Test;
 import it.tiriguarda.domain.Utente;
@@ -23,7 +22,7 @@ public class RegistraTestAppController {
 	
 	Test nuovoTest = new Test(utenteCorrente.getUsername(), idTest, bean.getTipo(), bean.getData());
 
-	DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+	DAOFactory factory = DAOFactory.getDAOFactory();
 	TestDAO dao = factory.createTestDAO();
 	dao.salvaTest(nuovoTest);
 	logger.info("Test registrato con successo.");

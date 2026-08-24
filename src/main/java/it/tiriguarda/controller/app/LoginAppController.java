@@ -3,7 +3,6 @@ package it.tiriguarda.controller.app;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.LoginDAO;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.CredenzialiBean;
@@ -16,7 +15,7 @@ public class LoginAppController {
 	public void effettuaLogin(CredenzialiBean bean) {
 		String hash = SecurityUtil.hashPassword(bean.getPassword());
 		bean.setPassword(hash);
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		LoginDAO dao = factory.createLoginDAO();
 		Utente utenteTrovato = dao.effetuaLogin(bean);
 		SessionManager sm = SessionManager.getInstance();

@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
@@ -28,7 +27,7 @@ public class GestioneSmsAppController {
 	        throw new UtenteNonLoggatoException();
 	    }
 
-        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+        DAOFactory factory = DAOFactory.getDAOFactory();
         SmsDAO smsDao = factory.createSmsDAO(); 
         	Sms sms = new Sms(utenteCorrente.getUsername(), UUID.randomUUID().toString(), bean.getTesto(), bean.getDataSpedizione(), bean.getTipo());
             smsDao.salvaSms(sms);
@@ -36,7 +35,7 @@ public class GestioneSmsAppController {
     }
 	
 	public void cancellaSmsProgrammati(String username, TipoSms tipoSms) {
-        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+        DAOFactory factory = DAOFactory.getDAOFactory();
         SmsDAO smsDao = factory.createSmsDAO(); 
         
         smsDao.eliminaSmsProgrammati(username, tipoSms);
@@ -48,7 +47,7 @@ public class GestioneSmsAppController {
 	    if (utente == null) {
 	        throw new UtenteNonLoggatoException();
 	    }
-	    DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+	    DAOFactory factory = DAOFactory.getDAOFactory();
 	    ProtocolloPrEPDAO protocolloDao = factory.createProtocolloPrEPDAO();
 	    ProtocolloPrEP protocollo = protocolloDao.trovaProtocolloAttivo(utente.getUsername());
 	    

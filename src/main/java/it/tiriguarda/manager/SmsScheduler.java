@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Sms;
@@ -45,7 +44,7 @@ public class SmsScheduler {
 
 	private void eseguiTaskSms() {
 		try {
-			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			DAOFactory factory = DAOFactory.getDAOFactory();
 			SmsDAO smsDao = factory.createSmsDAO();
 			UtenteDAO utenteDao = factory.createUtenteDAO();
 			

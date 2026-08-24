@@ -3,7 +3,6 @@ package it.tiriguarda.controller.app;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.CambioTelefonoBean;
@@ -21,7 +20,7 @@ public class ModificaTelefonoAppController {
  
         utenteCorrente.setNumeroTelefono(bean.getNuovoTelefono());
 
-        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+        DAOFactory factory = DAOFactory.getDAOFactory();
         UtenteDAO dao = factory.createUtenteDAO();        
         dao.aggiornaTelUtente(utenteCorrente); 
         

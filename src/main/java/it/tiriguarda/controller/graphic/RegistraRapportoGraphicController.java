@@ -68,8 +68,6 @@ public class RegistraRapportoGraphicController {
 		        }
 		        bean.setPrecauzioniUsate(precauzioneSelezionata);
 		        
-		        confermaButton.setDisable(true);
-		        
 		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
 		        new RicalcoloSMSPrEPObserver(appController);
 

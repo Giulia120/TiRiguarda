@@ -5,7 +5,7 @@ import java.util.List;
 
 import it.tiriguarda.controller.app.GestioneSmsAppController;
 import it.tiriguarda.controller.app.RegistraRapportoAppController;
-import it.tiriguarda.dao.DAOFactoryProvider;
+import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
@@ -28,7 +28,7 @@ public class RicalcoloSMSPrEPObserver implements NuovoRapportoObserver {
         Utente utente = subject.getUtenteRapportoSalvato();
         Rapporto nuovoRapporto = subject.getUltimoRapportoSalvato();
         
-        ProtocolloPrEPDAO dao = DAOFactoryProvider.getDAOFactory().createProtocolloPrEPDAO();
+        ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
         ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utente.getUsername());
 
         if (protocollo instanceof ProtocolloPrEPOnDemand onDemand) {

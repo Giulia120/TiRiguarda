@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.dao.UtenteDAO;
@@ -33,7 +32,7 @@ public class PrEPAppController {
 	        throw new UtenteNonLoggatoException();
 	    }
 		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		
 		if(dao.esisteProtocollo(utente.getUsername(), bean.getDataInizio(), false)) {
@@ -61,7 +60,7 @@ public class PrEPAppController {
 	        throw new UtenteNonLoggatoException();
 	    }
 		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		
 		ProtocolloPrEP oldProtocollo;
@@ -114,7 +113,7 @@ public class PrEPAppController {
 		        throw new UtenteNonLoggatoException();
 		    }
 		
-			DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+			DAOFactory factory = DAOFactory.getDAOFactory();
 			ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 			ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
 			dao.annullaStatoProtocollo(prot);	

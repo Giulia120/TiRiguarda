@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.dao.TestDAO;
@@ -26,7 +25,7 @@ public class RiepilogoAppController {
 	        throw new UtenteNonLoggatoException();
 	    }
 		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		ProtocolloPrEPDAO daoPrEP = factory.createProtocolloPrEPDAO();
 		List<ProtocolloPrEP> prep = daoPrEP.riepilogoPrEP(utenteCorrente.getUsername(), bean.getData());
 		

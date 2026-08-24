@@ -1,12 +1,9 @@
 package it.tiriguarda.controller.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.dao.RapportoDAO;
 import it.tiriguarda.domain.LivelloRischio;
@@ -16,37 +13,17 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.RapportoBean;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.NuoviRapportiSubject;
-import it.tiriguarda.logic.observer.NuovoRapportoObserver;
 import it.tiriguarda.logic.rischio.CalcoloRischio;
 import it.tiriguarda.logic.rischio.PrEPDecorator;
 import it.tiriguarda.logic.rischio.PreservativoDecorator;
 import it.tiriguarda.logic.rischio.RischioBase;
 import it.tiriguarda.service.SessionManager;
 
-public class RegistraRapportoAppController implements NuoviRapportiSubject {
+public class RegistraRapportoAppController extends NuoviRapportiSubject {
 	private static final Logger logger = Logger.getLogger(RegistraRapportoAppController.class.getName());
-	
-	private List<NuovoRapportoObserver> observers = new ArrayList<>();
 	
 	private Utente utenteRapportoSalvato; 
 	private Rapporto ultimoRapportoSalvato;
-
-    @Override
-    public void attach(NuovoRapportoObserver observer) { 
-    	observers.add(observer); 
-    	}
-
-    @Override
-    public void detach(NuovoRapportoObserver observer) { 
-    	observers.remove(observer); 
-    	}
-
-    @Override
-    public void notifyObservers() {
-        for (NuovoRapportoObserver obs : observers) {
-            obs.update();
-        }
-    }
     
     public Utente getUtenteRapportoSalvato() {
         return this.utenteRapportoSalvato;
@@ -80,7 +57,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 			calcolatore = new PreservativoDecorator(calcolatore);
 		}
 		
-		DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		if (dao.esisteProtocollo(utente.getUsername(), bean.getData())) {
 			calcolatore = new PrEPDecorator(calcolatore);
@@ -99,7 +76,7 @@ public class RegistraRapportoAppController implements NuoviRapportiSubject {
 	        
 	        Rapporto nuovoRapporto = new Rapporto(utenteCorrente.getUsername(), idRapporto, bean.getData(), bean.getRischio());
 	        
-	        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+	        DAOFactory factory = DAOFactory.getDAOFactory();
 	        RapportoDAO dao = factory.createRapportoDAO();
 	        dao.salvaRapporto(nuovoRapporto);
 	        

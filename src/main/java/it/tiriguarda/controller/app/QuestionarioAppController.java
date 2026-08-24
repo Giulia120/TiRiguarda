@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactoryProvider;
 import it.tiriguarda.dao.QuestionDAO;
 import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.domain.Question;
@@ -15,7 +14,7 @@ public class QuestionarioAppController {
     private final QuestionDAO questionDao;
 
     public QuestionarioAppController() {
-        DAOFactory factory = DAOFactoryProvider.getDAOFactory();
+        DAOFactory factory = DAOFactory.getDAOFactory();
         this.questionDao = factory.createQuestionDAO();
     }
     
