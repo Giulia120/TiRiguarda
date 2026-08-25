@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class RegistraUtenteGraphicController {
+	private RegistraUtenteAppController appController = new RegistraUtenteAppController();
 	
 	@FXML 
 	private TextField usernameField; 
@@ -53,7 +54,6 @@ public class RegistraUtenteGraphicController {
 	        bean.setSessoBiologico(sessoSelezionato);
 			bean.setNumeroTelefono(telefonoField.getText());
 			
-			RegistraUtenteAppController appController = new RegistraUtenteAppController();
 			appController.registraUtente(bean);
 			ViewDispatcher.mostraLogin();
 		} catch (DatiIncompletiException e){

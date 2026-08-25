@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class SceltaPrEPGraphicController {
+	PrEPAppController controller = new PrEPAppController();
 	
 	@FXML private Button dailyButton;
 	
@@ -33,7 +34,6 @@ public class SceltaPrEPGraphicController {
 	}
 	
 	@FXML public void onAnnullaPrEP(ActionEvent event) {
-		PrEPAppController controller = new PrEPAppController();
 		try {
 			controller.verificaStatoPrEP();
 			ViewDispatcher.mostraConfermaAnnullamento();

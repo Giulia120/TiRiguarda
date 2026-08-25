@@ -7,6 +7,9 @@ import it.tiriguarda.dto.DatiProfiloBean;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ProfiloCLIController {
+	private ProfiloAppController controller = new ProfiloAppController();
+	private ModificaPwdCLIController pwdController = new ModificaPwdCLIController();
+	private ModificaTelefonoCLIController telController = new ModificaTelefonoCLIController();
 	
 	public void avviaProfilo(Scanner scanner) {
 		
@@ -14,8 +17,7 @@ public class ProfiloCLIController {
 			ViewCLI.stampaTitolo("Profilo");
 			
 			try {
-				ProfiloAppController controller = new ProfiloAppController();
-				DatiProfiloBean bean =controller.getDatiProfilo();
+				DatiProfiloBean bean = controller.getDatiProfilo();
 				
 				ViewCLI.stampaMessaggio("Username: " + bean.getUsername());
 				ViewCLI.stampaMessaggio("Telefono: " + bean.getNumTelefono());
@@ -35,12 +37,10 @@ public class ProfiloCLIController {
 			
 			switch (scelta) {
 				case "1":
-					ModificaPwdCLIController pwdController = new ModificaPwdCLIController();
 					pwdController.avvia(scanner);
 					break;
 					
 				case "2":
-					ModificaTelefonoCLIController telController = new ModificaTelefonoCLIController();
 					telController.avvia(scanner);
 					break;
 					

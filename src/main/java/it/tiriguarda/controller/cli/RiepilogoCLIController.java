@@ -12,6 +12,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.FileSystemNonRaggiungibileException;
 
 public class RiepilogoCLIController {
+	private RiepilogoAppController controller = new RiepilogoAppController();
 	
 	public void mostraRiepilogo(Scanner scanner) {
 		ViewCLI.stampaTitolo("Riepilogo Attivita'");
@@ -20,7 +21,6 @@ public class RiepilogoCLIController {
 			
 			bean.setData(ViewCLI.leggiData(scanner));			
 			
-            RiepilogoAppController controller = new RiepilogoAppController();
             List<EventoRiepilogo> eventi = controller.getReportRiepilogo(bean);
             
             stampaCronologiaEventi(eventi);

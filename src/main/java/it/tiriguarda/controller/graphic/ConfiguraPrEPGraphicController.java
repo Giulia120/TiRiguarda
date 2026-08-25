@@ -18,6 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ConfiguraPrEPGraphicController {
+	private PrEPAppController controller = new PrEPAppController();
+	private TipologiaPrEP tipoPrEP;
+	
 	@FXML private DatePicker dataInizioPrEPPicker;
 	
 	@FXML private CheckBox checkSMS;
@@ -30,7 +33,6 @@ public class ConfiguraPrEPGraphicController {
 	
 	@FXML private Label tipoPrEPLabel;
 	
-	private TipologiaPrEP tipoPrEP;
 
 	public void inizializza(TipologiaPrEP tipoPrEP) {
 	    this.tipoPrEP = tipoPrEP;
@@ -48,7 +50,6 @@ public class ConfiguraPrEPGraphicController {
         
 			 bean.setOrario(ora);
         
-			 PrEPAppController controller = new PrEPAppController();
         	 controller.configuraPrEP(bean);
 			 ViewDispatcher.mostraSchermataSmsPrEP(bean);
 		 }catch(DateTimeParseException e) {

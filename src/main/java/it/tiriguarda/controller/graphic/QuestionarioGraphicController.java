@@ -21,14 +21,13 @@ public class QuestionarioGraphicController {
     @FXML private ToggleGroup gruppoOpzioni;
     @FXML private Button avantiButton;
 
-    private QuestionarioAppController appController;
+    private QuestionarioAppController appController = new QuestionarioAppController();
     private List<QuestionBean> listaDomande;
     private List<Integer> risposteUtente;
     private int indiceCorrente = 0;
 
     @FXML
     public void initialize() {
-        appController = new QuestionarioAppController();
         listaDomande = appController.getQuestionBeans();
         risposteUtente = new ArrayList<>();
         

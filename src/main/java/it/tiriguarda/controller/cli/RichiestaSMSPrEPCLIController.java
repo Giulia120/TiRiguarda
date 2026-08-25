@@ -8,6 +8,7 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RichiestaSMSPrEPCLIController {
+	private GestioneSmsAppController controller = new GestioneSmsAppController();
 	public void avvia(ProtocolloPrEPBean bean, Scanner scanner) {
 		boolean completato = false;
 		while(!completato) {
@@ -41,7 +42,6 @@ public class RichiestaSMSPrEPCLIController {
     
     private void impostaSMS() {
     	try {
-    		GestioneSmsAppController controller = new GestioneSmsAppController();
     		controller.programmaPromemoriaPrEP();
     	}catch(DatabaseNonRaggiungibileException e) {
     		ViewCLI.stampaErroreCriticoEChiudi(e.getMessage());

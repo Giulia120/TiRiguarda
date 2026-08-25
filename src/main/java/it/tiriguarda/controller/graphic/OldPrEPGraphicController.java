@@ -11,6 +11,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 
 public class OldPrEPGraphicController {
+	private PrEPAppController controller = new PrEPAppController();
+	
 	@FXML private Button confermaButton;
 	@FXML private DatePicker dataInizioPrEPPicker;
 	@FXML private DatePicker dataFinePrEPPicker;
@@ -18,10 +20,12 @@ public class OldPrEPGraphicController {
 	@FXML private RadioButton dailyRadio;
 	@FXML private RadioButton onDemandRadio;
 	
+	@FXML
 	public void onBackButton() {
 		ViewDispatcher.mostraMenuPrincipale();
 	}
 	
+	@FXML
 	public void onConfermaPrEP() {
 		try {
 			OldProtocolloPrEPBean bean = new OldProtocolloPrEPBean();
@@ -33,7 +37,6 @@ public class OldPrEPGraphicController {
 				bean.setTipoPrEP(TipologiaPrEP.ON_DEMAND);
 			}
 			
-			PrEPAppController controller = new PrEPAppController();
 			controller.configuraVecchiaPrEP(bean);
 			ViewDispatcher.mostraSuccesso("PrEP registrata con successo!");
 			

@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class InfoRapportoGraphicController {
+	private RegistraRapportoAppController appController = new RegistraRapportoAppController();
 	 @FXML private Button hoCapitoButton;
 	 @FXML private Button annullaButton;
 	 @FXML private Label infoRapportoLabel;
@@ -28,7 +29,7 @@ public class InfoRapportoGraphicController {
 	 
 	 @FXML
 	 private void onHoCapitoButton(ActionEvent event){
-		 try{ RegistraRapportoAppController appController = new RegistraRapportoAppController();
+		 try{
 			appController.salvaRapportoDefinitivo(beanInSospeso);
 			ViewDispatcher.mostraSuccesso("Rapporto registrato con successo!");
 			}catch (DatabaseNonRaggiungibileException e) {

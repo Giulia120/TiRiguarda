@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class AnnullaPrEPGraphicController {
+	private PrEPAppController controller = new PrEPAppController();
 	
 	@FXML
 	private Button siConfermaAnnullamento;
@@ -20,7 +21,6 @@ public class AnnullaPrEPGraphicController {
 	
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
-		PrEPAppController controller = new PrEPAppController();
 		try{
 			controller.annullaPrEP();
 		    ViewDispatcher.mostraSuccesso("PrEP annullata con successo!");

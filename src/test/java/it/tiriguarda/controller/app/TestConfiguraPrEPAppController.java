@@ -12,7 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import it.tiriguarda.dao.DAOFactory;
-import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.SessoBiologico;

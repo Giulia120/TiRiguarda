@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
 
 public class RiepilogoGraphicController {
+	private RiepilogoAppController controller = new RiepilogoAppController();
 	
 	@FXML private DatePicker dataRiepilogoPicker;
 	
@@ -32,7 +33,6 @@ public class RiepilogoGraphicController {
 	        RiepilogoBean bean = new RiepilogoBean();
 	        bean.setData(dataRiepilogoPicker.getValue());
 	        
-	        RiepilogoAppController controller = new RiepilogoAppController();
 	        List<EventoRiepilogo> eventi = controller.getReportRiepilogo(bean);
 
 	        if (eventi.isEmpty()) {

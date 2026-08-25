@@ -12,13 +12,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginGraphicController {
+	private LoginAppController appController = new LoginAppController();
 	
 	@FXML private Button loginButton;
 	@FXML private Button registratiButton;
 	@FXML private TextField usernameField;
 	@FXML private PasswordField passwordField;
-	@FXML private Button noLoginButton;
-	
+	@FXML private Button noLoginButton;	
 	
 	@FXML
 	private void onLoginButton(ActionEvent event) {
@@ -29,7 +29,6 @@ public class LoginGraphicController {
 			bean.setUsername(usernameField.getText());
 			bean.setPassword(passwordField.getText());
 			
-			LoginAppController appController = new LoginAppController();
 			appController.effettuaLogin(bean);
 			ViewDispatcher.mostraMenuPrincipale();
 		} catch (DatiIncompletiException e) {
