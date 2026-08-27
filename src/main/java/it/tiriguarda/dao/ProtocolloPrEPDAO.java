@@ -6,11 +6,11 @@ import java.util.List;
 import it.tiriguarda.domain.ProtocolloPrEP;
 
 public interface ProtocolloPrEPDAO {
-	ProtocolloPrEP trovaProtocolloAttivo(String username);
-	void configuraProtocollo(ProtocolloPrEP protocolloPrEP);
-	void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP);
-	void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP);
-	List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data);
+	public ProtocolloPrEP trovaProtocolloAttivo(String username);
+	public void configuraProtocollo(ProtocolloPrEP protocolloPrEP);
+	public void aggiornaProtocollo(ProtocolloPrEP protocolloPrEP);
+	public void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP);
+	public List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data);
 	public boolean esisteProtocollo(String utente, LocalDate data);
-	boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi);
+	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi);
 }
