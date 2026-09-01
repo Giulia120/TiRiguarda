@@ -1,6 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
-import it.tiriguarda.controller.app.PrEPAppController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
