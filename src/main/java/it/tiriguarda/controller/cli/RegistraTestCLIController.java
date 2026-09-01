@@ -11,7 +11,6 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RegistraTestCLIController {
-	private RegistraTestAppController appController = new RegistraTestAppController();
 	
 	public void avviaRegistrazioneTest(Scanner scanner) {
 		boolean fine = false;
@@ -31,6 +30,7 @@ public class RegistraTestCLIController {
 				bean.setData(dataTest);
 				bean.setTipo(tipoScelto);
 				
+				RegistraTestAppController appController = new RegistraTestAppController();
 				appController.registraTest(bean);
 				
 				ViewCLI.stampaSuccesso(scanner);

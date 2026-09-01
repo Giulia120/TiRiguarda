@@ -9,7 +9,6 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ModificaTelefonoCLIController {
-	private ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
 	
 	public void avvia(Scanner scanner) {
 		
@@ -26,7 +25,7 @@ public class ModificaTelefonoCLIController {
 			try {
 				CambioTelefonoBean bean = new CambioTelefonoBean();
 				bean.setNuovoTelefono(nuovoTelefono);
-				
+				ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
 				appController.cambiaTelefono(bean);
 				
 				ViewCLI.stampaSuccesso(scanner);

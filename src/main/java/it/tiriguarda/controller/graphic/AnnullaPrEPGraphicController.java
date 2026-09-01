@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class AnnullaPrEPGraphicController {
-	private PrEPAppController controller = new PrEPAppController();
 	
 	@FXML
 	private Button siConfermaAnnullamento;
@@ -22,6 +21,7 @@ public class AnnullaPrEPGraphicController {
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
 		try{
+			PrEPAppController controller = new PrEPAppController();
 			controller.annullaPrEP();
 		    ViewDispatcher.mostraSuccesso("PrEP annullata con successo!");
 		    } catch (DatabaseNonRaggiungibileException e) {

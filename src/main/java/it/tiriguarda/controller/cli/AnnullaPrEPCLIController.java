@@ -9,10 +9,10 @@ import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 
 public class AnnullaPrEPCLIController {
-	private PrEPAppController controller = new PrEPAppController();
 	
 	public boolean avvioAnnullamento(Scanner scanner) {
 		try {
+			PrEPAppController controller = new PrEPAppController();
 			controller.verificaStatoPrEP();
 			return confermaAnnullamento(controller, scanner);
 		}catch(UtenteNonLoggatoException e) {

@@ -5,10 +5,6 @@ import java.util.Scanner;
 import it.tiriguarda.domain.TipologiaPrEP;
 
 public class SceltaPrEPCLIController {
-	private ConfiguraPrEPCLIController configuraPrEPcontrollerD = new ConfiguraPrEPCLIController();
-	private ConfiguraPrEPCLIController configuraPrEPcontrollerOD = new ConfiguraPrEPCLIController();
-	private AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
-	private OldPrEPCLIController configuraOld = new OldPrEPCLIController();
 	
 	public void avviaPrEP(Scanner scanner) {
 		boolean fine = false;
@@ -23,18 +19,22 @@ public class SceltaPrEPCLIController {
 			String scelta = scanner.nextLine();
 			switch(scelta) {
 				case "1":
+					ConfiguraPrEPCLIController configuraPrEPcontrollerD = new ConfiguraPrEPCLIController();
 					configuraPrEPcontrollerD.avviaConfigurazione(TipologiaPrEP.DAILY, scanner);
 					break;
 				case "2":
+					ConfiguraPrEPCLIController configuraPrEPcontrollerOD = new ConfiguraPrEPCLIController();
 					configuraPrEPcontrollerOD.avviaConfigurazione(TipologiaPrEP.ON_DEMAND, scanner);
 					break;
 				case "3":
+					AnnullaPrEPCLIController annullaPrEPcontroller = new AnnullaPrEPCLIController();
 					boolean tornaMenu = annullaPrEPcontroller.avvioAnnullamento(scanner);
 					if(!tornaMenu) {
 						return;
 					}
 					break;
 				case "4":
+					OldPrEPCLIController configuraOld = new OldPrEPCLIController();
 					configuraOld.avviaConfigurazione(scanner);
 					break;
 				case "q":

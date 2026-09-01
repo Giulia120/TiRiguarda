@@ -15,7 +15,6 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RichiestaSMSRapportoCLIController {
-	private GestioneSmsAppController smsController = new GestioneSmsAppController();
 	RegistraRapportoAppController rapportoController = new RegistraRapportoAppController();
 	
 	public void avvia(RapportoBean bean, Scanner scanner) {
@@ -76,6 +75,7 @@ public class RichiestaSMSRapportoCLIController {
 		beanSms.setStato(StatoSms.DA_INVIARE);
 		
 		try {
+			GestioneSmsAppController smsController = new GestioneSmsAppController();
 			smsController.programmaSms(beanSms);
 			ViewCLI.stampaMessaggio("[INFO] Hai detto SI agli SMS! Notifica programmata per le ore 10:00.");
 		} catch (DatabaseNonRaggiungibileException e) {

@@ -8,9 +8,6 @@ import it.tiriguarda.exception.CredenzialiErrateException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class LoginCLIController {
-	private RegistraUtenteCLIController registrazioneController = new RegistraUtenteCLIController();
-	private MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
-	private LoginAppController loginController = new LoginAppController();
 	
 	public void avviaLogin(Scanner scanner) {
 		boolean fine = false;
@@ -29,9 +26,11 @@ public class LoginCLIController {
 					fine = eseguiAccesso(scanner);
 					break;
 				case "2":
+					RegistraUtenteCLIController registrazioneController = new RegistraUtenteCLIController();
 					registrazioneController.avviaRegistrazione(scanner);
 					break;
 				case "3":
+					MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
 					menuController.avviaMenu(scanner);
 					break;
 				case "q":
@@ -55,7 +54,10 @@ public class LoginCLIController {
 			bean.setUsername(username);
 			bean.setPassword(password);
 			
-			loginController.effettuaLogin(bean);
+			LoginAppController appController = new LoginAppController();
+			appController.effettuaLogin(bean);
+			
+			MenuPrincipaleCLIController menuController = new MenuPrincipaleCLIController();
 			menuController.avviaMenu(scanner);
 			
 			return false;

@@ -13,7 +13,6 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 
 public class ConfiguraPrEPCLIController {
-	private PrEPAppController controller = new PrEPAppController();
 	
 	public void avviaConfigurazione(TipologiaPrEP tipoPrEP, Scanner scanner) {
 		boolean completato = false;
@@ -35,7 +34,8 @@ public class ConfiguraPrEPCLIController {
 				bean.setTipoPrEP(tipoPrEP);
 				bean.setDataInizio(dataInizio);
 				bean.setOrario(orario);
-            
+				
+				PrEPAppController controller = new PrEPAppController();
                 controller.configuraPrEP(bean);
                 RichiestaSMSPrEPCLIController smsController = new RichiestaSMSPrEPCLIController();
                 smsController.avvia(bean, scanner);

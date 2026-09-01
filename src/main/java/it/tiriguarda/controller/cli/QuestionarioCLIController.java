@@ -9,9 +9,9 @@ import it.tiriguarda.domain.LivelloRischio;
 import it.tiriguarda.dto.QuestionBean;
 
 public class QuestionarioCLIController {
-	private QuestionarioAppController appController = new QuestionarioAppController();
 
 	public void avviaQuestionario(Scanner scanner) {
+		QuestionarioAppController appController = new QuestionarioAppController();
 		List<QuestionBean> domande = appController.getQuestionBeans();
 		List<Integer> risposteUtente = new ArrayList<>();
 

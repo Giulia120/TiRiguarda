@@ -10,7 +10,6 @@ import it.tiriguarda.exception.UsernameEsistenteException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class RegistraUtenteCLIController {
-	private RegistraUtenteAppController appController = new RegistraUtenteAppController();
 	
 	public void avviaRegistrazione(Scanner scanner) {
 		boolean fine = false;
@@ -48,6 +47,7 @@ public class RegistraUtenteCLIController {
 				bean.setSessoBiologico(sesso);
 				bean.setNumeroTelefono(telefono);
 				
+				RegistraUtenteAppController appController = new RegistraUtenteAppController();
 				appController.registraUtente(bean);
 				
 				ViewCLI.stampaSuccesso(scanner);

@@ -2,6 +2,7 @@ package it.tiriguarda.dao;
 
 import it.tiriguarda.config.AppConfig;
 import it.tiriguarda.config.AppMode;
+import it.tiriguarda.dao.mem.QuestionDAOMem;
 
 public abstract class DAOFactory {
 	private static DAOFactory dAOFactoryInstance;
@@ -27,7 +28,8 @@ public abstract class DAOFactory {
 	public abstract UtenteDAO createUtenteDAO();
 	public abstract TestDAO createTestDAO();
 	public abstract SmsDAO createSmsDAO();
-	public abstract QuestionDAO createQuestionDAO();
-	
-	
+	public QuestionDAO createQuestionDAO() {
+		return new QuestionDAOMem();
+	}
+
 }

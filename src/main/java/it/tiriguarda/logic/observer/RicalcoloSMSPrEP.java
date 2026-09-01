@@ -16,7 +16,9 @@ import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.SmsBean;
 
 public class RicalcoloSMSPrEP implements NuovoRapportoObserver {
-	private RegistraRapportoAppController subject; 
+	private RegistraRapportoAppController subject;
+	private Utente utente;
+	private Rapporto nuovoRapporto;
 
     public RicalcoloSMSPrEP(RegistraRapportoAppController subject) {
         this.subject = subject;
@@ -25,8 +27,8 @@ public class RicalcoloSMSPrEP implements NuovoRapportoObserver {
     
     @Override
     public void update() {
-        Utente utente = subject.getUtenteRapportoSalvato();
-        Rapporto nuovoRapporto = subject.getUltimoRapportoSalvato();
+        this.utente = subject.getUtenteRapportoSalvato();
+        this.nuovoRapporto = subject.getUltimoRapportoSalvato();
         
         ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
         ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utente.getUsername());

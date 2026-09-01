@@ -9,14 +9,6 @@ import it.tiriguarda.service.SessionManager;
 
 public class MenuPrincipaleCLIController {
 
-    private RegistraRapportoCLIController registraRapportoController = new RegistraRapportoCLIController();
-    private RegistraTestCLIController registraTestController = new RegistraTestCLIController();
-    private ProfiloCLIController profiloController = new ProfiloCLIController();
-    private RiepilogoCLIController riepilogoController = new RiepilogoCLIController();
-    private SceltaPrEPCLIController prEPController = new SceltaPrEPCLIController();
-    private QuestionarioCLIController questionarioController = new QuestionarioCLIController();
-    private InfoCLIController infoController = new InfoCLIController();
-
     public void avviaMenu(Scanner scanner) {
         boolean esci = false;
         List<String> opzioniRiservate = Arrays.asList("1", "2", "3", "4", "5");
@@ -41,47 +33,54 @@ public class MenuPrincipaleCLIController {
                 continue;
             }
 
-            try{
-                switch (scelta) {
-                case "1":
-                    registraRapportoController.avviaRegistrazioneRapporto(scanner);
-                    break;
-                    
-                case "2":
-                    registraTestController.avviaRegistrazioneTest(scanner);
-                    break;
-                    
-                case "3":
-                    profiloController.avviaProfilo(scanner);
-                    break;
-                    
-                case "4":
-                    riepilogoController.mostraRiepilogo(scanner);
-                    break;
-                    
-                case "5":
-                    prEPController.avviaPrEP(scanner);
-                    break;
-                    
-                case "6":
-                    questionarioController.avviaQuestionario(scanner);
-                    break;
-                    
-                case "7":
-                    infoController.avvia(scanner);
-                    break;
-                    
-                case "q":
-                    SessionManager.getInstance().clearSessione();
-                    return;
-                    
-                default:
-                    ViewCLI.stampaInvalido();
-                }
-            } catch(UtenteNonLoggatoException e) {
-                esci = true;
-                return;
-            }
-        }
-    }
-}
+			try{
+				switch (scelta) {
+				case "1":
+					RegistraRapportoCLIController registraRapportoController = new RegistraRapportoCLIController();
+					registraRapportoController.avviaRegistrazioneRapporto(scanner);
+					break;
+					
+				case "2":
+					RegistraTestCLIController registraTestController = new RegistraTestCLIController();
+					registraTestController.avviaRegistrazioneTest(scanner);
+					break;
+					
+				case "3":
+					ProfiloCLIController profiloController = new ProfiloCLIController();
+					profiloController.avviaProfilo(scanner);
+					break;
+					
+				case "4":
+					RiepilogoCLIController riepilogoController = new RiepilogoCLIController();
+					riepilogoController.mostraRiepilogo(scanner);
+					break;
+					
+				case "5":
+					SceltaPrEPCLIController prEPController = new SceltaPrEPCLIController();
+					prEPController.avviaPrEP(scanner);
+					break;
+					
+				case "6":
+					QuestionarioCLIController questionarioController = new QuestionarioCLIController();
+					questionarioController.avviaQuestionario(scanner);
+					break;
+					
+				case "7":
+					InfoCLIController infoController = new InfoCLIController();
+					infoController.avvia(scanner);
+					break;
+					
+				case "q":
+					SessionManager.getInstance().clearSessione();
+					return;
+					
+				default:
+					ViewCLI.stampaInvalido();
+					}
+			}catch(UtenteNonLoggatoException e) {
+				esci = true;
+				return;
+			}
+		}
+	}
+ }

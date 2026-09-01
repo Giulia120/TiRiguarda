@@ -11,7 +11,6 @@ import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.DatiIncompletiException;
 
 public class OldPrEPCLIController {
-	private PrEPAppController controller = new PrEPAppController();
 	
 	public void avviaConfigurazione(Scanner scanner) {
 		boolean completato = false;
@@ -34,7 +33,8 @@ public class OldPrEPCLIController {
 				bean.setTipoPrEP(tipoPrEP);
 				bean.setDataInizio(dataInizio);
 				bean.setDataFine(dataFine);
-            
+				
+				PrEPAppController controller = new PrEPAppController();
 				controller.configuraVecchiaPrEP(bean);
 				ViewCLI.stampaSuccesso(scanner);
 				completato = true;

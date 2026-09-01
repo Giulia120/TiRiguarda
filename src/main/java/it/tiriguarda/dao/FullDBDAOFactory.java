@@ -6,7 +6,6 @@ import it.tiriguarda.dao.db.RapportoDAODB;
 import it.tiriguarda.dao.db.SmsDAODB;
 import it.tiriguarda.dao.db.TestDAODB;
 import it.tiriguarda.dao.db.UtenteDAODB;
-import it.tiriguarda.dao.mem.QuestionDAOMem;
 
 public class FullDBDAOFactory extends DAOFactory{
 	@Override
@@ -36,9 +35,4 @@ public class FullDBDAOFactory extends DAOFactory{
 		return new SmsDAODB();
 	}
 	
-	@Override 
-	public QuestionDAO createQuestionDAO() {
-		return new QuestionDAOMem();
-	}
-
 }

@@ -10,8 +10,7 @@ import it.tiriguarda.exception.DatiIncompletiException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 
 public class ModificaPwdCLIController {
-	private ModificaPwdAppController appController = new ModificaPwdAppController();
-	
+
 	public void avvia(Scanner scanner) {
 		
 		ViewCLI.stampaTitolo("Modifica Password");
@@ -36,6 +35,7 @@ public class ModificaPwdCLIController {
 				bean.setVecchiaPassword(vecchiaPwd);
 				bean.setNuovaPassword(nuovaPwd);
 				
+				ModificaPwdAppController appController = new ModificaPwdAppController();
 				appController.cambiaPassword(bean);
 				
 				ViewCLI.stampaSuccesso(scanner);

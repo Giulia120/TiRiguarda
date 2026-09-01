@@ -18,8 +18,6 @@ import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.logic.observer.RicalcoloSMSPrEP;
 
 public class RegistraRapportoCLIController {
-	private RegistraRapportoAppController appController = new RegistraRapportoAppController();
-	private RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
 
 	public void avviaRegistrazioneRapporto(Scanner scanner) {
 		boolean completato = false;
@@ -46,13 +44,13 @@ public class RegistraRapportoCLIController {
 			bean.setData(dataRapporto);
 			bean.setTipo(tipi);
 			bean.setPrecauzioniUsate(precauzioni);
-
+			RegistraRapportoAppController appController = new RegistraRapportoAppController();
 			new RicalcoloSMSPrEP(appController);
 			RapportoBean beanAggiornato = appController.valutaRischio(bean);
 
 			if (beanAggiornato.getRischio() != LivelloRischio.NULLO) {
 				if (beanAggiornato.getDataFinePeriodoFinestra().isAfter(LocalDate.now(java.time.ZoneId.systemDefault()))) {
-			        
+					RichiestaSMSRapportoCLIController smsController = new RichiestaSMSRapportoCLIController();
 			        smsController.avvia(beanAggiornato, scanner); 
 			    } else {
 			    	ViewCLI.stampaMessaggio(String.format("%nATTENZIONE: il tuo rapporto ha un %s rischio. Il periodo finestra è già terminato: quindi ti consigliamo di fare un test prima possibile!", beanAggiornato.getRischio().toString()));
