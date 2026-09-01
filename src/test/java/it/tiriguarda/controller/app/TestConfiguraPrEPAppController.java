@@ -27,17 +27,17 @@ import it.tiriguarda.service.SessionManager;
  * author: Caterina Spinelli
  */
 
-	public class TestConfiguraPrEPAppController {
+	class TestConfiguraPrEPAppController {
 		private PrEPAppController controller;
 		private Utente utenteTest;
 		
 		@BeforeEach
-		public void setUp() {
+		void setUp() {
 			controller = new PrEPAppController();
 		}
 		
 		@AfterEach
-		public void tearDown() {
+		void tearDown() {
 			SessionManager.getInstance().clearSessione();
 			ProtocolloPrEPDAO dao = DAOFactory.getDAOFactory().createProtocolloPrEPDAO();
 			ProtocolloPrEP protocollo = dao.trovaProtocolloAttivo(utenteTest.getUsername());
@@ -52,7 +52,7 @@ import it.tiriguarda.service.SessionManager;
 		
 		@Test
 		@DisplayName("Configura una PrEP On Demand con data di fine corretta")
-		public void testConfiguraPrEPOndemand() {
+		void testConfiguraPrEPOndemand() {
 			fakeUtente("Utente1");
 			ProtocolloPrEPBean beanTest = new ProtocolloPrEPBean();
 			
@@ -72,7 +72,7 @@ import it.tiriguarda.service.SessionManager;
 		
 		@Test
 		@DisplayName("Lancia eccezione se si tenta di configurare una PrEP con un protocollo già attivo")
-		public void testConfiguraPrEPConProtocolloAttivoLanciaEccezione() {
+		void testConfiguraPrEPConProtocolloAttivoLanciaEccezione() {
 			fakeUtente("Utente2");
 			ProtocolloPrEPBean beanPrimo = new ProtocolloPrEPBean();
 			beanPrimo.setTipoPrEP(TipologiaPrEP.ON_DEMAND);
@@ -91,7 +91,7 @@ import it.tiriguarda.service.SessionManager;
 		
 		@Test
 		@DisplayName("Lancia eccezione se si tenta di configurare una PrEP senza specificare l'orario")
-		public void testConfiguraPrEPSenzaOrarioLanciaEccezione() {
+		void testConfiguraPrEPSenzaOrarioLanciaEccezione() {
 			fakeUtente("Utente3");
 			ProtocolloPrEPBean beanTest = new ProtocolloPrEPBean();
 			beanTest.setTipoPrEP(TipologiaPrEP.ON_DEMAND);
@@ -102,7 +102,7 @@ import it.tiriguarda.service.SessionManager;
 		
 		@Test
 		@DisplayName("Configura una PrEP con fine nel passato: il protocollo non risulta attivo")
-		public void testConfiguraPrEPConFineNelPassatoVieneAnnullata() {
+		void testConfiguraPrEPConFineNelPassatoVieneAnnullata() {
 			fakeUtente("Utente4");
 			ProtocolloPrEPBean bean = new ProtocolloPrEPBean();
 			bean.setTipoPrEP(TipologiaPrEP.ON_DEMAND);
