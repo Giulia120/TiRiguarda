@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="640.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/richiestaSmsPrEP.png" />
+            <Image url="@images/richiestaSms_PrEP.png" />
          </image>
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -29,7 +29,6 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="backButton" layoutX="30.0" layoutY="561.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: transparent; -fx-cursor: hand;" />
          </children>
       </AnchorPane>
    </children>
