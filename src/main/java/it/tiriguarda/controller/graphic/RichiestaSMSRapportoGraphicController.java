@@ -17,9 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class RichiestaSMSRapportoGraphicController {
-	private GestioneSmsAppController controller = new GestioneSmsAppController();
-	private RegistraRapportoAppController appController = new RegistraRapportoAppController();
-
+	
 	 @FXML private Button siButton;
 	 @FXML private Button noButton;
 	 @FXML private Button annullaButton;
@@ -50,6 +48,7 @@ public class RichiestaSMSRapportoGraphicController {
 
 		 salvaEConcludi();
 			 try {
+				 GestioneSmsAppController controller = new GestioneSmsAppController();
 				 controller.programmaSms(bean);
 				 ViewDispatcher.mostraSuccesso("Rapporto e promemoria registrati con successo! Ricorda di fare il test!");
 			 } catch (DatabaseNonRaggiungibileException e) {
@@ -67,6 +66,7 @@ public class RichiestaSMSRapportoGraphicController {
 	 }
 	 
 	 private void salvaEConcludi() {
+		RegistraRapportoAppController appController = new RegistraRapportoAppController();
 		appController.salvaRapportoDefinitivo(beanInSospeso);
 	 }
 	 
