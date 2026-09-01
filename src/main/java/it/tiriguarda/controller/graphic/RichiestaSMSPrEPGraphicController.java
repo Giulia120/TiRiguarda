@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class RichiestaSMSPrEPGraphicController {
-	private GestioneSmsAppController controller = new GestioneSmsAppController();
+	
 	@FXML private Button siButton;
 	@FXML private Button noButton;
 	@FXML private Label oraSmsLabel;
@@ -32,6 +32,7 @@ public class RichiestaSMSPrEPGraphicController {
 	
 	public void onSiButton() {
 		 try {
+			 GestioneSmsAppController controller = new GestioneSmsAppController();
 			 controller.programmaPromemoriaPrEP();
 			 ViewDispatcher.mostraSuccesso("Promemoria registrati con successo!");
 		 }catch (DatabaseNonRaggiungibileException e) {
