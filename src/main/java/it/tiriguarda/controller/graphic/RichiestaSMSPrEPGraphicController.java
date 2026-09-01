@@ -33,7 +33,7 @@ public class RichiestaSMSPrEPGraphicController {
 		 try {
 			 GestioneSmsAppController controller = new GestioneSmsAppController();
 			 controller.programmaPromemoriaPrEP();
-			 ViewDispatcher.mostraSuccesso("Promemoria registrati con successo!");
+			 ViewDispatcher.mostraSuccesso("PrEP e promemoria registrati con successo! Ricordati di seguire correttamente il protocollo. Visita la sezione INFORMAZIONI per maggiori info.");
 		 }catch (DatabaseNonRaggiungibileException e) {
 	        	ViewDispatcher.mostraErroreCriticoEChiudi(e.getMessage());
 	     }catch (UtenteNonLoggatoException e) {
@@ -43,7 +43,7 @@ public class RichiestaSMSPrEPGraphicController {
 	}
 	
 	public void onNoButton() {
-		ViewDispatcher.mostraSuccesso("Protocollo registrato con successo!");
+		ViewDispatcher.mostraSuccesso("PrEP registrata con successo! Ricordati di seguire correttamente il protocollo. Visita la sezione INFORMAZIONI per maggiori info.");
 	}
 	
 }
