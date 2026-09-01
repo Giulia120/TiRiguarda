@@ -24,7 +24,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 public class RegistraRapportoGraphicController {
-	private RegistraRapportoAppController appController = new RegistraRapportoAppController();
 	 @FXML
 	 private DatePicker dataRapportoPicker;
 	 @FXML
@@ -43,11 +42,6 @@ public class RegistraRapportoGraphicController {
 	 private Button confermaButton;
 	 @FXML
 	 private Button backButton;
-	 
-	 @FXML
-	 public void initialize() {
-		 new RicalcoloSMSPrEP(appController);
-	 }
 	 
 	 @FXML
 	 public void onConfermaRegistrazione(ActionEvent event) {
@@ -73,7 +67,8 @@ public class RegistraRapportoGraphicController {
 		            precauzioneSelezionata = Precauzioni.NULLA;
 		        }
 		        bean.setPrecauzioniUsate(precauzioneSelezionata);
-
+		        RegistraRapportoAppController appController = new RegistraRapportoAppController();
+				 new RicalcoloSMSPrEP(appController);
 		        RapportoBean beanAggiornato = appController.valutaRischio(bean);
 		            
 		            if (beanAggiornato.getRischio() == LivelloRischio.NULLO) {

@@ -10,8 +10,6 @@ import javafx.scene.control.Label;
 
 public class ProfiloGraphicController {
 	
-	private ProfiloAppController controller = new ProfiloAppController();
-	
 	@FXML 
 	private Button modificaPwd;
 	@FXML
@@ -29,6 +27,7 @@ public class ProfiloGraphicController {
 	public void initialize() {
 		
 		try {
+			ProfiloAppController controller = new ProfiloAppController();
 			DatiProfiloBean bean = controller.getDatiProfilo();
 			
 			usernameLabel.setText(bean.getUsername());

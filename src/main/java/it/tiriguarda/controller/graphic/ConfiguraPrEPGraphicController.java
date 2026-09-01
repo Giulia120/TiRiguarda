@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ConfiguraPrEPGraphicController {
-	private PrEPAppController controller = new PrEPAppController();
 	private TipologiaPrEP tipoPrEP;
 	
 	@FXML private DatePicker dataInizioPrEPPicker;
@@ -49,7 +48,7 @@ public class ConfiguraPrEPGraphicController {
 			 LocalTime ora = LocalTime.parse(oraInserita);
         
 			 bean.setOrario(ora);
-        
+			 PrEPAppController controller = new PrEPAppController();
         	 controller.configuraPrEP(bean);
 			 ViewDispatcher.mostraSchermataSmsPrEP(bean);
 		 }catch(DateTimeParseException e) {

@@ -14,8 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ModificaPwdGraphicController {
-	
-	private ModificaPwdAppController appController = new ModificaPwdAppController();
 
     @FXML
     private PasswordField oldPwdField;
@@ -30,7 +28,7 @@ public class ModificaPwdGraphicController {
             CambioPwdBean bean = new CambioPwdBean();
             bean.setVecchiaPassword(oldPwdField.getText());
             bean.setNuovaPassword(newPwdField.getText());
-            
+            ModificaPwdAppController appController = new ModificaPwdAppController();
             appController.cambiaPassword(bean);
             
             ViewDispatcher.mostraProfilo(); 

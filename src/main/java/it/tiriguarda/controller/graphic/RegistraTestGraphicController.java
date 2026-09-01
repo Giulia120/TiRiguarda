@@ -15,7 +15,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 
 public class RegistraTestGraphicController {
-	private RegistraTestAppController controller = new RegistraTestAppController();
 	
 	@FXML
 	private DatePicker dataRapportoPicker;
@@ -40,7 +39,7 @@ public class RegistraTestGraphicController {
 		        	tipoTest = TipoTest.PRELIEVO;
 		        }
 		     bean.setTipo(tipoTest);
-		     
+		     RegistraTestAppController controller = new RegistraTestAppController();
 	    	 controller.registraTest(bean);
 	    	 ViewDispatcher.mostraSuccesso("Test registrato con successo!");
 	     } catch (DatiIncompletiException e) {

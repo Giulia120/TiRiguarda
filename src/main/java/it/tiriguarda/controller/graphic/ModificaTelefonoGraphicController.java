@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ModificaTelefonoGraphicController {
-	private ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
 
     @FXML
     private TextField newTelField;
@@ -25,7 +24,7 @@ public class ModificaTelefonoGraphicController {
         try {
             CambioTelefonoBean bean = new CambioTelefonoBean();
             bean.setNuovoTelefono(newTelField.getText());
-            
+            ModificaTelefonoAppController appController = new ModificaTelefonoAppController();
             appController.cambiaTelefono(bean);
            
             ViewDispatcher.mostraProfilo();

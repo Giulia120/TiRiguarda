@@ -1,6 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
-import it.tiriguarda.controller.app.PrEPAppController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import javafx.event.ActionEvent;
@@ -21,7 +21,7 @@ public class AnnullaPrEPGraphicController {
 	@FXML
 	public void onConfermaAnnullamento(ActionEvent event) {
 		try{
-			PrEPAppController controller = new PrEPAppController();
+			AnnullaPrEPAppController controller = new AnnullaPrEPAppController();
 			controller.annullaPrEP();
 		    ViewDispatcher.mostraSuccesso("PrEP annullata con successo!");
 		    } catch (DatabaseNonRaggiungibileException e) {

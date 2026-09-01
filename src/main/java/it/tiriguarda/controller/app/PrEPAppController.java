@@ -7,17 +7,14 @@ import java.util.logging.Logger;
 
 import it.tiriguarda.dao.DAOFactory;
 import it.tiriguarda.dao.ProtocolloPrEPDAO;
-import it.tiriguarda.dao.SmsDAO;
 import it.tiriguarda.dao.UtenteDAO;
 import it.tiriguarda.domain.ProtocolloPrEP;
 import it.tiriguarda.domain.ProtocolloPrEPDaily;
 import it.tiriguarda.domain.ProtocolloPrEPOnDemand;
-import it.tiriguarda.domain.TipoSms;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.domain.Utente;
 import it.tiriguarda.dto.OldProtocolloPrEPBean;
 import it.tiriguarda.dto.ProtocolloPrEPBean;
-import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.ProtocolloAttivoException;
 import it.tiriguarda.exception.UtenteNonLoggatoException;
 import it.tiriguarda.service.SessionManager;
@@ -93,47 +90,6 @@ public class PrEPAppController {
             }
             return protocolloOnD;
         }
-	}
-	
-	public void verificaStatoPrEP() {
-		Utente utente = SessionManager.getInstance().getUtenteLoggato();
-		if (utente == null) {
-	        throw new UtenteNonLoggatoException();
-	    }
-	 
-		if(utente.getProtocolloAttivo() == null) {
-			throw new AnnullamentoPrEPException();
-		}
-	}
-	
-	public void annullaPrEP() {
-			
-			Utente utente = SessionManager.getInstance().getUtenteLoggato();
-			if (utente == null) {
-		        throw new UtenteNonLoggatoException();
-		    }
-		
-			DAOFactory factory = DAOFactory.getDAOFactory();
-			ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
-			ProtocolloPrEP prot = dao.trovaProtocolloAttivo(utente.getUsername());
-			dao.annullaStatoProtocollo(prot);	
-			logger.info("Protocollo PrEP annullato correttamente");
-			
-		
-			UtenteDAO daoUtente = factory.createUtenteDAO();
-			daoUtente.eliminaProtocolloAttivo(utente);
-			
-			
-			SmsDAO smsDAO = factory.createSmsDAO();
-
-			if(prot.getTipoPrEP() == TipologiaPrEP.DAILY) {
-			    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_DAILY);
-			}
-			else {
-			    smsDAO.eliminaSmsProgrammati(utente.getUsername(), TipoSms.PREP_OD);
-			}
-			logger.info("Eliminati promemoria per il protocollo PrEP.");
-		
 	}
 		
 }
