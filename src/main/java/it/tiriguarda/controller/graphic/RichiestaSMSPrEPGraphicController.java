@@ -16,7 +16,6 @@ public class RichiestaSMSPrEPGraphicController {
 	@FXML private Button noButton;
 	@FXML private Label oraSmsLabel;
 	@FXML private Label tipoPrEPLabel;
-	@FXML private Button backButton;
 	
 	private ProtocolloPrEPBean protocolloBean;
 
@@ -47,7 +46,4 @@ public class RichiestaSMSPrEPGraphicController {
 		ViewDispatcher.mostraSuccesso("Protocollo registrato con successo!");
 	}
 	
-	public void onBackButton() {
-		ViewDispatcher.mostraConfiguraPrEP(protocolloBean.getTipoPrEP());
-	}
 }
