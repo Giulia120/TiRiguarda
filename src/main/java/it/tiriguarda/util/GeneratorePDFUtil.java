@@ -1,6 +1,9 @@
 package it.tiriguarda.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import com.itextpdf.io.image.ImageData;
@@ -22,7 +25,7 @@ public class GeneratorePDFUtil {
 	    // Costruttore privato per prevenire l'istanziazione di questa classe utility
 	}
 	
-    public static void genera(File file, List<EventoRiepilogo> eventi) throws Exception {
+    public static void genera(File file, List<EventoRiepilogo> eventi) throws FileNotFoundException {
         PdfWriter writer = new PdfWriter(file.getAbsolutePath());
         PdfDocument pdf = new PdfDocument(writer);
         
@@ -31,15 +34,19 @@ public class GeneratorePDFUtil {
 
         Table headerTable = new Table(UnitValue.createPercentArray(new float[]{25, 75})).useAllAvailableWidth();
         headerTable.setBorder(null);
-
-        try {
-            String imagePath = GeneratorePDFUtil.class.getResource("/it/tiriguarda/view/images/logo.png").toString();
-            ImageData data = ImageDataFactory.create(imagePath);
-            Image logo = new Image(data);
-            logo.setWidth(170);
-            headerTable.addCell(new Cell().add(logo).setBorder(null));
-        } catch (Exception e) {
-            headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(null));
+        
+        URL imageUrl = GeneratorePDFUtil.class.getResource("/it/tiriguarda/view/images/logo.png");
+        if (imageUrl != null) {
+        	try {
+                ImageData data = ImageDataFactory.create(imageUrl.toString());
+                Image logo = new Image(data);
+                logo.setWidth(170);
+                headerTable.addCell(new Cell().add(logo).setBorder(null));
+            } catch (IOException e) {
+            	inserisciCellaVuota(headerTable);
+            }
+        }else {
+        	inserisciCellaVuota(headerTable);
         }
 
         Cell titleCell = new Cell().add(new Paragraph("Report Riepilogo Attività").setFontSize(20).setBold()).setBorder(null);
@@ -59,5 +66,9 @@ public class GeneratorePDFUtil {
 
         document.add(table);
         document.close();
+    }
+    
+    private static void inserisciCellaVuota(Table headerTable) {
+    	headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(null));
     }
 }

@@ -1,6 +1,7 @@
 package it.tiriguarda.controller.graphic;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import it.tiriguarda.controller.app.RiepilogoAppController;
@@ -58,7 +59,7 @@ public class RiepilogoGraphicController {
 	    	dataRiepilogoPicker.setValue(null);
 	    }catch(DatiIncompletiException e) {
 	    	ViewDispatcher.mostraErrore(e.getMessage());
-	    }catch (Exception e) {
+	    }catch (FileNotFoundException e) {
 	        ViewDispatcher.mostraErrore("Errore nella generazione del PDF: " + e.getMessage());
 	    }
 	}
