@@ -52,7 +52,7 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 	    for (ProtocolloPrEP p : protocolliInMemoria) {
 	    	boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente);
-            boolean dataValida = p.getDataInizio().isBefore(data);
+            boolean dataValida = p.getDataInizio().isAfter(data);
 	        if (stessoUtente && dataValida) {
 	            protocolli.add(p);
 	        }
@@ -60,19 +60,14 @@ public class ProtocolloPrEPDAOMem implements ProtocolloPrEPDAO{
 	    return protocolli;
     }
 	
-	@Override
-	public boolean esisteProtocollo(String utente, LocalDate data) {
-		return esisteProtocollo(utente, data, true);
-	}
 	
 	@Override
-	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi) {
+	public boolean esisteProtocollo(String utente, LocalDate data) {
 	    for (ProtocolloPrEP p : protocolliInMemoria) {
 	        boolean stessoUtente = p.getUtente() != null && p.getUtente().equals(utente);
-	        boolean statoValido = !soloAttivi || p.getStatoPrEP();
 	        boolean dataInizioValida = p.getDataInizio().isBefore(data);
-	        boolean dataFineValida = p.getDataFine() == null || !p.getDataFine().isBefore(data);
-	        if (stessoUtente && statoValido && dataInizioValida && dataFineValida) {
+	        boolean dataFineValida = p.getDataFine() == null || p.getDataFine().isAfter(data);
+	        if (stessoUtente && dataInizioValida && dataFineValida) {
 	            return true;
 	        }
 	    }

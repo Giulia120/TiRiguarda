@@ -1,6 +1,6 @@
 package it.tiriguarda.controller.graphic;
 
-import it.tiriguarda.controller.app.PrEPAppController;
+import it.tiriguarda.controller.app.AnnullaPrEPAppController;
 import it.tiriguarda.domain.TipologiaPrEP;
 import it.tiriguarda.exception.AnnullamentoPrEPException;
 import it.tiriguarda.exception.DatabaseNonRaggiungibileException;
@@ -39,7 +39,6 @@ public class SceltaPrEPGraphicController {
 			ViewDispatcher.mostraConfermaAnnullamento();
 		}catch(AnnullamentoPrEPException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
-			ViewDispatcher.mostraMenuPrincipale();
 		}catch(UtenteNonLoggatoException e) {
 			ViewDispatcher.mostraErrore(e.getMessage());
 			ViewDispatcher.mostraLogin();

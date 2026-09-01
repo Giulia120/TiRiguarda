@@ -124,7 +124,7 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 	
 	@Override
     public List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data) {
-		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine`, `ora` from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
+		String sql = "select `idProtocollo`, `utente`, `tipoPrEP`, `dataInizio`, `statoPrEP`, `dataFine` from `ProtocolloPrEP` where `utente` = ? and `dataInizio` >= ?";
 		List<ProtocolloPrEP> protocolli = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -138,13 +138,12 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 				String username = rs.getString("utente");
 				LocalDate dataInizio = rs.getDate("dataInizio").toLocalDate();
 				boolean statoPrEP = rs.getBoolean("statoPrEP");
-				LocalTime ora = rs.getTime("ora").toLocalTime();
 				java.sql.Date dataFine = rs.getDate("dataFine");
 				ProtocolloPrEP p;
 				if(tipoPrEP == TipologiaPrEP.DAILY) {
-	                p = new ProtocolloPrEPDaily(idProtocollo, username, dataInizio, statoPrEP, ora);
+	                p = new ProtocolloPrEPDaily(idProtocollo, username, dataInizio, statoPrEP, null);
 	            } else {
-	                p = new ProtocolloPrEPOnDemand(idProtocollo, username, dataInizio, statoPrEP, ora);
+	                p = new ProtocolloPrEPOnDemand(idProtocollo, username, dataInizio, statoPrEP, null);
 	            }
 				if (dataFine != null) {
 					p.setDataFine(dataFine.toLocalDate());
@@ -157,17 +156,11 @@ public class ProtocolloPrEPDAODB implements ProtocolloPrEPDAO{
 				throw new DatabaseNonRaggiungibileException("Impossibile contattare il server.");
 			}
     }
-	@Override
-	public boolean  esisteProtocollo(String utente, LocalDate data) {
-		return esisteProtocollo(utente, data, true);
-	}
+
 	
 	@Override
-	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi) {
+	public boolean esisteProtocollo(String utente, LocalDate data) {
 		String sql = "select 1 from `ProtocolloPrEP` where `utente` = ? and `dataInizio` <=  ? and (`dataFine` >=  ? or `dataFine` is null)";
-		if(soloAttivi) {
-			sql+= " and `statoPrEP` = 1";
-		}
 		try (Connection conn = ConnectionFactory.getConnection();
 		         PreparedStatement ps = conn.prepareStatement(sql)) {
 			 	ps.setString(1, utente);

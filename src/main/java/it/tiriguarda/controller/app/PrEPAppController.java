@@ -32,7 +32,7 @@ public class PrEPAppController {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		ProtocolloPrEPDAO dao = factory.createProtocolloPrEPDAO();
 		
-		if(dao.esisteProtocollo(utente.getUsername(), bean.getDataInizio(), false)) {
+		if(dao.esisteProtocollo(utente.getUsername(), bean.getDataInizio())) {
 			throw new ProtocolloAttivoException();
 		}
 		ProtocolloPrEP protocollo = creaProtocolloPrEP(bean, utente);

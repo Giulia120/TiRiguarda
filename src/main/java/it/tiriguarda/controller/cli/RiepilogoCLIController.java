@@ -20,7 +20,7 @@ public class RiepilogoCLIController {
 			
 			bean.setData(ViewCLI.leggiData(scanner));			
 			
-			 RiepilogoAppController controller = new RiepilogoAppController();
+			RiepilogoAppController controller = new RiepilogoAppController();
             List<EventoRiepilogo> eventi = controller.getReportRiepilogo(bean);
             
             stampaCronologiaEventi(eventi);

@@ -12,5 +12,4 @@ public interface ProtocolloPrEPDAO {
 	public void annullaStatoProtocollo(ProtocolloPrEP protocolloPrEP);
 	public List<ProtocolloPrEP> riepilogoPrEP(String utente, LocalDate data);
 	public boolean esisteProtocollo(String utente, LocalDate data);
-	public boolean esisteProtocollo(String utente, LocalDate data, boolean soloAttivi);
 }
